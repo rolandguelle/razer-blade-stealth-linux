@@ -1,1 +1,1 @@
-# razer-blade-stealth-linux
+# Razer Blade Stealth Linux
