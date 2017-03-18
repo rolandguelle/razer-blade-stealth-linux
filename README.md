@@ -197,9 +197,11 @@ sudo systemctl enable tlp
 
 https://github.com/StevenBlack/hosts
 
-## Arch
+## Arch (WIP)
 
 Using Apricityos: https://apricityos.com/download
+
+No caps lock or gfx issues & HDMI works :)
 
 Current status:
 * suspend loop (solved)
@@ -215,5 +217,5 @@ https://wiki.archlinux.org/index.php/razer#GRUB
 
 ### Webcam (unsolved)
 
-status like ubuntu
+status like ubuntu :(
 
