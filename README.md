@@ -111,12 +111,12 @@ Reference: https://wiki.archlinux.org/index.php/Razer#Graphics_Drivers
 
 After installing and updating with:
 * https://01.org/linuxgraphics/downloads/update-tool
-the problems are gone and the Razer runs **without** tthis setting in "sna" mode.
+
+the problems are gone and the Razer runs **without** this setting in "sna" mode.
 
 
-### wireless
+### wireless (not used)
 
-(not needed)
 Reference: https://wiki.archlinux.org/index.php/Razer#Killer_Wireless_Network_Adapter
 
 ### HDMI Output
@@ -149,6 +149,8 @@ Working only with 176x in cheese, or 640x480 in other tools
 Reference: https://wiki.archlinux.org/index.php/Razer#Webcam
 
 ### Theme tuning
+
+_Has nothing todo with the Razer, but ... :)_
 
 ```
 sudo apt install unity-tweak-tool
