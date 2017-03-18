@@ -125,7 +125,15 @@ Reference: https://wiki.archlinux.org/index.php/Razer#Killer_Wireless_Network_Ad
 The HDMI works when I boot with an external monitor, but not when plugging it into a running ubuntu :(
 
 Swithing Ubuntu to the 4.10.3 kernel solves the problem:
-* https://github.com/mtompkins/linux-kernel-utilities
+
+
+```
+sudo add-apt-repository -y ppa:teejee2008/ppa
+sudo apt update
+sudo apt install ukuu
+```
+
+Reference: https://www.linuxbabe.com/ubuntu/install-linux-kernel-4-10-ubuntu-16-04-ukuu
 
 ### Multiple monitors
 
