@@ -7,8 +7,8 @@ Work in progress...
 ## Preparation
 
 * Bios Updates: http://www.razersupport.com/gaming-systems/razer-blade-stealth/
- * http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.3_BIOS6.05.exe.7z
- * http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.0.zip
+	* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.3_BIOS6.05.exe.7z
+	* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.0.zip
  
 ## Ubuntu 16.10
 
@@ -194,10 +194,10 @@ sudo apt install fonts-cantarell
 
 Unity Tweak Tool:
 * Text scaling factor: 1,25
-* Default: Clear Sans Regular: 10
-* Monospace: Monospace Regular: 10
-* Document: Cantarell Regular: 10
-* Title: Clear Sans Regular: 8
+* Default: Clear Sans Regular: 11
+* Monospace: Monospace Regular: 11
+* Document: Cantarell Regular: 11
+* Title: Clear Sans Regular: 9
 
 
 #### Cursor
