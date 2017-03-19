@@ -1,11 +1,8 @@
 #!/bin/sh
-# location: /etc/pm/sleep.d/20_razer
+# location: /etc/pm/sleep.d/
 # http://askubuntu.com/questions/873626/crash-when-toggling-off-caps-lock
 
 case $1 in
-     suspend|suspend_hybrid|hibernate)
-	# everything is fine
-        ;;
      resume|thaw)
 	 xinput set-prop "AT Raw Set 2 keyboard" "Device Enabled" 0
         ;;
