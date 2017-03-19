@@ -88,7 +88,7 @@ Reference: http://askubuntu.com/questions/873626/crash-when-toggling-off-caps-lo
 
 ### Grafic Card
 
-#### uxa mode (not needed after "update linuxgraphics")
+#### ~~uxa mode~~ (not needed after "update linuxgraphics")
 
 File: /etc/X11/xorg.conf.d/20-intel.conf 
 ```
