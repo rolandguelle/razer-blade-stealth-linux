@@ -1,5 +1,5 @@
 #!/bin/sh
-# file: /etc/pm/sleep.d/20_razer
+# location: /etc/pm/sleep.d/20_razer
 # http://askubuntu.com/questions/873626/crash-when-toggling-off-caps-lock
 
 case $1 in
