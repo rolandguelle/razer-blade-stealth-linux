@@ -133,13 +133,15 @@ sudo apt update
 sudo apt install ukuu
 ```
 
+open ukuu and install new kernel
+
 Reference: https://www.linuxbabe.com/ubuntu/install-linux-kernel-4-10-ubuntu-16-04-ukuu
 
 ### Multiple monitors
 
 I run the external monitor above the internal display.
 
-Script: multiple_displays.sh
+Script: extend.sh
 ```
 EXT=`xrandr --current | sed 's/^\(.*\) connected.*$/\1/p;d' | grep -v ^eDP | head -n 1`
 INT=`xrandr --current | sed 's/^\(.*\) connected.*$/\1/p;d' | grep -v ^DP | head -n 1`
@@ -182,10 +184,21 @@ Open Unity Tweak Tool, choose arc-darker Theme
 
 Reference: http://www.noobslab.com/2017/01/arc-theme-light-dark-versions-and-arc.html
 
-#### Default Font
+#### Fonts
 
-* https://01.org/clear-sans/downloads
-* Use clear-sans as Default Font with Unity Tweak Tool
+* Install clear-sans font: https://01.org/clear-sans/downloads
+* Install Cantarell font:
+```
+sudo apt install fonts-cantarell
+```
+
+Unity Tweak Tool:
+* Text scaling factor: 1,25
+* Default: Clear Sans Regular: 10
+* Monospace: Monospace Regular: 10
+* Document: Cantarell Regular: 10
+* Title: Clear Sans Regular: 8
+
 
 #### Cursor
 
