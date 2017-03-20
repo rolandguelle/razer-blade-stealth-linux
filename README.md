@@ -101,7 +101,6 @@ EndSection
 ```
 Reference: https://wiki.archlinux.org/index.php/Razer#Graphics_Drivers
 
-
 #### update linuxgraphics
 
 The "uxa" mode to avoid flickering isn't needed after updating the intel driver:
@@ -113,7 +112,6 @@ The "uxa" mode to avoid flickering isn't needed after updating the intel driver:
 Reference: https://wiki.archlinux.org/index.php/Razer#Killer_Wireless_Network_Adapter
 
 ### HDMI Output
-
 
 The HDMI works when I boot with an external monitor, but not when plugging it into a running ubuntu :(
 
@@ -141,7 +139,6 @@ xrandr --output "${INT}" --auto --pos 0x${ext_h} --scale 1x1  --output "${EXT}" 
 ```
 
 Reference: https://wiki.archlinux.org/index.php/HiDPI#Multiple_displays
-
 
 ### Webcam (unsolved)
 
@@ -186,7 +183,6 @@ Unity Tweak Tool:
 * Document: Cantarell Regular: 11
 * Title: Clear Sans Regular: 9
 
-
 #### Cursor
 
 ```
@@ -194,21 +190,15 @@ sudo apt install breeze-cursor-theme
 ```
 Select "Breeze_cursor" with Unity Tweaks.
 
-
 ### Laptop TLP Tools
 
 ```
 sudo apt-get install tlp tlp-rdw
 sudo systemctl enable tlp
 ```
-
-### Ad Blocker
-
-https://github.com/StevenBlack/hosts
-
 ## Arch (WIP)
 
-Using Apricityos: https://apricityos.com/download
+Apricityos (https://apricityos.com/download) works like a charm:
 
 * No caps lock or gfx issues & HDMI works :)
 * TODOs:
@@ -226,4 +216,3 @@ https://wiki.archlinux.org/index.php/razer#GRUB
 ### Webcam (unsolved)
 
 status like ubuntu :(
-
