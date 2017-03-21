@@ -21,7 +21,7 @@ Only a few todos :)
 #### Suspend Loop
 
 sudo nano /etc/default/grub
-```bash
+```
 GRUB_CMDLINE_LINUX_DEFAULT="quiet button.lid_init_state=open"
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
@@ -32,7 +32,7 @@ Reference: https://wiki.archlinux.org/index.php/razer#GRUB
 
 Install tlp and tlp-rwd
 
-```bash
+```
 sudo systemctl enable tlp
 sudo systemctl enable tlp-sleep
 ```
@@ -56,12 +56,12 @@ Suspend loop issue:
 A grub kernel parameter solves the problem.
 
 Configuration: /etc/default/grub
-```bash
+```
 GRUB_CMDLINE_LINUX_DEFAULT="quiet button.lid_init_state=open"
 ```
 
 Update grub
-```bash
+```
 sudo update-grub
 ```
 
@@ -70,7 +70,7 @@ Reference: https://wiki.archlinux.org/index.php/Razer#GRUB
 ### Keyboard Colors
 
 Install razer utils and polychromatic tools:
-```bash
+```
 sudo add-apt-repository ppa:terrz/razerutils
 sudo apt update
 sudo apt install python3-razer razer-kernel-modules-dkms razer-daemon razer-doc
@@ -89,9 +89,7 @@ xinput list
 ```
 If you get "AT Raw Set 2 keyboard", you have a problem if you hit _Caps Lock_.
 
-How to fix it?
-
-Config: /etc/X11/xorg.conf.d/20-razer.conf 
+[Config](etc/X11/xorg.conf.d/20-razer.conf)
 ```
 Section "InputClass"
     Identifier      "Disable built-in keyboard"
@@ -100,9 +98,8 @@ Section "InputClass"
     Option          "Ignore"    "true"
 EndSection
 ```
-Re'disable keyboard after suspend:
+Re'disable keyboard after suspend, [Script](etc/pm/sleep.d/20_razer):
 
-Script: /etc/pm/sleep.d/20_razer 
 ```bash
 #!/bin/sh
 # http://askubuntu.com/questions/873626/crash-when-toggling-off-caps-lock
@@ -162,14 +159,14 @@ Reference: https://wiki.archlinux.org/index.php/Razer#Webcam
 
 _Has nothing todo with the Razer, but ... :)_
 
-```bash
+```
 sudo apt install unity-tweak-tool
 ```
 
 #### Install "Arc Darker" Theme & Icons
 
 The arc-icon-theme needs some additional icons:
-```bash
+```
 sudo add-apt-repository ppa:noobslab/themes
 sudo apt install breeze-cursor-theme
 sudo apt install arc-theme arc-icon-theme
@@ -184,7 +181,7 @@ Reference: http://www.noobslab.com/2017/01/arc-theme-light-dark-versions-and-arc
 
 * Install clear-sans font (manually): https://01.org/clear-sans/downloads
 * Install Cantarell font:
-```bash
+```
 sudo apt install fonts-cantarell
 ```
 
@@ -197,14 +194,14 @@ Unity Tweak Tool:
 
 #### Cursor
 
-```bash
+```
 sudo apt install breeze-cursor-theme
 ```
 Select "Breeze_cursor" with Unity Tweaks.
 
 ### Laptop TLP Tools
 
-```bash
+```
 sudo apt-get install tlp tlp-rdw
 sudo systemctl enable tlp
 ```
@@ -212,6 +209,7 @@ sudo systemctl enable tlp
 
 Disable touchpad while typing
 
+[50-synaptics.conf](etc/X11/xorg.conf.d/50-synaptics.conf)
 
 
 ### Gestures
