@@ -146,7 +146,7 @@ Reference: https://www.linuxbabe.com/ubuntu/install-linux-kernel-4-10-ubuntu-16-
 
 Run an external non HDPI monitor above the internal HDPI display.
 
-Actually, I run this (script)[bin/extend.sh] manually.
+Actually, I run this [script](bin/extend.sh) manually.
 
 TODO: automatic run this script
 
