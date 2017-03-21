@@ -226,3 +226,20 @@ Select "Breeze_cursor" with Unity Tweaks.
 sudo apt-get install tlp tlp-rdw
 sudo systemctl enable tlp
 ```
+
+### Gestures
+
+Install [Libinput-gestures](https://github.com/bulletmark/libinput-gestures):
+
+```
+sudo gpasswd -a $USER input
+sudo apt-get install xdotool wmctrl
+sudo apt-get install libinput-tools
+git clone http://github.com/bulletmark/libinput-gestures
+cd libinput-gestures
+sudo ./libinput-gestures-setup install
+echo "gesture swipe right     xdotool key ctrl+alt+Right" > .config/libinput-gestures.conf
+echo "gesture swipe left     xdotool key ctrl+alt+Left" >> .config/libinput-gestures.conf
+libinput-gestures-setup autostart
+libinput-gestures-setup start
+```
