@@ -118,22 +118,9 @@ Reference: http://askubuntu.com/questions/873626/crash-when-toggling-off-caps-lo
 
 ### Grafic Card
 
-#### ~~uxa mode~~ (not needed after "update linuxgraphics")
-
-File: /etc/X11/xorg.conf.d/20-intel.conf 
-```
-Section "Device"
-  Identifier  "Intel Graphics"
-  Driver      "intel"
-  Option      "AccelMethod"  "uxa"
-  #Option      "AccelMethod"  "sna"
-EndSection
-```
-Reference: https://wiki.archlinux.org/index.php/Razer#Graphics_Drivers
-
 #### update linuxgraphics
 
-The "uxa" mode to avoid flickering isn't needed after updating the intel driver:
+The [uxa mode](https://wiki.archlinux.org/index.php/Razer#Graphics_Drivers) to avoid flickering isn't needed after updating the intel driver:
 * https://01.org/linuxgraphics/downloads/update-tool
 
 
@@ -159,7 +146,9 @@ Reference: https://www.linuxbabe.com/ubuntu/install-linux-kernel-4-10-ubuntu-16-
 
 Run an external non HDPI monitor above the internal HDPI display.
 
-Script: (bin/extend.sh)
+Actually, I run this (script)[bin/extend.sh] manually.
+
+TODO: automatic run this script
 
 Reference: https://wiki.archlinux.org/index.php/HiDPI#Multiple_displays
 
@@ -219,6 +208,11 @@ Select "Breeze_cursor" with Unity Tweaks.
 sudo apt-get install tlp tlp-rdw
 sudo systemctl enable tlp
 ```
+### Palm Detection
+
+Disable touchpad while typing
+
+
 
 ### Gestures
 
