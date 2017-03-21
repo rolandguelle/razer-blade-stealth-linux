@@ -9,6 +9,39 @@ Razer Blade Stealth (late 2016) UHD Linux installation & configuration.
 	* Direct Link:
 		* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.3_BIOS6.05.exe.7z
 		* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.0.zip
+
+
+## Arch Linux
+
+### Antergos
+
+Antergos (Arch Linux, https://antergos.com/) works like a charm.
+Only a few todos :)
+
+#### Suspend Loop
+
+sudo nano /etc/default/grub
+```
+GRUB_CMDLINE_LINUX_DEFAULT="quiet button.lid_init_state=open"
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+Reference: https://wiki.archlinux.org/index.php/razer#GRUB
+
+### Laptop TLP Tools
+
+Install tlp and tlp-rwd
+
+```
+sudo systemctl enable tlp
+sudo systemctl enable tlp-sleep
+```
+
+Reference: https://wiki.archlinux.org/index.php/TLP
+
+#### Webcam
+
+unsolved, like Ubuntu
  
 ## Ubuntu 16.10
 
@@ -98,7 +131,6 @@ EndSection
 ```
 Reference: https://wiki.archlinux.org/index.php/Razer#Graphics_Drivers
 
-
 #### update linuxgraphics
 
 The "uxa" mode to avoid flickering isn't needed after updating the intel driver:
@@ -110,7 +142,6 @@ The "uxa" mode to avoid flickering isn't needed after updating the intel driver:
 Reference: https://wiki.archlinux.org/index.php/Razer#Killer_Wireless_Network_Adapter
 
 ### HDMI Output
-
 
 The HDMI works when I boot with an external monitor, but not when plugging it into a running ubuntu :(
 
@@ -138,7 +169,6 @@ xrandr --output "${INT}" --auto --pos 0x${ext_h} --scale 1x1  --output "${EXT}" 
 ```
 
 Reference: https://wiki.archlinux.org/index.php/HiDPI#Multiple_displays
-
 
 ### Webcam (unsolved)
 
@@ -183,7 +213,6 @@ Unity Tweak Tool:
 * Document: Cantarell Regular: 11
 * Title: Clear Sans Regular: 9
 
-
 #### Cursor
 
 ```
@@ -191,36 +220,9 @@ sudo apt install breeze-cursor-theme
 ```
 Select "Breeze_cursor" with Unity Tweaks.
 
-
 ### Laptop TLP Tools
 
 ```
 sudo apt-get install tlp tlp-rdw
 sudo systemctl enable tlp
 ```
-
-### Ad Blocker
-
-https://github.com/StevenBlack/hosts
-
-## Arch (WIP)
-
-Using Apricityos: https://apricityos.com/download
-
-* No caps lock or gfx issues & HDMI works :)
-* TODOs:
-	* suspend loop (solved)
-	* web cam (unsolved)
-
-### Suspend loop
-
-Added kernel parameter to GRUB
-```
-button.lid_init_state=open
-```
-https://wiki.archlinux.org/index.php/razer#GRUB
-
-### Webcam (unsolved)
-
-status like ubuntu :(
-
