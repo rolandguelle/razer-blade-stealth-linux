@@ -21,7 +21,7 @@ Only a few todos :)
 #### Suspend Loop
 
 sudo nano /etc/default/grub
-```
+```bash
 GRUB_CMDLINE_LINUX_DEFAULT="quiet button.lid_init_state=open"
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
@@ -32,7 +32,7 @@ Reference: https://wiki.archlinux.org/index.php/razer#GRUB
 
 Install tlp and tlp-rwd
 
-```
+```bash
 sudo systemctl enable tlp
 sudo systemctl enable tlp-sleep
 ```
@@ -56,12 +56,12 @@ Suspend loop issue:
 A grub kernel parameter solves the problem.
 
 Configuration: /etc/default/grub
-```
+```bash
 GRUB_CMDLINE_LINUX_DEFAULT="quiet button.lid_init_state=open"
 ```
 
 Update grub
-```
+```bash
 sudo update-grub
 ```
 
@@ -70,7 +70,7 @@ Reference: https://wiki.archlinux.org/index.php/Razer#GRUB
 ### Keyboard Colors
 
 Install razer utils and polychromatic tools:
-```
+```bash
 sudo add-apt-repository ppa:terrz/razerutils
 sudo apt update
 sudo apt install python3-razer razer-kernel-modules-dkms razer-daemon razer-doc
@@ -103,7 +103,7 @@ EndSection
 Re'disable keyboard after suspend:
 
 Script: /etc/pm/sleep.d/20_razer 
-```
+```bash
 #!/bin/sh
 # http://askubuntu.com/questions/873626/crash-when-toggling-off-caps-lock
 
@@ -146,7 +146,7 @@ Reference: https://wiki.archlinux.org/index.php/Razer#Killer_Wireless_Network_Ad
 The HDMI works when I boot with an external monitor, but not when plugging it into a running ubuntu :(
 
 Swithing Ubuntu to the 4.10.4 kernel solves the problem:
-```
+```bash
 sudo add-apt-repository -y ppa:teejee2008/ppa
 sudo apt update
 sudo apt install ukuu
@@ -159,14 +159,7 @@ Reference: https://www.linuxbabe.com/ubuntu/install-linux-kernel-4-10-ubuntu-16-
 
 Run an external non HDPI monitor above the internal HDPI display.
 
-Script: extend.sh
-```
-#!/bin/sh
-EXT=`xrandr --current | sed 's/^\(.*\) connected.*$/\1/p;d' | grep -v ^eDP | head -n 1`
-INT=`xrandr --current | sed 's/^\(.*\) connected.*$/\1/p;d' | grep -v ^DP | head -n 1`
-ext_h=`xrandr | sed 's/^'"${EXT}"' [^0-9]* [0-9]\+x\([0-9]\+\).*$/\1/p;d'`
-xrandr --output "${INT}" --auto --pos 0x${ext_h} --scale 1x1  --output "${EXT}" --auto --scale 2x2 --pos 0x0
-```
+Script: (bin/extend.sh)
 
 Reference: https://wiki.archlinux.org/index.php/HiDPI#Multiple_displays
 
@@ -180,14 +173,14 @@ Reference: https://wiki.archlinux.org/index.php/Razer#Webcam
 
 _Has nothing todo with the Razer, but ... :)_
 
-```
+```bash
 sudo apt install unity-tweak-tool
 ```
 
 #### Install "Arc Darker" Theme & Icons
 
 The arc-icon-theme needs some additional icons:
-```
+```bash
 sudo add-apt-repository ppa:noobslab/themes
 sudo apt install breeze-cursor-theme
 sudo apt install arc-theme arc-icon-theme
@@ -202,27 +195,27 @@ Reference: http://www.noobslab.com/2017/01/arc-theme-light-dark-versions-and-arc
 
 * Install clear-sans font (manually): https://01.org/clear-sans/downloads
 * Install Cantarell font:
-```
+```bash
 sudo apt install fonts-cantarell
 ```
 
 Unity Tweak Tool:
-* Text scaling factor: 1,25
+* Text scaling factor: 1
 * Default: Clear Sans Regular: 11
 * Monospace: Monospace Regular: 11
 * Document: Cantarell Regular: 11
-* Title: Clear Sans Regular: 9
+* Title: Clear Sans Regular: 10
 
 #### Cursor
 
-```
+```bash
 sudo apt install breeze-cursor-theme
 ```
 Select "Breeze_cursor" with Unity Tweaks.
 
 ### Laptop TLP Tools
 
-```
+```bash
 sudo apt-get install tlp tlp-rdw
 sudo systemctl enable tlp
 ```
@@ -231,7 +224,7 @@ sudo systemctl enable tlp
 
 Install [Libinput-gestures](https://github.com/bulletmark/libinput-gestures):
 
-```
+```bash
 sudo gpasswd -a $USER input
 sudo apt-get install xdotool wmctrl
 sudo apt-get install libinput-tools
@@ -243,3 +236,5 @@ echo "gesture swipe left     xdotool key ctrl+alt+Left" >> .config/libinput-gest
 libinput-gestures-setup autostart
 libinput-gestures-setup start
 ```
+
+Reference: https://github.com/bulletmark/libinput-gestures
