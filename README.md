@@ -205,6 +205,20 @@ Select "Breeze_cursor" with Unity Tweaks.
 sudo apt-get install tlp tlp-rdw
 sudo systemctl enable tlp
 ```
+
+### msc
+
+I get errors like:
+```
+mce: [Hardware Error]: CPU 3: Machine Check: 0 Bank 128 ...
+```
+
+msclog gives more information:
+```
+Processor 1 below trip temperature. Throttling disabled
+Running trigger `unknown-error-trigger'
+```
+
 ### Palm Detection
 
 Disable touchpad while typing
