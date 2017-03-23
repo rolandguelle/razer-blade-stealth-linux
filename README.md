@@ -15,8 +15,9 @@ Razer Blade Stealth (late 2016) UHD Linux installation & configuration.
 
 ### Antergos
 
-Antergos (Arch Linux, https://antergos.com/) works like a charm.
-Only a few todos :)
+* Disk resize & fresh install
+* Antergos (Arch Linux, https://antergos.com/)
+* most works like a charm
 
 #### Suspend Loop
 
@@ -39,7 +40,13 @@ sudo systemctl enable tlp-sleep
 
 Reference: https://wiki.archlinux.org/index.php/TLP
 
-#### Webcam
+### Gestures
+
+Install libinput-gestures via pacman
+
+[Config](config/libinput-gestures.conf)
+
+### Webcam
 
 unsolved, like Ubuntu
  
