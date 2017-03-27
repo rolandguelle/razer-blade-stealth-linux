@@ -1,6 +1,6 @@
 #!/bin/sh
 case "${1}" in
   resume|thaw)
-    service network-manager restart
+    sleep 1 && service network-manager restart
 ;;
 esac

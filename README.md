@@ -136,7 +136,7 @@ Reference: https://wiki.archlinux.org/index.php/Razer#Killer_Wireless_Network_Ad
 
 The HDMI works when I boot with an external monitor, but not when plugging it into a running ubuntu :(
 
-Swithing Ubuntu to the 4.10.4 kernel solves the problem:
+Swithing Ubuntu to the 4.10.6 kernel solves the problem:
 ```bash
 sudo add-apt-repository -y ppa:teejee2008/ppa
 sudo apt update
@@ -170,17 +170,24 @@ _Has nothing todo with the Razer, but ... :)_
 sudo apt install unity-tweak-tool
 ```
 
-#### Install "Arc Darker" Theme & Icons
+#### Install "Arc Darker" and "Paper" Theme & Icons
 
 The arc-icon-theme needs some additional icons:
 ```
 sudo add-apt-repository ppa:noobslab/themes
+sudo add-apt-repository ppa:snwh/pulp
+sudo apt-get update
 sudo apt install breeze-cursor-theme
 sudo apt install arc-theme arc-icon-theme
 sudo apt install adwaita-icon-theme
 sudo apt install moka-icon-theme
+sudo apt-get install paper-icon-theme
+sudo apt-get install paper-gtk-theme
+sudo apt install breeze-cursor-theme
 ```
-Open Unity Tweak Tool: "arc-darker" theme & icons
+Open Unity Tweak Tool:
+* "arc-darker" theme & "paper" icons
+* Select "Breeze_cursor" with Unity Tweaks.
 
 Reference: http://www.noobslab.com/2017/01/arc-theme-light-dark-versions-and-arc.html
 
@@ -194,36 +201,16 @@ sudo apt install fonts-cantarell
 
 Unity Tweak Tool:
 * Text scaling factor: 1
-* Default: Clear Sans Regular: 11
+* Default: Clear Sans Regular: 12
 * Monospace: Monospace Regular: 11
-* Document: Cantarell Regular: 11
-* Title: Clear Sans Regular: 10
-
-#### Cursor
-
-```
-sudo apt install breeze-cursor-theme
-```
-Select "Breeze_cursor" with Unity Tweaks.
+* Document: Clear Sans Regular: 12
+* Title: Clear Sans Bold: 11
 
 ### Laptop TLP Tools
 
 ```
 sudo apt-get install tlp tlp-rdw
 sudo systemctl enable tlp
-```
-
-### msc
-
-I get errors like:
-```
-mce: [Hardware Error]: CPU 3: Machine Check: 0 Bank 128 ...
-```
-
-msclog gives more information:
-```
-Processor 1 below trip temperature. Throttling disabled
-Running trigger `unknown-error-trigger'
 ```
 
 ### Palm Detection
