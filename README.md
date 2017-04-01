@@ -17,7 +17,6 @@ Razer Blade Stealth (late 2016) UHD Linux installation & configuration.
 
 * Disk resize & fresh install
 * Antergos (Arch Linux, https://antergos.com/)
-* most works like a charm
 
 #### Suspend Loop
 
@@ -46,10 +45,25 @@ Install libinput-gestures via pacman
 
 [Config](config/libinput-gestures.conf)
 
+### libinput & palm detection
+
+Antergos use libinput, but the touchpad / keyboard not well working in dayly work.
+
+TODO open...
+
 ### Webcam
 
 unsolved, like Ubuntu
- 
+TODO open...
+
+### Multiple monitors
+
+The [script](bin/extend.sh) don't work, because Antergos use (X)Wayland instead of X11 - but I hope that it isn't needed :)
+But the current status is that the scaling is broken: My primary (laptop) screen is fine, my external 1920x1080 screen has gigantic icons.
+A weston.ini doesn't help.
+TODO open...
+
+
 ## Ubuntu 16.10
 
 * Disk resize & fresh install
@@ -152,17 +166,18 @@ Run an external non HDPI monitor above the internal HDPI display.
 
 Actually, I run this [script](bin/extend.sh) manually.
 
-TODO: automatic run this script
+TODO: automatic run this script & maybe find a better solution
 
 Reference: https://wiki.archlinux.org/index.php/HiDPI#Multiple_displays
 
 ### Webcam (unsolved)
 
 Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames
+TODO open...
 
 Reference: https://wiki.archlinux.org/index.php/Razer#Webcam
 
-### Theme tuning
+### Ubuntu Theme tuning
 
 _Has nothing todo with the Razer, but ... :)_
 
