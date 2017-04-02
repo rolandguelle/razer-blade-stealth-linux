@@ -47,11 +47,44 @@ Install libinput-gestures via pacman
 
 ### libinput & palm detection
 
-Antergos use libinput, but the touchpad / keyboard not well working in dayly work.
+Antergos use libinput and the touchpad / keyboard not well working in dayly work.
 
 TODO open...
 
-status:
+```
+libinput-list-devices
+```
+returns:
+```
+Device:           15320205:00 06CB:5F41
+Kernel:           /dev/input/event12
+Group:            8
+Seat:             seat0, default
+Size:             104x60mm
+Capabilities:     prointer 
+Tap-to-click:     disabled
+Tap-and-drag:     enabled
+Tap drag lock:    disabled
+Left-handed:      disabled
+Nat.scrolling:    disabled
+Middle emulation: disabled
+Calibration:      n/a
+Scroll methods:   *two-finger edge 
+Click methods:    *button-areas clickfinger 
+Disable-w-typing: enabled
+Accel profiles:   none
+Rotation:         n/a
+```
+(where Disably-w-typing is enabled, but not with the same effect on X11 / synaptics)
+
+```
+xinput list-props 8
+Device 'xwayland-keyboard:13':
+	Device Enabled (119):	1
+	Coordinate Transformation Matrix (121):	1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
+```
+
+More
 * https://bugs.freedesktop.org/show_bug.cgi?id=100165
 * xinput --set-prop "${TOUCHPAD}" "libinput Disable While Typing Enabled" 1
 
