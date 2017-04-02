@@ -47,9 +47,9 @@ Install libinput-gestures via pacman
 
 ### libinput & palm detection
 
-Antergos use libinput and the touchpad / keyboard not well working in dayly work.
-
-TODO open...
+Antergos use libinput and (X)Wayland.
+ 
+* TODO open...
 
 ```
 libinput-list-devices
@@ -75,30 +75,27 @@ Disable-w-typing: enabled
 Accel profiles:   none
 Rotation:         n/a
 ```
-(where Disably-w-typing is enabled, but not with the same effect on X11 / synaptics)
+(where Disably-w-typing is enabled, but not well working)
 
-```
-xinput list-props 8
-Device 'xwayland-keyboard:13':
-	Device Enabled (119):	1
-	Coordinate Transformation Matrix (121):	1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
-```
+The Gnome Configuration shows Tap-to-click: enabled.
+:S
 
 More
 * https://bugs.freedesktop.org/show_bug.cgi?id=100165
-* xinput --set-prop "${TOUCHPAD}" "libinput Disable While Typing Enabled" 1
 
 ### Webcam
 
 unsolved, like Ubuntu
-TODO open...
+
+* TODO open...
 
 ### Multiple monitors
 
 The [script](bin/extend.sh) don't work, because Antergos use (X)Wayland instead of X11 - but I hope that it isn't needed :)
 But the current status is that the scaling is broken: My primary (laptop) screen is fine, my external 1920x1080 screen has gigantic icons.
 A weston.ini doesn't help.
-TODO open...
+
+* TODO open...
 
 
 ## Ubuntu 16.10
