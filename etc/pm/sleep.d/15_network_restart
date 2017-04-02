@@ -1,6 +1,0 @@
-#!/bin/sh
-case "${1}" in
-  resume|thaw)
-    sleep 2 && service network-manager restart
-;;
-esac

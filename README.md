@@ -51,6 +51,10 @@ Antergos use libinput, but the touchpad / keyboard not well working in dayly wor
 
 TODO open...
 
+status:
+* https://bugs.freedesktop.org/show_bug.cgi?id=100165
+* xinput --set-prop "${TOUCHPAD}" "libinput Disable While Typing Enabled" 1
+
 ### Webcam
 
 unsolved, like Ubuntu
