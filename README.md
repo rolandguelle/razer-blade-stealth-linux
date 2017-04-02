@@ -47,7 +47,7 @@ Install libinput-gestures via pacman
 
 ### libinput & palm detection
 
-Antergos use libinput and (X)Wayland.
+I switched to GDM and give Wayland a try...
  
 * TODO open...
 
@@ -91,7 +91,7 @@ unsolved, like Ubuntu
 
 ### Multiple monitors
 
-The [script](bin/extend.sh) don't work, because Antergos use (X)Wayland instead of X11 - but I hope that it isn't needed :)
+The [script](bin/extend.sh) don't work, because GDM & Antergos use (X)Wayland instead of X11 - but I hope that it isn't needed :)
 But the current status is that the scaling is broken: My primary (laptop) screen is fine, my external 1920x1080 screen has gigantic icons.
 A weston.ini doesn't help.
 
