@@ -200,7 +200,8 @@ Run an external non HDPI monitor above the internal HDPI display.
 
 Actually, I run this [script](bin/extend.sh) manually.
 
-TODO: automatic run this script & maybe find a better solution
+* TODO: automatic run this script & maybe find a better solution
+    * http://askubuntu.com/questions/270374/possible-to-run-a-script-when-something-plugged-in-disconnected-from-mini-disp
 
 Reference: https://wiki.archlinux.org/index.php/HiDPI#Multiple_displays
 
