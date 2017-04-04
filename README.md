@@ -91,12 +91,7 @@ unsolved, like Ubuntu
 
 ### Multiple monitors
 
-The [script](bin/extend.sh) don't work, because GDM & Antergos use (X)Wayland instead of X11 - but I hope that it isn't needed :)
-But the current status is that the scaling is broken: My primary (laptop) screen is fine, my external 1920x1080 screen has gigantic icons.
-A weston.ini doesn't help.
-
-* TODO open...
-
+The [script](bin/extend.sh) isn't needed, because I use GDM & Antergos with (X)Wayland instead of X11.
 
 ## Ubuntu 16.10
 
@@ -198,9 +193,9 @@ Reference: https://www.linuxbabe.com/ubuntu/install-linux-kernel-4-10-ubuntu-16-
 
 Run an external non HDPI monitor above the internal HDPI display.
 
-Actually, I run this [script](bin/extend.sh) manually.
+Actually, I run this [script](bin/extend.sh) manually, but it is a hack - and breaks the screen.
 
-* TODO: automatic run this script & maybe find a better solution
+* TODO: automatic run this script & find a better solution
     * http://askubuntu.com/questions/270374/possible-to-run-a-script-when-something-plugged-in-disconnected-from-mini-disp
 
 Reference: https://wiki.archlinux.org/index.php/HiDPI#Multiple_displays
