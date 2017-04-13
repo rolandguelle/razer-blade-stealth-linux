@@ -87,7 +87,6 @@ More
 * https://bugs.freedesktop.org/show_bug.cgi?id=100165
 
 
-
 ### Webcam
 
 unsolved, like Ubuntu
@@ -96,7 +95,9 @@ unsolved, like Ubuntu
 
 ### Multiple monitors
 
-The [script](bin/extend.sh) isn't needed, because I use GDM & Antergos with (X)Wayland instead of X11.
+Works on Wayland works.
+
+But scaling fails on most apps.
 
 ## Ubuntu 16.10
 
