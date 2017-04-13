@@ -47,10 +47,9 @@ Install libinput-gestures via pacman
 
 ### libinput & palm detection
 
-I switched to GDM and give Wayland a try...
+I switched to GDM and give Wayland a try.
+Everything runs great, but the touchpad has issues with to sensitive detection.
  
-* TODO open...
-
 ```
 libinput-list-devices
 ```
@@ -75,13 +74,19 @@ Disable-w-typing: enabled
 Accel profiles:   none
 Rotation:         n/a
 ```
-(where Disably-w-typing is enabled, but not well working)
+(where _Disable-w-typing_ is enabled)
 
-The Gnome Configuration shows Tap-to-click: enabled.
+Strange: _Tap-to-click_ is disabled.
+
+The Gnome settings (https://wiki.archlinux.org/index.php/Libinput#Graphical_tools) shows Tap-to-click: enabled.
 :S
+
+* TODO open...
 
 More
 * https://bugs.freedesktop.org/show_bug.cgi?id=100165
+
+
 
 ### Webcam
 
