@@ -20,8 +20,8 @@ Razer Blade Stealth (late 2016) UHD Linux installation & configuration.
 
 #### Suspend Loop
 
-sudo nano /etc/default/grub
 ```
+sudo nano /etc/default/grub
 GRUB_CMDLINE_LINUX_DEFAULT="quiet button.lid_init_state=open"
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
@@ -50,17 +50,17 @@ Install libinput-gestures via pacman
 I switched to GDM and give Wayland a try.
 Everything runs great, but the touchpad has issues with to sensitive detection.
  
+* TODO open...
+
 ```
 libinput-list-devices
-```
-returns:
-```
+...
 Device:           15320205:00 06CB:5F41
 Kernel:           /dev/input/event12
 Group:            8
 Seat:             seat0, default
 Size:             104x60mm
-Capabilities:     prointer 
+Capabilities:     pointer 
 Tap-to-click:     disabled
 Tap-and-drag:     enabled
 Tap drag lock:    disabled
@@ -74,22 +74,41 @@ Disable-w-typing: enabled
 Accel profiles:   none
 Rotation:         n/a
 ```
-(where _Disable-w-typing_ is enabled)
+...where _Disable-w-typing_ is enabled and _Tap-to-click_ is disabled.
+???
 
-Strange: _Tap-to-click_ is disabled.
-
-The Gnome settings (https://wiki.archlinux.org/index.php/Libinput#Graphical_tools) shows Tap-to-click: enabled.
-:S
-
-* TODO open...
-
-More
+The Gnome settings:
+```
+gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click
+true
+```
+No settings about Disable while typing. I guess the touchpad isn't correct detected:
 * https://bugs.freedesktop.org/show_bug.cgi?id=100165
 
+```
+evemu-describe 
+Available devices:
+/dev/input/event12:	15320205:00 06CB:5F41
+# EVEMU 1.3
+# Kernel: 4.10.9-1-ARCH
+# DMI: dmi:bvnRazer:bvr6.05:bd01/26/2017:svnRazer:pnBladeStealth:pvr2.04:rvnRazer:rnRazer:rvr:cvnRazer:ct9:cvr:
+# Input device name: "15320205:00 06CB:5F41"
+# Input device ID: bus 0x18 vendor 0x6cb product 0x5f41 version 0x100
+```
+
+```
+udevadm info /dev/input/event12
+N: input/event12
+S: input/by-path/pci-0000:00:15.1-platform-i2c_designware.1-event-mouse
+E: DEVLINKS=/dev/input/by-path/pci-0000:00:15.1-platform-i2c_designware.1-event-mouse
+```
+
+Maybe a local hwdb helps????
+https://github.com/systemd/systemd/blob/master/hwdb/70-touchpad.hwdb
 
 ### Webcam
 
-unsolved, like Ubuntu
+Unsolved, like Ubuntu
 
 * TODO open...
 
@@ -179,7 +198,7 @@ The [uxa mode](https://wiki.archlinux.org/index.php/Razer#Graphics_Drivers) to a
 
 ### wireless
 
-Reference: https://wiki.archlinux.org/index.php/Razer#Killer_Wireless_Network_Adapter
+Works, but I updated the firmware: https://wiki.archlinux.org/index.php/Razer#Killer_Wireless_Network_Adapter
 
 ### HDMI Output
 
