@@ -95,9 +95,9 @@ unsolved, like Ubuntu
 
 ### Multiple monitors
 
-Works on Wayland works.
+Works on Wayland.
 
-But scaling fails on most apps.
+But scaling fails on most apps :(
 
 ## Ubuntu 16.10
 
