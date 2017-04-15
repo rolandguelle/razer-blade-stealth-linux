@@ -118,9 +118,9 @@ Works on Wayland.
 
 But scaling fails on most apps :(
 
-## Ubuntu 16.10
+## Ubuntu ~~16.10~~ 17.04
 
-* Disk resize & fresh install
+* Disk resize & fresh install 16.10, update to 17.04
 * Settings -> Monitor -> Scale for menu and title bars: 2
 
 ### Suspend
@@ -200,20 +200,6 @@ The [uxa mode](https://wiki.archlinux.org/index.php/Razer#Graphics_Drivers) to a
 
 Works, but I updated the firmware: https://wiki.archlinux.org/index.php/Razer#Killer_Wireless_Network_Adapter
 
-### HDMI Output
-
-The HDMI works when I boot with an external monitor, but not when plugging it into a running ubuntu :(
-
-Swithing Ubuntu to the 4.10.6 kernel solves the problem:
-```bash
-sudo add-apt-repository -y ppa:teejee2008/ppa
-sudo apt update
-sudo apt install ukuu
-```
-Open ukuu and install new kernel.
-
-Reference: https://www.linuxbabe.com/ubuntu/install-linux-kernel-4-10-ubuntu-16-04-ukuu
-
 ### Multiple monitors
 
 Run an external non HDPI monitor above the internal HDPI display.
@@ -222,6 +208,8 @@ Actually, I run this [script](bin/extend.sh) manually, but it is a hack - and br
 
 * TODO: automatic run this script & find a better solution
     * http://askubuntu.com/questions/270374/possible-to-run-a-script-when-something-plugged-in-disconnected-from-mini-disp
+    
+The script is buggy and I need to find another solution. Wayland on my Arch trial looks better, but the touchpad & libinput needs some work. 
 
 Reference: https://wiki.archlinux.org/index.php/HiDPI#Multiple_displays
 
