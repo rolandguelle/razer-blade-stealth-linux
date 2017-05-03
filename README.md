@@ -164,6 +164,20 @@ xinput list
 ```
 If you get "AT Raw Set 2 keyboard", you have a problem if you hit _Caps Lock_.
 
+There are two possible solutions
+
+#### Solution 1: replacing capslocks
+
+Feels like a workaround, but simple solutions are always nice :)
+(Thanks to https://github.com/xlinbsd)
+
+Modify /etc/default/keyboard following line, replacing capslocks by a second ctrl, better than nothing:
+```
+XKBOPTIONS="ctrl:nocaps"
+```
+
+#### Solution 2: Disable built-in keyboard
+
 [Config](etc/X11/xorg.conf.d/20-razer.conf)
 ```
 Section "InputClass"
