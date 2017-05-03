@@ -162,21 +162,13 @@ The RBS crashes randomly if you hit "Caps Lock". The build-in driver causes the 
 ```
 xinput list
 ```
-If you get "AT Raw Set 2 keyboard", you have a problem if you hit _Caps Lock_.
+If you get "AT Raw Set 2 keyboard", you have a problem if you hit _Caps Lock_ :(
 
-There are two possible solutions
+There are two possible solutions: Disable the build-in keyboard driver or replace capslock.
 
-#### Solution 1: replacing capslocks
+#### Solution 1: Disable built-in keyboard driver
 
-Feels like a workaround, but simple solutions are always nice :)
-(Thanks to https://github.com/xlinbsd)
-
-Modify /etc/default/keyboard following line, replacing capslocks by a second ctrl, better than nothing:
-```
-XKBOPTIONS="ctrl:nocaps"
-```
-
-#### Solution 2: Disable built-in keyboard
+When you install the the razer keyboard driver for linux which you can find [here on GitHub](https://terrycain.github.io/razer-drivers/), you can disable the build-in keyboard driver.
 
 [Config](etc/X11/xorg.conf.d/20-razer.conf)
 ```
@@ -201,6 +193,17 @@ esac
 ```
 
 Reference: http://askubuntu.com/questions/873626/crash-when-toggling-off-caps-lock
+
+#### Solution 2: replacing capslocks
+
+Feels like a workaround, but simple solutions are always nice :)
+(Thanks to https://github.com/xlinbsd)
+
+Modify /etc/default/keyboard following line, replacing capslocks by a second ctrl, better than nothing:
+```
+XKBOPTIONS="ctrl:nocaps"
+```
+
 
 ### Grafic Card
 
