@@ -10,121 +10,6 @@ Razer Blade Stealth (late 2016) UHD Linux installation & configuration.
 		* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.3_BIOS6.05.exe.7z
 		* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.0.zip
 
-
-## Arch Linux
-
-### Antergos
-
-* Disk resize & fresh install
-* Antergos (Arch Linux, https://antergos.com/)
-
-#### Suspend Loop
-
-```
-sudo nano /etc/default/grub
-GRUB_CMDLINE_LINUX_DEFAULT="quiet button.lid_init_state=open"
-grub-mkconfig -o /boot/grub/grub.cfg
-```
-
-Reference: https://wiki.archlinux.org/index.php/razer#GRUB
-
-### Laptop TLP Tools
-
-Install tlp and tlp-rwd
-
-```
-sudo systemctl enable tlp
-sudo systemctl enable tlp-sleep
-```
-
-Reference: https://wiki.archlinux.org/index.php/TLP
-
-### Gestures
-
-Install libinput-gestures via pacman
-
-[Config](config/libinput-gestures.conf)
-
-### Keyboard Colors
-
-Install:
-* razer-driver-dkms
-* razer-driver-meta
-* polychromatic
-
-### libinput & palm detection
-
-I switched to GDM and give Wayland a try.
-Everything runs great, but the touchpad has issues with to sensitive detection.
- 
-* TODO open...
-
-```
-libinput-list-devices
-...
-Device:           15320205:00 06CB:5F41
-Kernel:           /dev/input/event12
-Group:            8
-Seat:             seat0, default
-Size:             104x60mm
-Capabilities:     pointer 
-Tap-to-click:     disabled
-Tap-and-drag:     enabled
-Tap drag lock:    disabled
-Left-handed:      disabled
-Nat.scrolling:    disabled
-Middle emulation: disabled
-Calibration:      n/a
-Scroll methods:   *two-finger edge 
-Click methods:    *button-areas clickfinger 
-Disable-w-typing: enabled
-Accel profiles:   none
-Rotation:         n/a
-```
-...where _Disable-w-typing_ is enabled and _Tap-to-click_ is disabled.
-???
-
-The Gnome settings:
-```
-gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click
-true
-```
-No settings about Disable while typing. I guess the touchpad isn't correct detected:
-* https://bugs.freedesktop.org/show_bug.cgi?id=100165
-
-```
-evemu-describe 
-Available devices:
-/dev/input/event12:	15320205:00 06CB:5F41
-# EVEMU 1.3
-# Kernel: 4.10.9-1-ARCH
-# DMI: dmi:bvnRazer:bvr6.05:bd01/26/2017:svnRazer:pnBladeStealth:pvr2.04:rvnRazer:rnRazer:rvr:cvnRazer:ct9:cvr:
-# Input device name: "15320205:00 06CB:5F41"
-# Input device ID: bus 0x18 vendor 0x6cb product 0x5f41 version 0x100
-```
-
-```
-udevadm info /dev/input/event12
-N: input/event12
-S: input/by-path/pci-0000:00:15.1-platform-i2c_designware.1-event-mouse
-E: DEVLINKS=/dev/input/by-path/pci-0000:00:15.1-platform-i2c_designware.1-event-mouse
-```
-
-Maybe a local hwdb helps????
-https://github.com/systemd/systemd/blob/master/hwdb/70-touchpad.hwdb
-
-### Webcam
-
-Unsolved, like Ubuntu
-
-* TODO open...
-
-### Multiple monitors
-
-Works on Wayland.
-
-But scaling fails on most apps :(
-
 ## Ubuntu ~~16.10~~ 17.04
 
 * Disk resize & fresh install 16.10, update to 17.04
@@ -320,3 +205,124 @@ libinput-gestures-setup start
 ```
 
 Reference: https://github.com/bulletmark/libinput-gestures
+
+
+## Arch Linux
+
+### Antergos
+
+* Disk resize & fresh install
+* Antergos (Arch Linux, https://antergos.com/)
+
+#### Suspend Loop
+
+```
+sudo nano /etc/default/grub
+GRUB_CMDLINE_LINUX_DEFAULT="quiet button.lid_init_state=open"
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+Reference: https://wiki.archlinux.org/index.php/razer#GRUB
+
+### Laptop TLP Tools
+
+Install tlp and tlp-rwd
+
+```
+sudo systemctl enable tlp
+sudo systemctl enable tlp-sleep
+```
+
+Reference: https://wiki.archlinux.org/index.php/TLP
+
+### Gestures
+
+Install libinput-gestures via pacman
+
+[Config](config/libinput-gestures.conf)
+
+### Keyboard Colors
+
+Tried to install:
+* razer-driver-dkms
+* razer-driver-meta
+* polychromatic
+
+But seems not to work:
+```
+bus = cls._new_for_bus(address_or_type, mainloop=mainloop)
+dbus.exceptions.DBusException: org.freedesktop.DBus.Error.NotSupported: Using X11 for dbus-daemon autolaunch was disabled at compile time, set your DBUS_SESSION_BUS_ADDRESS instead
+```
+
+### libinput & palm detection
+
+I switched to GDM and give Wayland a try.
+Everything runs great, but the touchpad has issues with to sensitive detection.
+ 
+* TODO open...
+
+```
+libinput-list-devices
+...
+Device:           15320205:00 06CB:5F41
+Kernel:           /dev/input/event12
+Group:            8
+Seat:             seat0, default
+Size:             104x60mm
+Capabilities:     pointer 
+Tap-to-click:     disabled
+Tap-and-drag:     enabled
+Tap drag lock:    disabled
+Left-handed:      disabled
+Nat.scrolling:    disabled
+Middle emulation: disabled
+Calibration:      n/a
+Scroll methods:   *two-finger edge 
+Click methods:    *button-areas clickfinger 
+Disable-w-typing: enabled
+Accel profiles:   none
+Rotation:         n/a
+```
+...where _Disable-w-typing_ is enabled and _Tap-to-click_ is disabled.
+???
+
+The Gnome settings:
+```
+gsettings get org.gnome.desktop.peripherals.touchpad tap-to-click
+true
+```
+No settings about Disable while typing. I guess the touchpad isn't correct detected:
+* https://bugs.freedesktop.org/show_bug.cgi?id=100165
+
+```
+evemu-describe 
+Available devices:
+/dev/input/event12:	15320205:00 06CB:5F41
+# EVEMU 1.3
+# Kernel: 4.10.9-1-ARCH
+# DMI: dmi:bvnRazer:bvr6.05:bd01/26/2017:svnRazer:pnBladeStealth:pvr2.04:rvnRazer:rnRazer:rvr:cvnRazer:ct9:cvr:
+# Input device name: "15320205:00 06CB:5F41"
+# Input device ID: bus 0x18 vendor 0x6cb product 0x5f41 version 0x100
+```
+
+```
+udevadm info /dev/input/event12
+N: input/event12
+S: input/by-path/pci-0000:00:15.1-platform-i2c_designware.1-event-mouse
+E: DEVLINKS=/dev/input/by-path/pci-0000:00:15.1-platform-i2c_designware.1-event-mouse
+```
+
+Maybe a local hwdb helps????
+https://github.com/systemd/systemd/blob/master/hwdb/70-touchpad.hwdb
+
+### Webcam
+
+Unsolved, like Ubuntu
+
+* TODO open...
+
+### Multiple monitors
+
+Works on Wayland.
+
+But scaling fails on most apps :(
