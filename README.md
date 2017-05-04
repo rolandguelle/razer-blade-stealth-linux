@@ -45,6 +45,13 @@ Install libinput-gestures via pacman
 
 [Config](config/libinput-gestures.conf)
 
+### Keyboard Colors
+
+Install:
+* razer-driver-dkms
+* razer-driver-meta
+* polychromatic
+
 ### libinput & palm detection
 
 I switched to GDM and give Wayland a try.
