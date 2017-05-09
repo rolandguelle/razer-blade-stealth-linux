@@ -1,6 +1,8 @@
 # Razer Blade Stealth Linux
 
 Razer Blade Stealth (late 2016) UHD Linux installation & configuration.
+If you have questions, please contact me at twitter: [@rolandguelle](https://twitter.com/rolandguelle)
+
 
 ## Preparation
 
@@ -96,6 +98,43 @@ Modify /etc/default/keyboard following line, replacing capslocks by a second ctr
 XKBOPTIONS="ctrl:nocaps"
 ```
 
+### wireless
+
+Works out of the box, but I updated the firmware: https://wiki.archlinux.org/index.php/Razer#Killer_Wireless_Network_Adapter
+
+### Laptop TLP Tools
+
+```
+sudo apt-get install tlp tlp-rdw
+sudo systemctl enable tlp
+```
+
+### Palm Detection
+
+Disable touchpad while typing
+
+[50-synaptics.conf](etc/X11/xorg.conf.d/50-synaptics.conf)
+
+
+### Gestures
+
+Install [Libinput-gestures](https://github.com/bulletmark/libinput-gestures):
+
+```bash
+sudo gpasswd -a $USER input
+sudo apt-get install xdotool wmctrl
+sudo apt-get install libinput-tools
+git clone http://github.com/bulletmark/libinput-gestures
+cd libinput-gestures
+sudo ./libinput-gestures-setup install
+echo "gesture swipe right     xdotool key ctrl+alt+Right" > .config/libinput-gestures.conf
+echo "gesture swipe left     xdotool key ctrl+alt+Left" >> .config/libinput-gestures.conf
+libinput-gestures-setup autostart
+libinput-gestures-setup start
+```
+
+Reference: https://github.com/bulletmark/libinput-gestures
+
 
 ### Grafic Card
 
@@ -104,12 +143,7 @@ XKBOPTIONS="ctrl:nocaps"
 The [uxa mode](https://wiki.archlinux.org/index.php/Razer#Graphics_Drivers) to avoid flickering isn't needed after updating the intel driver:
 * https://01.org/linuxgraphics/downloads/update-tool
 
-
-### wireless
-
-Works, but I updated the firmware: https://wiki.archlinux.org/index.php/Razer#Killer_Wireless_Network_Adapter
-
-### Multiple monitors
+#### Multiple monitors (WIP)
 
 Run an external non HDPI monitor above the internal HDPI display.
 
@@ -173,40 +207,6 @@ Unity Tweak Tool:
 * Document: Clear Sans Regular: 12
 * Title: Clear Sans Bold: 11
 
-### Laptop TLP Tools
-
-```
-sudo apt-get install tlp tlp-rdw
-sudo systemctl enable tlp
-```
-
-### Palm Detection
-
-Disable touchpad while typing
-
-[50-synaptics.conf](etc/X11/xorg.conf.d/50-synaptics.conf)
-
-
-### Gestures
-
-Install [Libinput-gestures](https://github.com/bulletmark/libinput-gestures):
-
-```bash
-sudo gpasswd -a $USER input
-sudo apt-get install xdotool wmctrl
-sudo apt-get install libinput-tools
-git clone http://github.com/bulletmark/libinput-gestures
-cd libinput-gestures
-sudo ./libinput-gestures-setup install
-echo "gesture swipe right     xdotool key ctrl+alt+Right" > .config/libinput-gestures.conf
-echo "gesture swipe left     xdotool key ctrl+alt+Left" >> .config/libinput-gestures.conf
-libinput-gestures-setup autostart
-libinput-gestures-setup start
-```
-
-Reference: https://github.com/bulletmark/libinput-gestures
-
-
 ## Arch Linux
 
 ### Antergos
@@ -241,7 +241,7 @@ Install libinput-gestures via pacman
 
 [Config](config/libinput-gestures.conf)
 
-### Keyboard Colors
+### Keyboard Colors (WIP)
 
 Tried to install:
 * razer-driver-dkms
@@ -254,7 +254,7 @@ bus = cls._new_for_bus(address_or_type, mainloop=mainloop)
 dbus.exceptions.DBusException: org.freedesktop.DBus.Error.NotSupported: Using X11 for dbus-daemon autolaunch was disabled at compile time, set your DBUS_SESSION_BUS_ADDRESS instead
 ```
 
-### libinput & palm detection
+### libinput & palm detection (WIP)
 
 I switched to GDM and give Wayland a try.
 Everything runs great, but the touchpad has issues with to sensitive detection.
@@ -315,14 +315,13 @@ E: DEVLINKS=/dev/input/by-path/pci-0000:00:15.1-platform-i2c_designware.1-event-
 Maybe a local hwdb helps????
 https://github.com/systemd/systemd/blob/master/hwdb/70-touchpad.hwdb
 
-### Webcam
+### Webcam (unsolved)
 
 Unsolved, like Ubuntu
 
 * TODO open...
 
-### Multiple monitors
+### Multiple monitors (WIP)
 
 Works on Wayland.
-
 But scaling fails on most apps :(
