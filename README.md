@@ -98,7 +98,7 @@ Modify /etc/default/keyboard following line, replacing capslocks by a second ctr
 XKBOPTIONS="ctrl:nocaps"
 ```
 
-### wireless
+### Wireless
 
 Works out of the box, but I updated the firmware: https://wiki.archlinux.org/index.php/Razer#Killer_Wireless_Network_Adapter
 
@@ -109,14 +109,15 @@ sudo apt-get install tlp tlp-rdw
 sudo systemctl enable tlp
 ```
 
-### Palm Detection
+### Touchpad (WIP)
 
-Disable touchpad while typing
+Disable touchpad while typing and some other tunings.
+Maybe I find (someday) the same configuration like on macOS.
 
-[50-synaptics.conf](etc/X11/xorg.conf.d/50-synaptics.conf)
+* [50-synaptics.conf](etc/X11/xorg.conf.d/50-synaptics.conf)
 
 
-### Gestures
+#### Gestures
 
 Install [Libinput-gestures](https://github.com/bulletmark/libinput-gestures):
 
@@ -138,7 +139,6 @@ Reference: https://github.com/bulletmark/libinput-gestures
 
 ### Grafic Card
 
-#### update linuxgraphics
 
 The [uxa mode](https://wiki.archlinux.org/index.php/Razer#Graphics_Drivers) to avoid flickering isn't needed after updating the intel driver:
 * https://01.org/linuxgraphics/downloads/update-tool
