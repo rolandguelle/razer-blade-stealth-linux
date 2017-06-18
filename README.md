@@ -1,12 +1,11 @@
 # Razer Blade Stealth Linux
 
 Razer Blade Stealth (late 2016) UHD Linux installation & configuration.
-If you have questions, please contact me at twitter: [@rolandguelle](https://twitter.com/rolandguelle)
-
+If you have questions, please contact me: [@rolandguelle](https://twitter.com/rolandguelle)
 
 ## Preparation
 
-* Run all Bios updates at Windows
+* Run Bios updates at Windows
 	* http://www.razersupport.com/gaming-systems/razer-blade-stealth/
 	* Direct Link:
 		* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.3_BIOS6.05.exe.7z
@@ -14,7 +13,7 @@ If you have questions, please contact me at twitter: [@rolandguelle](https://twi
 
 ## Ubuntu ~~16.10~~ 17.04
 
-* Disk resize & fresh install 16.10, update to 17.04
+* Resize disk & fresh install (I run an updated 16.10 -> 17.04)
 * Settings -> Monitor -> Scale for menu and title bars: 2
 
 ### Suspend
@@ -38,7 +37,7 @@ Reference: https://wiki.archlinux.org/index.php/Razer#GRUB
 
 ### Keyboard Colors
 
-Install razer utils and polychromatic tools:
+Install razerutils and polychromatic tools:
 ```
 sudo add-apt-repository ppa:terrz/razerutils
 sudo apt update
@@ -109,10 +108,9 @@ sudo apt-get install tlp tlp-rdw
 sudo systemctl enable tlp
 ```
 
-### Touchpad (WIP)
+### Touchpad
 
 Disable touchpad while typing and some other tunings.
-Maybe I find (someday) the same configuration like on macOS.
 
 * [50-synaptics.conf](etc/X11/xorg.conf.d/50-synaptics.conf)
 
@@ -139,7 +137,6 @@ Reference: https://github.com/bulletmark/libinput-gestures
 
 ### Grafic Card
 
-
 The [uxa mode](https://wiki.archlinux.org/index.php/Razer#Graphics_Drivers) to avoid flickering isn't needed after updating the intel driver:
 * https://01.org/linuxgraphics/downloads/update-tool
 
@@ -158,8 +155,8 @@ Reference: https://wiki.archlinux.org/index.php/HiDPI#Multiple_displays
 
 ### Webcam (unsolved)
 
-Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames
-TODO open...
+Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
+Unsolved... :(
 
 Reference: https://wiki.archlinux.org/index.php/Razer#Webcam
 
