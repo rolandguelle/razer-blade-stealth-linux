@@ -257,8 +257,8 @@ install libinput-gestures via pacman
 
 .config/libinput-gestures.conf
 ```
-gesture swipe left	_internal ws_up
-gesture swipe right	_internal ws_down
+gesture swipe right	_internal ws_up
+gesture swipe left	_internal ws_down
 
 ```
 
