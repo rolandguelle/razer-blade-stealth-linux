@@ -249,21 +249,27 @@ dbus.exceptions.DBusException: org.freedesktop.DBus.Error.NotSupported: Using X1
 
 I want the same behavior like on my macOS setup, vertical workspaces and gestures for switching.
 
-* Install Gnome Workspace vertical alignment:
-    * https://extensions.gnome.org/extension/484/workspace-grid/
-    * (setup only vertical workspaces)
-* install libinput-gestures via pacman
-    * .config/libinput-gestures.conf
+Install Gnome Workspace vertical alignment:
+* https://extensions.gnome.org/extension/484/workspace-grid/
+* (setup only vertical workspaces)
+
+Install libinput-gestures via pacman
+* .config/libinput-gestures.conf
 ```
 gesture swipe right	_internal ws_up
 gesture swipe left	_internal ws_down
+gesture swipe down	_internal --col=2 ws_up
+gesture swipe up	_internal --col=2 ws_down
 ```
+(looks strange, but this does what it should for me)
+
+Restart libinput-gestures
 * libinput-gestures-setup restart
 
 ### Multiple monitors (WIP)
 
 Works on Wayland.
-But scaling fails on most apps :(
+But scaling fails on apps chromium, firefox, chrome, ... :(
 
 ### Webcam (unsolved)
 
