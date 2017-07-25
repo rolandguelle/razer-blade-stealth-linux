@@ -250,10 +250,10 @@ dbus.exceptions.DBusException: org.freedesktop.DBus.Error.NotSupported: Using X1
 I want the same behavior like on my macOS setup, vertical workspaces and gestures for switching.
 
 * Install Gnome Workspace vertical alignment:
- * https://extensions.gnome.org/extension/484/workspace-grid/
- * (setup only vertical workspaces)
+    * https://extensions.gnome.org/extension/484/workspace-grid/
+    * (setup only vertical workspaces)
 * install libinput-gestures via pacman
- * .config/libinput-gestures.conf
+    * .config/libinput-gestures.conf
 ```
 gesture swipe right	_internal ws_up
 gesture swipe left	_internal ws_down
