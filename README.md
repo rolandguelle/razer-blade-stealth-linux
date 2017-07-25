@@ -232,12 +232,6 @@ sudo systemctl enable tlp-sleep
 
 Reference: https://wiki.archlinux.org/index.php/TLP
 
-### Gestures
-
-Install libinput-gestures via pacman
-
-[Config](config/libinput-gestures.conf)
-
 ### Keyboard Colors (WIP)
 
 Tried to install:
@@ -250,6 +244,24 @@ But seems not to work:
 bus = cls._new_for_bus(address_or_type, mainloop=mainloop)
 dbus.exceptions.DBusException: org.freedesktop.DBus.Error.NotSupported: Using X11 for dbus-daemon autolaunch was disabled at compile time, set your DBUS_SESSION_BUS_ADDRESS instead
 ```
+
+### Gnome, Workspaces, Gestures
+
+I want the same behavior like on my macOS setup, vertical workspaces and gestures for switching.
+
+Install Gnome Workspace vertical alignment:
+* https://extensions.gnome.org/extension/484/workspace-grid/
+(setup only vertical workspaces)
+
+install libinput-gestures via pacman
+
+.config/libinput-gestures.conf
+```
+gesture swipe left	_internal ws_up
+gesture swipe right	_internal ws_down
+
+```
+
 
 ### libinput & palm detection (WIP)
 
