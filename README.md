@@ -232,18 +232,12 @@ sudo systemctl enable tlp-sleep
 
 Reference: https://wiki.archlinux.org/index.php/TLP
 
-### Keyboard Colors (WIP)
+### Keyboard Colors
 
-Tried to install:
+Install via pacman:
 * razer-driver-dkms
-* razer-driver-meta
 * polychromatic
 
-But seems not to work:
-```
-bus = cls._new_for_bus(address_or_type, mainloop=mainloop)
-dbus.exceptions.DBusException: org.freedesktop.DBus.Error.NotSupported: Using X11 for dbus-daemon autolaunch was disabled at compile time, set your DBUS_SESSION_BUS_ADDRESS instead
-```
 
 ### Gnome, Workspaces, Gestures
 
