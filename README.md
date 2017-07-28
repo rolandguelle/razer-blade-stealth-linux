@@ -1,10 +1,12 @@
 # Razer Blade Stealth Linux
 
-My personal guide / howto / experiances with a Razer Blade Stealth (late 2016) UHD and Linux.
-If you have questions, please contact me: [@rolandguelle](https://twitter.com/rolandguelle)
+My personal experiances with a Razer Blade Stealth (late 2016) UHD and Linux.
+
+If you have questions, please contact me at twitter: [@rolandguelle](https://twitter.com/rolandguelle)
 
 * [Ubuntu](#ubuntu)
 * [Arch](#arch)
+
 
 ## Preparation
 
@@ -213,7 +215,7 @@ Unity Tweak Tool:
 
 ## Arch
 
-I use [Antergos](https://antergos.com/) Arch, because mostly everything works out-of-the-box.
+I use [Antergos](https://antergos.com/) Arch - mostly everything works out-of-the-box.
 
 ### Suspend Loop Issue
 
@@ -227,7 +229,9 @@ Reference: https://wiki.archlinux.org/index.php/razer#GRUB
 
 ### Laptop TLP Tools
 
-Install tlp and tlp-rwd
+Install via pacman:
+* tlp
+* tlp-rwd
 
 ```
 sudo systemctl enable tlp
@@ -243,7 +247,6 @@ Install via pacman:
 * linux-headers
 * openrazer-meta
 * polychromatic
-_reboot_
 
 polychromatic tray icon won't appear in gnome, even with gnome-extensions like topicon. But the app works.
 
@@ -253,7 +256,6 @@ I want the same behavior like on my macOS setup, vertical workspaces and gesture
 
 Install Gnome Extension for vertical worksace alignment:
 * https://extensions.gnome.org/extension/484/workspace-grid/
-* (setup only vertical workspaces)
 
 Install libinput-gestures via pacman
 * .config/libinput-gestures.conf
@@ -271,11 +273,19 @@ Restart libinput-gestures
 ### Multiple monitors (WIP)
 
 Works on Wayland.
-But scaling fails on apps chromium, firefox, chrome, ... :(
+But scaling fails on apps chromium, firefox, chrome :(
 
 ### Webcam (unsolved)
 
-Unsolved, like Ubuntu
+Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
+Unsolved... :(
 
-* TODO open...
+Reference: https://wiki.archlinux.org/index.php/Razer#Webcam
 
+The suggested solution does not work:
+
+```
+/etc/modprobe.d/uvcvideo.conf
+## fix issue with built-in webcam
+options uvcvideo quirks=512
+```
