@@ -242,8 +242,10 @@ Reference: https://wiki.archlinux.org/index.php/TLP
 ### Keyboard Colors (WIP)
 
 Install via pacman:
-* razer-driver-dkms
-* polychromatic
+* python-notify2
+* linux-headers
+* openrazer-meta
+
 
 ### Gnome, Workspaces, Gestures
 
