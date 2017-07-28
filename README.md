@@ -1,22 +1,29 @@
 # Razer Blade Stealth Linux
 
-Razer Blade Stealth (late 2016) UHD Linux installation & configuration.
+My personal guide / howto / experiances with a Razer Blade Stealth (late 2016) UHD and Linux.
 If you have questions, please contact me: [@rolandguelle](https://twitter.com/rolandguelle)
+
+* [Ubuuntu](#Ubuntu)
+* [Arch](#Arch)
 
 ## Preparation
 
-* Run Bios updates at Windows
+* Run Bios updates via Windows the installed Windows 10
 	* http://www.razersupport.com/gaming-systems/razer-blade-stealth/
-	* Direct Link:
+	* Direct Links:
 		* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.3_BIOS6.05.exe.7z
 		* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.0.zip
 
-## Ubuntu ~~16.10~~ 17.04
+## Ubuntu
 
-* Resize disk & fresh install (I run an updated 16.10 -> 17.04)
+* Resize disk with live linux (Ubuntu installation)
+* Fresh install (I run an updated 16.10 -> 17.04)
+
+### X11 / Unity
+
 * Settings -> Monitor -> Scale for menu and title bars: 2
 
-### Suspend
+### Suspend Issue
 
 Suspend loop issue:
 * http://askubuntu.com/questions/849888/suspend-not-working-as-intended-on-razer-blade-stealth-running-xubuntu-16-04/849900
@@ -140,16 +147,16 @@ Reference: https://github.com/bulletmark/libinput-gestures
 The [uxa mode](https://wiki.archlinux.org/index.php/Razer#Graphics_Drivers) to avoid flickering isn't needed after updating the intel driver:
 * https://01.org/linuxgraphics/downloads/update-tool
 
-#### Multiple monitors (WIP)
+#### Multiple monitors X11 (WIP)
 
 Run an external non HDPI monitor above the internal HDPI display.
 
-Actually, I run this [script](bin/extend.sh) manually, but it is a hack - and breaks the screen.
+Actually, I run this [script](bin/extend.sh) manually, but it is a hack - and breaks my screen :(
 
 * TODO: automatic run this script & find a better solution
     * http://askubuntu.com/questions/270374/possible-to-run-a-script-when-something-plugged-in-disconnected-from-mini-disp
     
-The script is buggy and I need to find another solution. Wayland on my Arch trial looks better, but the touchpad & libinput needs some work. 
+Wayland looks better and this hack isn't needed. Use Wayland instead of this hack!
 
 Reference: https://wiki.archlinux.org/index.php/HiDPI#Multiple_displays
 
@@ -204,14 +211,14 @@ Unity Tweak Tool:
 * Document: Clear Sans Regular: 12
 * Title: Clear Sans Bold: 11
 
-## Arch Linux
+## Arch
 
-### Antergos
+I use [Antergos](https://antergos.com/) for my Arch experiances, because mostly everything works out-of-the box.
+TODO: _Real_ arch installation: https://wiki.archlinux.org/index.php/installation_guide
 
 * Disk resize & fresh install
-* Antergos (Arch Linux, https://antergos.com/)
 
-#### Suspend Loop
+### Suspend Loop
 
 ```
 sudo nano /etc/default/grub
