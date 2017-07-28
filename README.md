@@ -232,18 +232,17 @@ sudo systemctl enable tlp-sleep
 
 Reference: https://wiki.archlinux.org/index.php/TLP
 
-### Keyboard Colors
+### Keyboard Colors (WIP)
 
 Install via pacman:
 * razer-driver-dkms
 * polychromatic
 
-
 ### Gnome, Workspaces, Gestures
 
 I want the same behavior like on my macOS setup, vertical workspaces and gestures for switching.
 
-Install Gnome Workspace vertical alignment:
+Install Gnome Extension for vertical worksace alignment:
 * https://extensions.gnome.org/extension/484/workspace-grid/
 * (setup only vertical workspaces)
 
