@@ -23,7 +23,7 @@ If you have questions, please contact me: [@rolandguelle](https://twitter.com/ro
 
 * Settings -> Monitor -> Scale for menu and title bars: 2
 
-### Suspend Issue
+### Suspend Loop Issue
 
 Suspend loop issue:
 * http://askubuntu.com/questions/849888/suspend-not-working-as-intended-on-razer-blade-stealth-running-xubuntu-16-04/849900
@@ -213,12 +213,9 @@ Unity Tweak Tool:
 
 ## Arch
 
-I use [Antergos](https://antergos.com/) for my Arch experiances, because mostly everything works out-of-the box.
-TODO: _Real_ arch installation: https://wiki.archlinux.org/index.php/installation_guide
+I use [Antergos](https://antergos.com/) Arch, because mostly everything works out-of-the-box.
 
-* Disk resize & fresh install
-
-### Suspend Loop
+### Suspend Loop Issue
 
 ```
 sudo nano /etc/default/grub
@@ -245,7 +242,10 @@ Install via pacman:
 * python-notify2
 * linux-headers
 * openrazer-meta
+* polychromatic
+_reboot_
 
+polychromatic tray icon won't appear in gnome, even with gnome-extensions like topicon. But the app works.
 
 ### Gnome, Workspaces, Gestures
 
