@@ -3,8 +3,8 @@
 My personal guide / howto / experiances with a Razer Blade Stealth (late 2016) UHD and Linux.
 If you have questions, please contact me: [@rolandguelle](https://twitter.com/rolandguelle)
 
-* [Ubuuntu](#Ubuntu)
-* [Arch](#Arch)
+* [Ubuntu](#ubuntu)
+* [Arch](#arch)
 
 ## Preparation
 
