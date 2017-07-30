@@ -240,7 +240,7 @@ sudo systemctl enable tlp-sleep
 
 Reference: https://wiki.archlinux.org/index.php/TLP
 
-### Keyboard Colors (WIP)
+### Keyboard Colors
 
 Install via pacman:
 * python-notify2
@@ -248,7 +248,7 @@ Install via pacman:
 * openrazer-meta
 * polychromatic
 
-polychromatic tray icon won't appear in gnome, even with gnome-extensions like topicon. But the app works.
+polychromatic tray icon appears in gnome with gnome-extension: https://extensions.gnome.org/extension/615/appindicator-support/
 
 ### Gnome, Workspaces, Gestures
 
