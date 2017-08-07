@@ -232,7 +232,7 @@ Reference: https://wiki.archlinux.org/index.php/razer#GRUB
 
 Install TLP tools:
 ```shell
-$ sudo pacman -S tlp tlp-rwd
+$ sudo pacman -S tlp tlp-rdw
 ```
 
 Enable TLP tools:
@@ -245,10 +245,11 @@ Reference: https://wiki.archlinux.org/index.php/TLP
 
 ### Keyboard Colors (WIP)
 
-Install openrazer and polychromatic tools:
-```shell
-$ sudo pacman -S python-notify2 linux-headers openrazer-meta polychromatic
-```
+Install openrazer and polychromatic tools with the software manager:
+* python-notify2
+* linux-headers
+* openrazer-meta
+* polychromatic
 
 Polychromatic tray icon appears in Gnome with Gnome-extension:
 * https://extensions.gnome.org/extension/615/appindicator-support/
@@ -262,9 +263,9 @@ I want the same behavior like on my macOS setup, vertical workspaces and gesture
 Install Gnome Extension for vertical worksace alignment:
 * https://extensions.gnome.org/extension/484/workspace-grid/
 
-Install libinput-gestures via pacman
+Install libinput-gestures via software package manager:
+* libinput-gestures
 ```shell
-$ sudo pacman -S libinput-gestures
 $ nano .config/libinput-gestures.conf
 gesture swipe right	_internal ws_up
 gesture swipe left	_internal ws_down
@@ -309,6 +310,8 @@ $ cp 4.4.1/firmware-6.bin_WLAN.RM.4.4.1-00014-QCARMSWP-1 firmware-6.bin
 ```
 
 * reboot
+
+* install ethtool
 
 ```shell
 $ ethtool -i wlp1s0
