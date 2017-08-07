@@ -214,6 +214,18 @@ Unity Tweak Tool:
 
 I use [Antergos](https://antergos.com/) Arch - mostly everything works out-of-the-box, running Gnome + Wayland.
 
+And currently gnome-unstable and testing enabled:
+```shell
+$ sudo nano /etc/pacman.conf
+[gnome-unstable]
+Include = /etc/pacman.d/mirrorlist
+
+[testing]
+Include = /etc/pacman.d/mirrorlist
+```
+
+Reference: https://wiki.archlinux.org/index.php/official_repositories
+
 ### Suspend Loop Issue
 
 ```shell
