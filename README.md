@@ -7,7 +7,6 @@ If you have questions, please contact me at twitter: [@rolandguelle](https://twi
 * [Ubuntu](#ubuntu)
 * [Arch](#arch)
 
-
 ## Preparation
 
 * Run Bios updates via Windows the installed Windows 10
@@ -39,7 +38,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet button.lid_init_state=open"
 
 Update grub
 ```
-sudo update-grub
+$ sudo update-grub
 ```
 
 Reference: https://wiki.archlinux.org/index.php/Razer#GRUB
@@ -48,12 +47,12 @@ Reference: https://wiki.archlinux.org/index.php/Razer#GRUB
 
 Install razerutils and polychromatic tools:
 ```
-sudo add-apt-repository ppa:terrz/razerutils
-sudo apt update
-sudo apt install python3-razer razer-kernel-modules-dkms razer-daemon razer-doc
-sudo add-apt-repository ppa:lah7/polychromatic
-sudo apt update
-sudo apt install polychromatic
+$ sudo add-apt-repository ppa:terrz/razerutils
+$ sudo apt update
+$ sudo apt install python3-razer razer-kernel-modules-dkms razer-daemon razer-doc
+$ sudo add-apt-repository ppa:lah7/polychromatic
+$ sudo apt update
+$ sudo apt install polychromatic
 ```
 
 Reference: https://github.com/lah7/polychromatic
@@ -62,7 +61,7 @@ Reference: https://github.com/lah7/polychromatic
 
 The RBS crashes randomly if you hit "Caps Lock". The build-in driver causes the problem:
 ```
-xinput list
+$ xinput list
 ```
 If you get "AT Raw Set 2 keyboard", you have a problem if you hit _Caps Lock_ :(
 
@@ -103,6 +102,7 @@ Feels like a workaround, but simple solutions are always nice :)
 
 Modify /etc/default/keyboard following line, replacing capslocks by a second ctrl, better than nothing:
 ```
+$ sudo nano /etc/default/keyboard 
 XKBOPTIONS="ctrl:nocaps"
 ```
 
@@ -113,8 +113,8 @@ Works out of the box, but I updated the firmware: https://wiki.archlinux.org/ind
 ### Laptop TLP Tools
 
 ```
-sudo apt-get install tlp tlp-rdw
-sudo systemctl enable tlp
+$ sudo apt-get install tlp tlp-rdw
+$ sudo systemctl enable tlp
 ```
 
 ### Touchpad
@@ -129,16 +129,16 @@ Disable touchpad while typing and some other tunings.
 Install [Libinput-gestures](https://github.com/bulletmark/libinput-gestures):
 
 ```bash
-sudo gpasswd -a $USER input
-sudo apt-get install xdotool wmctrl
-sudo apt-get install libinput-tools
-git clone http://github.com/bulletmark/libinput-gestures
-cd libinput-gestures
-sudo ./libinput-gestures-setup install
-echo "gesture swipe right     xdotool key ctrl+alt+Right" > .config/libinput-gestures.conf
-echo "gesture swipe left     xdotool key ctrl+alt+Left" >> .config/libinput-gestures.conf
-libinput-gestures-setup autostart
-libinput-gestures-setup start
+$ sudo gpasswd -a $USER input
+$ sudo apt-get install xdotool wmctrl
+$ sudo apt-get install libinput-tools
+$ git clone http://github.com/bulletmark/libinput-gestures
+$ cd libinput-gestures
+$ sudo ./libinput-gestures-setup install
+$ echo "gesture swipe right     xdotool key ctrl+alt+Right" > .config/libinput-gestures.conf
+$ echo "gesture swipe left     xdotool key ctrl+alt+Left" >> .config/libinput-gestures.conf
+$ libinput-gestures-setup autostart
+$ libinput-gestures-setup start
 ```
 
 Reference: https://github.com/bulletmark/libinput-gestures
@@ -181,16 +181,10 @@ sudo apt install unity-tweak-tool
 
 The arc-icon-theme needs some additional icons:
 ```
-sudo add-apt-repository ppa:noobslab/themes
-sudo add-apt-repository ppa:snwh/pulp
-sudo apt-get update
-sudo apt install breeze-cursor-theme
-sudo apt install arc-theme arc-icon-theme
-sudo apt install adwaita-icon-theme
-sudo apt install moka-icon-theme
-sudo apt-get install paper-icon-theme
-sudo apt-get install paper-gtk-theme
-sudo apt install breeze-cursor-theme
+$ sudo add-apt-repository ppa:noobslab/themes
+$ sudo add-apt-repository ppa:snwh/pulp
+$ sudo apt-get update
+$ sudo apt install breeze-cursor-theme arc-theme arc-icon-theme adwaita-icon-theme moka-icon-theme paper-icon-theme paper-gtk-theme breeze-cursor-theme
 ```
 Open Unity Tweak Tool:
 * "arc-darker" theme & "paper" icons
@@ -203,7 +197,7 @@ Reference: http://www.noobslab.com/2017/01/arc-theme-light-dark-versions-and-arc
 * Install clear-sans font (manually): https://01.org/clear-sans/downloads
 * Install Cantarell font:
 ```
-sudo apt install fonts-cantarell
+$ sudo apt install fonts-cantarell
 ```
 
 Unity Tweak Tool:
@@ -220,9 +214,13 @@ I use [Antergos](https://antergos.com/) Arch - mostly everything works out-of-th
 ### Suspend Loop Issue
 
 ```
-sudo nano /etc/default/grub
+$ sudo nano /etc/default/grub
 GRUB_CMDLINE_LINUX_DEFAULT="quiet button.lid_init_state=open"
-grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+Update Grub
+```
+$ grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 Reference: https://wiki.archlinux.org/index.php/razer#GRUB
@@ -230,12 +228,14 @@ Reference: https://wiki.archlinux.org/index.php/razer#GRUB
 ### Laptop TLP Tools
 
 Install via pacman:
-* tlp
-* tlp-rwd
-
 ```
-sudo systemctl enable tlp
-sudo systemctl enable tlp-sleep
+$ sudo pacman -S tlp tlp-rwd
+```
+
+Enable TLP
+```
+$ sudo systemctl enable tlp
+$ sudo systemctl enable tlp-sleep
 ```
 
 Reference: https://wiki.archlinux.org/index.php/TLP
@@ -243,12 +243,12 @@ Reference: https://wiki.archlinux.org/index.php/TLP
 ### Keyboard Colors
 
 Install via pacman:
-* python-notify2
-* linux-headers
-* openrazer-meta
-* polychromatic
+```
+$ sudo pacman -S python-notify2 linux-headers openrazer-meta polychromatic
+```
 
-polychromatic tray icon appears in gnome with gnome-extension: https://extensions.gnome.org/extension/615/appindicator-support/
+Polychromatic tray icon appears in Gnome with Gnome-extension:
+* https://extensions.gnome.org/extension/615/appindicator-support/
 
 ### Gnome, Workspaces, Gestures
 
@@ -270,6 +270,54 @@ gesture swipe up	_internal --col=2 ws_down
 Restart libinput-gestures
 * libinput-gestures-setup restart
 
+### Wireless (WIP)
+
+Works out of the box, but I updated the firmware:
+
+Remove the included firmware:
+```
+$ rm -r /lib/firmware/ath10k/QCA6174/
+```
+Download the latest firmware using wget or your favorite browser:
+```
+$ wget https://github.com/kvalo/ath10k-firmware/archive/master.zip
+```
+Unzip the downloaded file using your preferred method and copy to /lib/firmware/ath10k/:
+```
+$ cp -r ath10k-firmware-master/QCA6174/ /lib/firmware/ath10k/
+```
+Rename some files:
+```
+$ cd /lib/firmware/ath10k/QCA6174/hw2.1/
+$ mv firmware-5.bin_SW_RM.1.1.1-00157-QCARMSWPZ-1 firmware-5.bin
+$ cd /lib/firmware/ath10k/QCA6174/hw3.0/
+$ mv firmware-4.bin_WLAN.RM.2.0-00180-QCARMSWPZ-1 firmware-4.bin
+```
+
+Additional:
+```
+$ cd /lib/firmware/ath10k/QCA6174/hw3.0/
+$ cp 4.4.1/firmware-6.bin_WLAN.RM.4.4.1-00014-QCARMSWP-1 firmware-6.bin
+```
+
+* reboot
+
+```
+$ ethtool -i wlp1s0
+driver: ath10k_pci
+version: 4.12.4-1-ARCH
+firmware-version: WLAN.RM.4.4.1-00014-QCARMSWP-1
+expansion-rom-version: 
+bus-info: 0000:01:00.0
+supports-statistics: yes
+supports-test: no
+supports-eeprom-access: no
+supports-register-dump: no
+supports-priv-flags: no
+```
+
+Reference: https://wiki.archlinux.org/index.php/Razer#Killer_Wireless_Network_Adapte
+
 ### Multiple monitors (WIP)
 
 Works on Wayland.
@@ -285,7 +333,7 @@ Reference: https://wiki.archlinux.org/index.php/Razer#Webcam
 The suggested solution does not work:
 
 ```
-/etc/modprobe.d/uvcvideo.conf
+$ nano /etc/modprobe.d/uvcvideo.conf
 ## fix issue with built-in webcam
 options uvcvideo quirks=512
 ```
