@@ -212,19 +212,7 @@ Unity Tweak Tool:
 
 ## Arch
 
-I use [Antergos](https://antergos.com/) Arch - mostly everything works out-of-the-box, running Gnome + Wayland.
-
-And currently gnome-unstable and testing enabled:
-```shell
-$ sudo nano /etc/pacman.conf
-[gnome-unstable]
-Include = /etc/pacman.d/mirrorlist
-
-[testing]
-Include = /etc/pacman.d/mirrorlist
-```
-
-Reference: https://wiki.archlinux.org/index.php/official_repositories
+I installed [Antergos](https://antergos.com/) Arch, but should be work with other Arch distros.
 
 ### Suspend Loop Issue
 
@@ -255,98 +243,62 @@ $ sudo systemctl enable tlp-sleep
 
 Reference: https://wiki.archlinux.org/index.php/TLP
 
-### Keyboard Colors (WIP)
+### Keyboard Colors
 
-Install openrazer and polychromatic tools with the software manager:
-* python-notify2
-* linux-headers
-* openrazer-meta
-* polychromatic
-
-Polychromatic tray icon appears in Gnome with Gnome-extension:
-* https://extensions.gnome.org/extension/615/appindicator-support/
-
-TODO: after resume, the settings are gone.
+There are problems after resume, where the keyboard lighting won't work.
+Without drivers, keyboard lighting works :)
 
 ### Gnome, Workspaces, Gestures
 
-I want the same behavior like on my macOS setup, vertical workspaces and gestures for switching.
-
-Install Gnome Extension for vertical worksace alignment:
-* https://extensions.gnome.org/extension/484/workspace-grid/
-
 Install libinput-gestures via software package manager:
-* libinput-gestures
+* libinput-gesture
+
+Setup libinput gesture:
+```shell
+$ sudo gpasswd -a $USER input
+```
+logout, login:
+```
+$ libinput-gestures-setup start
+$ libinput-gestures-setup autostart
+```
+
+Configuration files are at:
+   /etc/libinput-gestures.conf (system wide default)
+   $HOME/.config/libinput-gestures.conf (optional per user)
+
 ```shell
 $ nano .config/libinput-gestures.conf
-gesture swipe right	_internal ws_up
-gesture swipe left	_internal ws_down
-gesture swipe down	_internal --col=2 ws_up
-gesture swipe up	_internal --col=2 ws_down
+gesture swipe down      _internal ws_upWa
+gesture swipe up        _internal ws_down
 ```
-_(looks strange, but this does what it should for me)_
+_(if you prefer natural scrolling, change up/down)_
 
 Restart libinput-gestures
 ```shell
 $ libinput-gestures-setup restart
 ```
 
-### Wireless (WIP)
+### Wireless
 
-Works out of the box, but I updated the firmware:
+Works out of the box.
 
-Remove the included firmware:
-```shell
-$ rm -r /lib/firmware/ath10k/QCA6174/
-```
-Download the latest firmware using wget or your favorite browser:
-```shell
-$ wget https://github.com/kvalo/ath10k-firmware/archive/master.zip
-```
-Unzip the downloaded file using your preferred method and copy to /lib/firmware/ath10k/:
-```shell
-$ cp -r ath10k-firmware-master/QCA6174/ /lib/firmware/ath10k/
-```
-Rename some files:
-```shell
-$ cd /lib/firmware/ath10k/QCA6174/hw2.1/
-$ mv firmware-5.bin_SW_RM.1.1.1-00157-QCARMSWPZ-1 firmware-5.bin
-$ cd /lib/firmware/ath10k/QCA6174/hw3.0/
-$ mv firmware-4.bin_WLAN.RM.2.0-00180-QCARMSWPZ-1 firmware-4.bin
-```
+### Multiple monitors, libinput, HDPI, Wayland
 
-Additional:
-```shell
-$ cd /lib/firmware/ath10k/QCA6174/hw3.0/
-$ cp 4.4.1/firmware-6.bin_WLAN.RM.4.4.1-00014-QCARMSWP-1 firmware-6.bin
-```
+I tried Wayland, libinput and HDPI, but (sadly) I must agree to "Vuv" comment:
+* https://insider.razerzone.com/index.php?threads/arch-linux-on-the-2017-razer-blade.24833/#post-371727
 
-* reboot
 
-* install ethtool
+Switch back to:
+* X11
+* 1920x1080 resulution
+* Synaptics driver
 
-```shell
-$ ethtool -i wlp1s0
-driver: ath10k_pci
-version: 4.12.4-1-ARCH
-firmware-version: WLAN.RM.4.4.1-00014-QCARMSWP-1
-expansion-rom-version: 
-bus-info: 0000:01:00.0
-supports-statistics: yes
-supports-test: no
-supports-eeprom-access: no
-supports-register-dump: no
-supports-priv-flags: no
-```
+Use this config for "Disable touchpad while typing" tunings:
+* [50-synaptics.conf](etc/X11/xorg.conf.d/50-synaptics.conf)
 
-Reference: https://wiki.archlinux.org/index.php/Razer#Killer_Wireless_Network_Adapte
 
-### Multiple monitors (WIP)
-
-Works on Wayland.
-But scaling fails on apps chromium, firefox, chrome :(
-
-### Webcam (unsolved)
+### Webcam
 
 Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
 Unsolved... :(
@@ -367,13 +319,6 @@ options uvcvideo quirks=512
 
 * GTK+ Theme: Arc-Darker
 * Icons: Numix-Square
-* Cursor: Breeze_Default
+* Cursor: Capitaine
 * Shell theme: Paper
 
-#### Fonts
-
-* Window Titles: Clear Sans Regular 12
-* Interface: Clear Sans Regular 13
-* Documents: Cantarell Regular 13
-* Monospace: Monospace Regular 13
-* Scaling Factor: 1
