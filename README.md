@@ -20,18 +20,25 @@ If you have questions, please contact me at twitter: [@rolandguelle](https://twi
 * Resize disk with live linux (Ubuntu installation)
 * Fresh install (I run an updated 16.10 -> 17.04)
 
-### X11 / Unity
+### X11
+
+Switch to 1920x1080 resulution - works best with multiple monitors :)
+
+Alternative:
 
 * Settings -> Monitor -> Scale for menu and title bars: 2
 
-Note: I'm currently using Gnome and Wayland.
+
+### Wayland (Alternative)
+
+Buggy with multiple Monitors, but my current setup with Gnome.
 
 ### Suspend Loop Issue
 
 Suspend loop issue:
 * http://askubuntu.com/questions/849888/suspend-not-working-as-intended-on-razer-blade-stealth-running-xubuntu-16-04/849900
 
-Adding this kernel parameter solves the problem:
+This kernel parameter solves the problem:
 ```shell
 $ sudo nano /etc/default/grub
 GRUB_CMDLINE_LINUX_DEFAULT="quiet button.lid_init_state=open"
@@ -60,15 +67,18 @@ Reference: https://github.com/lah7/polychromatic
 
 The RBS crashes randomly if you hit "Caps Lock". The build-in driver causes the problem:
 ```shell
-$ xinput list
+$ xinput list | grep "Set 2 keyboard"
 ```
-If you get **"AT Raw Set 2 keyboard"**, you have a problem if you hit _Caps Lock_ :(
+If you get something like **"AT Raw Set 2 keyboard"**, **"AT Translated Set 2 keyboard"** or ... - you have a problem, if you hit _Caps Lock_ :(
 
 There are two possible solutions: Disable build-in keyboard driver or replace capslock.
 
 #### Solution 1: Disable built-in keyboard driver
 
-When you install the the razer keyboard driver for linux which you can find [here on GitHub](https://terrycain.github.io/razer-drivers/), you can disable the build-in keyboard driver.
+Get your keyboard description and use it instead of "AT Raw Set 2 keyboard":
+```shell
+$ xinput list | grep "Set 2 keyboard"
+```
 
 [Config](etc/X11/xorg.conf.d/20-razer.conf)
 ```
@@ -76,9 +86,11 @@ Section "InputClass"
     Identifier      "Disable built-in keyboard"
     MatchIsKeyboard "on"
     MatchProduct    "AT Raw Set 2 keyboard"
+#	MatchProduct    "AT Translated Set 2 keyboard"
     Option          "Ignore"    "true"
 EndSection
 ```
+
 Re'disable keyboard after suspend, [Script](etc/pm/sleep.d/20_razer):
 
 ```shell
@@ -88,16 +100,16 @@ Re'disable keyboard after suspend, [Script](etc/pm/sleep.d/20_razer):
 case $1 in
     resume|thaw)
 	  xinput set-prop "AT Raw Set 2 keyboard" "Device Enabled" 0
+# 	  xinput set-prop "AT Translated Set 2 keyboard" "Device Enabled" 0
     ;;
 esac
 ```
 
 Reference: http://askubuntu.com/questions/873626/crash-when-toggling-off-caps-lock
-
+ 
 #### Solution 2: replace capslocks
 
-Feels like a workaround, but simple solutions are always nice :)
-(Thanks to https://github.com/xlinbsd)
+Thanks to https://github.com/xlinbsd
 
 Modify /etc/default/keyboard following line, replacing capslocks by a second ctrl:
 ```shell
