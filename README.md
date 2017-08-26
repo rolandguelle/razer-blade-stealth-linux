@@ -15,10 +15,10 @@ If you have questions, please contact me at twitter: [@rolandguelle](https://twi
 		* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.3_BIOS6.05.exe.7z
 		* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.0.zip
 
-## Ubuntu
+## Ubuntu 17.04
 
-* Resize disk with live linux (Ubuntu installation)
-* Fresh install (I run an updated 16.10 -> 17.04)
+* Resize disk with Windows
+* Fresh install
 
 ### X11
 
@@ -73,7 +73,7 @@ If you get something like **"AT Raw Set 2 keyboard"**, **"AT Translated Set 2 ke
 
 There are two possible solutions: Disable build-in keyboard driver or replace capslock.
 
-#### Solution 1: Disable built-in keyboard driver
+#### Solution 1 (X11): Disable built-in keyboard driver
 
 Get your keyboard description and use it instead of "AT Raw Set 2 keyboard":
 ```shell
@@ -84,7 +84,6 @@ $ xinput list | grep "Set 2 keyboard"
 ```
 Section "InputClass"
     Identifier      "Disable built-in keyboard"
-    MatchIsKeyboard "on"
     MatchProduct    "AT Raw Set 2 keyboard"
 #	MatchProduct    "AT Translated Set 2 keyboard"
     Option          "Ignore"    "true"
@@ -107,7 +106,7 @@ esac
 
 Reference: http://askubuntu.com/questions/873626/crash-when-toggling-off-caps-lock
  
-#### Solution 2: replace capslocks
+#### Solution 2 (X11 & Wayland): replace capslocks
 
 Thanks to https://github.com/xlinbsd
 
@@ -119,7 +118,7 @@ XKBOPTIONS="ctrl:nocaps"
 
 ### Wireless
 
-Works out of the box, but I updated the firmware:
+Works out of the box , but I updated the firmware:
 * https://wiki.archlinux.org/index.php/Razer#Killer_Wireless_Network_Adapter
 
 ### Laptop TLP Tools
@@ -165,16 +164,10 @@ Works with kernel update or switch to 17.04, but only the Video signal (not soun
 Sound is detected, but without result on the HDMI screen.
 Works on Arch Linux with 4.12.4 kernel.
 
-#### Multiple monitors X11 (failure)
+#### Multiple monitors X11
 
-Run an external non HDPI monitor above the internal HDPI display.
-I played with this [script](bin/extend.sh), but it is a hack - and breaks my screen :(
-    
-Wayland looks better and this hack isn't needed. Use Wayland instead of this hack!
-
-References:
-* https://wiki.archlinux.org/index.php/HiDPI#Multiple_displays
-* http://askubuntu.com/questions/270374/possible-to-run-a-script-when-something-plugged-in-disconnected-from-mini-disp
+Switch to 1920x1080 resulution on your internal HDPI display.
+Currently the only solution that works without issues.
 
 
 ### Webcam (unsolved)
@@ -184,43 +177,6 @@ Unsolved... :(
 
 Reference: https://wiki.archlinux.org/index.php/Razer#Webcam
 
-### Ubuntu Theme tuning
-
-_Has nothing todo with the Razer, but ... :)_
-
-```shell
-$ sudo apt install unity-tweak-tool
-```
-
-#### Install "Arc Darker" and "Paper" Theme & Icons
-
-The arc-icon-theme needs some additional icons:
-```shell
-$ sudo add-apt-repository ppa:noobslab/themes
-$ sudo add-apt-repository ppa:snwh/pulp
-$ sudo apt-get update
-$ sudo apt install breeze-cursor-theme arc-theme arc-icon-theme adwaita-icon-theme moka-icon-theme paper-icon-theme paper-gtk-theme breeze-cursor-theme
-```
-Open Unity Tweak Tool:
-* "arc-darker" theme & "paper" icons
-* Select "Breeze_cursor" with Unity Tweaks.
-
-Reference: http://www.noobslab.com/2017/01/arc-theme-light-dark-versions-and-arc.html
-
-#### Fonts
-
-* Install clear-sans font (manually): https://01.org/clear-sans/downloads
-* Install Cantarell font:
-```shell
-$ sudo apt install fonts-cantarell
-```
-
-Unity Tweak Tool:
-* Text scaling factor: 1
-* Default: Clear Sans Regular: 12
-* Monospace: Monospace Regular: 11
-* Document: Clear Sans Regular: 12
-* Title: Clear Sans Bold: 11
 
 ## Arch
 
@@ -325,12 +281,4 @@ $ nano /etc/modprobe.d/uvcvideo.conf
 options uvcvideo quirks=512
 ```
 
-### Gnome Theme
-
-#### Appeareance
-
-* GTK+ Theme: Arc-Darker
-* Icons: Numix-Square
-* Cursor: Capitaine
-* Shell theme: Paper
 
