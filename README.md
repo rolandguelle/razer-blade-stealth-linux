@@ -118,7 +118,7 @@ XKBOPTIONS="ctrl:nocaps"
 
 ### Wireless
 
-Works out of the box , but I updated the firmware:
+Works out of the box, but updated the firmware if you like:e
 * https://wiki.archlinux.org/index.php/Razer#Killer_Wireless_Network_Adapter
 
 ### Laptop TLP Tools
@@ -130,11 +130,21 @@ $ sudo systemctl enable tlp
 
 ### Touchpad
 
+
+#### Synaptics
+
 Disable touchpad while typing and some other tunings:
 * [50-synaptics.conf](etc/X11/xorg.conf.d/50-synaptics.conf)
 
+#### libinput
+
+Wayland/libinput works great (compared to Arch/Antergos).
+
 
 #### Gestures
+
+libinput-gestures work also great with Synaptics / X11 :)
+
 
 Install [Libinput-gestures](https://github.com/bulletmark/libinput-gestures):
 
@@ -144,11 +154,28 @@ $ sudo apt-get install xdotool wmctrl libinput-tools
 $ git clone http://github.com/bulletmark/libinput-gestures
 $ cd libinput-gestures
 $ sudo ./libinput-gestures-setup install
+```
+
+Logout - Login (if not, you get an error)
+
+X11:
+```shell
 $ echo "gesture swipe right     xdotool key ctrl+alt+Right" > .config/libinput-gestures.conf
 $ echo "gesture swipe left     xdotool key ctrl+alt+Left" >> .config/libinput-gestures.conf
 $ libinput-gestures-setup autostart
 $ libinput-gestures-setup start
 ```
+
+Wayland:
+```shell
+$ nano .config/libinput-gestures.conf
+gesture swipe down      _internal ws_up
+gesture swipe up        _internal ws_down
+$ libinput-gestures-setup autostart
+$ libinput-gestures-setup start
+```
+_(if you prefer natural scrolling, change up/down)_
+
 
 Reference: https://github.com/bulletmark/libinput-gestures
 
@@ -160,9 +187,8 @@ The [uxa mode](https://wiki.archlinux.org/index.php/Razer#Graphics_Drivers) to a
 
 ### HDMI
 
-Works with kernel update or switch to 17.04, but only the Video signal (not sound).
-Sound is detected, but without result on the HDMI screen.
-Works on Arch Linux with 4.12.4 kernel.
+Only Issue: Sound is detected, but without result on the HDMI screen.
+(Sound works on Arch Linux with 4.12.X kernel)
 
 #### Multiple monitors X11
 
@@ -237,7 +263,7 @@ Configuration files are at:
 
 ```shell
 $ nano .config/libinput-gestures.conf
-gesture swipe down      _internal ws_upWa
+gesture swipe down      _internal ws_up
 gesture swipe up        _internal ws_down
 ```
 _(if you prefer natural scrolling, change up/down)_
