@@ -17,7 +17,7 @@ If you have questions, please contact me at twitter: [@rolandguelle](https://twi
 
 ## Ubuntu 17.04
 
-* Resize disk with Windows
+* Resize disk on Windows
 * Fresh install
 
 ### X11
@@ -118,7 +118,7 @@ XKBOPTIONS="ctrl:nocaps"
 
 ### Wireless
 
-Works out of the box, but updated the firmware if you like:e
+Works out of the box, but updated the firmware if you like:
 * https://wiki.archlinux.org/index.php/Razer#Killer_Wireless_Network_Adapter
 
 ### Laptop TLP Tools
@@ -129,7 +129,6 @@ $ sudo systemctl enable tlp
 ```
 
 ### Touchpad
-
 
 #### Synaptics
 
@@ -144,7 +143,6 @@ Wayland/libinput works great (compared to Arch/Antergos).
 #### Gestures
 
 libinput-gestures work also great with Synaptics / X11 :)
-
 
 Install [Libinput-gestures](https://github.com/bulletmark/libinput-gestures):
 
@@ -176,14 +174,13 @@ $ libinput-gestures-setup start
 ```
 _(if you prefer natural scrolling, change up/down)_
 
-
 Reference: https://github.com/bulletmark/libinput-gestures
-
 
 ### Grafic Card
 
-The [uxa mode](https://wiki.archlinux.org/index.php/Razer#Graphics_Drivers) to avoid flickering isn't needed after updating the intel driver:
-* https://01.org/linuxgraphics/downloads/update-tool
+Works out the box.
+
+[uxa mode](https://wiki.archlinux.org/index.php/Razer#Graphics_Drivers) to avoid flickering isn't needed.
 
 ### HDMI
 
@@ -194,7 +191,6 @@ Only Issue: Sound is detected, but without result on the HDMI screen.
 
 Switch to 1920x1080 resulution on your internal HDPI display.
 Currently the only solution that works without issues.
-
 
 ### Webcam (unsolved)
 
@@ -251,7 +247,9 @@ Setup libinput gesture:
 ```shell
 $ sudo gpasswd -a $USER input
 ```
-logout, login:
+
+Logout - Login (if not, you get an error)
+
 ```
 $ libinput-gestures-setup start
 $ libinput-gestures-setup autostart
@@ -282,7 +280,6 @@ Works out of the box.
 I tried Wayland, libinput and HDPI, but (sadly) I must agree to "Vuv" comment:
 * https://insider.razerzone.com/index.php?threads/arch-linux-on-the-2017-razer-blade.24833/#post-371727
 
-
 Switch back to:
 * X11
 * 1920x1080 resulution
@@ -290,7 +287,6 @@ Switch back to:
 
 Use this config for "Disable touchpad while typing" tunings:
 * [50-synaptics.conf](etc/X11/xorg.conf.d/50-synaptics.conf)
-
 
 ### Webcam
 
