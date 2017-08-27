@@ -1,4 +1,6 @@
-### Ubuntu Theme tuning
+# More RBS Linux settings
+
+## Ubuntu Gnome tuning
 
 _Has nothing todo with the Razer, but ... :)_
 
@@ -7,7 +9,7 @@ $ sudo apt install unity-tweak-toolning
 
 ```
 
-#### Install "Arc Darker" and "Paper" Theme & Icons
+### Install "Arc Darker" and "Paper" Theme & Icons
 
 The arc-icon-theme needs some additional icons:
 ```shell
@@ -22,7 +24,7 @@ Open Unity Tweak Tool:
 
 Reference: http://www.noobslab.com/2017/01/arc-theme-light-dark-versions-and-arc.html
 
-#### Fonts
+### Fonts
 
 * Install clear-sans font (manually): https://01.org/clear-sans/downloads
 * Install Cantarell font:
@@ -38,12 +40,11 @@ Unity Tweak Tool:
 * Title: Clear Sans Bold: 11
 
 
-### Gnome Theme
+## Arch Gnome Theme
 
-#### Appeareance
+### Appeareance
 
 * GTK+ Theme: Arc-Darker
 * Icons: Numix-Square
 * Cursor: Capitaine
 * Shell theme: Paper
-

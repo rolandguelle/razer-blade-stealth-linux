@@ -4,6 +4,8 @@
 # you may run into https://bugs.freedesktop.org/show_bug.cgi?id=39949
 #                  https://bugs.launchpad.net/ubuntu/+source/xorg-server/+bug/883319
 
+# DON't use this script! Switch to non HDPI resulution (eg 1920x1080).
+
 function getScreenParameters() {
     EXT=`xrandr --current | sed 's/^\(.*\) connected.*$/\1/p;d' | grep -v ^eDP | head -n 1`
     INT=`xrandr --current | sed 's/^\(.*\) connected.*$/\1/p;d' | grep -v ^DP | head -n 1`

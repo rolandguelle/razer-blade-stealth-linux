@@ -2,14 +2,14 @@
 
 My personal experiances with a Razer Blade Stealth (late 2016) UHD and Linux.
 
-If you have questions, please contact me at twitter: [@rolandguelle](https://twitter.com/rolandguelle)
+If you have questions, contact me at twitter: [@rolandguelle](https://twitter.com/rolandguelle)
 
 * [Ubuntu](#ubuntu)
 * [Arch](#arch)
 
 ## Preparation
 
-* Run Bios updates via Windows the installed Windows 10
+* Run Bios updates via installed Windows 10
 	* http://www.razersupport.com/gaming-systems/razer-blade-stealth/
 	* Direct Links:
 		* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.3_BIOS6.05.exe.7z
@@ -18,20 +18,8 @@ If you have questions, please contact me at twitter: [@rolandguelle](https://twi
 ## Ubuntu 17.04
 
 * Resize disk on Windows
+    * https://www.howtogeek.com/101862/how-to-manage-partitions-on-windows-without-downloading-any-other-software/ 
 * Fresh install
-
-### X11
-
-Switch to 1920x1080 resulution - works best with multiple monitors :)
-
-Alternative:
-
-* Settings -> Monitor -> Scale for menu and title bars: 2
-
-
-### Wayland (Alternative)
-
-Buggy with multiple Monitors, but my current setup with Gnome.
 
 ### Suspend Loop Issue
 
@@ -50,18 +38,6 @@ $ sudo update-grub
 ```
 
 Reference: https://wiki.archlinux.org/index.php/Razer#GRUB
-
-### Keyboard Colors
-
-Install razerutils and polychromatic tools:
-```shell
-$ sudo add-apt-repository ppa:terrz/razerutils
-$ sudo add-apt-repository ppa:lah7/polychromatic
-$ sudo apt update
-$ sudo apt install python3-razer razer-kernel-modules-dkms razer-daemon razer-doc polychromatic
-```
-
-Reference: https://github.com/lah7/polychromatic
 
 ### Caps Lock Issue
 
@@ -116,6 +92,18 @@ $ sudo nano /etc/default/keyboard
 XKBOPTIONS="ctrl:nocaps"
 ```
 
+### Keyboard Colors
+
+Install razerutils and polychromatic tools:
+```shell
+$ sudo add-apt-repository ppa:terrz/razerutils
+$ sudo add-apt-repository ppa:lah7/polychromatic
+$ sudo apt update
+$ sudo apt install python3-razer razer-kernel-modules-dkms razer-daemon razer-doc polychromatic
+```
+
+Reference: https://github.com/lah7/polychromatic
+
 ### Wireless
 
 Works out of the box, but updated the firmware if you like:
@@ -130,15 +118,15 @@ $ sudo systemctl enable tlp
 
 ### Touchpad
 
-#### Synaptics
+#### Synaptics (X11)
 
 Disable touchpad while typing and some other tunings:
-* [50-synaptics.conf](etc/X11/xorg.conf.d/50-synaptics.conf)
+* [50-synaptics-ubuntu.conf](etc/X11/xorg.conf.d/50-synaptics-ubuntu.conf)
 
-#### libinput
+#### libinput (Wayland)
 
-Wayland/libinput works great (compared to Arch/Antergos).
-
+"libinput" configration:
+* [60-libinput.conf](etc/X11/xorg.conf.d/60-libinput.conf)
 
 #### Gestures
 
@@ -180,7 +168,7 @@ Reference: https://github.com/bulletmark/libinput-gestures
 
 Works out the box.
 
-[uxa mode](https://wiki.archlinux.org/index.php/Razer#Graphics_Drivers) to avoid flickering isn't needed.
+[uxa mode](https://wiki.archlinux.org/index.php/Razer#Graphics_Drivers) to avoid flickering isn't needed (anymore?).
 
 ### HDMI
 
@@ -200,9 +188,11 @@ Unsolved... :(
 Reference: https://wiki.archlinux.org/index.php/Razer#Webcam
 
 
+
+
 ## Arch
 
-I installed [Antergos](https://antergos.com/) Arch, but should be work with other Arch distros.
+I use [Antergos](https://antergos.com/) Arch, but should be work with other Arch distros.
 
 ### Suspend Loop Issue
 
@@ -213,7 +203,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet button.lid_init_state=open"
 
 Update Grub
 ```shell
-$ grub-mkconfig -o /boot/grub/grub.cfg
+$ sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 Reference: https://wiki.archlinux.org/index.php/razer#GRUB
@@ -275,18 +265,21 @@ $ libinput-gestures-setup restart
 
 Works out of the box.
 
-### Multiple monitors, libinput, HDPI, Wayland
+### Touchpad
 
-I tried Wayland, libinput and HDPI, but (sadly) I must agree to "Vuv" comment:
-* https://insider.razerzone.com/index.php?threads/arch-linux-on-the-2017-razer-blade.24833/#post-371727
+#### Synaptics
 
-Switch back to:
-* X11
-* 1920x1080 resulution
-* Synaptics driver
+Disable touchpad while typing and some other tunings:
+* [50-synaptics-arch.conf](etc/X11/xorg.conf.d/50-synaptics-arch.conf)
 
-Use this config for "Disable touchpad while typing" tunings:
-* [50-synaptics.conf](etc/X11/xorg.conf.d/50-synaptics.conf)
+#### libinput
+
+"libinput" configration:
+* [60-libinput.conf](etc/X11/xorg.conf.d/60-libinput.conf)
+
+### Multiple Monitors
+
+HDPI is still a problem, 1920x1080 seems to be the best solution.
 
 ### Webcam
 
