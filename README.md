@@ -1,6 +1,6 @@
 # Razer Blade Stealth Linux
 
-My personal experiances with a Razer Blade Stealth (late 2016) UHD and Linux.
+Personal experiances with a Razer Blade Stealth (late 2016) UHD and Linux.
 
 If you have questions, contact me at twitter: [@rolandguelle](https://twitter.com/rolandguelle)
 
@@ -103,6 +103,10 @@ $ sudo apt install python3-razer razer-kernel-modules-dkms razer-daemon razer-do
 ```
 
 Reference: https://github.com/lah7/polychromatic
+
+But after suspend, the settings are lost:
+* https://github.com/openrazer/openrazer/issues/342
+(Gnome, Wayland)
 
 ### Wireless
 
@@ -227,6 +231,7 @@ Reference: https://wiki.archlinux.org/index.php/TLP
 
 There are problems after resume, where the keyboard lighting won't work.
 Without drivers, keyboard lighting works :)
+* https://github.com/openrazer/openrazer/issues/342
 
 ### Gnome, Workspaces, Gestures
 
