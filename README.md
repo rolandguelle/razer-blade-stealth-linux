@@ -272,15 +272,38 @@ Works out of the box.
 
 ### Touchpad
 
-#### Synaptics
+#### Synaptics (X11)
 
 Disable touchpad while typing and some other tunings:
 * [50-synaptics-arch.conf](etc/X11/xorg.conf.d/50-synaptics-arch.conf)
 
-#### libinput
+#### libinput (X11)
 
-"libinput" configration:
-* [60-libinput.conf](etc/X11/xorg.conf.d/60-libinput.conf)
+"libinput" configration for X11 [60-libinput.conf](etc/X11/xorg.conf.d/60-libinput.conf)
+
+#### libinput (Wayland)
+
+```shell
+$ sudo nano /etc/udev/hwdb.d/61-evdev-local.hwdb
+#########################################
+# Razer
+#########################################
+# Razer Blade Stealth (2016)
+# https://github.com/systemd/systemd/pull/6730/files
+evdev:name:Synaptics TM2438-005:dmi:*svnRazer:pnBladeStealth*
+ EVDEV_ABS_00=0:4064:29
+ EVDEV_ABS_01=0:2405:37
+ EVDEV_ABS_35=0:4064:29
+ EVDEV_ABS_36=0:2405:37
+#########################################
+```
+
+```shell
+$ sudo systemd-hwdb update
+$ sudo udevadm trigger /dev/input/event*
+```
+
+Reference: https://github.com/systemd/systemd/pull/6730
 
 ### Multiple Monitors
 
