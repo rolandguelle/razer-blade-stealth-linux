@@ -281,29 +281,24 @@ Disable touchpad while typing and some other tunings:
 
 "libinput" configration for X11 [60-libinput.conf](etc/X11/xorg.conf.d/60-libinput.conf)
 
-#### libinput (Wayland)
+#### Wayland
+
+Adjust "libinput" coordinate ranges for absolute axes:
+* [61-evdev-local.hwdb](etc/udev/hwdb.d/61-evdev-local.hwdb)
 
 ```shell
-$ sudo nano /etc/udev/hwdb.d/61-evdev-local.hwdb
-#########################################
-# Razer
-#########################################
-# Razer Blade Stealth (2016)
-# https://github.com/systemd/systemd/pull/6730/files
-evdev:name:Synaptics TM2438-005:dmi:*svnRazer:pnBladeStealth*
- EVDEV_ABS_00=0:4064:29
- EVDEV_ABS_01=0:2405:37
- EVDEV_ABS_35=0:4064:29
- EVDEV_ABS_36=0:2405:37
-#########################################
+$ sudo cp etc/udev/hwdb.d/61-evdev-local.hwdb /etc/udev/hwdb.d/61-evdev-local.hwdb
 ```
 
+Update settings:
 ```shell
 $ sudo systemd-hwdb update
 $ sudo udevadm trigger /dev/input/event*
 ```
 
-Reference: https://github.com/systemd/systemd/pull/6730
+References:
+* https://wayland.freedesktop.org/libinput/doc/latest/absolute_coordinate_ranges.html
+* https://github.com/systemd/systemd/pull/6730
 
 ### Multiple Monitors
 
