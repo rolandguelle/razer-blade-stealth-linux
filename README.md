@@ -168,7 +168,7 @@ _(if you prefer natural scrolling, change up/down)_
 
 Reference: https://github.com/bulletmark/libinput-gestures
 
-### Grafic Card
+### Graphic Card
 
 Works out the box.
 
