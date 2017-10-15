@@ -108,6 +108,11 @@ But after suspend, the settings are lost:
 * https://github.com/openrazer/openrazer/issues/342
 (Gnome, Wayland)
 
+#### Gnome Indicator
+
+KStatusNotifierItem/AppIndicator needed for Polychromatic tray icon in Wayland:
+* https://extensions.gnome.org/extension/615/appindicator-support/
+
 ### Wireless
 
 Works out of the box, but updated the firmware if you like:
