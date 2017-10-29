@@ -1,9 +1,17 @@
 # Razer Blade Stealth Linux
 
-Personal experiances with a Razer Blade Stealth (late 2016) UHD and Linux.
+Personal experiences with a Razer Blade Stealth (late 2016) UHD and Linux.
+Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions.
 
-If you have questions, contact me at twitter: [@rolandguelle](https://twitter.com/rolandguelle)
+Solved issues:
+* Suspend loop
+* Caps-Lock freeze
+* Disabled touchpad after suspend
 
+Unsolved issues:
+* Webcam
+
+Distros:
 * [Ubuntu](#ubuntu)
 * [Arch](#arch)
 
@@ -15,11 +23,13 @@ If you have questions, contact me at twitter: [@rolandguelle](https://twitter.co
 		* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.3_BIOS6.05.exe.7z
 		* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.0.zip
 
-## Ubuntu 17.04
+## Ubuntu 17.10
 
 * Resize disk on Windows
     * https://www.howtogeek.com/101862/how-to-manage-partitions-on-windows-without-downloading-any-other-software/ 
-* Fresh install
+* Fresh install, reboot
+* Software & Updates
+	* Additional Drivers: Using Processor microcode firmware for Intel CPUs from intel-microcode (proprietary)
 
 ### Suspend Loop Issue
 
@@ -41,15 +51,19 @@ Reference: https://wiki.archlinux.org/index.php/Razer#GRUB
 
 ### Caps Lock Issue
 
-The RBS crashes randomly if you hit "Caps Lock". The build-in driver causes the problem:
+The RBS crashes randomly if you hit "Caps Lock". The build-in driver causes the problem.
+
+#### Wayland & X11: disable capslocks
+
+Thanks to https://github.com/xlinbsd
+
+Modify /etc/default/keyboard following line, replacing capslocks by a second ctrl:
 ```shell
-$ xinput list | grep "Set 2 keyboard"
+$ sudo nano /etc/default/keyboard 
+XKBOPTIONS="ctrl:nocaps"
 ```
-If you get something like **"AT Raw Set 2 keyboard"**, **"AT Translated Set 2 keyboard"** or ... - you have a problem, if you hit _Caps Lock_ :(
 
-There are two possible solutions: Disable build-in keyboard driver or replace capslock.
-
-#### Solution 1 (X11): Disable built-in keyboard driver
+#### X11: Disable built-in keyboard driver
 
 Get your keyboard description and use it instead of "AT Raw Set 2 keyboard":
 ```shell
@@ -81,42 +95,6 @@ esac
 ```
 
 Reference: http://askubuntu.com/questions/873626/crash-when-toggling-off-caps-lock
- 
-#### Solution 2 (X11 & Wayland): replace capslocks
-
-Thanks to https://github.com/xlinbsd
-
-Modify /etc/default/keyboard following line, replacing capslocks by a second ctrl:
-```shell
-$ sudo nano /etc/default/keyboard 
-XKBOPTIONS="ctrl:nocaps"
-```
-
-### Keyboard Colors
-
-Install razerutils and polychromatic tools:
-```shell
-$ sudo add-apt-repository ppa:terrz/razerutils
-$ sudo add-apt-repository ppa:lah7/polychromatic
-$ sudo apt update
-$ sudo apt install python3-razer razer-kernel-modules-dkms razer-daemon razer-doc polychromatic
-```
-
-Reference: https://github.com/lah7/polychromatic
-
-But after suspend, the settings are lost:
-* https://github.com/openrazer/openrazer/issues/342
-(Gnome, Wayland)
-
-#### Gnome Indicator
-
-KStatusNotifierItem/AppIndicator needed for Polychromatic tray icon in Wayland:
-* https://extensions.gnome.org/extension/615/appindicator-support/
-
-### Wireless
-
-Works out of the box, but updated the firmware if you like:
-* https://wiki.archlinux.org/index.php/Razer#Killer_Wireless_Network_Adapter
 
 ### Laptop TLP Tools
 
@@ -125,19 +103,65 @@ $ sudo apt-get install tlp tlp-rdw
 $ sudo systemctl enable tlp
 ```
 
-### Touchpad
+### Touchpad Suspend Issue
 
-#### Synaptics (X11)
+#### Wayland: libinput
+
+Touchpad fails resuming from suspend with:
+
+```
+rmi4_physical rmi4-00: rmi_driver_reset_handler: Failed to read current IRQ mask.
+dpm_run_callback(): i2c_hid_resume+0x0/0x120 [i2c_hid] returns -11
+PM: Device i2c-15320205:00 failed to resume async: error -11
+```
+
+##### Temporary fix
+
+```shell
+$ sudo rmmod i2c_hid && sudo modprobe i2c_hid
+```
+
+##### Permanent fix + Gestures
+
+Install [Libinput-gestures](https://github.com/bulletmark/libinput-gestures) solves the problem:
+
+```shell
+$ sudo gpasswd -a $USER input
+$ sudo apt install xdotool wmctrl libinput-tools
+$ git clone http://github.com/bulletmark/libinput-gestures
+$ cd libinput-gestures
+$ sudo ./libinput-gestures-setup install
+```
+
+Logout - Login (if not, you get an error)
+
+```shell
+$ nano .config/libinput-gestures.conf
+gesture swipe down      _internal ws_up
+gesture swipe up        _internal ws_down
+$ libinput-gestures-setup autostart
+$ libinput-gestures-setup start
+```
+_(if you prefer natural scrolling, change up/down)_
+
+Reference: https://github.com/bulletmark/libinput-gestures
+
+##### Tweaks
+
+macOS touchpad feeling:
+
+```shell
+$ sudo apt install gnome-tweak-tool
+```
+* Keyboard & Mouse
+* Click Method: Fingers
+
+#### X11: synaptics 
 
 Disable touchpad while typing and some other tunings:
 * [50-synaptics-ubuntu.conf](etc/X11/xorg.conf.d/50-synaptics-ubuntu.conf)
 
-#### libinput (Wayland)
-
-"libinput" configration:
-* [60-libinput.conf](etc/X11/xorg.conf.d/60-libinput.conf)
-
-#### Gestures
+##### Gestures
 
 libinput-gestures work also great with Synaptics / X11 :)
 
@@ -153,7 +177,6 @@ $ sudo ./libinput-gestures-setup install
 
 Logout - Login (if not, you get an error)
 
-X11:
 ```shell
 $ echo "gesture swipe right     xdotool key ctrl+alt+Right" > .config/libinput-gestures.conf
 $ echo "gesture swipe left     xdotool key ctrl+alt+Left" >> .config/libinput-gestures.conf
@@ -161,33 +184,32 @@ $ libinput-gestures-setup autostart
 $ libinput-gestures-setup start
 ```
 
-Wayland:
-```shell
-$ nano .config/libinput-gestures.conf
-gesture swipe down      _internal ws_up
-gesture swipe up        _internal ws_down
-$ libinput-gestures-setup autostart
-$ libinput-gestures-setup start
-```
-_(if you prefer natural scrolling, change up/down)_
-
 Reference: https://github.com/bulletmark/libinput-gestures
+
+### Keyboard Colors
+
+Currently not installed.
+
+Issue: (settings are lost after suspend):
+* https://github.com/openrazer/openrazer/issues/342
+(Gnome, Wayland)
+
+### Wireless
+
+Works out of the box.
 
 ### Graphic Card
 
-Works out the box.
-
-[uxa mode](https://wiki.archlinux.org/index.php/Razer#Graphics_Drivers) to avoid flickering isn't needed (anymore?).
+Works out of the box.
 
 ### HDMI
 
-Only Issue: Sound is detected, but without result on the HDMI screen.
-(Sound works on Arch Linux with 4.12.X kernel)
+Works out of the box.
 
-#### Multiple monitors X11
+#### Multiple monitors
 
 Switch to 1920x1080 resulution on your internal HDPI display.
-Currently the only solution that works without issues.
+Currently the best solution.
 
 ### Webcam (unsolved)
 
@@ -195,9 +217,6 @@ Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
 Unsolved... :(
 
 Reference: https://wiki.archlinux.org/index.php/Razer#Webcam
-
-
-
 
 ## Arch
 
@@ -234,9 +253,10 @@ Reference: https://wiki.archlinux.org/index.php/TLP
 
 ### Keyboard Colors
 
-There are problems after resume, where the keyboard lighting won't work.
-Without drivers, keyboard lighting works :)
+The keyboard lighting won't work after reboot:
+
 * https://github.com/openrazer/openrazer/issues/342
+
 
 ### Gnome, Workspaces, Gestures
 

@@ -40,6 +40,27 @@ Unity Tweak Tool:
 * Title: Clear Sans Bold: 11
 
 
+### Keyboard Colors
+
+Install razerutils and polychromatic tools:
+```shell
+$ sudo add-apt-repository ppa:terrz/razerutils
+$ sudo add-apt-repository ppa:lah7/polychromatic
+$ sudo apt update
+$ sudo apt install python3-razer razer-kernel-modules-dkms razer-daemon razer-doc polychromatic
+```
+
+Reference: https://github.com/lah7/polychromatic
+
+But after suspend, the settings are lost:
+* https://github.com/openrazer/openrazer/issues/342
+(Gnome, Wayland)
+
+#### Gnome Indicator
+
+KStatusNotifierItem/AppIndicator needed for Polychromatic tray icon in Wayland:
+* https://extensions.gnome.org/extension/615/appindicator-support/
+
 ## Arch Gnome Theme
 
 ### Appeareance
