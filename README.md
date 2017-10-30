@@ -7,6 +7,7 @@ Solved issues:
 * Suspend loop
 * Caps-Lock freeze
 * Disabled touchpad after suspend
+* Wifi connection lost randomly
 
 Unsolved issues:
 * Webcam
@@ -194,9 +195,20 @@ Issue: (settings are lost after suspend):
 * https://github.com/openrazer/openrazer/issues/342
 (Gnome, Wayland)
 
-### Wireless
+### Wireless Issue
 
-Works out of the box.
+Connection gets lost randomly, updating the firmeware helps:
+
+* Backup /lib/firmware/ath10k/QCA6174/hw3.0/
+* Download & Update Firmware:
+```shell
+$ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/board.bin
+$ sudo cp board.bin /lib/firmware/ath10k/QCA6174/hw3.0/board.bin
+$ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/board-2.bin
+$ sudo cp board-2.bin /lib/firmware/ath10k/QCA6174/hw3.0/board-2.bin
+$ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/4.4.1/firmware-6.bin_WLAN.RM.4.4.1-00065-QCARMSWP-1
+$ sudo cp firmware-6.bin_WLAN.RM.4.4.1-00065-QCARMSWP-1 /lib/firmware/ath10k/QCA6174/hw3.0/firmware-6.bin
+```
 
 ### Graphic Card
 
@@ -208,8 +220,8 @@ Works out of the box.
 
 #### Multiple monitors
 
-Switch to 1920x1080 resulution on your internal HDPI display.
-Currently the best solution.
+Switch to 1920x1080 resulution on your internal HDPi display when using multiple monitors.
+HDPi scaling is currently frustrating.
 
 ### Webcam (unsolved)
 
