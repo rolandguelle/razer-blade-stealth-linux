@@ -1,6 +1,6 @@
 # Razer Blade Stealth Linux
 
-Personal experiences with a Razer Blade Stealth (late 2016) UHD and Linux.
+Personal experiences with a **Razer Blade Stealth** (late 2016) UHD and Linux.
 Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions.
 
 Solved issues:
@@ -31,16 +31,18 @@ Distros:
 * Fresh install, reboot
 * Software & Updates
 	* Additional Drivers: Using Processor microcode firmware for Intel CPUs from intel-microcode (proprietary)
+(Secure boot was disabled during installation, but is now activated)
 
 ### Suspend Loop Issue
 
-Suspend loop issue:
+After resume, the system loops back in suspend.
 * http://askubuntu.com/questions/849888/suspend-not-working-as-intended-on-razer-blade-stealth-running-xubuntu-16-04/849900
 
-This kernel parameter solves the problem:
+The system send an ACPI event where the [kernel defaults](https://patchwork.kernel.org/patch/9512307/) are different.
+This kernel parameter changes the defaults:
 ```shell
 $ sudo nano /etc/default/grub
-GRUB_CMDLINE_LINUX_DEFAULT="quiet button.lid_init_state=open"
+GRUB_CMDLINE_LINUX_DEFAULT="button.lid_init_state=open"
 ```
 
 Update grub
@@ -52,17 +54,18 @@ Reference: https://wiki.archlinux.org/index.php/Razer#GRUB
 
 ### Caps Lock Issue
 
-The RBS crashes randomly if you hit "Caps Lock". The build-in driver causes the problem.
+The RBS crashes ~~randomly~~ mostly if you hit "Caps Lock". The build-in driver causes the problem.
 
 #### Wayland & X11: disable capslocks
 
-Thanks to https://github.com/xlinbsd
-
 Modify /etc/default/keyboard following line, replacing capslocks by a second ctrl:
+
 ```shell
 $ sudo nano /etc/default/keyboard 
 XKBOPTIONS="ctrl:nocaps"
 ```
+
+Thanks to https://github.com/xlinbsd
 
 #### X11: Disable built-in keyboard driver
 
@@ -116,7 +119,7 @@ dpm_run_callback(): i2c_hid_resume+0x0/0x120 [i2c_hid] returns -11
 PM: Device i2c-15320205:00 failed to resume async: error -11
 ```
 
-##### Temporary fix
+Temporary fix:
 
 ```shell
 $ sudo rmmod i2c_hid && sudo modprobe i2c_hid
@@ -163,8 +166,6 @@ Disable touchpad while typing and some other tunings:
 * [50-synaptics-ubuntu.conf](etc/X11/xorg.conf.d/50-synaptics-ubuntu.conf)
 
 ##### Gestures
-
-libinput-gestures work also great with Synaptics / X11 :)
 
 Install [Libinput-gestures](https://github.com/bulletmark/libinput-gestures):
 
