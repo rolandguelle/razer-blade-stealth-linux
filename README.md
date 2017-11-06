@@ -216,8 +216,12 @@ $ sudo cp firmware-6.bin_WLAN.RM.4.4.1-00065-QCARMSWP-1 /lib/firmware/ath10k/QCA
 
 ```
 sudo nano /etc/environment
+```
+Add the line at the end:
+```
 export MOZ_USE_XINPUT2=1
 ```
+Save and log off/in, now just start firefox
 
 ### Graphic Card
 
