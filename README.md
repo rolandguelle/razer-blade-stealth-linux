@@ -8,6 +8,7 @@ Solved issues:
 * Caps-Lock freeze
 * Disabled touchpad after suspend
 * Wifi connection lost randomly
+* Firefox touchscreen scrolling
 
 Unsolved issues:
 * Webcam
@@ -208,6 +209,17 @@ $ sudo cp board-2.bin /lib/firmware/ath10k/QCA6174/hw3.0/board-2.bin
 $ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/4.4.1/firmware-6.bin_WLAN.RM.4.4.1-00065-QCARMSWP-1
 $ sudo cp firmware-6.bin_WLAN.RM.4.4.1-00065-QCARMSWP-1 /lib/firmware/ath10k/QCA6174/hw3.0/firmware-6.bin
 ```
+
+### Firefox touchscreen scrolling
+
+```
+sudo nano /etc/environment
+```
+Add the line at the end:
+```
+export MOZ_USE_XINPUT2=1
+```
+Save and log off/in, now just start firefox
 
 ### Graphic Card
 
