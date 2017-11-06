@@ -212,8 +212,8 @@ $ sudo cp firmware-6.bin_WLAN.RM.4.4.1-00065-QCARMSWP-1 /lib/firmware/ath10k/QCA
 
 ### Firefox touchscreen scrolling
 
-```
-sudo nano /etc/environment
+```shell
+$ sudo nano /etc/environment
 ```
 Add the line at the end:
 ```
@@ -235,7 +235,7 @@ At native resolution, the internal HDPi 4K display with 100% scale might be too 
 
 To enable more scaling options run the following command:
 
-```
+```shell
 $ gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
 ```
 
