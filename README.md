@@ -65,8 +65,6 @@ $ sudo nano /etc/default/keyboard
 XKBOPTIONS="ctrl:nocaps"
 ```
 
-Thanks to https://github.com/xlinbsd
-
 #### X11: Disable built-in keyboard driver
 
 Get your keyboard description and use it instead of "AT Raw Set 2 keyboard":
@@ -226,12 +224,10 @@ At native resolution, the internal HDPi 4K display with 100% scale might be too 
 To enable more scaling options run the following command:
 
 ```
-gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
+$ gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
 ```
 
 After reboot, you'll get more scaling options under Settings > Devices > Displays.
-
-`150%` scale seems to hit the right balance without sacrificing resolution.
 
 #### Multiple monitors
 
@@ -371,4 +367,11 @@ $ nano /etc/modprobe.d/uvcvideo.conf
 options uvcvideo quirks=512
 ```
 
+# Credits
+
+Thanks for help / feedback:
+* https://github.com/xlinbsd
+* https://github.com/tomsquest
+* https://github.com/ahmadnassri
+* https://github.com/lucaszanella
 
