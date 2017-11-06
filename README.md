@@ -219,6 +219,20 @@ Works out of the box.
 
 Works out of the box.
 
+#### Display Scaling
+
+At native resolution, the internal HDPi 4K display with 100% scale might be too tiny and frustrating for some, and with 200% scale is too large to be useful, luckily with Ubuntu 17.10 shipping with Gnome3, a native screen scaling solution is provided, however it's limited to 2 options: `100%` and `200%`.
+
+To enable more scaling options run the following command:
+
+```
+gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
+```
+
+After reboot, you'll get more scaling options under Settings > Devices > Displays.
+
+`150%` scale seems to hit the right balance without sacrificing resolution.
+
 #### Multiple monitors
 
 Switch to 1920x1080 resulution on your internal HDPi display when using multiple monitors.
