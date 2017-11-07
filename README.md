@@ -243,8 +243,25 @@ After login/logout, you'll get more scaling options under Settings > Devices > D
 
 If the fonts are blurry, reset this setting:
 ```
-$gsettings reset-recursively org.gnome.mutter
+$ gsettings reset-recursively org.gnome.mutter
 ```
+
+#### Touchscreen + Keyboard (Block caribou)
+
+Blocks caribou (the on screen keyboard) from popping up when you use a touchscreen. 
+* https://extensions.gnome.org/extension/1326/block-caribou/
+
+Manual installation:
+```
+$ mkdir -p ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
+$ cd ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
+$ wget https://github.com/keringar/cariboublocker/raw/master/extension.js
+$ wget https://github.com/keringar/cariboublocker/raw/master/metadata.json
+$ cd
+$ gsettings get org.gnome.shell enabled-extensions
+$ gsettings set org.gnome.shell enabled-extensions "['cariboublocker@git.keringar.xyz']"
+```
+Logout / Login
 
 #### Multiple monitors
 
