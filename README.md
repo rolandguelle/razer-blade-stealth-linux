@@ -92,7 +92,7 @@ Re'disable keyboard after suspend, [Script](etc/pm/sleep.d/20_razer):
 case $1 in
     resume|thaw)
 	  xinput set-prop "AT Raw Set 2 keyboard" "Device Enabled" 0
-# 	  xinput set-prop "AT Translated Set 2 keyboard" "Device Enabled" 0
+#	  xinput set-prop "AT Translated Set 2 keyboard" "Device Enabled" 0
     ;;
 esac
 ```
@@ -265,8 +265,60 @@ Logout / Login
 
 #### Multiple monitors
 
-Switch to 1920x1080 resulution on your internal HDPi display when using multiple monitors.
-HDPi scaling is currently frustrating.
+Switch the internal HDPI screen to **1920x1080** when using your RBS with a non HDPI external monitor.
+
+#### Thunderbolt
+
+Works on my 27'' Dell monitor over thunderbolt with a (Apple) USB-C (HDMI, USB) adapter.
+Including USB to ethernet :)
+
+### Razer Core
+
+Thunderbolt security: User
+
+Authorize thunderbold device by user:
+```
+$ echo "1" | sudo tee /sys/bus/thunderbolt/devices/0-0/0-1/authorized 
+```
+
+* USB works
+* Ethernet works
+
+#### External GPU (WIP)
+
+Got some positive results, but most hangups.
+Different variants with using the core while booting and hotplugging.
+
+Install Bumblebee:
+```
+$ sudo apt-get install bumblebee bumblebee-nvidia primus linux-headers-generic
+$ sudo gpasswd -a $USER bumblebee
+```
+Logout / Login
+
+Update to nvidia-384 driver
+```
+$ sudo apt install nvidia-384
+$ sudo nano /etc/bumblebee/bumblebee.conf 
+LibraryPath=/usr/lib/nvidia-384:/usr/lib32/nvidia-384    
+XorgModulePath=/usr/lib/nvidia-384/xorg,/usr/lib/xorg/modules
+```
+
+Test
+```
+$ optirun glxinfo | grep OpenGL
+```
+
+##### Ressouces
+
+* https://wiki.ubuntu.com/Bumblebee#Installation
+* https://wiki.ubuntuusers.de/Hybrid-Grafikkarten/PRIME/
+* http://www.dell.com/support/article/de/de/debsdt1/sln298431/a-guide-to-nvidia-optimus-on-dell-pcs-with-an-ubuntu-operating-system?lang=en
+* https://wiki.ubuntuusers.de/Hybrid-Grafikkarten/Bumblebee/
+* https://cubethethird.wordpress.com/2017/10/22/nvidia-xrun-an-alternative-to-bumblebee/
+* https://cubethethird.wordpress.com/2017/01/15/the-current-state-of-gaming-on-wayland/
+* http://pocketnix.org/posts/eGPUs%20under%20Linux%3A%20an%20advanced%20guide
+* https://egpu.io/forums/
 
 ### Webcam (unsolved)
 
@@ -274,6 +326,11 @@ Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
 Unsolved... :(
 
 Reference: https://wiki.archlinux.org/index.php/Razer#Webcam
+
+
+### "Capitaine" Cursors
+
+https://github.com/keeferrourke/capitaine-cursors
 
 ## Arch
 
@@ -384,7 +441,7 @@ References:
 
 ### Multiple Monitors
 
-HDPI is still a problem, 1920x1080 seems to be the best solution.
+See Ubuntu Setup
 
 ### Webcam
 
