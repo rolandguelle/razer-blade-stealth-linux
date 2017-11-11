@@ -325,7 +325,7 @@ OpenGL vendor string: NVIDIA Corporation
 Result:
 
 optirun glxgears gets only 80 FPS.
-Booting without thunderbolt security and some tweaks, I got 3000 FPS using the Nvidia card as primary card.
+Booting without thunderbolt security and some tweaks, I got 3000 FPS using the Nvidia as primary card :(
 WIP...
     
 
