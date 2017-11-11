@@ -299,15 +299,35 @@ Logout / Login
 Update to nvidia-384 driver
 ```
 $ sudo apt install nvidia-384
+```
+
+Update bumblebee configuration
+```
 $ sudo nano /etc/bumblebee/bumblebee.conf 
-LibraryPath=/usr/lib/nvidia-384:/usr/lib32/nvidia-384    
+Driver=nvidia
+KernelDriver=nvidia-384
+LibraryPath=/usr/lib/nvidia-384:/usr/lib32/nvidia-384
 XorgModulePath=/usr/lib/nvidia-384/xorg,/usr/lib/xorg/modules
+```
+
+Missing Nvidia symlinks (???)
+```
+$ ln -s /usr/lib/nvidia-384/bin/nvidia-persistenced 
+$ ln -s /usr/lib/nvidia-384/libnvidia-cfg.so.1 /usr/lib/libnvidia-cfg.so.1
 ```
 
 Test
 ```
 $ optirun glxinfo | grep OpenGL
+OpenGL vendor string: NVIDIA Corporation
 ```
+
+Result:
+
+optirun glxgears gets only 80 FPS.
+Booting without thunderbolt security and some tweaks, I got 3000 FPS using the Nvidia card as primary card.
+WIP...
+    
 
 ##### Ressouces
 
