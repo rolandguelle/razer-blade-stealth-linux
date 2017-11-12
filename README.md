@@ -9,6 +9,9 @@ Solved issues:
 * Disabled touchpad after suspend
 * Wifi connection lost randomly
 * Firefox touchscreen scrolling
+* Thunderbolt
+* Razer Core
+* Razer Core + NVIDIA GPU
 
 Unsolved issues:
 * Webcam
@@ -229,7 +232,7 @@ Works out of the box.
 
 Works out of the box.
 
-#### Display Scaling
+### Display Scaling
 
 At native resolution, the internal HDPi 4K display with 100% scale might be too tiny and frustrating for some, and with 200% scale is too large to be useful, luckily with Ubuntu 17.10 shipping with Gnome3, a native screen scaling solution is provided, however it's limited to 2 options: `100%` and `200%`.
 
@@ -246,7 +249,7 @@ If the fonts are blurry, reset this setting:
 $ gsettings reset-recursively org.gnome.mutter
 ```
 
-#### Touchscreen + Keyboard (Block caribou)
+### Touchscreen + Keyboard (Block caribou)
 
 Blocks caribou (the on screen keyboard) from popping up when you use a touchscreen. 
 * https://extensions.gnome.org/extension/1326/block-caribou/
@@ -263,31 +266,35 @@ $ gsettings set org.gnome.shell enabled-extensions "['cariboublocker@git.keringa
 ```
 Logout / Login
 
-#### Multiple monitors
+### Multiple monitors
 
 Switch the internal HDPI screen to **1920x1080** when using your RBS with a non HDPI external monitor.
 
-#### Thunderbolt
+### Thunderbolt
 
-Works on my 27'' Dell monitor over thunderbolt with a (Apple) USB-C (HDMI, USB) adapter.
+USB & video works on my 27'' Dell monitor with a (Apple) USB-C (HDMI, USB) adapter, without any modifications.
 Including USB to ethernet :)
 
 ### Razer Core
 
-Thunderbolt security: User
+* Thunderbolt security: User
 
-Authorize thunderbold device by user:
+Authorize thunderbolt device manual by user:
 ```
 $ echo "1" | sudo tee /sys/bus/thunderbolt/devices/0-0/0-1/authorized 
 ```
+or with [razercore start](#razercore).
 
 * USB works
 * Ethernet works
 
-#### External GPU (WIP)
+#### External GPU
 
-Got some positive results, but most hangups.
-Different variants with using the core while booting and hotplugging.
+Install NVIDIA Prime and set it to "intel":
+```
+$ sudo apt install nvidia-prime
+$ sudo prime-select intel
+```
 
 Install Bumblebee:
 ```
@@ -296,25 +303,29 @@ $ sudo gpasswd -a $USER bumblebee
 ```
 Logout / Login
 
-Update to nvidia-384 driver
+Update to driver (I use the latest NVIDIA drivers & Ubuntu 'pre-released updates')
 ```
-$ sudo apt install nvidia-384
+$ sudo add-apt-repository ppa:graphics-drivers/ppa
+$ sudo apt update
+$ sudo apt install nvidia-387
 ```
 
 Update bumblebee configuration
 ```
 $ sudo nano /etc/bumblebee/bumblebee.conf 
 Driver=nvidia
-KernelDriver=nvidia-384
-LibraryPath=/usr/lib/nvidia-384:/usr/lib32/nvidia-384
-XorgModulePath=/usr/lib/nvidia-384/xorg,/usr/lib/xorg/modules
+KernelDriver=nvidia-387
+LibraryPath=/usr/lib/nvidia-387:/usr/lib32/nvidia-387
+XorgModulePath=/usr/lib/nvidia-387/xorg,/usr/lib/xorg/modules
 ```
 
-Missing Nvidia symlinks (???)
+Add missing NVIDIA symlinks (? not sure if this is only my local problem)
 ```
-$ ln -s /usr/lib/nvidia-384/bin/nvidia-persistenced 
-$ ln -s /usr/lib/nvidia-384/libnvidia-cfg.so.1 /usr/lib/libnvidia-cfg.so.1
+$ ln -s /usr/lib/nvidia-387/bin/nvidia-persistenced /usr/bin/nvidia-persistenced 
+$ ln -s /usr/lib/nvidia-387/libnvidia-cfg.so.1 /usr/lib/libnvidia-cfg.so.1
 ```
+
+Reboot (?)
 
 Test
 ```
@@ -322,23 +333,41 @@ $ optirun glxinfo | grep OpenGL
 OpenGL vendor string: NVIDIA Corporation
 ```
 
-Result:
+Play :)
+```
+PRIMUS_SYNC=1 vblank_mode=0 primusrun steam
+```
+* PRIMUS_SYNC sync between NVIDIA and Intel
+    * 0: no sync, 1: D lags behind one frame, 2: fully synced
+* ignore the refresh rate of your monitor and just try to reach the maximux fps
+    * vblank_mode=0 
 
-optirun glxgears gets only 80 FPS.
-Booting without thunderbolt security and some tweaks, I got 3000 FPS using the Nvidia as primary card :(
-WIP...
-    
+Tested with "Steam / Saints Row IV" and Wayland & X11
 
-##### Ressouces
+Reference: http://www.webupd8.org/2016/08/how-to-install-and-configure-bumblebee.html
 
-* https://wiki.ubuntu.com/Bumblebee#Installation
-* https://wiki.ubuntuusers.de/Hybrid-Grafikkarten/PRIME/
-* http://www.dell.com/support/article/de/de/debsdt1/sln298431/a-guide-to-nvidia-optimus-on-dell-pcs-with-an-ubuntu-operating-system?lang=en
-* https://wiki.ubuntuusers.de/Hybrid-Grafikkarten/Bumblebee/
-* https://cubethethird.wordpress.com/2017/10/22/nvidia-xrun-an-alternative-to-bumblebee/
-* https://cubethethird.wordpress.com/2017/01/15/the-current-state-of-gaming-on-wayland/
-* http://pocketnix.org/posts/eGPUs%20under%20Linux%3A%20an%20advanced%20guide
-* https://egpu.io/forums/
+#### razercore
+
+This little shell script helps with the most tasks:
+* Authorize thunderbolt
+* Disconnect thunderbolt PCI devices
+* PCI rescan after / before disconnect
+* status
+* exec
+
+Copy [razercore](bin/razercore) into ~/bin or somewhere else in your path.
+
+Usage:
+* razercore start
+    * PCI rescan
+    * Authorize thunderbolt
+    * Check status (aka razercore status)
+* razercore status
+    * status of connection
+* razercore stop
+    * remove PCI device
+* razercore exec <prog>
+    * start prog on external gpu
 
 ### Webcam (unsolved)
 

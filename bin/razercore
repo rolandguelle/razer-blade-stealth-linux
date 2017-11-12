@@ -1,0 +1,85 @@
+#!/bin/bash
+# Razer Core thunderbolt (de-)connect script
+# No warranty, no license, just for fun
+#
+# Needs Bumblebee, tested with NVIDIA GFX card
+# Setup & details:
+# https://github.com/rolandguelle/razer-blade-stealth-linux
+#
+
+function checkRazerCore() {
+	if [[ -e /sys/bus/thunderbolt/devices/0-0/0-1/vendor_name && "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/vendor_name)" == 'Razer' && "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/device_name)" == 'Core' ]]
+	then
+		return
+	else
+		echo "Razer Core not found"
+		exit 1
+	fi	
+}
+
+function usageText() {
+	echo "Usage: razercore start|stop|status|exec <prog>"
+}
+
+function coreAuthorize() {
+	echo "Rescan PCI bus."
+	echo "1" | sudo tee /sys/bus/pci/rescan > /dev/null
+	sleep 1
+	checkRazerCore
+	if [[ "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/authorized)" == '0' ]]
+	then
+		echo "Authorize Razer Core..."
+		echo "1" | sudo tee /sys/bus/thunderbolt/devices/0-0/0-1/authorized > /dev/null
+	else
+		echo "Razer Core already authorized."
+	fi
+	sleep 2
+	coreStatus	
+}
+
+function coreStatus() {
+	if [[ -e /sys/bus/thunderbolt/devices/0-0/0-1/vendor_name ]]
+	then
+		if [[ "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/vendor_name)" == 'Razer' && "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/device_name)" == 'Core' ]]
+		then
+			echo "Razer Core connected: id=$(cat /sys/bus/thunderbolt/devices/0-0/0-1/unique_id)"
+			echo "Authorized: $(cat /sys/bus/thunderbolt/devices/0-0/0-1/authorized)"
+			if [[ "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/authorized)" == '1' ]]
+			then
+				optirun glxinfo | grep OpenGL
+			fi
+		else
+			echo "Razer Core not found, but other thunderbolt device:"
+			echo "Vendor: $(cat /sys/bus/thunderbolt/devices/0-0/0-1/vendor_name)"
+			echo "Device: $(cat /sys/bus/thunderbolt/devices/0-0/0-1/device_name)"
+		fi
+	else
+		echo "Razer Core not connected or stopped."	
+	fi
+}
+
+function removeRazerCore {
+	echo "Remove Racer Core PCI Devices..."
+	echo "1" | sudo tee /sys/bus/pci/devices/0000\:04\:00.0/remove > /dev/null
+}
+
+command="$1"
+
+if [[ $command == "exec" ]]
+then
+	coreAuthorize
+	shift
+	PRIMUS_SYNC=1 vblank_mode=0 primusrun "$@"
+elif [[ $command == "start" ]]
+then
+	coreAuthorize
+elif [[ $command == "stop" ]]
+then
+	checkRazerCore
+	removeRazerCore
+elif [[ $command == "status" ]]
+then
+	coreStatus
+else
+	usageText
+fi
