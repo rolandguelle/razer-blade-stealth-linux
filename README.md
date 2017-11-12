@@ -370,6 +370,7 @@ https://github.com/keeferrourke/capitaine-cursors
 ## Arch
 
 I use [Antergos](https://antergos.com/) Arch, but should be work with other Arch distros.
+Currently maybe outdated.
 
 ### Suspend Loop Issue
 
