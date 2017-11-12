@@ -329,16 +329,16 @@ $ optirun glxinfo | grep OpenGL
 OpenGL vendor string: NVIDIA Corporation
 ```
 
-Play :)
+Play Extreme Tuxracer :)
 ```
-PRIMUS_SYNC=1 vblank_mode=0 primusrun steam
+PRIMUS_SYNC=1 vblank_mode=0 primusrun etr
 ```
 * PRIMUS_SYNC sync between NVIDIA and Intel
     * 0: no sync, 1: D lags behind one frame, 2: fully synced
 * ignore the refresh rate of your monitor and just try to reach the maximux fps
     * vblank_mode=0 
 
-Tested with "Steam / Saints Row IV" and Wayland & X11
+Tested with "Extremetuxracer" & "Steam / Saints Row IV" and Wayland & X11
 
 #### razercore
 
