@@ -338,7 +338,7 @@ PRIMUS_SYNC=1 vblank_mode=0 primusrun etr
 * ignore the refresh rate of your monitor and just try to reach the maximux fps
     * vblank_mode=0 
 
-Tested with "Extremetuxracer" & "Steam / Saints Row IV" and Wayland & X11
+Tested with "Extremetuxracer" & "Steam / Saints Row IV (4k resolution)" and Wayland & X11
 
 #### razercore
 
