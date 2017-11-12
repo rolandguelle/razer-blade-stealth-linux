@@ -40,7 +40,6 @@ Distros:
 ### Suspend Loop Issue
 
 After resume, the system loops back in suspend.
-* http://askubuntu.com/questions/849888/suspend-not-working-as-intended-on-razer-blade-stealth-running-xubuntu-16-04/849900
 
 The system send an ACPI event where the [kernel defaults](https://patchwork.kernel.org/patch/9512307/) are different.
 This kernel parameter changes the defaults:
@@ -53,8 +52,6 @@ Update grub
 ```shell
 $ sudo update-grub
 ```
-
-Reference: https://wiki.archlinux.org/index.php/Razer#GRUB
 
 ### Caps Lock Issue
 
@@ -99,8 +96,6 @@ case $1 in
     ;;
 esac
 ```
-
-Reference: http://askubuntu.com/questions/873626/crash-when-toggling-off-caps-lock
 
 ### Laptop TLP Tools
 
@@ -150,8 +145,6 @@ $ libinput-gestures-setup start
 ```
 _(if you prefer natural scrolling, change up/down)_
 
-Reference: https://github.com/bulletmark/libinput-gestures
-
 ##### Tweaks
 
 macOS touchpad feeling:
@@ -187,8 +180,6 @@ $ echo "gesture swipe left     xdotool key ctrl+alt+Left" >> .config/libinput-ge
 $ libinput-gestures-setup autostart
 $ libinput-gestures-setup start
 ```
-
-Reference: https://github.com/bulletmark/libinput-gestures
 
 ### Keyboard Colors
 
@@ -252,9 +243,8 @@ $ gsettings reset-recursively org.gnome.mutter
 ### Touchscreen + Keyboard (Block caribou)
 
 Blocks caribou (the on screen keyboard) from popping up when you use a touchscreen. 
-* https://extensions.gnome.org/extension/1326/block-caribou/
 
-Manual installation:
+Installation:
 ```
 $ mkdir -p ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
 $ cd ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
@@ -288,7 +278,13 @@ or with [razercore start](#razercore).
 * USB works
 * Ethernet works
 
-#### External GPU
+#### External NVIDIA GPU
+
+Goal is to run the _same_ setup like Windows:
+ * using the normal setup (Wayland, Gnome) without the Razer Core
+ * hotplug the Razer Core (without reboot, login/logout) with user interaction
+ * run selected applications at the NVIDIA GPU
+ * unplug the Razer Core without freezing the system
 
 Install NVIDIA Prime and set it to "intel":
 ```
@@ -344,17 +340,9 @@ PRIMUS_SYNC=1 vblank_mode=0 primusrun steam
 
 Tested with "Steam / Saints Row IV" and Wayland & X11
 
-Reference: http://www.webupd8.org/2016/08/how-to-install-and-configure-bumblebee.html
-
 #### razercore
 
-This little shell script helps with the most tasks:
-* Authorize thunderbolt
-* Disconnect thunderbolt PCI devices
-* PCI rescan after / before disconnect
-* status
-* exec
-
+This ugly script helps with the typical tasks.
 Copy [razercore](bin/razercore) into ~/bin or somewhere else in your path.
 
 Usage:
@@ -368,14 +356,12 @@ Usage:
     * remove PCI device
 * razercore exec <prog>
     * start prog on external gpu
+    * example: razercore exec steam
 
 ### Webcam (unsolved)
 
 Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
 Unsolved... :(
-
-Reference: https://wiki.archlinux.org/index.php/Razer#Webcam
-
 
 ### "Capitaine" Cursors
 
@@ -397,8 +383,6 @@ Update Grub
 $ sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-Reference: https://wiki.archlinux.org/index.php/razer#GRUB
-
 ### Laptop TLP Tools
 
 Install TLP tools:
@@ -411,8 +395,6 @@ Enable TLP tools:
 $ sudo systemctl enable tlp
 $ sudo systemctl enable tlp-sleep
 ```
-
-Reference: https://wiki.archlinux.org/index.php/TLP
 
 ### Keyboard Colors
 
@@ -484,10 +466,6 @@ $ sudo systemd-hwdb update
 $ sudo udevadm trigger /dev/input/event*
 ```
 
-References:
-* https://wayland.freedesktop.org/libinput/doc/latest/absolute_coordinate_ranges.html
-* https://github.com/systemd/systemd/pull/6730
-
 ### Multiple Monitors
 
 See Ubuntu Setup
@@ -497,21 +475,23 @@ See Ubuntu Setup
 Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
 Unsolved... :(
 
-Reference: https://wiki.archlinux.org/index.php/Razer#Webcam
-
-The suggested solution does not work:
-
-```shell
-$ nano /etc/modprobe.d/uvcvideo.conf
-## fix issue with built-in webcam
-options uvcvideo quirks=512
-```
-
 # Credits
 
-Thanks for help / feedback:
+## References
+
+* https://wiki.archlinux.org/index.php/Razer
+* https://wayland.freedesktop.org/libinput/doc/latest/absolute_coordinate_ranges.html
+* https://github.com/systemd/systemd/pull/6730
+* https://wiki.archlinux.org/index.php/TLP
+* http://www.webupd8.org/2016/08/how-to-install-and-configure-bumblebee.html
+* https://extensions.gnome.org/extension/1326/block-caribou/
+* https://github.com/bulletmark/libinput-gestures
+* http://askubuntu.com/questions/849888/suspend-not-working-as-intended-on-razer-blade-stealth-running-xubuntu-16-04/849900
+* http://askubuntu.com/questions/873626/crash-when-toggling-off-caps-lock
+
+## Thanks for help & feedback
+
 * https://github.com/xlinbsd
 * https://github.com/tomsquest
 * https://github.com/ahmadnassri
 * https://github.com/lucaszanella
-
