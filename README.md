@@ -35,7 +35,8 @@ Distros:
 * Fresh install, reboot
 * Software & Updates
 	* Additional Drivers: Using Processor microcode firmware for Intel CPUs from intel-microcode (proprietary)
-(Secure boot was disabled during installation, but is now activated)
+        * (Secure boot was disabled during installation, but is now activated)
+    * Packages: main, universe, restricted, multiverse, artful-proposed pages enabled
 
 ### Suspend Loop Issue
 
@@ -211,7 +212,7 @@ $ sudo nano /etc/environment
 ```
 Add the line at the end:
 ```
-export MOZ_USE_XINPUT2=1
+MOZ_USE_XINPUT2=1
 ```
 Save and log off/in, now just start firefox
 
