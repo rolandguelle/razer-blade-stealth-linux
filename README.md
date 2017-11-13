@@ -1,6 +1,6 @@
 # Razer Blade Stealth Linux
 
-Personal experiences with a **Razer Blade Stealth** (late 2016) UHD and Linux.
+**Razer Blade Stealth** (late 2016, UHD / HiDPI) Linux (Ubuntu & Arch) setup.
 Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions.
 
 Solved issues:
@@ -197,11 +197,11 @@ Connection gets lost randomly, updating the firmeware helps:
 * Download & Update Firmware:
 ```shell
 $ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/board.bin
-$ sudo cp board.bin /lib/firmware/ath10k/QCA6174/hw3.0/board.bin
+$ sudo mv board.bin /lib/firmware/ath10k/QCA6174/hw3.0/board.bin
 $ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/board-2.bin
-$ sudo cp board-2.bin /lib/firmware/ath10k/QCA6174/hw3.0/board-2.bin
+$ sudo mv board-2.bin /lib/firmware/ath10k/QCA6174/hw3.0/board-2.bin
 $ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/4.4.1/firmware-6.bin_WLAN.RM.4.4.1-00065-QCARMSWP-1
-$ sudo cp firmware-6.bin_WLAN.RM.4.4.1-00065-QCARMSWP-1 /lib/firmware/ath10k/QCA6174/hw3.0/firmware-6.bin
+$ sudo mv firmware-6.bin_WLAN.RM.4.4.1-00065-QCARMSWP-1 /lib/firmware/ath10k/QCA6174/hw3.0/firmware-6.bin
 ```
 
 ### Firefox touchscreen scrolling
@@ -225,7 +225,7 @@ Works out of the box.
 
 ### Display Scaling
 
-At native resolution, the internal HDPi 4K display with 100% scale might be too tiny and frustrating for some, and with 200% scale is too large to be useful, luckily with Ubuntu 17.10 shipping with Gnome3, a native screen scaling solution is provided, however it's limited to 2 options: `100%` and `200%`.
+At native resolution, the internal HiDPI 4K display with 100% scale might be too tiny and frustrating for some, and with 200% scale is too large to be useful, luckily with Ubuntu 17.10 shipping with Gnome3, a native screen scaling solution is provided, however it's limited to 2 options: `100%` and `200%`.
 
 To enable more scaling options run the following command:
 
@@ -240,7 +240,7 @@ If the fonts are blurry, reset this setting:
 $ gsettings reset-recursively org.gnome.mutter
 ```
 
-### Touchscreen + Keyboard (Block caribou)
+### Touchscreen + Keyboard (aka block caribou)
 
 Blocks caribou (the on screen keyboard) from popping up when you use a touchscreen. 
 
@@ -258,7 +258,7 @@ Logout / Login
 
 ### Multiple monitors
 
-Switch the internal HDPI screen to **1920x1080** when using your RBS with a non HDPI external monitor.
+Switch the internal HiDPI screen to **1920x1080** when using your RBS with a non HiDPI external monitor.
 
 ### Thunderbolt
 
@@ -267,9 +267,9 @@ Including USB to ethernet :)
 
 ### Razer Core
 
-* Thunderbolt security: User
+* BIOS Setting: Thunderbolt security: User
 
-Authorize thunderbolt device manual by user:
+Authorize thunderbolt by user:
 ```
 $ echo "1" | sudo tee /sys/bus/thunderbolt/devices/0-0/0-1/authorized 
 ```
