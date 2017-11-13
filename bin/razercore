@@ -33,6 +33,8 @@ function coreAuthorize() {
 	else
 		echo "Razer Core already authorized."
 	fi
+	echo "Restart bumblebeed"
+	sudo service bumblebeed restart
 	sleep 2
 	coreStatus	
 }
