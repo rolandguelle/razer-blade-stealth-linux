@@ -29,7 +29,7 @@ function checkRazerCore() {
 }
 
 function usageText() {
-	echo "Usage: razercore start|stop|status|exec <prog>"
+	echo "Usage: razercore start|stop|restart|status|exec <prog>"
 }
 
 function restartBumblebeed() {
@@ -93,8 +93,13 @@ function coreStatus() {
 }
 
 function removeRazerCore {
-	echo "Remove Racer Core PCI Devices..."
-	echo "1" | sudo tee /sys/bus/pci/devices/0000\:04\:00.0/remove > /dev/null
+	if [[ -e /sys/bus/pci/devices/0000\:04\:00.0/remove ]]
+	then
+		echo "Remove Racer Core PCI Devices..."
+		echo "1" | sudo tee /sys/bus/pci/devices/0000\:04\:00.0/remove > /dev/null
+	else
+		echo "Racer Core PCI Devices seems to be gone..."
+	fi
 }
 
 command="$1"
@@ -111,6 +116,10 @@ elif [[ $command == "stop" ]]
 then
 	checkRazerCore
 	removeRazerCore
+elif [[ $command == "restart" ]]
+then
+	removeRazerCore
+	coreAuthorize
 elif [[ $command == "status" ]]
 then
 	coreStatus

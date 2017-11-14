@@ -307,7 +307,7 @@ $ sudo apt update
 $ sudo apt install nvidia-387
 ```
 
-Update bumblebee configuration
+Update bumblebee [config](etc/bumblebee/bumblebee.conf)
 ```
 $ sudo nano /etc/bumblebee/bumblebee.conf 
 Driver=nvidia
