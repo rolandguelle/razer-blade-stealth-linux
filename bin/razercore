@@ -8,6 +8,13 @@
 #
 
 function checkRazerCore() {
+	if [[ ! -e /sys/bus/thunderbolt/devices/0-0/0-1/vendor_name ]]
+	then
+		echo "No thunderbold device found. Rescan PCI bus."
+		echo "1" | sudo tee /sys/bus/pci/rescan > /dev/null
+		sleep 1
+	fi
+
 	if [[ -e /sys/bus/thunderbolt/devices/0-0/0-1/vendor_name && "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/vendor_name)" == 'Razer' && "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/device_name)" == 'Core' ]]
 	then
 		return
@@ -22,9 +29,6 @@ function usageText() {
 }
 
 function coreAuthorize() {
-	echo "Rescan PCI bus."
-	echo "1" | sudo tee /sys/bus/pci/rescan > /dev/null
-	sleep 1
 	checkRazerCore
 	if [[ "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/authorized)" == '0' ]]
 	then
@@ -35,7 +39,7 @@ function coreAuthorize() {
 	fi
 	echo "Restart bumblebeed"
 	sudo service bumblebeed restart
-	sleep 2
+	sleep 3
 	coreStatus	
 }
 

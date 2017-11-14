@@ -201,8 +201,8 @@ $ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/board.b
 $ sudo mv board.bin /lib/firmware/ath10k/QCA6174/hw3.0/board.bin
 $ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/board-2.bin
 $ sudo mv board-2.bin /lib/firmware/ath10k/QCA6174/hw3.0/board-2.bin
-$ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/4.4.1/firmware-6.bin_WLAN.RM.4.4.1-00065-QCARMSWP-1
-$ sudo mv firmware-6.bin_WLAN.RM.4.4.1-00065-QCARMSWP-1 /lib/firmware/ath10k/QCA6174/hw3.0/firmware-6.bin
+$ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/4.4.1.c1/firmware-6.bin_RM.4.4.1.c1-00031-QCARMSWP-1
+$ sudo mv firmware-6.bin_RM.4.4.1.c1-00031-QCARMSWP-1 /lib/firmware/ath10k/QCA6174/hw3.0/firmware-6.bin
 ```
 
 ### Firefox touchscreen scrolling
