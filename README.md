@@ -344,7 +344,7 @@ Tested with "Extremetuxracer" & "Steam / Saints Row IV (4k resolution)" and Wayl
 #### razercore
 
 This ugly script helps with the typical tasks.
-Copy [razercore](bin/razercore) into ~/bin or somewhere else in your path.
+Copy [razercore](bin/razercore) into ~/bin or somewhere else in your path and make it executable.
 
 Usage:
 * razercore start
@@ -355,6 +355,8 @@ Usage:
     * status of connection
 * razercore stop
     * remove PCI device
+* razercore restart
+    * stop & start
 * razercore exec <prog>
     * start prog on external gpu
     * example: razercore exec steam
