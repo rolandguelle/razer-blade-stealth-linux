@@ -366,9 +366,24 @@ Usage:
 Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
 Unsolved... :(
 
-### "Capitaine" Cursors
+### Theme 
 
-https://github.com/keeferrourke/capitaine-cursors
+#### "Capitaine" Cursors
+
+* Install https://github.com/keeferrourke/capitaine-cursors
+* Select via tweaks tool
+
+#### Applicatioins Theme
+
+* apt install arc-theme
+* Select (Arc-Darker) via tweaks tool
+
+#### Fonts
+
+* Window-Title: Garuda Regular 11
+* Interface: Ubuntu Regular 11
+* Document: Sans Regular 12
+* Monospace: Monospace Regular 12
 
 ## Arch
 
