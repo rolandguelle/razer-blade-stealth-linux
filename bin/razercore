@@ -10,6 +10,7 @@
 
 typeset -i RETRYDRIVER
 RETRYDRIVER=0
+GLXTEST=""
 
 function checkRazerCore() {
 	if [[ ! -e /sys/bus/thunderbolt/devices/0-0/0-1/vendor_name ]]
@@ -39,19 +40,6 @@ function restartBumblebeed() {
 }
 
 function coreAuthorize() {
-	checkRazerCore
-	if [[ "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/authorized)" == '0' ]]
-	then
-		echo "Authorize Razer Core..."
-		echo "1" | sudo tee /sys/bus/thunderbolt/devices/0-0/0-1/authorized > /dev/null
-		restartBumblebeed
-	else
-		echo "Razer Core already authorized."
-	fi
-	coreStatus	
-}
-
-function coreStatus() {
 	if [[ $RETRYDRIVER > 3 ]]
 	then
 		echo "Too many retries, giving up!"
@@ -60,6 +48,29 @@ function coreStatus() {
 		exit 1
 	fi
 
+	checkRazerCore
+
+	if [[ "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/authorized)" == '0' ]]
+	then
+		echo "Authorize Razer Core..."
+		echo "1" | sudo tee /sys/bus/thunderbolt/devices/0-0/0-1/authorized > /dev/null
+		restartBumblebeed
+	else
+		echo "Razer Core already authorized."
+	fi
+
+	coreStatus
+
+	if [[ $GLXTEST == '' ]]
+	then
+		RETRYDRIVER+=1
+		echo "Retry $RETRYDRIVER loading driver..."
+		restartBumblebeed
+		coreAuthorize
+	fi
+}
+
+function coreStatus() {
 	if [[ -e /sys/bus/thunderbolt/devices/0-0/0-1/vendor_name ]]
 	then
 		if [[ "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/vendor_name)" == 'Razer' && "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/device_name)" == 'Core' ]]
@@ -68,19 +79,14 @@ function coreStatus() {
 			echo "Authorized: $(cat /sys/bus/thunderbolt/devices/0-0/0-1/authorized)"
 			if [[ "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/authorized)" == '1' ]]
 			then
-				GLXTEST=$(optirun glxinfo | grep OpenGL | grep string)
+				GLXTEST=$(optirun glxinfo 2> /dev/null | grep OpenGL | grep string)
 				if [[ $GLXTEST == '' ]]
 				then
 					echo "OpenGL driver not correct loaded!"
-					RETRYDRIVER+=1
-					echo "Retry $RETRYDRIVER ..."
-					restartBumblebeed
-					coreStatus
 				else
 					echo "OpenGL Driver loaded!"
 					echo "${GLXTEST}"
 				fi
-				
 			fi
 		else
 			echo "Razer Core not found, but other thunderbolt device:"
