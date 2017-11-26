@@ -16,11 +16,11 @@ Solved issues:
 Unsolved issues:
 * Webcam
 
-Distros:
-* [Ubuntu](#ubuntu)
-* [Arch](#arch)
+Current Setup:
+* Ubuntu 17.10 & Wayland
+* (Maybe) outdated Infos: Ubuntu X11, [Arch](#arch)
 
-## Preparation
+# Preparation
 
 * Run Bios updates via installed Windows 10
 	* http://www.razersupport.com/gaming-systems/razer-blade-stealth/
@@ -28,21 +28,49 @@ Distros:
 		* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.3_BIOS6.05.exe.7z
 		* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.0.zip
 
-## Ubuntu 17.10
+# Ubuntu 17.10
+
+## Install
 
 * Resize disk on Windows
     * https://www.howtogeek.com/101862/how-to-manage-partitions-on-windows-without-downloading-any-other-software/ 
-* Fresh install, reboot
+* Fresh Ubuntu 17.10 installation, reboot
 * Software & Updates
 	* Additional Drivers: Using Processor microcode firmware for Intel CPUs from intel-microcode (proprietary)
         * (Secure boot was disabled during installation, but is now activated)
-    * Packages: main, universe, restricted, multiverse, artful-proposed pages enabled
+    * Packages: main, universe, restricted, multiverse, artful-proposed
 
-### Suspend Loop Issue
+## Works
+
+Other tutorials reports issues for some components.
+Maybe it depends on other distros, Ubuntu versions or configurations, but on my machine are no issues
+
+### Graphic Card
+
+Not needed any more:
+
+* X11: "AccelMethod"  "uxa"
+* Kernel: i915.enable_rc6=0 
+
+### HDMI
+
+Since 4.10.6 kernel HDMI out works.
+
+### Thunderbolt
+
+USB & video works on my 27'' Dell monitor with a (Apple) USB-C (HDMI, USB) adapter, without any modifications with kernel 4.13.x.
+Including USB to ethernet :)
+
+## Issues
+
+### Suspend Loop
 
 After resume, the system loops back in suspend.
 
 The system send an ACPI event where the [kernel defaults](https://patchwork.kernel.org/patch/9512307/) are different.
+
+#### Grub Kernel Parameter
+
 This kernel parameter changes the defaults:
 ```shell
 $ sudo nano /etc/default/grub
@@ -54,11 +82,11 @@ Update grub
 $ sudo update-grub
 ```
 
-### Caps Lock Issue
+### Caps-Lock Crash
 
 The RBS crashes ~~randomly~~ mostly if you hit "Caps Lock". The build-in driver causes the problem.
 
-#### Wayland & X11: disable capslocks
+#### Disable Capslocks
 
 Modify /etc/default/keyboard following line, replacing capslocks by a second ctrl:
 
@@ -67,7 +95,7 @@ $ sudo nano /etc/default/keyboard
 XKBOPTIONS="ctrl:nocaps"
 ```
 
-#### X11: Disable built-in keyboard driver
+#### X11: Disable Built-In Keyboard Driver
 
 Get your keyboard description and use it instead of "AT Raw Set 2 keyboard":
 ```shell
@@ -98,16 +126,7 @@ case $1 in
 esac
 ```
 
-### Laptop TLP Tools
-
-```shell
-$ sudo apt-get install tlp tlp-rdw
-$ sudo systemctl enable tlp
-```
-
-### Touchpad Suspend Issue
-
-#### Wayland: libinput
+### Touchpad Suspend
 
 Touchpad fails resuming from suspend with:
 
@@ -123,51 +142,13 @@ Temporary fix:
 $ sudo rmmod i2c_hid && sudo modprobe i2c_hid
 ```
 
-##### Permanent fix + Gestures
+#### Libinput-gestures
 
-Install [Libinput-gestures](https://github.com/bulletmark/libinput-gestures) solves the problem:
+[Libinput-gestures](https://github.com/bulletmark/libinput-gestures) solves the problem:
 
 ```shell
 $ sudo gpasswd -a $USER input
 $ sudo apt install xdotool wmctrl libinput-tools
-$ git clone http://github.com/bulletmark/libinput-gestures
-$ cd libinput-gestures
-$ sudo ./libinput-gestures-setup install
-```
-
-Logout - Login (if not, you get an error)
-
-```shell
-$ nano .config/libinput-gestures.conf
-gesture swipe down      _internal ws_up
-gesture swipe up        _internal ws_down
-$ libinput-gestures-setup autostart
-$ libinput-gestures-setup start
-```
-_(if you prefer natural scrolling, change up/down)_
-
-##### Tweaks
-
-macOS touchpad feeling:
-
-```shell
-$ sudo apt install gnome-tweak-tool
-```
-* Keyboard & Mouse
-* Click Method: Fingers
-
-#### X11: synaptics 
-
-Disable touchpad while typing and some other tunings:
-* [50-synaptics-ubuntu.conf](etc/X11/xorg.conf.d/50-synaptics-ubuntu.conf)
-
-##### Gestures
-
-Install [Libinput-gestures](https://github.com/bulletmark/libinput-gestures):
-
-```shell
-$ sudo gpasswd -a $USER input
-$ sudo apt-get install xdotool wmctrl libinput-tools
 $ git clone http://github.com/bulletmark/libinput-gestures
 $ cd libinput-gestures
 $ sudo ./libinput-gestures-setup install
@@ -181,18 +162,32 @@ $ echo "gesture swipe left     xdotool key ctrl+alt+Left" >> .config/libinput-ge
 $ libinput-gestures-setup autostart
 $ libinput-gestures-setup start
 ```
+_(if you prefer natural scrolling, change up/down)_
 
-### Keyboard Colors
+### Touchscreen & Firefox
 
-Currently not installed.
+Firefox doesn't seem to care about the touchscreen at all.
 
-Issue: (settings are lost after suspend):
-* https://github.com/openrazer/openrazer/issues/342
-(Gnome, Wayland)
+#### Xinput2
 
-### Wireless Issue
+Tell Firefox to use xinput2
 
-Connection gets lost randomly, updating the firmeware helps:
+```
+$ sudo nano /etc/environment
+```
+Add the line at the end:
+```
+MOZ_USE_XINPUT2=1
+```
+Save and log off/in
+
+### Unstable WIFI
+
+Wireless connection gets lost randomly.
+
+#### Update Firmware
+
+Updating the firmeware helps.
 
 * Backup /lib/firmware/ath10k/QCA6174/hw3.0/
 * Download & Update Firmware:
@@ -205,24 +200,78 @@ $ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/4.4.1.c
 $ sudo mv firmware-6.bin_RM.4.4.1.c1-00031-QCARMSWP-1 /lib/firmware/ath10k/QCA6174/hw3.0/firmware-6.bin
 ```
 
-### Firefox touchscreen scrolling
+### Onscreen Keyboard
 
+Everytime the touchscreen is used, an onscreen keyboard opens.
+
+#### Block caribou
+
+Blocks caribou (the on screen keyboard) from popping up when you use a touchscreen. 
+
+Installation:
 ```
-$ sudo nano /etc/environment
+$ mkdir -p ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
+$ cd ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
+$ wget https://github.com/keringar/cariboublocker/raw/master/extension.js
+$ wget https://github.com/keringar/cariboublocker/raw/master/metadata.json
+$ cd
+$ gsettings get org.gnome.shell enabled-extensions
+$ gsettings set org.gnome.shell enabled-extensions "['cariboublocker@git.keringar.xyz']"
 ```
-Add the line at the end:
+Logout / Login
+
+
+### Multiple Monitors
+
+Using a HiDPI and "normal" monitor works on _some_ applications, but not in Firefox & Chrome.
+
+#### Switch to 1920x1080
+
+Switch the internal HiDPI screen to **1920x1080** when using your RBS with a non HiDPI external monitor.
+Gnome _remembers_ the monitor and switch back to 4k when unplugging the screen.
+
+
+## Unsolved Issues
+
+### Keyboard Colors
+
+Currently not used.
+
+Issue: (settings are lost after suspend):
+* https://github.com/openrazer/openrazer/issues/342
+(Gnome, Wayland)
+
+### Webcam
+
+Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
+
+## Tweaks
+
+### Power Management
+
+TLP is an advanced power management tool for Linux that tries to apply tweaks for you automatically, depending on your Linux distribution and hardware.
+
+```shell
+$ sudo apt-get install tlp tlp-rdw
+$ sudo systemctl enable tlp
 ```
-MOZ_USE_XINPUT2=1
+
+### Touchpad
+
+#### Click, Tap, Move
+
+macOS touchpad feeling:
+
+```shell
+$ sudo apt install gnome-tweak-tool
 ```
-Save and log off/in, now just start firefox
+* Keyboard & Mouse
+* Click Method: Fingers
 
-### Graphic Card
+#### X11: Synaptics Configuration
 
-Works out of the box.
-
-### HDMI
-
-Works out of the box.
+Disable touchpad while typing and some other tunings:
+* [50-synaptics-ubuntu.conf](etc/X11/xorg.conf.d/50-synaptics-ubuntu.conf)
 
 ### Display Scaling
 
@@ -241,132 +290,9 @@ If the fonts are blurry, reset this setting:
 $ gsettings reset-recursively org.gnome.mutter
 ```
 
-### Touchscreen + Keyboard (aka block caribou)
-
-Blocks caribou (the on screen keyboard) from popping up when you use a touchscreen. 
-
-Installation:
-```
-$ mkdir -p ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
-$ cd ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
-$ wget https://github.com/keringar/cariboublocker/raw/master/extension.js
-$ wget https://github.com/keringar/cariboublocker/raw/master/metadata.json
-$ cd
-$ gsettings get org.gnome.shell enabled-extensions
-$ gsettings set org.gnome.shell enabled-extensions "['cariboublocker@git.keringar.xyz']"
-```
-Logout / Login
-
-### Multiple monitors
-
-Switch the internal HiDPI screen to **1920x1080** when using your RBS with a non HiDPI external monitor.
-
-### Thunderbolt
-
-USB & video works on my 27'' Dell monitor with a (Apple) USB-C (HDMI, USB) adapter, without any modifications.
-Including USB to ethernet :)
-
-### Razer Core
-
-* BIOS Setting: Thunderbolt security: User
-
-Authorize thunderbolt by user:
-```
-$ echo "1" | sudo tee /sys/bus/thunderbolt/devices/0-0/0-1/authorized 
-```
-or with [razercore start](#razercore).
-
-* USB works
-* Ethernet works
-
-#### External NVIDIA GPU
-
-Goal is to run the _same_ setup like Windows:
- * using the normal setup (Wayland, Gnome) without the Razer Core
- * hotplug the Razer Core (without reboot, login/logout) with user interaction
- * run selected applications at the NVIDIA GPU
- * unplug the Razer Core without freezing the system
-
-Install NVIDIA Prime and set it to "intel":
-```
-$ sudo apt install nvidia-prime
-$ sudo prime-select intel
-```
-
-Install Bumblebee:
-```
-$ sudo apt-get install bumblebee bumblebee-nvidia primus linux-headers-generic
-$ sudo gpasswd -a $USER bumblebee
-```
-Logout / Login
-
-Update to driver (I use the latest NVIDIA drivers & Ubuntu 'pre-released updates')
-```
-$ sudo add-apt-repository ppa:graphics-drivers/ppa
-$ sudo apt update
-$ sudo apt install nvidia-387
-```
-
-Update bumblebee [config](etc/bumblebee/bumblebee.conf)
-```
-$ sudo nano /etc/bumblebee/bumblebee.conf 
-Driver=nvidia
-KernelDriver=nvidia-387
-LibraryPath=/usr/lib/nvidia-387:/usr/lib32/nvidia-387
-XorgModulePath=/usr/lib/nvidia-387/xorg,/usr/lib/xorg/modules
-```
-
-Add missing NVIDIA symlinks (? not sure if this is only my local problem)
-```
-$ ln -s /usr/lib/nvidia-387/bin/nvidia-persistenced /usr/bin/nvidia-persistenced 
-$ ln -s /usr/lib/nvidia-387/libnvidia-cfg.so.1 /usr/lib/libnvidia-cfg.so.1
-```
-
-Reboot (?)
-
-Test
-```
-$ optirun glxinfo | grep OpenGL
-OpenGL vendor string: NVIDIA Corporation
-```
-
-Play Extreme Tuxracer :)
-```
-PRIMUS_SYNC=1 vblank_mode=0 primusrun etr
-```
-* PRIMUS_SYNC sync between NVIDIA and Intel
-    * 0: no sync, 1: D lags behind one frame, 2: fully synced
-* ignore the refresh rate of your monitor and just try to reach the maximux fps
-    * vblank_mode=0 
-
-Tested with "Extremetuxracer" & "Steam / Saints Row IV (4k resolution)" and Wayland & X11
-
-#### razercore
-
-This ugly script helps with the typical tasks.
-Copy [razercore](bin/razercore) into ~/bin or somewhere else in your path and make it executable.
-
-Usage:
-* razercore start
-    * PCI rescan
-    * Authorize thunderbolt
-    * Check status (aka razercore status)
-* razercore status
-    * status of connection
-* razercore stop
-    * remove PCI device
-* razercore restart
-    * stop & start
-* razercore exec <prog>
-    * start prog on external gpu
-    * example: razercore exec steam
-
-### Webcam (unsolved)
-
-Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
-Unsolved... :(
-
 ### Theme 
+
+My Ubuntu/Gnome tweaks :)
 
 #### "Capitaine" Cursors
 
@@ -385,12 +311,122 @@ Unsolved... :(
 * Document: Sans Regular 12
 * Monospace: Monospace Regular 12
 
-## Arch
 
-I use [Antergos](https://antergos.com/) Arch, but should be work with other Arch distros.
-Currently maybe outdated.
+## Razer Core
 
-### Suspend Loop Issue
+Using hardware like the Razer Core with Linux sounds like fun :)
+
+### Thunderbolt
+
+* BIOS Setting: Thunderbolt security: User
+
+Authorize thunderbolt by user:
+```
+$ echo "1" | sudo tee /sys/bus/thunderbolt/devices/0-0/0-1/authorized 
+```
+or with [razercore start](#razercore).
+
+* USB works
+* Ethernet works
+
+### Discrete NVIDIA GPU
+
+Goal is the _same_ setup like Windows:
+ * Use the normal setup (Wayland, Gnome) without the Razer Core
+ * Hotplug Razer Core (without reboot, login/logout) with user interaction
+ * Run selected applications on Razer Core / NVIDIA GPU
+ * Unplug the Razer Core without freezing the system
+
+#### NVIDIA Prime
+
+Install NVIDIA Prime and set it to "intel":
+```
+$ sudo apt install nvidia-prime
+$ sudo prime-select intel
+```
+
+#### NVIDIA GPU Driver
+
+Update to driver (I use the latest NVIDIA drivers & Ubuntu 'pre-released updates')
+```
+$ sudo add-apt-repository ppa:graphics-drivers/ppa
+$ sudo apt update
+$ sudo apt install nvidia-387
+```
+
+Add missing NVIDIA symlinks (? not sure if this is only my local problem)
+```
+$ ln -s /usr/lib/nvidia-387/bin/nvidia-persistenced /usr/bin/nvidia-persistenced 
+$ ln -s /usr/lib/nvidia-387/libnvidia-cfg.so.1 /usr/lib/libnvidia-cfg.so.1
+```
+
+#### Bumblebee
+
+Install Bumblebee:
+```
+$ sudo apt-get install bumblebee bumblebee-nvidia primus linux-headers-generic
+$ sudo gpasswd -a $USER bumblebee
+```
+
+Update bumblebee [config](etc/bumblebee/bumblebee.conf)
+```
+$ sudo nano /etc/bumblebee/bumblebee.conf 
+Driver=nvidia
+KernelDriver=nvidia-387
+LibraryPath=/usr/lib/nvidia-387:/usr/lib32/nvidia-387
+XorgModulePath=/usr/lib/nvidia-387/xorg,/usr/lib/xorg/modules
+```
+
+#### Test GPU With optirun
+
+Reboot :)
+
+Check if NVIDIA driver is used: 
+```
+$ optirun glxinfo | grep OpenGL
+OpenGL vendor string: NVIDIA Corporation
+```
+
+#### Play Extreme Tuxracer :)
+
+Replace this with your favorite 3D application/game ;)
+
+```
+PRIMUS_SYNC=1 vblank_mode=0 primusrun etr
+```
+* PRIMUS_SYNC sync between NVIDIA and Intel
+    * 0: no sync, 1: D lags behind one frame, 2: fully synced
+* ignore the refresh rate of your monitor and just try to reach the maximux fps
+    * vblank_mode=0 
+
+Tested with "Extremetuxracer" and different games on "Steam" (Saints Row IV, Life is Strange, ...) at 4k resolution on Wayland & X11.
+
+### razercore
+
+This (ugly) script helps with the typical tasks.
+Copy [razercore](bin/razercore) into ~/bin or somewhere else in your path and make it executable.
+
+Usage:
+* razercore start
+    * PCI rescan
+    * Authorize thunderbolt
+    * Check status (aka razercore status)
+* razercore status
+    * status of connection
+* razercore stop
+    * remove PCI device
+* razercore restart
+    * stop & start
+* razercore exec <prog>
+    * start prog on external gpu
+    * example: razercore exec steam
+
+# Arch (Antergos)
+
+Tested with [Antergos](https://antergos.com/) Arch, but other Arch distros should work too.
+Maybe outdated.
+
+## Suspend Loop
 
 ```shell
 $ sudo nano /etc/default/grub
@@ -402,7 +438,7 @@ Update Grub
 $ sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-### Laptop TLP Tools
+## TLP
 
 Install TLP tools:
 ```shell
@@ -415,62 +451,26 @@ $ sudo systemctl enable tlp
 $ sudo systemctl enable tlp-sleep
 ```
 
-### Keyboard Colors
+## Keyboard Colors
 
-The keyboard lighting won't work after reboot:
+See Ubuntu Setup
 
-* https://github.com/openrazer/openrazer/issues/342
+## Gnome, Workspaces, Gestures
 
+See Ubuntu Setup
 
-### Gnome, Workspaces, Gestures
+## Touchpad
 
-Install libinput-gestures via software package manager:
-* libinput-gesture
-
-Setup libinput gesture:
-```shell
-$ sudo gpasswd -a $USER input
-```
-
-Logout - Login (if not, you get an error)
-
-```
-$ libinput-gestures-setup start
-$ libinput-gestures-setup autostart
-```
-
-Configuration files are at:
-   /etc/libinput-gestures.conf (system wide default)
-   $HOME/.config/libinput-gestures.conf (optional per user)
-
-```shell
-$ nano .config/libinput-gestures.conf
-gesture swipe down      _internal ws_up
-gesture swipe up        _internal ws_down
-```
-_(if you prefer natural scrolling, change up/down)_
-
-Restart libinput-gestures
-```shell
-$ libinput-gestures-setup restart
-```
-
-### Wireless
-
-Works out of the box.
-
-### Touchpad
-
-#### Synaptics (X11)
+### Synaptics (X11)
 
 Disable touchpad while typing and some other tunings:
 * [50-synaptics-arch.conf](etc/X11/xorg.conf.d/50-synaptics-arch.conf)
 
-#### libinput (X11)
+### libinput (X11)
 
 "libinput" configration for X11 [60-libinput.conf](etc/X11/xorg.conf.d/60-libinput.conf)
 
-#### Wayland
+### libinput (Wayland)
 
 Adjust "libinput" coordinate ranges for absolute axes:
 * [61-evdev-local.hwdb](etc/udev/hwdb.d/61-evdev-local.hwdb)
@@ -489,11 +489,6 @@ $ sudo udevadm trigger /dev/input/event*
 
 See Ubuntu Setup
 
-### Webcam
-
-Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
-Unsolved... :(
-
 # Credits
 
 ## References
@@ -508,7 +503,7 @@ Unsolved... :(
 * http://askubuntu.com/questions/849888/suspend-not-working-as-intended-on-razer-blade-stealth-running-xubuntu-16-04/849900
 * http://askubuntu.com/questions/873626/crash-when-toggling-off-caps-lock
 
-## Thanks for help & feedback
+## Thanks
 
 * https://github.com/xlinbsd
 * https://github.com/tomsquest
