@@ -1,32 +1,76 @@
 # Razer Blade Stealth Linux
 
-**Razer Blade Stealth** (late 2016, UHD / HiDPI) Linux (Ubuntu & Arch) setup.
+**Razer Blade Stealth** (late 2016, UHD / HiDPI) Linux ([Ubuntu](#ubuntu-1710) & [Arch (Antergos)](#arch-antergos)) setup, including **[Razer Core](#razer-core)** with [discrete NVIDIA GPU](#discrete-nvidia-gpu) setup over [thunderbolt](#thunderbolt-1) :)
+
 Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions.
+My current setup is Ubuntu 17.10 & Wayland and (maybe) outdated infos: X11 & Arch.
 
-Solved issues:
-* Suspend loop
-* Caps-Lock freeze
-* Disabled touchpad after suspend
-* Wifi connection lost randomly
-* Firefox touchscreen scrolling
-* Thunderbolt
-* Razer Core
-* Razer Core + NVIDIA GPU
-
-Unsolved issues:
-* Webcam
-
-Current Setup:
-* Ubuntu 17.10 & Wayland
-* (Maybe) outdated Infos: Ubuntu X11, [Arch](#arch)
+   * [Preparation](#preparation)
+   * [Ubuntu 17.10](#ubuntu-1710)
+      * [Install](#install)
+      * [Works](#works)
+         * [Graphic Card](#graphic-card)
+         * [HDMI](#hdmi)
+         * [Thunderbolt](#thunderbolt)
+      * [Issues](#issues)
+         * [Suspend Loop](#suspend-loop)
+            * [Grub Kernel Parameter](#grub-kernel-parameter)
+         * [Caps-Lock Crash](#caps-lock-crash)
+            * [Disable Capslocks](#disable-capslocks)
+            * [X11: Disable Built-In Keyboard Driver](#x11-disable-built-in-keyboard-driver)
+         * [Touchpad Suspend](#touchpad-suspend)
+            * [Libinput-gestures](#libinput-gestures)
+         * [Touchscreen &amp; Firefox](#touchscreen--firefox)
+            * [Xinput2](#xinput2)
+         * [Unstable WIFI](#unstable-wifi)
+            * [Update Firmware](#update-firmware)
+         * [Onscreen Keyboard](#onscreen-keyboard)
+            * [Block caribou](#block-caribou)
+         * [Multiple Monitors](#multiple-monitors)
+            * [Switch to 1920x1080](#switch-to-1920x1080)
+      * [Unsolved Issues](#unsolved-issues)
+         * [Keyboard Colors](#keyboard-colors)
+         * [Webcam](#webcam)
+      * [Tweaks](#tweaks)
+         * [Power Management](#power-management)
+         * [Touchpad](#touchpad)
+            * [Click, Tap, Move](#click-tap-move)
+            * [X11: Synaptics Configuration](#x11-synaptics-configuration)
+         * [Display Scaling](#display-scaling)
+         * [Theme](#theme)
+            * ["Capitaine" Cursors](#capitaine-cursors)
+            * [Applicatioins Theme](#applicatioins-theme)
+            * [Fonts](#fonts)
+      * [Razer Core](#razer-core)
+         * [Thunderbolt](#thunderbolt-1)
+            * [Cable](#cable)
+            * [User Authorization](#user-authorization)
+         * [Discrete NVIDIA GPU](#discrete-nvidia-gpu)
+            * [NVIDIA Prime](#nvidia-prime)
+            * [NVIDIA GPU Driver](#nvidia-gpu-driver)
+            * [Bumblebee](#bumblebee)
+            * [Test GPU With optirun](#test-gpu-with-optirun)
+            * [Play Extreme Tuxracer :)](#play-extreme-tuxracer-)
+         * [razercore](#razercore)
+   * [Arch (Antergos)](#arch-antergos)
+      * [Suspend Loop](#suspend-loop-1)
+      * [Power Management](#power-management-1)
+      * [Keyboard Colors](#keyboard-colors-1)
+      * [Gnome, Workspaces, Gestures](#gnome-workspaces-gestures)
+      * [Touchpad](#touchpad-1)
+         * [Synaptics (X11)](#synaptics-x11)
+         * [libinput (X11)](#libinput-x11)
+         * [libinput (Wayland)](#libinput-wayland)
+      * [Multiple Monitors](#multiple-monitors-1)
+   * [Credits](#credits)
 
 # Preparation
 
-* Run Bios updates via installed Windows 10
-	* http://www.razersupport.com/gaming-systems/razer-blade-stealth/
-	* Direct Links:
-		* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.3_BIOS6.05.exe.7z
-		* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.0.zip
+Run Bios updates via installed Windows 10:
+* http://www.razersupport.com/gaming-systems/razer-blade-stealth/
+* Direct Links:
+	* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.3_BIOS6.05.exe.7z
+	* http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.0.zip
 
 # Ubuntu 17.10
 
@@ -42,36 +86,35 @@ Current Setup:
 
 ## Works
 
-Other tutorials reports issues for some components.
-Maybe it depends on other distros, Ubuntu versions or configurations, but on my machine are no issues
+Other tutorials report issues for these topics/components, but on my machine these issues are gone.
 
 ### Graphic Card
 
-Not needed any more:
-
+Works without Kernel parameter:
+* i915.enable_rc6=0 
+or UXA mode:
 * X11: "AccelMethod"  "uxa"
-* Kernel: i915.enable_rc6=0 
 
 ### HDMI
 
-Since 4.10.6 kernel HDMI out works.
+Since 4.10.6 kernel, HDMI works.
 
 ### Thunderbolt
 
 USB & video works on my 27'' Dell monitor with a (Apple) USB-C (HDMI, USB) adapter, without any modifications with kernel 4.13.x.
 Including USB to ethernet :)
+No BIOS modifications or patching needed.
 
 ## Issues
 
 ### Suspend Loop
 
 After resume, the system loops back in suspend.
-
 The system send an ACPI event where the [kernel defaults](https://patchwork.kernel.org/patch/9512307/) are different.
 
 #### Grub Kernel Parameter
 
-This kernel parameter changes the defaults:
+This parameter changes the default kernel behavior:
 ```shell
 $ sudo nano /etc/default/grub
 GRUB_CMDLINE_LINUX_DEFAULT="button.lid_init_state=open"
@@ -112,8 +155,7 @@ Section "InputClass"
 EndSection
 ```
 
-Re'disable keyboard after suspend, [Script](etc/pm/sleep.d/20_razer):
-
+[Re'disable](etc/pm/sleep.d/20_razer) keyboard after suspend:
 ```shell
 #!/bin/sh
 # http://askubuntu.com/questions/873626/crash-when-toggling-off-caps-lock
@@ -152,17 +194,17 @@ $ sudo apt install xdotool wmctrl libinput-tools
 $ git clone http://github.com/bulletmark/libinput-gestures
 $ cd libinput-gestures
 $ sudo ./libinput-gestures-setup install
-```
-
-Logout - Login (if not, you get an error)
-
-```shell
 $ echo "gesture swipe right     xdotool key ctrl+alt+Right" > .config/libinput-gestures.conf
 $ echo "gesture swipe left     xdotool key ctrl+alt+Left" >> .config/libinput-gestures.conf
 $ libinput-gestures-setup autostart
+```
+
+Logout - Login (if not, you get an error).
+
+```shell
 $ libinput-gestures-setup start
 ```
-_(if you prefer natural scrolling, change up/down)_
+_(If you prefer natural scrolling, change up/down)_
 
 ### Touchscreen & Firefox
 
@@ -173,13 +215,9 @@ Firefox doesn't seem to care about the touchscreen at all.
 Tell Firefox to use xinput2
 
 ```
-$ sudo nano /etc/environment
+$ sudo echo "MOZ_USE_XINPUT2=1" >> /etc/environment
 ```
-Add the line at the end:
-```
-MOZ_USE_XINPUT2=1
-```
-Save and log off/in
+Logout - Login.
 
 ### Unstable WIFI
 
@@ -187,8 +225,7 @@ Wireless connection gets lost randomly.
 
 #### Update Firmware
 
-Updating the firmeware helps.
-
+Updating the firmeware:
 * Backup /lib/firmware/ath10k/QCA6174/hw3.0/
 * Download & Update Firmware:
 ```shell
@@ -196,8 +233,8 @@ $ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/board.b
 $ sudo mv board.bin /lib/firmware/ath10k/QCA6174/hw3.0/board.bin
 $ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/board-2.bin
 $ sudo mv board-2.bin /lib/firmware/ath10k/QCA6174/hw3.0/board-2.bin
-$ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/4.4.1.c1/firmware-6.bin_RM.4.4.1.c1-00031-QCARMSWP-1
-$ sudo mv firmware-6.bin_RM.4.4.1.c1-00031-QCARMSWP-1 /lib/firmware/ath10k/QCA6174/hw3.0/firmware-6.bin
+$ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/4.4.1.c1/firmware-6.bin_RM.4.4.1.c1-00035-QCARMSWP-1
+$ sudo mv firmware-6.bin_RM.4.4.1.c1-00035-QCARMSWP-1 /lib/firmware/ath10k/QCA6174/hw3.0/firmware-6.bin
 ```
 
 ### Onscreen Keyboard
@@ -208,7 +245,7 @@ Everytime the touchscreen is used, an onscreen keyboard opens.
 
 Blocks caribou (the on screen keyboard) from popping up when you use a touchscreen. 
 
-Installation:
+Manual installation:
 ```
 $ mkdir -p ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
 $ cd ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
@@ -218,8 +255,7 @@ $ cd
 $ gsettings get org.gnome.shell enabled-extensions
 $ gsettings set org.gnome.shell enabled-extensions "['cariboublocker@git.keringar.xyz']"
 ```
-Logout / Login
-
+Logout - Login.
 
 ### Multiple Monitors
 
@@ -229,7 +265,6 @@ Using a HiDPI and "normal" monitor works on _some_ applications, but not in Fire
 
 Switch the internal HiDPI screen to **1920x1080** when using your RBS with a non HiDPI external monitor.
 Gnome _remembers_ the monitor and switch back to 4k when unplugging the screen.
-
 
 ## Unsolved Issues
 
@@ -311,23 +346,27 @@ My Ubuntu/Gnome tweaks :)
 * Document: Sans Regular 12
 * Monospace: Monospace Regular 12
 
-
 ## Razer Core
 
 Using hardware like the Razer Core with Linux sounds like fun :)
 
 ### Thunderbolt
 
-* BIOS Setting: Thunderbolt security: User
+#### Cable
 
-Authorize thunderbolt by user:
+I use a [**2m** cable](https://www.amazon.de/CalDigit-Thunderbolt-3-Kabel-Zertifiziert-Typ-C-kompatibel/dp/B01N4MFG7J/) without problems.
+I measured no performance differences compared to the included _very_ short cable (tested on Windows & Linux).
+
+#### User Authorization
+
+* Setting: Thunderbolt security: User
+* Authorize thunderbolt by user:
 ```
 $ echo "1" | sudo tee /sys/bus/thunderbolt/devices/0-0/0-1/authorized 
 ```
 or with [razercore start](#razercore).
 
-* USB works
-* Ethernet works
+Razer Core USB & Ethernet works!
 
 ### Discrete NVIDIA GPU
 
@@ -438,7 +477,7 @@ Update Grub
 $ sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-## TLP
+## Power Management
 
 Install TLP tools:
 ```shell
@@ -485,27 +524,24 @@ $ sudo systemd-hwdb update
 $ sudo udevadm trigger /dev/input/event*
 ```
 
-### Multiple Monitors
+## Multiple Monitors
 
 See Ubuntu Setup
 
 # Credits
 
-## References
-
-* https://wiki.archlinux.org/index.php/Razer
-* https://wayland.freedesktop.org/libinput/doc/latest/absolute_coordinate_ranges.html
-* https://github.com/systemd/systemd/pull/6730
-* https://wiki.archlinux.org/index.php/TLP
-* http://www.webupd8.org/2016/08/how-to-install-and-configure-bumblebee.html
-* https://extensions.gnome.org/extension/1326/block-caribou/
-* https://github.com/bulletmark/libinput-gestures
-* http://askubuntu.com/questions/849888/suspend-not-working-as-intended-on-razer-blade-stealth-running-xubuntu-16-04/849900
-* http://askubuntu.com/questions/873626/crash-when-toggling-off-caps-lock
-
-## Thanks
-
-* https://github.com/xlinbsd
-* https://github.com/tomsquest
-* https://github.com/ahmadnassri
-* https://github.com/lucaszanella
+* References
+    * https://wiki.archlinux.org/index.php/Razer
+    * https://wayland.freedesktop.org/libinput/doc/latest/absolute_coordinate_ranges.html
+    * https://github.com/systemd/systemd/pull/6730
+    * https://wiki.archlinux.org/index.php/TLP
+    * http://www.webupd8.org/2016/08/how-to-install-and-configure-bumblebee.html
+    * https://extensions.gnome.org/extension/1326/block-caribou/
+    * https://github.com/bulletmark/libinput-gestures
+    * http://askubuntu.com/questions/849888/suspend-not-working-as-intended-on-razer-blade-stealth-running-xubuntu-16-04/849900
+    * http://askubuntu.com/questions/873626/crash-when-toggling-off-caps-lock
+* Thanks
+    * https://github.com/xlinbsd
+    * https://github.com/tomsquest
+    * https://github.com/ahmadnassri
+    * https://github.com/lucaszanella
