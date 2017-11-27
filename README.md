@@ -1,9 +1,10 @@
 # Razer Blade Stealth Linux
 
-**Razer Blade Stealth** (late 2016, UHD / HiDPI) Linux ([Ubuntu](#ubuntu-1710) & [Arch (Antergos)](#arch-antergos)) setup, including **[Razer Core](#razer-core)** with [discrete NVIDIA GPU](#discrete-nvidia-gpu) setup over [thunderbolt](#thunderbolt-1) :)
+**Razer Blade Stealth** (late 2016, UHD / HiDPI) Linux ([Ubuntu](#ubuntu-1710) & [Arch (Antergos)](#arch-antergos)) setup, including **[Razer Core](#razer-core)** with [discrete NVIDIA GPU](#discrete-nvidia-gpu) setup connected on [thunderbolt](#thunderbolt-1).
 
 Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions.
-My current setup is Ubuntu 17.10 & Wayland and (maybe) outdated infos: X11 & Arch.
+
+My current setup is Ubuntu 17.10 & Wayland, but you find some (maybe) outdated infos about X11 & Arch in this tutorial.
 
 <!-- TOC -->
 
@@ -24,7 +25,7 @@ My current setup is Ubuntu 17.10 & Wayland and (maybe) outdated infos: X11 & Arc
         - [Touchpad Suspend](#touchpad-suspend)
             - [Libinput-gestures](#libinput-gestures)
         - [Touchscreen & Firefox](#touchscreen--firefox)
-            - [Xinput2](#xinput2)
+            - [XINPUT2](#xinput2)
         - [Unstable WIFI](#unstable-wifi)
             - [Update Firmware](#update-firmware)
         - [Onscreen Keyboard](#onscreen-keyboard)
@@ -71,19 +72,16 @@ My current setup is Ubuntu 17.10 & Wayland and (maybe) outdated infos: X11 & Arc
 
 # Preparation
 
-Run Bios updates via installed Windows 10:
-
-- http://www.razersupport.com/gaming-systems/razer-blade-stealth/
+- [BIOS updates](http://www.razersupport.com/gaming-systems/razer-blade-stealth/) via Windows 10
 - Direct Links:
-    - http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.3_BIOS6.05.exe.7z
-    - http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.0.zip
+    - [BladeStealthUpdater_v1.0.5.3_BIOS6.05.exe.7z](http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.3_BIOS6.05.exe.7z)
+    - [BladeStealthUpdater_v1.0.5.0.zip](http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.0.zip)
 
 # Ubuntu 17.10
 
 ## Install
 
-- Resize disk on Windows
-    - https://www.howtogeek.com/101862/how-to-manage-partitions-on-windows-without-downloading-any-other-software/ 
+- [Resize disk](https://www.howtogeek.com/101862/how-to-manage-partitions-on-windows-without-downloading-any-other-software/) via Windows 10
 - Fresh Ubuntu 17.10 installation, reboot
 - Software & Updates
     - Additional Drivers: Using Processor microcode firmware for Intel CPUs from intel-microcode (proprietary)
@@ -92,27 +90,26 @@ Run Bios updates via installed Windows 10:
 
 ## Works
 
-Other tutorials report issues for these topics/components, but on my machine these issues are gone.
+Other tutorials reports issues for some topics/components, but on my machine these are running fine.
 
 ### Graphic Card
 
-Works without Kernel parameter:
+Works out of the box **without** the Kernel parameter:
 
 - i915.enable_rc6=0
 
-or UXA mode:
+or X11 UXA mode:
 
-- X11: "AccelMethod"  "uxa"
+- "AccelMethod"  "uxa"
 
 ### HDMI
 
-Since 4.10.6 kernel, HDMI works.
+Since 4.10.6 kernel, HDMI works out of the box.
 
 ### Thunderbolt / USB-C
 
-USB & video works on my 27'' Dell monitor with a (Apple) USB-C (HDMI, USB) adapter, without any modifications with kernel 4.13.x.
-Including USB to ethernet :)
-No BIOS modifications or patching needed.
+USB & video works on my 27'' Dell monitor with a (Apple) USB-C (HDMI, USB) adapter, without modifications (since 4.13.x kernel).
+Including USB to ethernet.
 
 ## Issues
 
@@ -123,29 +120,29 @@ The system send an ACPI event where the [kernel defaults](https://patchwork.kern
 
 #### Grub Kernel Parameter
 
-This parameter changes the default kernel behavior:
+Change kernel defaults:
 
 ```shell
-$ sudo nano /etc/default/grub
+sudo nano /etc/default/grub
 GRUB_CMDLINE_LINUX_DEFAULT="button.lid_init_state=open"
 ```
 
 Update grub
 
 ```shell
-$ sudo update-grub
+sudo update-grub
 ```
 
 ### Caps-Lock Crash
 
-The RBS crashes ~~randomly~~ mostly if you hit "Caps Lock". The build-in driver causes the problem.
+The RBS crashes ~~randomly~~ mostly if you hit "Caps Lock", causes by the build-in driver.
 
 #### Disable Capslocks
 
-Modify /etc/default/keyboard following line, replacing capslocks by a second ctrl:
+Modify /etc/default/keyboard, replacing capslocks by a second ctrl:
 
 ```shell
-$ sudo nano /etc/default/keyboard
+sudo nano /etc/default/keyboard
 XKBOPTIONS="ctrl:nocaps"
 ```
 
@@ -154,12 +151,12 @@ XKBOPTIONS="ctrl:nocaps"
 Get your keyboard description and use it instead of "AT Raw Set 2 keyboard":
 
 ```shell
-$ xinput list | grep "Set 2 keyboard"
+xinput list | grep "Set 2 keyboard"
 ```
 
 [Config](etc/X11/xorg.conf.d/20-razer.conf)
 
-```
+```shell
 Section "InputClass"
     Identifier      "Disable built-in keyboard"
     MatchProduct    "AT Raw Set 2 keyboard"
@@ -186,7 +183,7 @@ esac
 
 Touchpad fails resuming from suspend with:
 
-```
+```shell
 rmi4_physical rmi4-00: rmi_driver_reset_handler: Failed to read current IRQ mask.
 dpm_run_callback(): i2c_hid_resume+0x0/0x120 [i2c_hid] returns -11
 PM: Device i2c-15320205:00 failed to resume async: error -11
@@ -195,7 +192,7 @@ PM: Device i2c-15320205:00 failed to resume async: error -11
 Temporary fix:
 
 ```shell
-$ sudo rmmod i2c_hid && sudo modprobe i2c_hid
+sudo rmmod i2c_hid && sudo modprobe i2c_hid
 ```
 
 #### Libinput-gestures
@@ -203,34 +200,34 @@ $ sudo rmmod i2c_hid && sudo modprobe i2c_hid
 [Libinput-gestures](https://github.com/bulletmark/libinput-gestures) solves the problem:
 
 ```shell
-$ sudo gpasswd -a $USER input
-$ sudo apt install xdotool wmctrl libinput-tools
-$ git clone http://github.com/bulletmark/libinput-gestures
-$ cd libinput-gestures
-$ sudo ./libinput-gestures-setup install
-$ echo "gesture swipe right     xdotool key ctrl+alt+Right" > .config/libinput-gestures.conf
-$ echo "gesture swipe left     xdotool key ctrl+alt+Left" >> .config/libinput-gestures.conf
-$ libinput-gestures-setup autostart
+sudo gpasswd -a $USER input
+sudo apt install xdotool wmctrl libinput-tools
+git clone http://github.com/bulletmark/libinput-gestures
+cd libinput-gestures
+sudo ./libinput-gestures-setup install
+echo "gesture swipe right     xdotool key ctrl+alt+Right" > .config/libinput-gestures.conf
+echo "gesture swipe left     xdotool key ctrl+alt+Left" >> .config/libinput-gestures.conf
+libinput-gestures-setup autostart
 ```
 
 Logout - Login (if not, you get an error).
 
 ```shell
-$ libinput-gestures-setup start
+libinput-gestures-setup start
 ```
 
-_(If you prefer natural scrolling, change up/down)_
+(If you prefer _natural scrolling_, change up/down)
 
 ### Touchscreen & Firefox
 
 Firefox doesn't seem to care about the touchscreen at all.
 
-#### Xinput2
+#### XINPUT2
 
 Tell Firefox to use xinput2
 
-```
-$ sudo echo "MOZ_USE_XINPUT2=1" >> /etc/environment
+```shell
+sudo echo "MOZ_USE_XINPUT2=1" >> /etc/environment
 ```
 
 Logout - Login.
@@ -247,12 +244,12 @@ Updating the firmeware:
 - Download & Update Firmware:
 
 ```shell
-$ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/board.bin
-$ sudo mv board.bin /lib/firmware/ath10k/QCA6174/hw3.0/board.bin
-$ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/board-2.bin
-$ sudo mv board-2.bin /lib/firmware/ath10k/QCA6174/hw3.0/board-2.bin
-$ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/4.4.1.c1/firmware-6.bin_RM.4.4.1.c1-00035-QCARMSWP-1
-$ sudo mv firmware-6.bin_RM.4.4.1.c1-00035-QCARMSWP-1 /lib/firmware/ath10k/QCA6174/hw3.0/firmware-6.bin
+wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/board.bin
+sudo mv board.bin /lib/firmware/ath10k/QCA6174/hw3.0/board.bin
+wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/board-2.bin
+sudo mv board-2.bin /lib/firmware/ath10k/QCA6174/hw3.0/board-2.bin
+wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/4.4.1.c1/firmware-6.bin_RM.4.4.1.c1-00035-QCARMSWP-1
+sudo mv firmware-6.bin_RM.4.4.1.c1-00035-QCARMSWP-1 /lib/firmware/ath10k/QCA6174/hw3.0/firmware-6.bin
 ```
 
 ### Onscreen Keyboard
@@ -261,29 +258,34 @@ Everytime the touchscreen is used, an onscreen keyboard opens.
 
 #### Block caribou
 
-Blocks caribou (the on screen keyboard) from popping up when you use a touchscreen.
+Blocks caribou (the on screen keyboard) from popping up when you use a touchscreen with a Gnome extension.
 
 Manual installation:
 
+```shell
+mkdir -p ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
+cd ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
+wget https://github.com/keringar/cariboublocker/raw/master/extension.js
+wget https://github.com/keringar/cariboublocker/raw/master/metadata.json
+cd
+gsettings get org.gnome.shell enabled-extensions
 ```
-$ mkdir -p ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
-$ cd ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
-$ wget https://github.com/keringar/cariboublocker/raw/master/extension.js
-$ wget https://github.com/keringar/cariboublocker/raw/master/metadata.json
-$ cd
-$ gsettings get org.gnome.shell enabled-extensions
-$ gsettings set org.gnome.shell enabled-extensions "['cariboublocker@git.keringar.xyz']"
+
+Add Gnome extension (add the new extension to your existing extensions):
+
+```shell
+gsettings set org.gnome.shell enabled-extensions "['cariboublocker@git.keringar.xyz']"
 ```
 
 Logout - Login.
 
 ### Multiple Monitors
 
-Using a HiDPI and "normal" monitor works on _some_ applications, but not in Firefox & Chrome.
+Using a HiDPI and "normal" monitor works on _some_ applications with Wayland, but not in Firefox & Chrome.
 
 #### Switch to 1920x1080
 
-Switch the internal HiDPI screen to **1920x1080** when using your RBS with a non HiDPI external monitor.
+Switch the internal HiDPI screen to **1920x1080** when using your RBS together with a non HiDPI external monitor.
 Gnome _remembers_ the monitor and switch back to 4k when unplugging the screen.
 
 ## Unsolved Issues
@@ -292,15 +294,20 @@ Gnome _remembers_ the monitor and switch back to 4k when unplugging the screen.
 
 Currently not used.
 
-Issue: (settings are lost after suspend):
-
-- https://github.com/openrazer/openrazer/issues/342
-
-(Gnome, Wayland)
+[Issue](https://github.com/openrazer/openrazer/issues/342): Settings are lost after suspend (Gnome, Wayland).
 
 ### Webcam
 
 Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
+
+[This](https://wiki.archlinux.org/index.php/Razer_Blade#Webcam) fix not really helped:
+
+```shell
+/etc/modprobe.d/uvcvideo.conf
+
+## fix issue with built-in webcam
+options uvcvideo quirks=512
+```
 
 ## Tweaks
 
@@ -309,18 +316,18 @@ Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
 TLP is an advanced power management tool for Linux that tries to apply tweaks for you automatically, depending on your Linux distribution and hardware.
 
 ```shell
-$ sudo apt-get install tlp tlp-rdw
-$ sudo systemctl enable tlp
+sudo apt-get install tlp tlp-rdw
+sudo systemctl enable tlp
 ```
 
 ### Touchpad
 
 #### Click, Tap, Move
 
-macOS touchpad feeling:
+macOS touchpad feeling.
 
 ```shell
-$ sudo apt install gnome-tweak-tool
+sudo apt install gnome-tweak-tool
 ```
 
 - Keyboard & Mouse
@@ -338,16 +345,16 @@ At native resolution, the internal HiDPI 4K display with 100% scale might be too
 
 To enable more scaling options run the following command:
 
-```
-$ gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
+```shell
+gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']"
 ```
 
 After login/logout, you'll get more scaling options under Settings > Devices > Displays.
 
-If the fonts are blurry, reset this setting:
+If the fonts are blurry (on my setup), reset this setting:
 
-```
-$ gsettings reset-recursively org.gnome.mutter
+```shell
+gsettings reset-recursively org.gnome.mutter
 ```
 
 ### Theme
@@ -356,78 +363,75 @@ My Ubuntu/Gnome tweaks :)
 
 #### "Capitaine" Cursors
 
-- Install https://github.com/keeferrourke/capitaine-cursors
-- Select via tweaks tool
+- Install ["Capitaine" Cursors](https://github.com/keeferrourke/capitaine-cursors)
+- Select via tweaks tool, Appearance, Themes, Cursor
 
 #### Applicatioins Theme
 
 - apt install arc-theme
-- Select (Arc-Darker) via tweaks tool
+- Select (Arc-Darker) via tweaks tool, Appearance, Themes, Application
 
 #### Fonts
 
 - Window-Title: Garuda Regular 11
-- Interface: Ubuntu Regular 11
-- Document: Sans Regular 12
-- Monospace: Monospace Regular 12
+- Interface: Ubuntu Regular 12
+- Document: Sans Regular 13
+- Monospace: Monospace Regular 13
 
 ## Razer Core
-
-Using hardware like the Razer Core with Linux sounds like fun :)
 
 ### Thunderbolt
 
 #### Cable
 
-I use a [**2m** cable](https://www.amazon.de/CalDigit-Thunderbolt-3-Kabel-Zertifiziert-Typ-C-kompatibel/dp/B01N4MFG7J/) without problems.
-I measured no performance differences compared to the included _very_ short cable (tested on Windows & Linux).
+A [**2m** cable](https://www.amazon.de/CalDigit-Thunderbolt-3-Kabel-Zertifiziert-Typ-C-kompatibel/dp/B01N4MFG7J/) without problems, I measured no (performance) differences compared to the included _very_ short cable (tested on Windows & Linux).
 
 #### User Authorization
 
 - Setting: Thunderbolt security: User
-- Authorize thunderbolt by user:
+- Authorize thunderbolt:
 
-```
-$ echo "1" | sudo tee /sys/bus/thunderbolt/devices/0-0/0-1/authorized
+```shell
+echo "1" | sudo tee /sys/bus/thunderbolt/devices/0-0/0-1/authorized
 ```
 
 or with [razercore start](#razercore).
 
-Razer Core USB & Ethernet works!
+Razer Core USB & Ethernet now works!
 
 ### Discrete NVIDIA GPU
 
 Goal is the _same_ setup like Windows:
 
-- Run the _default_ setup (Wayland, Gnome) - without the Razer Core
+- Run a _normal_ setup (Wayland, Gnome) - without the Razer Core or any modifications
 - Hotplug Razer Core (without reboot, login/logout)
-- Run selected applications on Razer Core / NVIDIA GPU
-- Unplug the Razer Core without freezing the system
+- Run selected applications on Razer Core & external NVIDIA GPU
+- Unplug the Razer Core - without freezing the system
 
 #### NVIDIA Prime
 
 Install NVIDIA Prime and set it to "intel":
 
 ```shell
-$ sudo apt install nvidia-prime
-$ sudo prime-select intel
+sudo apt install nvidia-prime
+sudo prime-select intel
 ```
 
 #### NVIDIA GPU Driver
 
-Update to driver (I use the latest NVIDIA drivers & Ubuntu 'pre-released updates')
+Update driver (I use the latest NVIDIA drivers & Ubuntu 'pre-released updates'):
 
 ```shell
-$ sudo add-apt-repository ppa:graphics-drivers/ppa
-$ sudo apt update
-$ sudo apt install nvidia-387
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt update
+sudo apt install nvidia-387
 ```
 
 Add missing NVIDIA symlinks (? not sure if this is only my local problem)
 
 ```shell
-$ ln -s /usr/lib/nvidia-387/bin/nvidia-persistenced /usr/bin/nvidia-persistenced
-$ ln -s /usr/lib/nvidia-387/libnvidia-cfg.so.1 /usr/lib/libnvidia-cfg.so.1
+ln -s /usr/lib/nvidia-387/bin/nvidia-persistenced /usr/bin/nvidia-persistenced
+ln -s /usr/lib/nvidia-387/libnvidia-cfg.so.1 /usr/lib/libnvidia-cfg.so.1
 ```
 
 #### Bumblebee
@@ -435,14 +439,19 @@ $ ln -s /usr/lib/nvidia-387/libnvidia-cfg.so.1 /usr/lib/libnvidia-cfg.so.1
 Install Bumblebee:
 
 ```shell
-$ sudo apt-get install bumblebee bumblebee-nvidia primus linux-headers-generic
-$ sudo gpasswd -a $USER bumblebee
+sudo apt-get install bumblebee bumblebee-nvidia primus linux-headers-generic
+sudo gpasswd -a $USER bumblebee
 ```
 
 Update bumblebee [config](etc/bumblebee/bumblebee.conf)
 
 ```shell
-$ sudo nano /etc/bumblebee/bumblebee.conf
+sudo nano /etc/bumblebee/bumblebee.conf
+```
+
+Changes:
+
+```shell
 Driver=nvidia
 KernelDriver=nvidia-387
 LibraryPath=/usr/lib/nvidia-387:/usr/lib32/nvidia-387
@@ -451,7 +460,7 @@ XorgModulePath=/usr/lib/nvidia-387/xorg,/usr/lib/xorg/modules
 
 #### Test GPU With optirun
 
-Reboot :)
+Reboot with NVIDIA kernel drivers.
 
 Check if NVIDIA driver is used:
 
@@ -464,7 +473,7 @@ OpenGL vendor string: NVIDIA Corporation
 
 Replace "etr" (Extremetuxracer) with your favorite 3D application/game ;)
 
-```
+```shell
 PRIMUS_SYNC=1 vblank_mode=0 primusrun etr
 ```
 
@@ -492,7 +501,7 @@ Usage:
     - remove PCI device
 - razercore restart
     - stop & start
-- razercore exec <prog>
+- razercore exec "prog"
     - start prog on external gpu
     - example: razercore exec steam
 
@@ -513,7 +522,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet button.lid_init_state=open"
 Update Grub:
 
 ```shell
-$ sudo grub-mkconfig -o /boot/grub/grub.cfg
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 ## Power Management
@@ -521,14 +530,14 @@ $ sudo grub-mkconfig -o /boot/grub/grub.cfg
 Install TLP tools:
 
 ```shell
-$ sudo pacman -S tlp tlp-rdw
+sudo pacman -S tlp tlp-rdw
 ```
 
 Enable TLP tools:
 
 ```shell
-$ sudo systemctl enable tlp
-$ sudo systemctl enable tlp-sleep
+sudo systemctl enable tlp
+sudo systemctl enable tlp-sleep
 ```
 
 ## Keyboard Colors
@@ -558,14 +567,14 @@ Adjust "libinput" coordinate ranges for absolute axes:
 - [61-evdev-local.hwdb](etc/udev/hwdb.d/61-evdev-local.hwdb)
 
 ```shell
-$ sudo cp etc/udev/hwdb.d/61-evdev-local.hwdb /etc/udev/hwdb.d/61-evdev-local.hwdb
+sudo cp etc/udev/hwdb.d/61-evdev-local.hwdb /etc/udev/hwdb.d/61-evdev-local.hwdb
 ```
 
 Update settings:
 
 ```shell
-$ sudo systemd-hwdb update
-$ sudo udevadm trigger /dev/input/event*
+sudo systemd-hwdb update
+sudo udevadm trigger /dev/input/event*
 ```
 
 ## Multiple Monitors
