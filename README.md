@@ -384,11 +384,11 @@ My Ubuntu/Gnome tweaks :)
 
 #### Cable
 
-A [**2m** cable](https://www.amazon.de/CalDigit-Thunderbolt-3-Kabel-Zertifiziert-Typ-C-kompatibel/dp/B01N4MFG7J/) without problems, I measured no (performance) differences compared to the included _very_ short cable (tested on Windows & Linux).
+This [**2m** cable](https://www.amazon.de/CalDigit-Thunderbolt-3-Kabel-Zertifiziert-Typ-C-kompatibel/dp/B01N4MFG7J/) works without problems. I measured no (performance) differences compared with the included _very_ short cable (tested on Windows & Linux).
 
 #### User Authorization
 
-- Setting: Thunderbolt security: User
+- BIOS Setting: Thunderbolt security: User
 - Authorize thunderbolt:
 
 ```shell
@@ -403,9 +403,9 @@ Razer Core USB & Ethernet now works!
 
 Goal is the _same_ setup like Windows:
 
-- Run a _normal_ setup (Wayland, Gnome) - without the Razer Core or any modifications
+- Run a _normal_ setup (Wayland, Gnome) - without connected Razer Core
 - Hotplug Razer Core (without reboot, login/logout)
-- Run selected applications on Razer Core & external NVIDIA GPU
+- Run selected applications with Razer Core on external NVIDIA GPU
 - Unplug the Razer Core - without freezing the system
 
 #### NVIDIA Prime
