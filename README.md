@@ -205,18 +205,13 @@ sudo apt install xdotool wmctrl libinput-tools
 git clone http://github.com/bulletmark/libinput-gestures
 cd libinput-gestures
 sudo ./libinput-gestures-setup install
-echo "gesture swipe right     xdotool key ctrl+alt+Right" > .config/libinput-gestures.conf
-echo "gesture swipe left     xdotool key ctrl+alt+Left" >> .config/libinput-gestures.conf
 libinput-gestures-setup autostart
 ```
 
-Logout - Login (if not, you get an error).
-
-```shell
-libinput-gestures-setup start
-```
-
+My [config](config/libinput-gestures.conf).
 (If you prefer _natural scrolling_, change up/down)
+
+Logout - Login
 
 ### Touchscreen & Firefox
 
