@@ -222,7 +222,8 @@ Firefox doesn't seem to care about the touchscreen at all.
 Tell Firefox to use xinput2
 
 ```shell
-sudo echo "MOZ_USE_XINPUT2=1" >> /etc/environment
+sudo nano /etc/environment
+MOZ_USE_XINPUT2=1
 ```
 
 Logout - Login.
