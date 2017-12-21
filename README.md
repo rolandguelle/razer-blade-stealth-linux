@@ -254,26 +254,15 @@ Everytime the touchscreen is used, an onscreen keyboard opens.
 
 #### Block caribou
 
-Blocks caribou (the on screen keyboard) from popping up when you use a touchscreen with a Gnome extension.
+Disable caribou (the on screen keyboard) in "Startup Applications".
 
-Manual installation:
-
-```shell
-mkdir -p ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
-cd ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
-wget https://github.com/keringar/cariboublocker/raw/master/extension.js
-wget https://github.com/keringar/cariboublocker/raw/master/metadata.json
-cd
-gsettings get org.gnome.shell enabled-extensions
-```
-
-Add Gnome extension (add the new extension to your existing extensions):
+Display "hidden apps":
 
 ```shell
-gsettings set org.gnome.shell enabled-extensions "['cariboublocker@git.keringar.xyz']"
+sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop
 ```
 
-Logout - Login.
+Open "Startup Applications", disable caribou (and maybe Desktop Sharing, Backup Monitor and some others).
 
 ### Multiple Monitors
 
