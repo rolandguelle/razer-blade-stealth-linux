@@ -44,6 +44,7 @@ My current setup is Ubuntu 17.10 & Wayland, but you find some (maybe) outdated i
         - [Theme](#theme)
             - ["Capitaine" Cursors](#capitaine-cursors)
             - [Applicatioins Theme](#applicatioins-theme)
+            - [Dock & Top Bar](#dock--top-bar)
             - [Fonts](#fonts)
     - [Razer Core](#razer-core)
         - [Thunderbolt](#thunderbolt)
@@ -353,8 +354,17 @@ My Ubuntu/Gnome tweaks :)
 
 #### Applicatioins Theme
 
-- apt install arc-theme
-- Select (Arc-Darker) via tweaks tool, Appearance, Themes, Application
+- apt install numix-gtk-theme numix-icon-theme
+- Select via tweaks tool, Appearance, Themes, Application (Numix), Icons (Numix-Light) 
+
+#### Dock & Top Bar
+
+- Dock (Settings)
+    - Auto-hide the Dock
+    - Position on the screen: bottom
+- Top Bar (Extension)
+    - ["Hide Top Bar"](https://github.com/mlutfy/hidetopbar)
+    - Tweaks, Extension: Show panel when mouse approaches edges of the screen
 
 #### Fonts
 
