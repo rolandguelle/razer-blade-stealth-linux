@@ -1,0 +1,13 @@
+Section "ServerLayout"
+    Identifier  "Layout0"
+    Option      "AutoAddGPU" "false"
+EndSection
+
+Section "Device"
+    Identifier  "DiscreteNvidia"
+    Driver      "nvidia"
+    VendorName  "NVIDIA Corporation"
+    BusID       "PCI:07:00:0"
+    Option      "ProbeAllGpus" "false"
+    Option      "NoLogo" "true"
+EndSection

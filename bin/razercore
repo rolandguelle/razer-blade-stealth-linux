@@ -30,7 +30,7 @@ function checkRazerCore() {
 }
 
 function usageText() {
-	echo "Usage: razercore start|stop|restart|status|exec <prog>"
+	echo "Usage: razercore start|stop|restart|status|exec <prog>|exec-ext <prog>"
 }
 
 function restartBumblebeed() {
@@ -59,6 +59,7 @@ function coreAuthorize() {
 		echo "Razer Core already authorized."
 	fi
 
+	restartBumblebeed
 	coreStatus
 
 	if [[ $GLXTEST == '' ]]
@@ -110,7 +111,24 @@ function removeRazerCore {
 
 command="$1"
 
-if [[ $command == "exec" ]]
+if [[ $command == "exec-ext" ]]
+then
+    checkRazerCore
+	echo "Backup existing configuration"
+    sudo mv /etc/bumblebee/bumblebee.conf /etc/bumblebee/bumblebee.conf.bak
+	echo "Use bumblebee-external.conf"
+    sudo cp /etc/bumblebee/bumblebee-external.conf /etc/bumblebee/bumblebee.conf
+	echo "Restart modified bumblebeed"
+	sudo service bumblebeed restart
+	sleep 1
+	# ??? sudo prime-select nvidia
+	# set configuration back
+    sudo mv /etc/bumblebee/bumblebee.conf.bak /etc/bumblebee/bumblebee.conf
+	export DISPLAY=:8 LD_LIBRARY_PATH=/usr/lib/nvidia-387:$LD_LIBRARY_PATH
+	optirun true
+	shift
+	exec "$@"
+elif [[ $command == "exec" ]]
 then
 	coreAuthorize
 	shift

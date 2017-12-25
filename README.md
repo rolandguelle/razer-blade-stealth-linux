@@ -57,6 +57,13 @@ My current setup is Ubuntu 17.10 & Wayland, but you find some (maybe) outdated i
             - [Test GPU With optirun](#test-gpu-with-optirun)
             - [Run Extremetuxracer With primusrun](#run-extremetuxracer-with-primusrun)
         - [razercore](#razercore)
+        - [External Display](#external-display)
+            - [Laptop HDMI](#laptop-hdmi)
+            - [Razer Core HDMI](#razer-core-hdmi)
+                - [Expand Display](#expand-display)
+                - [Run 'Only' Applications On External Screen](#run-only-applications-on-external-screen)
+                    - [Automatic Setup](#automatic-setup)
+                    - [Manual Setup](#manual-setup)
 - [Arch (Antergos)](#arch-antergos)
     - [Suspend Loop](#suspend-loop-1)
     - [Power Management](#power-management-1)
@@ -464,6 +471,12 @@ $ optirun glxinfo | grep OpenGL
 OpenGL vendor string: NVIDIA Corporation
 ```
 
+NVIDIA Settings
+
+```shell
+optirun -b none /usr/bin/nvidia-settings  -c :8
+```
+
 #### Run Extremetuxracer With primusrun
 
 Replace "etr" (Extremetuxracer) with your favorite 3D application/game ;)
@@ -499,6 +512,85 @@ Usage:
 - razercore exec "prog"
     - start prog on external gpu
     - example: razercore exec steam
+- razercore exec-ext "prog"
+    - start prog on external gpu
+    - output on external display, connected with Razer Core
+    - example: razercore exec-ext steam
+
+### External Display
+
+Use eGPU on external displays.
+
+#### Laptop HDMI
+
+Switch to "Single Display" for gaming:
+
+- Settings, Devices, Single Display
+
+Tested with Samsung TV, XBox 360 controller (plugged in Razer Core) and Steam.
+
+#### Razer Core HDMI
+
+##### Expand Display
+
+Tested with this setup:
+
+- BIOS: Disable Thunderbold Security
+- Connect Razer Core via Thunderbold
+- Login with Xorg Session
+- Keep Thunderbold connected
+
+##### Run 'Only' Applications On External Screen
+
+Check if your monitor is detected:
+
+```shell
+nvidia-xconfig --query-gpu-info
+```
+
+###### Automatic Setup
+
+Create/Copy/Modify additional bumblebee and NVIDIA configuration:
+
+```shell
+cp etc/bumblebee/bumblebee.conf /etc/bumblebee/bumblebee.conf
+cp etc/bumblebee/bumblebee-external.conf /etc/bumblebee/bumblebee-external.conf
+cp etc/bumblebee/xorg.conf.external /etc/bumblebee/xorg.conf.external
+```
+
+Exec razercore with "exec-ext":
+```
+razercore exec-ext etr
+```
+
+Extreme Tuxracer should now run on your external screen.
+
+###### Manual Setup
+
+Modify [bumblebee.conf](etc/bumblebee/bublebee-external.conf).
+
+```
+KeepUnusedXServer=true
+PMMethod=none
+```
+
+Modify [xorg.conf.nvidia](etc/bumblebee/xorg.conf.external)
+
+```
+# Option "AutoAddDevices" "false"
+# Option "UseEDID" "false"
+```
+
+Run
+
+```shell
+/etc/init.d/bumblebee restart # razercore restart is also possible, ignore the error messages
+export DISPLAY=:8 LD_LIBRARY_PATH=/usr/lib/nvidia-387:$LD_LIBRARY_PATH
+optirun true
+etr # replace this with steam or whatever
+```
+
+Extreme Tuxracer should now run on your external screen.
 
 # Arch (Antergos)
 
@@ -584,10 +676,10 @@ See Ubuntu Setup
     - https://github.com/systemd/systemd/pull/6730
     - https://wiki.archlinux.org/index.php/TLP
     - http://www.webupd8.org/2016/08/how-to-install-and-configure-bumblebee.html
-    - https://extensions.gnome.org/extension/1326/block-caribou/
     - https://github.com/bulletmark/libinput-gestures
     - http://askubuntu.com/questions/849888/suspend-not-working-as-intended-on-razer-blade-stealth-running-xubuntu-16-04/849900
     - http://askubuntu.com/questions/873626/crash-when-toggling-off-caps-lock
+    - https://github.com/Bumblebee-Project/Bumblebee/wiki/Multi-monitor-setup
 - Thanks
     - https://github.com/xlinbsd
     - https://github.com/tomsquest
