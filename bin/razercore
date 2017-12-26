@@ -109,11 +109,16 @@ function removeRazerCore {
 	fi
 }
 
-command="$1"
+# exec program and display screen screen
+function execInternal {
+	coreAuthorize
+	shift
+	PRIMUS_SYNC=1 vblank_mode=0 primusrun "$@"
+}
 
-if [[ $command == "exec-ext" ]]
-then
-    checkRazerCore
+# exec program and display external screen connected on GPU / Razer Core
+function execExternal {
+    coreAuthorize
 	echo "Backup existing configuration"
     sudo mv /etc/bumblebee/bumblebee.conf /etc/bumblebee/bumblebee.conf.bak
 	echo "Use bumblebee-external.conf"
@@ -121,24 +126,35 @@ then
 	echo "Restart modified bumblebeed"
 	sudo service bumblebeed restart
 	sleep 1
-	# ??? sudo prime-select nvidia
-	# set configuration back
+	# needed for steam
+	sudo prime-select nvidia
+	# set configuration back, for later bumblebee restarts
     sudo mv /etc/bumblebee/bumblebee.conf.bak /etc/bumblebee/bumblebee.conf
-	export DISPLAY=:8 LD_LIBRARY_PATH=/usr/lib/nvidia-387:$LD_LIBRARY_PATH
+	# start external X server
 	optirun true
+	# set x env to external display
+	export DISPLAY=:8 LD_LIBRARY_PATH=/usr/lib/nvidia-387:$LD_LIBRARY_PATH
 	shift
 	exec "$@"
+}
+
+command="$1"
+
+if [[ $command == "exec-ext" ]]
+then
+	execExternal
 elif [[ $command == "exec" ]]
 then
-	coreAuthorize
-	shift
-	PRIMUS_SYNC=1 vblank_mode=0 primusrun "$@"
+	execInternal
 elif [[ $command == "start" ]]
 then
 	coreAuthorize
 elif [[ $command == "stop" ]]
 then
 	checkRazerCore
+	# undo potential exec-ext settings
+	sudo prime-select intel
+	restartBumblebeed
 	removeRazerCore
 elif [[ $command == "restart" ]]
 then

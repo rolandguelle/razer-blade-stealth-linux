@@ -59,9 +59,9 @@ My current setup is Ubuntu 17.10 & Wayland, but you find some (maybe) outdated i
         - [razercore](#razercore)
         - [External Display](#external-display)
             - [Laptop HDMI](#laptop-hdmi)
-            - [Razer Core HDMI](#razer-core-hdmi)
+            - [Razer Core HDMI (WIP)](#razer-core-hdmi-wip)
                 - [Expand Display](#expand-display)
-                - [Run 'Only' Applications On External Screen](#run-only-applications-on-external-screen)
+                - ['Only' Run Applications On External Screen](#only-run-applications-on-external-screen)
                     - [Automatic Setup](#automatic-setup)
                     - [Manual Setup](#manual-setup)
 - [Arch (Antergos)](#arch-antergos)
@@ -529,18 +529,18 @@ Switch to "Single Display" for gaming:
 
 Tested with Samsung TV, XBox 360 controller (plugged in Razer Core) and Steam.
 
-#### Razer Core HDMI
+#### Razer Core HDMI (WIP)
 
 ##### Expand Display
 
-Tested with this setup:
+Permanent expand display with external screen, connected at GPU / Razer Core:
 
 - BIOS: Disable Thunderbold Security
 - Connect Razer Core via Thunderbold
 - Login with Xorg Session
 - Keep Thunderbold connected
 
-##### Run 'Only' Applications On External Screen
+##### 'Only' Run Applications On External Screen
 
 Check if your monitor is detected:
 
@@ -584,9 +584,9 @@ Modify [xorg.conf.nvidia](etc/bumblebee/xorg.conf.external)
 Run
 
 ```shell
-/etc/init.d/bumblebee restart # razercore restart is also possible, ignore the error messages
+/etc/init.d/bumblebee restart # 'razercore restart' is also possible, ignore error messages
 export DISPLAY=:8 LD_LIBRARY_PATH=/usr/lib/nvidia-387:$LD_LIBRARY_PATH
-optirun true
+optirun true # start X server
 etr # replace this with steam or whatever
 ```
 
