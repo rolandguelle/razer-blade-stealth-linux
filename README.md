@@ -61,7 +61,7 @@ My current setup is Ubuntu 17.10 & Wayland, but you find some (maybe) outdated i
             - [Laptop HDMI](#laptop-hdmi)
             - [Razer Core HDMI (WIP)](#razer-core-hdmi-wip)
                 - [Expand Display](#expand-display)
-                - ['Only' Run Applications On External Screen](#only-run-applications-on-external-screen)
+                - [Run Applications 'Only' On External Screen](#run-applications-only-on-external-screen)
                     - [Automatic Setup](#automatic-setup)
                     - [Manual Setup](#manual-setup)
 - [Arch (Antergos)](#arch-antergos)
@@ -540,7 +540,7 @@ Permanent expand display with external screen, connected at GPU / Razer Core:
 - Login with Xorg Session
 - Keep Thunderbold connected
 
-##### 'Only' Run Applications On External Screen
+##### Run Applications 'Only' On External Screen
 
 Check if your monitor is detected:
 
