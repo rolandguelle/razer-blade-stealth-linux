@@ -109,12 +109,7 @@ function removeRazerCore {
 	fi
 }
 
-# exec program and display screen screen
-function execInternal {
-	coreAuthorize
-	shift
-	PRIMUS_SYNC=1 vblank_mode=0 primusrun "$@"
-}
+
 
 # exec program and display external screen connected on GPU / Razer Core
 function execExternal {
@@ -132,10 +127,6 @@ function execExternal {
     sudo mv /etc/bumblebee/bumblebee.conf.bak /etc/bumblebee/bumblebee.conf
 	# start external X server
 	optirun true
-	# set x env to external display
-	export DISPLAY=:8 LD_LIBRARY_PATH=/usr/lib/nvidia-387:$LD_LIBRARY_PATH
-	shift
-	exec "$@"
 }
 
 command="$1"
@@ -143,9 +134,15 @@ command="$1"
 if [[ $command == "exec-ext" ]]
 then
 	execExternal
+	# set x env to external display
+	export DISPLAY=:8 LD_LIBRARY_PATH=/usr/lib/nvidia-387:$LD_LIBRARY_PATH
+	shift
+	exec "$@"
 elif [[ $command == "exec" ]]
 then
-	execInternal
+	coreAuthorize
+	shift
+	PRIMUS_SYNC=1 vblank_mode=0 primusrun "$@"
 elif [[ $command == "start" ]]
 then
 	coreAuthorize
