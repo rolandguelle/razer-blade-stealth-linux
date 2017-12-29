@@ -143,6 +143,7 @@ then
 	coreAuthorize
 	shift
 	PRIMUS_SYNC=1 vblank_mode=0 primusrun "$@"
+	echo "Exit razercore"
 elif [[ $command == "start" ]]
 then
 	coreAuthorize

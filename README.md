@@ -30,6 +30,8 @@ My current setup is Ubuntu 17.10 & Wayland, but you find some (maybe) outdated i
             - [Update Firmware](#update-firmware)
         - [Onscreen Keyboard](#onscreen-keyboard)
             - [Block caribou](#block-caribou)
+                - [Startup Applications](#startup-applications)
+                - [Extension](#extension)
         - [Multiple Monitors](#multiple-monitors)
             - [Switch to 1920x1080](#switch-to-1920x1080)
     - [Unsolved Issues](#unsolved-issues)
@@ -262,6 +264,8 @@ Everytime the touchscreen is used, an onscreen keyboard opens.
 
 #### Block caribou
 
+##### Startup Applications
+
 Disable caribou (the on screen keyboard) in "Startup Applications".
 
 Display "hidden apps":
@@ -271,6 +275,31 @@ sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop
 ```
 
 Open "Startup Applications", disable caribou (and maybe Desktop Sharing, Backup Monitor and some others).
+
+##### Extension
+
+Remove caribou from "Startup Applications" is not enough :(
+
+Blocks caribou (the on screen keyboard) from popping up when you use a touchscreen with a Gnome extension.
+
+Manual installation:
+
+```shell
+mkdir -p ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
+cd ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
+wget https://github.com/keringar/cariboublocker/raw/master/extension.js
+wget https://github.com/keringar/cariboublocker/raw/master/metadata.json
+cd
+gsettings get org.gnome.shell enabled-extensions
+```
+
+Add Gnome extension (add the new extension to your existing extensions):
+
+```shell
+gsettings set org.gnome.shell enabled-extensions "['cariboublocker@git.keringar.xyz']"
+```
+
+Logout - Login.
 
 ### Multiple Monitors
 
