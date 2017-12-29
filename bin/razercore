@@ -11,7 +11,35 @@
 typeset -i RETRYDRIVER
 RETRYDRIVER=0
 GLXTEST=""
+command="$1"
+shift
+cmdline="$@"
 
+function usageText() {
+	echo "Short: razercore start|stop|restart|status|run-int <prog>|run-ext <prog>"
+HELPTEXT="Full:
+- razercore start
+    - PCI rescan, authorize thunderbolt
+    - Check status (aka razercore status)
+- razercore status
+    - Status of connection
+- razercore stop
+    - Remove PCI device
+- razercore restart
+    - Stop & start
+- razercore run-int "prog"
+    - razercore "start", run prog on external GPU & render at internal or laptop HDMI connected screen, razercore "stop"
+    - Example: razercore run-int steam
+- razercore run-ext "prog"
+    - razercore "start", run prog on external GPU & render at Razer Core connected screen, razercore "stop"
+    - Example: razercore run-ext steam"
+	echo "$HELPTEXT"
+	echo ""
+	echo "More: https://github.com/rolandguelle/razer-blade-stealth-linux#razercore"
+	echo ""
+}
+
+# check if Razer Core is connected via thunderbolt
 function checkRazerCore() {
 	if [[ ! -e /sys/bus/thunderbolt/devices/0-0/0-1/vendor_name ]]
 	then
@@ -29,16 +57,13 @@ function checkRazerCore() {
 	fi	
 }
 
-function usageText() {
-	echo "Usage: razercore start|stop|restart|status|exec <prog>|exec-ext <prog>"
-}
-
 function restartBumblebeed() {
 	echo "Restart bumblebeed"
 	sudo service bumblebeed restart
 	sleep 1
 }
 
+# Authorize thunderbold device and check if NVIDIA GL Extension is available
 function coreAuthorize() {
 	if [[ $RETRYDRIVER > 3 ]]
 	then
@@ -54,18 +79,16 @@ function coreAuthorize() {
 	then
 		echo "Authorize Razer Core..."
 		echo "1" | sudo tee /sys/bus/thunderbolt/devices/0-0/0-1/authorized > /dev/null
-		restartBumblebeed
 	else
 		echo "Razer Core already authorized."
 	fi
 
-	restartBumblebeed
 	coreStatus
 
 	if [[ $GLXTEST == '' ]]
 	then
 		RETRYDRIVER+=1
-		echo "Retry $RETRYDRIVER loading driver..."
+		echo "Retry $RETRYDRIVER : reloading bumblebee and re-run..."
 		restartBumblebeed
 		coreAuthorize
 	fi
@@ -99,6 +122,7 @@ function coreStatus() {
 	fi
 }
 
+# remove razer core device
 function removeRazerCore {
 	if [[ -e /sys/bus/pci/devices/0000\:04\:00.0/remove ]]
 	then
@@ -109,10 +133,8 @@ function removeRazerCore {
 	fi
 }
 
-
-
-# exec program and display external screen connected on GPU / Razer Core
-function execExternal {
+# run program / render on eGPU at Razer Core  / display at external screen / connected on GPU / Razer Core
+function runExternal {
     coreAuthorize
 	echo "Backup existing configuration"
     sudo mv /etc/bumblebee/bumblebee.conf /etc/bumblebee/bumblebee.conf.bak
@@ -123,37 +145,53 @@ function execExternal {
 	sleep 1
 	# needed for steam
 	sudo prime-select nvidia
-	# set configuration back, for later bumblebee restarts
-    sudo mv /etc/bumblebee/bumblebee.conf.bak /etc/bumblebee/bumblebee.conf
 	# start external X server
 	optirun true
-}
-
-command="$1"
-
-if [[ $command == "exec-ext" ]]
-then
-	execExternal
 	# set x env to external display
 	export DISPLAY=:8 LD_LIBRARY_PATH=/usr/lib/nvidia-387:$LD_LIBRARY_PATH
-	shift
-	exec "$@"
-elif [[ $command == "exec" ]]
-then
+	# EXEC cmd
+	(exec "$cmdline")
+	# EXIT cmd
+	echo "Cleanup External Setup"
+	# set configuration back, for bumblebee restart
+    sudo mv /etc/bumblebee/bumblebee.conf.bak /etc/bumblebee/bumblebee.conf
+	# switch back to intel as primary display
+	sudo prime-select intel
+	# restart bumblebee
+	restartBumblebeed
+	removeRazerCore
+	echo "Exit razercore run-ext"
+}
+
+# run program / render on eGPU at Razer Core  / display at internal Laptop or HDMI on Laptop
+function runInternal {
 	coreAuthorize
-	shift
-	PRIMUS_SYNC=1 vblank_mode=0 primusrun "$@"
-	echo "Exit razercore"
+	# EXEC cmd
+	(PRIMUS_SYNC=1 vblank_mode=0 primusrun "$cmdline")
+	# EXIT cmd
+	removeRazerCore
+	echo "Exit razercore run-int"
+}
+
+function stopRazerCore {
+	checkRazerCore
+	removeRazerCore
+}
+
+### main
+
+if [[ $command == "run-ext" || $command == "exec-ext" ]]
+then
+	runExternal
+elif [[ $command == "run-int" || $command == "exec" ]]
+then
+	runInternal
 elif [[ $command == "start" ]]
 then
 	coreAuthorize
 elif [[ $command == "stop" ]]
 then
-	checkRazerCore
-	# undo potential exec-ext settings
-	sudo prime-select intel
-	restartBumblebeed
-	removeRazerCore
+	stopRazerCore
 elif [[ $command == "restart" ]]
 then
 	removeRazerCore

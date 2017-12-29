@@ -60,8 +60,8 @@ My current setup is Ubuntu 17.10 & Wayland, but you find some (maybe) outdated i
             - [Run Extremetuxracer With primusrun](#run-extremetuxracer-with-primusrun)
         - [razercore](#razercore)
         - [External Display](#external-display)
-            - [Laptop HDMI](#laptop-hdmi)
-            - [Razer Core HDMI (WIP)](#razer-core-hdmi-wip)
+            - [Connected At Laptop HDMI](#connected-at-laptop-hdmi)
+            - [Connected At External GPU](#connected-at-external-gpu)
                 - [Expand Display](#expand-display)
                 - [Run Applications 'Only' On External Screen](#run-applications-only-on-external-screen)
                     - [Automatic Setup](#automatic-setup)
@@ -529,28 +529,26 @@ Copy [razercore](bin/razercore) into ~/bin or somewhere else in your path and ma
 Usage:
 
 - razercore start
-    - PCI rescan
-    - Authorize thunderbolt
+    - PCI rescan, authorize thunderbolt
     - Check status (aka razercore status)
 - razercore status
-    - status of connection
+    - Status of connection
 - razercore stop
-    - remove PCI device
+    - Remove PCI device
 - razercore restart
-    - stop & start
-- razercore exec "prog"
-    - start prog on external gpu
-    - example: razercore exec steam
-- razercore exec-ext "prog"
-    - start prog on external gpu
-    - output on external display, connected with Razer Core
-    - example: razercore exec-ext steam
+    - Stop & start
+- razercore run-int "prog"
+    - razercore "start", run prog on external GPU & render at internal or laptop HDMI connected screen, razercore "stop"
+    - Example: razercore run-int steam
+- razercore run-ext "prog"
+    - razercore "start", run prog on external GPU & render at Razer Core connected screen, razercore "stop"
+    - Example: razercore run-ext steam"
 
 ### External Display
 
 Use eGPU on external displays.
 
-#### Laptop HDMI
+#### Connected At Laptop HDMI
 
 Switch to "Single Display" for gaming:
 
@@ -558,7 +556,7 @@ Switch to "Single Display" for gaming:
 
 Tested with Samsung TV, XBox 360 controller (plugged in Razer Core) and Steam.
 
-#### Razer Core HDMI (WIP)
+#### Connected At External GPU
 
 ##### Expand Display
 
@@ -589,7 +587,7 @@ cp etc/bumblebee/xorg.conf.external /etc/bumblebee/xorg.conf.external
 
 Exec razercore with "exec-ext":
 ```
-razercore exec-ext etr
+razercore run-ext etr
 ```
 
 Extreme Tuxracer should now run on your external screen.
