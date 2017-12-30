@@ -87,7 +87,8 @@ function coreAuthorize() {
 	if [[ $GLXTEST == '' ]]
 	then
 		RETRYDRIVER+=1
-		echo "Retry $RETRYDRIVER : reloading bumblebee and re-run..."
+		echo "Retry $RETRYDRIVER : remove core, reloading bumblebee and re-run..."
+		removeRazerCore
 		restartBumblebeed
 		coreAuthorize
 	fi
@@ -151,8 +152,7 @@ function runExternal {
 	# set configuration back, for later bumblebee restart
     sudo mv /etc/bumblebee/bumblebee.conf.bak /etc/bumblebee/bumblebee.conf
 	# EXEC cmd
-	("$cmdline")
-#	(exec "$cmdline")
+	(exec "$cmdline")
 	# EXIT cmd
 	echo "Cleanup External Setup"
 	# switch back to intel as primary display
