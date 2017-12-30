@@ -6,7 +6,6 @@
 # Setup & details:
 # https://github.com/rolandguelle/razer-blade-stealth-linux
 #
-#set -x
 
 typeset -i RETRYDRIVER
 RETRYDRIVER=0
@@ -59,7 +58,7 @@ function checkRazerCore() {
 
 function restartBumblebeed() {
 	echo "Restart bumblebeed"
-	sudo service bumblebeed restart
+	sudo systemctl restart bumblebeed.service
 	sleep 1
 }
 
@@ -141,7 +140,7 @@ function runExternal {
 	echo "Use bumblebee-external.conf"
     sudo cp /etc/bumblebee/bumblebee-external.conf /etc/bumblebee/bumblebee.conf
 	echo "Restart modified bumblebeed"
-	sudo service bumblebeed restart
+	sudo systemctl restart bumblebeed.service
 	sleep 1
 	# needed for steam
 	sudo prime-select nvidia
@@ -149,12 +148,13 @@ function runExternal {
 	optirun true
 	# set x env to external display
 	export DISPLAY=:8 LD_LIBRARY_PATH=/usr/lib/nvidia-387:$LD_LIBRARY_PATH
+	# set configuration back, for later bumblebee restart
+    sudo mv /etc/bumblebee/bumblebee.conf.bak /etc/bumblebee/bumblebee.conf
 	# EXEC cmd
-	(exec "$cmdline")
+	("$cmdline")
+#	(exec "$cmdline")
 	# EXIT cmd
 	echo "Cleanup External Setup"
-	# set configuration back, for bumblebee restart
-    sudo mv /etc/bumblebee/bumblebee.conf.bak /etc/bumblebee/bumblebee.conf
 	# switch back to intel as primary display
 	sudo prime-select intel
 	# restart bumblebee

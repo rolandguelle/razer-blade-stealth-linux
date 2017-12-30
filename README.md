@@ -585,8 +585,15 @@ cp etc/bumblebee/bumblebee-external.conf /etc/bumblebee/bumblebee-external.conf
 cp etc/bumblebee/xorg.conf.external /etc/bumblebee/xorg.conf.external
 ```
 
-Exec razercore with "exec-ext":
+Install Synaptics Xorg driver:
+
+```shell
+sudo apt install xserver-xorg-input-synaptics
 ```
+
+Exec razercore with "exec-ext":
+
+```shell
 razercore run-ext etr
 ```
 

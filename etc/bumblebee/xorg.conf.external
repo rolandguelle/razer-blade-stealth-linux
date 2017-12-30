@@ -1,6 +1,6 @@
 Section "ServerLayout"
     Identifier  "Layout0"
-    Option      "AutoAddGPU" "false"
+#    Option      "AutoAddDevices" "true"
 EndSection
 
 Section "Device"
@@ -8,6 +8,37 @@ Section "Device"
     Driver      "nvidia"
     VendorName  "NVIDIA Corporation"
     BusID       "PCI:07:00:0"
-    Option      "ProbeAllGpus" "false"
+#    Option      "UseEDID" "true"
     Option      "NoLogo" "true"
+EndSection
+
+Section "InputClass"
+        Identifier "touchpad"
+        Driver "synaptics"
+        MatchIsTouchpad "yes"
+        Option  "PalmDetect" "1"
+        Option  "PalmMinWidth" "15"
+        Option  "PalmMinZ" "250"
+        Option  "FingerHigh" "50"
+        Option  "FingerLow" "15"
+
+        Option  "TapButton1" "1"
+        Option  "TapButton2" "3"
+
+        Option  "HorizTwoFingerScroll" "1"
+        Option  "VertTwoFingerScroll" "1"
+
+        Option  "TapButton3" "0"
+        Option  "ClickPad" "1"
+        Option  "ClickFinger1" "1"
+        Option  "ClickFinger2" "3"
+        Option  "ClickFinger3" "2"
+        Option  "RightButtonAreaLeft" "0"
+        Option  "RightButtonAreaRight" "0"
+        Option  "RightButtonAreaTop" "0"
+        Option  "RightButtonAreaBottom" "0"
+        Option  "SoftButtonAreas" "0   0   0   0   0   0   0   0  "
+        Option  "HasSecondarySoftButtons" "false"
+        Option  "SecondarySoftButtonAreas" "0 0 0 0 0 0 0 0"
+        Option  "CoastingSpeed" "0"
 EndSection
