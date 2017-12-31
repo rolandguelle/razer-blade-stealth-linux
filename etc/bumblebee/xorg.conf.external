@@ -1,6 +1,7 @@
 Section "ServerLayout"
     Identifier  "Layout0"
-#    Option      "AutoAddDevices" "true"
+    Option      "AutoAddDevices" "true"
+    Option      "AutoAddGPU" "false"
 EndSection
 
 Section "Device"
@@ -8,8 +9,33 @@ Section "Device"
     Driver      "nvidia"
     VendorName  "NVIDIA Corporation"
     BusID       "PCI:07:00:0"
-#    Option      "UseEDID" "true"
+    Option      "UseEDID" "true"
     Option      "NoLogo" "true"
+    Option      "AllowEmptyInitialConfiguration" "true"
+    Option      "ProbeAllGpus" "false"
+EndSection
+
+Section "Screen"
+    Identifier     "Screen0"
+    DefaultDepth    24
+    Option         "Stereo" "0"
+    Option         "metamodes" "3840x2160_60 +0+0"
+    Option         "SLI" "Off"
+    Option         "MultiGPU" "Off"
+    Option         "BaseMosaic" "off"
+    SubSection     "Display"
+        Depth       24
+    EndSubSection
+EndSection
+
+Section "Monitor"
+    # HorizSync source: edid, VertRefresh source: edid
+    Identifier     "Monitor0"
+    VendorName     "Unknown"
+    ModelName      "SAMSUNG"
+    HorizSync       15.0 - 81.0
+    VertRefresh     24.0 - 75.0
+    Option         "DPMS"
 EndSection
 
 Section "InputClass"

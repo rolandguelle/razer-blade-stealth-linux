@@ -539,10 +539,15 @@ Usage:
     - Stop & start
 - razercore run-int "prog"
     - razercore "start", run prog on external GPU & render at internal or laptop HDMI connected screen, razercore "stop"
-    - Example: razercore run-int steam
+    - Example: razercore run-int etr
 - razercore run-ext "prog"
     - razercore "start", run prog on external GPU & render at Razer Core connected screen, razercore "stop"
-    - Example: razercore run-ext steam"
+    - Example: razercore run-ext etr
+    - Example: razercore run-ext fluxbox
+    - razercore reset
+        - reset (maybe) broken settings (disabled touchpad on Wayland, wrong bumblebee.conf) from "run-ext"
+    - razercore intern-on, razercore intern-off
+        - enable / disable internal screen
 
 ### External Display
 
@@ -557,6 +562,10 @@ Switch to "Single Display" for gaming:
 Tested with Samsung TV, XBox 360 controller (plugged in Razer Core) and Steam.
 
 #### Connected At External GPU
+
+Unsolved: Dynamic expand external display:
+
+- https://unix.stackexchange.com/questions/326362/bumblebee-dual-monitor-mirror-fedora-25
 
 ##### Expand Display
 
@@ -577,12 +586,15 @@ nvidia-xconfig --query-gpu-info
 
 ###### Automatic Setup
 
+**NOTICE:**
+
+- razercore overwrites /etc/bumblebee/bumblebee.conf
+- razercore disables touchpad while running a shared Wayland / Xorg session
+
 Create/Copy/Modify additional bumblebee and NVIDIA configuration:
 
 ```shell
-cp etc/bumblebee/bumblebee.conf /etc/bumblebee/bumblebee.conf
-cp etc/bumblebee/bumblebee-external.conf /etc/bumblebee/bumblebee-external.conf
-cp etc/bumblebee/xorg.conf.external /etc/bumblebee/xorg.conf.external
+sudo cp etc/bumblebee/* /etc/bumblebee/
 ```
 
 Install Synaptics Xorg driver:
@@ -599,9 +611,22 @@ razercore run-ext etr
 
 Extreme Tuxracer should now run on your external screen.
 
+I run fluxbox on the external screen and start (mostly games) in this window manager.
+With a lightweight wm, games like 'Counter Strike', 'Life is Strange' or 'Steam in Big Picture Mode' runs fine.
+
+```shell
+razercore run-ext fluxbox
+```
+
+Modify and create your monitor settings, stored in /etc/bumblebee/xorg.conf.external:
+
+```shell
+optirun /usr/bin/nvidia-settings  -c :8
+```
+
 ###### Manual Setup
 
-Modify [bumblebee.conf](etc/bumblebee/bublebee-external.conf).
+Modify [bumblebee.conf](etc/bumblebee/bublebee-external.conf) and store in etc/bumblebee/bublebee.conf:
 
 ```
 KeepUnusedXServer=true

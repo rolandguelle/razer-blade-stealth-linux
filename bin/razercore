@@ -1,8 +1,9 @@
 #!/bin/bash
+#
 # Razer Core thunderbolt (de-)connect script
 # No warranty, no license, just for fun
 #
-# Needs Bumblebee, tested with NVIDIA GFX card
+# Needs Bumblebee, tested with NVIDIA GFX card, Ubuntu 17.10
 # Setup & details:
 # https://github.com/rolandguelle/razer-blade-stealth-linux
 #
@@ -28,10 +29,15 @@ HELPTEXT="Full:
     - Stop & start
 - razercore run-int "prog"
     - razercore "start", run prog on external GPU & render at internal or laptop HDMI connected screen, razercore "stop"
-    - Example: razercore run-int steam
+    - Example: razercore run-int etr
 - razercore run-ext "prog"
     - razercore "start", run prog on external GPU & render at Razer Core connected screen, razercore "stop"
-    - Example: razercore run-ext steam"
+    - Example: razercore run-ext etr
+    - Example: razercore run-ext fluxbox
+    - razercore reset
+        - reset (maybe) broken settings (disabled touchpad on Wayland, wrong bumblebee.conf) from "run-ext"
+    - razercore intern-on, razercore intern-off
+        - enable / disable internal screen"
 	echo "$HELPTEXT"
 	echo ""
 	echo "More: https://github.com/rolandguelle/razer-blade-stealth-linux#razercore"
@@ -58,6 +64,7 @@ function checkRazerCore() {
 
 function restartBumblebeed() {
 	echo "Restart bumblebeed"
+	sudo cp /etc/bumblebee/bumblebee-internal.conf /etc/bumblebee/bumblebee.conf
 	sudo systemctl restart bumblebeed.service
 	sleep 1
 }
@@ -136,8 +143,6 @@ function removeRazerCore {
 # run program / render on eGPU at Razer Core  / display at external screen / connected on GPU / Razer Core
 function runExternal {
     coreAuthorize
-	echo "Backup existing configuration"
-    sudo mv /etc/bumblebee/bumblebee.conf /etc/bumblebee/bumblebee.conf.bak
 	echo "Use bumblebee-external.conf"
     sudo cp /etc/bumblebee/bumblebee-external.conf /etc/bumblebee/bumblebee.conf
 	echo "Restart modified bumblebeed"
@@ -150,11 +155,13 @@ function runExternal {
 	# set x env to external display
 	export DISPLAY=:8 LD_LIBRARY_PATH=/usr/lib/nvidia-387:$LD_LIBRARY_PATH
 	# set configuration back, for later bumblebee restart
-    sudo mv /etc/bumblebee/bumblebee.conf.bak /etc/bumblebee/bumblebee.conf
+    sudo cp /etc/bumblebee/bumblebee-internal.conf /etc/bumblebee/bumblebee.conf
+	internalOff
 	# EXEC cmd
 	(exec "$cmdline")
 	# EXIT cmd
 	echo "Cleanup External Setup"
+	internalOn
 	# switch back to intel as primary display
 	sudo prime-select intel
 	# restart bumblebee
@@ -178,8 +185,27 @@ function stopRazerCore {
 	removeRazerCore
 }
 
-### main
+# set everything back to _normal_ mode
+function resetSettings {
+    sudo cp /etc/bumblebee/bumblebee-internal.conf /etc/bumblebee/bumblebee.conf
+	internalOn
+	sudo prime-select intel
+	restartBumblebeed
+	stopRazerCore
+}
 
+function internalOn {
+	# enabld touchscreen
+	echo "Enable touchpad on Wayland / Gnome"
+	gsettings set org.gnome.desktop.peripherals.touchpad send-events enabled
+}
+function internalOff {
+	# disable touchscreen
+	echo "Disabled touchpad on Wayland / Gnome! Manual reenable it: razercore reset or razercore internal-on"
+	gsettings set org.gnome.desktop.peripherals.touchpad send-events disabled	
+}
+
+### main
 if [[ $command == "run-ext" || $command == "exec-ext" ]]
 then
 	runExternal
@@ -199,6 +225,15 @@ then
 elif [[ $command == "status" ]]
 then
 	coreStatus
+elif [[ $command == "reset" ]]
+then
+	resetSettings
+elif [[ $command == "intern-on" ]]
+then
+	internalOn
+elif [[ $command == "intern-off" ]]
+then
+	internalOff
 else
 	usageText
 fi
