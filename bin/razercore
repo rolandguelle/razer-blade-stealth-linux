@@ -15,51 +15,13 @@ command="$1"
 shift
 cmdline="$@"
 
+hash tbtadm 2>/dev/null || { echo >&2 "Require tbtadm but it's not installed. Aborting."; exit 1; }
+
 function usageText() {
-	echo "Short: razercore start|stop|restart|status|run-int <prog>|run-ext <prog>"
-HELPTEXT="Full:
-- razercore start
-    - PCI rescan, authorize thunderbolt
-    - Check status (aka razercore status)
-- razercore status
-    - Status of connection
-- razercore stop
-    - Remove PCI device
-- razercore restart
-    - Stop & start
-- razercore run-int "prog"
-    - razercore "start", run prog on external GPU & render at internal or laptop HDMI connected screen, razercore "stop"
-    - Example: razercore run-int etr
-- razercore run-ext "prog"
-    - razercore "start", run prog on external GPU & render at Razer Core connected screen, razercore "stop"
-    - Example: razercore run-ext etr
-    - Example: razercore run-ext fluxbox
-    - razercore reset
-        - reset (maybe) broken settings (disabled touchpad on Wayland, wrong bumblebee.conf) from "run-ext"
-    - razercore intern-on, razercore intern-off
-        - enable / disable internal screen"
-	echo "$HELPTEXT"
+	echo "Usage: razercore status|intern <prog>|extern <prog>"
 	echo ""
 	echo "More: https://github.com/rolandguelle/razer-blade-stealth-linux#razercore"
 	echo ""
-}
-
-# check if Razer Core is connected via thunderbolt
-function checkRazerCore() {
-	if [[ ! -e /sys/bus/thunderbolt/devices/0-0/0-1/vendor_name ]]
-	then
-		echo "No thunderbold device found. Rescan PCI bus."
-		echo "1" | sudo tee /sys/bus/pci/rescan > /dev/null
-		sleep 1
-	fi
-
-	if [[ -e /sys/bus/thunderbolt/devices/0-0/0-1/vendor_name && "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/vendor_name)" == 'Razer' && "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/device_name)" == 'Core' ]]
-	then
-		return
-	else
-		echo "Razer Core not found"
-		exit 1
-	fi	
 }
 
 function restartBumblebeed() {
@@ -71,22 +33,11 @@ function restartBumblebeed() {
 
 # Authorize thunderbold device and check if NVIDIA GL Extension is available
 function coreAuthorize() {
-	if [[ $RETRYDRIVER > 3 ]]
+	if [[ $RETRYDRIVER > 5 ]]
 	then
 		echo "Too many retries, giving up!"
-		echo "OpenGL driver not correct loaded!"
 		echo "Check thunderbolt cable or installaton."
 		exit 1
-	fi
-
-	checkRazerCore
-
-	if [[ "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/authorized)" == '0' ]]
-	then
-		echo "Authorize Razer Core..."
-		echo "1" | sudo tee /sys/bus/thunderbolt/devices/0-0/0-1/authorized > /dev/null
-	else
-		echo "Razer Core already authorized."
 	fi
 
 	coreStatus
@@ -94,51 +45,32 @@ function coreAuthorize() {
 	if [[ $GLXTEST == '' ]]
 	then
 		RETRYDRIVER+=1
-		echo "Retry $RETRYDRIVER : remove core, reloading bumblebee and re-run..."
-		removeRazerCore
-		restartBumblebeed
+		sleep 1
+		echo "Retry $RETRYDRIVER in 1 second..."
 		coreAuthorize
 	fi
 }
 
 function coreStatus() {
-	if [[ -e /sys/bus/thunderbolt/devices/0-0/0-1/vendor_name ]]
+	# check if Razer Core is connected via thunderbolt
+	CORETEST=$(tbtadm devices 2> /dev/null | grep "Razer	Core")
+	if [[ $CORETEST == '' ]]
 	then
-		if [[ "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/vendor_name)" == 'Razer' && "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/device_name)" == 'Core' ]]
-		then
-			echo "Razer Core connected: id=$(cat /sys/bus/thunderbolt/devices/0-0/0-1/unique_id)"
-			echo "Authorized: $(cat /sys/bus/thunderbolt/devices/0-0/0-1/authorized)"
-			if [[ "$(cat /sys/bus/thunderbolt/devices/0-0/0-1/authorized)" == '1' ]]
-			then
-				GLXTEST=$(optirun glxinfo 2> /dev/null | grep OpenGL | grep string)
-				if [[ $GLXTEST == '' ]]
-				then
-					echo "OpenGL driver not correct loaded!"
-				else
-					echo "OpenGL Driver loaded!"
-					echo "${GLXTEST}"
-				fi
-			fi
-		else
-			echo "Razer Core not found, but other thunderbolt device:"
-			echo "Vendor: $(cat /sys/bus/thunderbolt/devices/0-0/0-1/vendor_name)"
-			echo "Device: $(cat /sys/bus/thunderbolt/devices/0-0/0-1/device_name)"
-		fi
+		echo "Core not found!"
 	else
-		echo "Razer Core not connected or stopped."	
+		echo "Core Found!"
+		echo "${CORETEST}"
+		GLXTEST=$(optirun glxinfo 2> /dev/null | grep OpenGL | grep string)
+		if [[ $GLXTEST == '' ]]
+		then
+			echo "OpenGL driver not correct loaded."
+		else
+			echo "OpenGL Driver loaded!"
+			echo "${GLXTEST}"
+		fi
 	fi
 }
 
-# remove razer core device
-function removeRazerCore {
-	if [[ -e /sys/bus/pci/devices/0000\:04\:00.0/remove ]]
-	then
-		echo "Remove Racer Core PCI Devices..."
-		echo "1" | sudo tee /sys/bus/pci/devices/0000\:04\:00.0/remove > /dev/null
-	else
-		echo "Racer Core PCI Devices seems to be gone..."
-	fi
-}
 
 # run program / render on eGPU at Razer Core  / display at external screen / connected on GPU / Razer Core
 function runExternal {
@@ -166,7 +98,6 @@ function runExternal {
 	sudo prime-select intel
 	# restart bumblebee
 	restartBumblebeed
-	removeRazerCore
 	echo "Exit razercore run-ext"
 }
 
@@ -176,13 +107,7 @@ function runInternal {
 	# EXEC cmd
 	(PRIMUS_SYNC=1 vblank_mode=0 primusrun "$cmdline")
 	# EXIT cmd
-	removeRazerCore
 	echo "Exit razercore run-int"
-}
-
-function stopRazerCore {
-	checkRazerCore
-	removeRazerCore
 }
 
 # set everything back to _normal_ mode
@@ -191,7 +116,6 @@ function resetSettings {
 	internalOn
 	sudo prime-select intel
 	restartBumblebeed
-	stopRazerCore
 }
 
 function internalOn {
@@ -199,32 +123,23 @@ function internalOn {
 	echo "Enable touchpad on Wayland / Gnome"
 	gsettings set org.gnome.desktop.peripherals.touchpad send-events enabled
 }
+
 function internalOff {
 	# disable touchscreen
-	echo "Disabled touchpad on Wayland / Gnome! Manual reenable it: razercore reset or razercore internal-on"
+	echo "Disabled touchpad on Wayland / Gnome! Manual reenable it: razercore reset or razercore intern-on"
 	gsettings set org.gnome.desktop.peripherals.touchpad send-events disabled	
 }
 
 ### main
-if [[ $command == "run-ext" || $command == "exec-ext" ]]
+if [[ $command == "extern" || $command == "run-ext" || $command == "exec-ext" ]]
 then
 	runExternal
-elif [[ $command == "run-int" || $command == "exec" ]]
+elif [[ $command == "intern" || $command == "run-int" || $command == "exec" ]]
 then
 	runInternal
-elif [[ $command == "start" ]]
-then
-	coreAuthorize
-elif [[ $command == "stop" ]]
-then
-	stopRazerCore
-elif [[ $command == "restart" ]]
-then
-	removeRazerCore
-	coreAuthorize
 elif [[ $command == "status" ]]
 then
-	coreStatus
+	coreAuthorize
 elif [[ $command == "reset" ]]
 then
 	resetSettings

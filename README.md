@@ -411,7 +411,11 @@ My Ubuntu/Gnome tweaks :)
 
 ## Razer Core
 
+Running a thunderbolt 3 device like the [Razer Core](https://www.razerzone.com/gaming-laptops/razer-core-v2) with Linux sounds like fun :)
+
 ### Thunderbolt
+
+The Razer Core is connected via Thunderbold 3 with your RBS.
 
 #### Cable
 
@@ -420,19 +424,37 @@ This [**2m** cable](https://www.amazon.de/CalDigit-Thunderbolt-3-Kabel-Zertifizi
 #### User Authorization
 
 - BIOS Setting: Thunderbolt security: User
-- Authorize thunderbolt:
+- Authorize thunderbolt, install: (Thunderbolt user-space components)[https://github.com/01org/thunderbolt-software-user-space]
 
 ```shell
-echo "1" | sudo tee /sys/bus/thunderbolt/devices/0-0/0-1/authorized
+git clone https://github.com/01org/thunderbolt-software-user-space.git
+cd thunderbolt-software-user-space
+apt install cmake libboost-filesystem-dev txt2tags
+mkdir build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+cmake --build .
+sudo cmake --build . --target install.
 ```
 
-or with [razercore start](#razercore).
+tbtadm:
+
+```shell
+$ tbtadm devices
+0-1 Razer	Core	non-authorized	not in ACL
+```
+
+- Add Razer Core to ACL:
+
+```shell
+sudo tbtadm approve 0-1
+```
 
 Razer Core USB & Ethernet now works!
 
 ### Discrete NVIDIA GPU
 
-Goal is the _same_ setup like Windows:
+Goal is a setup like:
 
 - Run a _normal_ setup (Wayland, Gnome) - without connected Razer Core
 - Hotplug Razer Core (without reboot, login/logout)
@@ -528,22 +550,15 @@ Copy [razercore](bin/razercore) into ~/bin or somewhere else in your path and ma
 
 Usage:
 
-- razercore start
-    - PCI rescan, authorize thunderbolt
-    - Check status (aka razercore status)
 - razercore status
     - Status of connection
-- razercore stop
-    - Remove PCI device
-- razercore restart
-    - Stop & start
-- razercore run-int "prog"
-    - razercore "start", run prog on external GPU & render at internal or laptop HDMI connected screen, razercore "stop"
-    - Example: razercore run-int etr
-- razercore run-ext "prog"
-    - razercore "start", run prog on external GPU & render at Razer Core connected screen, razercore "stop"
-    - Example: razercore run-ext etr
-    - Example: razercore run-ext fluxbox
+- razercore intern "application"
+    - run application on external GPU & render at internal or laptop HDMI connected screen
+    - Example: razercore intern etr
+- razercore extern "application"
+    - run application on external GPU & render at Razer Core connected screen
+    - Example: razercore extern etr
+    - Example: razercore extern fluxbox
     - razercore reset
         - reset (maybe) broken settings (disabled touchpad on Wayland, wrong bumblebee.conf) from "run-ext"
     - razercore intern-on, razercore intern-off
