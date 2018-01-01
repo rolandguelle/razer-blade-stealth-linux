@@ -434,7 +434,7 @@ mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
 cmake --build .
-sudo cmake --build . --target install.
+sudo cmake --build . --target install
 ```
 
 tbtadm:
@@ -450,7 +450,7 @@ $ tbtadm devices
 sudo tbtadm approve 0-1
 ```
 
-Razer Core USB & Ethernet now works!
+Razer Core USB & Ethernet now works.
 
 ### Discrete NVIDIA GPU
 
