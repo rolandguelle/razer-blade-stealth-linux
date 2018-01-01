@@ -424,7 +424,7 @@ This [**2m** cable](https://www.amazon.de/CalDigit-Thunderbolt-3-Kabel-Zertifizi
 #### User Authorization
 
 - BIOS Setting: Thunderbolt security: User
-- Authorize thunderbolt, install: (Thunderbolt user-space components)[https://github.com/01org/thunderbolt-software-user-space]
+- Authorize thunderbolt, install: [Thunderbolt user-space components](https://github.com/01org/thunderbolt-software-user-space)
 
 ```shell
 git clone https://github.com/01org/thunderbolt-software-user-space.git
@@ -618,10 +618,10 @@ Install Synaptics Xorg driver:
 sudo apt install xserver-xorg-input-synaptics
 ```
 
-Exec razercore with "exec-ext":
+Start an application on the external display:
 
 ```shell
-razercore run-ext etr
+razercore extern etr
 ```
 
 Extreme Tuxracer should now run on your external screen.
@@ -630,7 +630,7 @@ I run fluxbox on the external screen and start (mostly games) in this window man
 With a lightweight wm, games like 'Counter Strike', 'Life is Strange' or 'Steam in Big Picture Mode' runs fine.
 
 ```shell
-razercore run-ext fluxbox
+razercore extern fluxbox
 ```
 
 Modify and create your monitor settings, stored in /etc/bumblebee/xorg.conf.external:
