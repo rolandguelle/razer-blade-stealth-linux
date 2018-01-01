@@ -31,4 +31,7 @@ Section "Device"
     Option "NoLogo" "true"
     Option "UseEDID" "false"
     Option "UseDisplayDevice" "none"
+
+    # https://superuser.com/questions/1082617/bumblebee-with-hdmi-on-nvidia-make-usable-both-with-without-connected-monitor
+    Option "AllowEmptyInitialConfiguration"
 EndSection
