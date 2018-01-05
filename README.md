@@ -4,7 +4,7 @@
 
 Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions or open an issue.
 
-My current setup is Ubuntu 17.10 & Wayland, but you find some (maybe) outdated infos about X11 & Arch in this tutorial.
+My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gnome + Wayland) but you find some (maybe) outdated infos about X11 in this tutorial.
 
 <!-- TOC -->
 
@@ -15,7 +15,7 @@ My current setup is Ubuntu 17.10 & Wayland, but you find some (maybe) outdated i
     - [Works](#works)
         - [Graphic Card](#graphic-card)
         - [HDMI](#hdmi)
-        - [Thunderbolt / USB-C](#thunderbolt--usb-c)
+        - [Thunderbolt / USB-C](#thunderbolt-usb-c)
     - [Issues](#issues)
         - [Suspend Loop](#suspend-loop)
             - [Grub Kernel Parameter](#grub-kernel-parameter)
@@ -24,7 +24,7 @@ My current setup is Ubuntu 17.10 & Wayland, but you find some (maybe) outdated i
             - [X11: Disable Built-In Keyboard Driver](#x11-disable-built-in-keyboard-driver)
         - [Touchpad Suspend](#touchpad-suspend)
             - [Libinput-gestures](#libinput-gestures)
-        - [Touchscreen & Firefox](#touchscreen--firefox)
+        - [Touchscreen & Firefox](#touchscreen-firefox)
             - [XINPUT2](#xinput2)
         - [Unstable WIFI](#unstable-wifi)
             - [Update Firmware](#update-firmware)
@@ -46,7 +46,7 @@ My current setup is Ubuntu 17.10 & Wayland, but you find some (maybe) outdated i
         - [Theme](#theme)
             - ["Capitaine" Cursors](#capitaine-cursors)
             - [Applicatioins Theme](#applicatioins-theme)
-            - [Dock & Top Bar](#dock--top-bar)
+            - [Dock & Top Bar](#dock-top-bar)
             - [Fonts](#fonts)
     - [Razer Core](#razer-core)
         - [Thunderbolt](#thunderbolt)
@@ -67,15 +67,19 @@ My current setup is Ubuntu 17.10 & Wayland, but you find some (maybe) outdated i
                     - [Automatic Setup](#automatic-setup)
                     - [Manual Setup](#manual-setup)
 - [Arch (Antergos)](#arch-antergos)
-    - [Suspend Loop](#suspend-loop-1)
-    - [Power Management](#power-management-1)
-    - [Keyboard Colors](#keyboard-colors-1)
-    - [Gnome, Workspaces, Gestures](#gnome-workspaces-gestures)
-    - [Touchpad](#touchpad-1)
+    - [Suspend Loop](#suspend-loop)
+    - [Keyboard Colors](#keyboard-colors)
+    - [Touchpad](#touchpad)
         - [Synaptics (X11)](#synaptics-x11)
-        - [libinput (X11)](#libinput-x11)
-        - [libinput (Wayland)](#libinput-wayland)
-    - [Multiple Monitors](#multiple-monitors-1)
+        - [Libinput-gestures](#libinput-gestures)
+        - [Touchscreen & Firefox](#touchscreen-firefox)
+            - [XINPUT2](#xinput2)
+    - [Razer Core (WIP)](#razer-core-wip)
+        - [Thunderbolt](#thunderbolt)
+    - [Tweaks](#tweaks)
+        - [Gdm](#gdm)
+        - [Theme](#theme)
+        - [Power Management](#power-management)
 - [Credits](#credits)
 
 <!-- /TOC -->
@@ -668,8 +672,9 @@ Extreme Tuxracer should now run on your external screen.
 
 # Arch (Antergos)
 
-Tested with [Antergos](https://antergos.com/) Arch, but other Arch distros should work too.
-Maybe outdated.
+Tested with [Antergos](https://antergos.com/) Arch - other Arch distros should work too.
+
+Work-in-progress.
 
 ## Suspend Loop
 
@@ -677,7 +682,7 @@ Add kernel parameter:
 
 ```shell
 $ sudo nano /etc/default/grub
-GRUB_CMDLINE_LINUX_DEFAULT="quiet button.lid_init_state=open"
+GRUB_CMDLINE_LINUX_DEFAULT="button.lid_init_state=open"
 ```
 
 Update Grub:
@@ -686,7 +691,71 @@ Update Grub:
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-## Power Management
+## Keyboard Colors
+
+Same as Ubuntu.
+
+## Touchpad
+
+### Synaptics (X11)
+
+Disable touchpad while typing and some other tunings:
+
+- [50-synaptics-arch.conf](etc/X11/xorg.conf.d/50-synaptics-arch.conf)
+
+### Libinput-gestures
+
+Install Libinput-gestures, my [config](config/libinput-gestures.conf).
+(If you prefer _natural scrolling_, change up/down)
+
+### Touchscreen & Firefox
+
+Firefox doesn't seem to care about the touchscreen at all.
+
+#### XINPUT2
+
+Tell Firefox to use xinput2
+
+```shell
+sudo nano /etc/environment
+MOZ_USE_XINPUT2=1
+```
+
+Logout - Login.
+
+## Razer Core (WIP)
+
+- Install
+    - antergos-prime
+    - bumblebee
+    - primus
+- Setup
+    - Add to bumblebee group
+    - /etc/bumblebee/bumblebee.conf, change nvidia driver
+    - copy xorg.conf.external, bumblebee-external.conf to /etc/bumblebee/
+
+https://wiki.archlinux.org/index.php/bumblebee#Installation
+- install 32bit driver for steam
+
+### Thunderbolt
+
+"bolt" and bolt extension
+- https://github.com/gicmo/bolt-extension
+
+## Tweaks
+
+### Gdm
+
+https://forum.antergos.com/topic/5081/switching-from-lightdm-to-gdm-no-lock-screen
+
+### Theme
+
+- appplications: arc-darker
+- cursor: capitaine-cursors
+- icons: flat-remix
+- shell: arc-Dark
+
+### Power Management
 
 Install TLP tools:
 
@@ -701,46 +770,7 @@ sudo systemctl enable tlp
 sudo systemctl enable tlp-sleep
 ```
 
-## Keyboard Colors
-
-See Ubuntu Setup
-
-## Gnome, Workspaces, Gestures
-
-See Ubuntu Setup
-
-## Touchpad
-
-### Synaptics (X11)
-
-Disable touchpad while typing and some other tunings:
-
-- [50-synaptics-arch.conf](etc/X11/xorg.conf.d/50-synaptics-arch.conf)
-
-### libinput (X11)
-
-"libinput" configration for X11 [60-libinput.conf](etc/X11/xorg.conf.d/60-libinput.conf)
-
-### libinput (Wayland)
-
-Adjust "libinput" coordinate ranges for absolute axes:
-
-- [61-evdev-local.hwdb](etc/udev/hwdb.d/61-evdev-local.hwdb)
-
-```shell
-sudo cp etc/udev/hwdb.d/61-evdev-local.hwdb /etc/udev/hwdb.d/61-evdev-local.hwdb
-```
-
-Update settings:
-
-```shell
-sudo systemd-hwdb update
-sudo udevadm trigger /dev/input/event*
-```
-
-## Multiple Monitors
-
-See Ubuntu Setup
+- https://wiki.archlinux.org/index.php/TLP#Bumblebee_with_NVIDIA_driver
 
 # Credits
 
