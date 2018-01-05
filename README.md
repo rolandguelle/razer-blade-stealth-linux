@@ -2,7 +2,7 @@
 
 **Razer Blade Stealth** (late 2016, UHD / HiDPI) Linux ([Ubuntu](#ubuntu-1710) & [Arch (Antergos)](#arch-antergos)) setup, including **[Razer Core](#razer-core)** with [discrete NVIDIA GPU](#discrete-nvidia-gpu) setup connected on [thunderbolt](#thunderbolt-1).
 
-Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions.
+Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions or open an issue.
 
 My current setup is Ubuntu 17.10 & Wayland, but you find some (maybe) outdated infos about X11 & Arch in this tutorial.
 

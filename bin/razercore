@@ -36,7 +36,7 @@ function coreAuthorize() {
 	if [[ $RETRYDRIVER > 5 ]]
 	then
 		echo "Too many retries, giving up!"
-		echo "Check thunderbolt cable or installaton."
+		echo "Check thunderbolt cable, installation or /var/log/syslog."
 		exit 1
 	fi
 
@@ -45,8 +45,8 @@ function coreAuthorize() {
 	if [[ $GLXTEST == '' ]]
 	then
 		RETRYDRIVER+=1
-		sleep 1
-		echo "Retry $RETRYDRIVER in 1 second..."
+		echo "Retry $RETRYDRIVER in 3 second..."
+		sleep 3
 		coreAuthorize
 	fi
 }
