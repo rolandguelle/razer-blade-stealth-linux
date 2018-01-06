@@ -1,10 +1,10 @@
 # Razer Blade Stealth Linux
 
-**Razer Blade Stealth** (late 2016, UHD / HiDPI) Linux ([Ubuntu](#ubuntu-1710) & [Arch (Antergos)](#arch-antergos)) setup, including **[Razer Core](#razer-core)** with [discrete NVIDIA GPU](#discrete-nvidia-gpu) setup connected on [thunderbolt](#thunderbolt-1).
+**Razer Blade Stealth** (late 2016, UHD / HiDPI) Linux ([Ubuntu](#ubuntu-1710) & [Arch (Antergos)](#arch-antergos)) setup, including **[Razer Core](#razer-core)** with [discrete NVIDIA GPU](#discrete-nvidia-gpu) setup connected via [thunderbolt](#thunderbolt-1).
 
 Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions or open an issue.
 
-My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gnome + Wayland) but you find some (maybe) outdated infos about X11 in this tutorial.
+My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gnome + Wayland), but you find some (maybe) outdated infos about X11 in this tutorial.
 
 <!-- TOC -->
 
@@ -67,14 +67,13 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gn
                     - [Automatic Setup](#automatic-setup)
                     - [Manual Setup](#manual-setup)
 - [Arch (Antergos)](#arch-antergos)
+    - [Works](#works)
     - [Suspend Loop](#suspend-loop)
-    - [Keyboard Colors](#keyboard-colors)
     - [Touchpad](#touchpad)
-        - [Synaptics (X11)](#synaptics-x11)
         - [Libinput-gestures](#libinput-gestures)
-        - [Touchscreen & Firefox](#touchscreen-firefox)
-            - [XINPUT2](#xinput2)
-    - [Razer Core (WIP)](#razer-core-wip)
+        - [Synaptics (X11)](#synaptics-x11)
+    - [More](#more)
+    - [Razer Core](#razer-core)
         - [Thunderbolt](#thunderbolt)
     - [Tweaks](#tweaks)
         - [Gdm](#gdm)
@@ -672,9 +671,18 @@ Extreme Tuxracer should now run on your external screen.
 
 # Arch (Antergos)
 
-Tested with [Antergos](https://antergos.com/) Arch - other Arch distros should work too.
+Tested with [Antergos](https://antergos.com/) Arch, but other Arch based distros should work too.
 
-Work-in-progress.
+## Works
+
+Sames as Ubuntu:
+- [Graphic Card](#graphic-card)
+- [HDMI](#hdmi)
+- [Thunderbolt / USB-C](#thunderbolt-usb-c)
+
+Arch (4.14.11 kernel):
+- Caps-Lock fix is not needed
+- No touchpad issues
 
 ## Suspend Loop
 
@@ -691,11 +699,14 @@ Update Grub:
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-## Keyboard Colors
-
-Same as Ubuntu.
-
 ## Touchpad
+
+Works, without suspend issues.
+
+### Libinput-gestures
+
+Install Libinput-gestures, my [config](config/libinput-gestures.conf).
+(If you prefer _natural scrolling_, change up/down)
 
 ### Synaptics (X11)
 
@@ -703,50 +714,72 @@ Disable touchpad while typing and some other tunings:
 
 - [50-synaptics-arch.conf](etc/X11/xorg.conf.d/50-synaptics-arch.conf)
 
-### Libinput-gestures
+## More
 
-Install Libinput-gestures, my [config](config/libinput-gestures.conf).
-(If you prefer _natural scrolling_, change up/down)
+- [Touchscreen & Firefox](#touchscreen-firefox)
+    - [XINPUT2](#xinput2)
+- [Onscreen Keyboard](#onscreen-keyboard)
+    - [Block caribou](#block-caribou)
+    - [Startup Applications](#startup-applications)
+    - [Extension](#extension)
+- [Multiple Monitors](#multiple-monitors)
+    - [Switch to 1920x1080](#switch-to-1920x1080)
+- [Unstable WIFI](#unstable-wifi)
+    - [Update Firmware](#update-firmware)
 
-### Touchscreen & Firefox
-
-Firefox doesn't seem to care about the touchscreen at all.
-
-#### XINPUT2
-
-Tell Firefox to use xinput2
-
-```shell
-sudo nano /etc/environment
-MOZ_USE_XINPUT2=1
-```
-
-Logout - Login.
-
-## Razer Core (WIP)
+## Razer Core
 
 - Install
     - antergos-prime
     - bumblebee
     - primus
+    - nvidia
+    - nvidia-utils
+    - virtualgl
+- Install 32bit driver for steam
+    - lib32-virtualgl
+    - lib32-nvidia-utils
 - Setup
     - Add to bumblebee group
-    - /etc/bumblebee/bumblebee.conf, change nvidia driver
+    - nano /etc/bumblebee/bumblebee.conf, change nvidia driver
     - copy xorg.conf.external, bumblebee-external.conf to /etc/bumblebee/
 
-https://wiki.archlinux.org/index.php/bumblebee#Installation
-- install 32bit driver for steam
+```shell
+$ nano .bashrc
+alias razercore='PRIMUS_SYNC=1 vblank_mode=0 primusrun'
+```
+
+check:
+```shell
+optirun glxinfo
+```
+
+More: https://wiki.archlinux.org/index.php/bumblebee#Installation
 
 ### Thunderbolt
 
-"bolt" and bolt extension
-- https://github.com/gicmo/bolt-extension
+Install "bolt"
+```shell
+boltctl enroll
+```
+
+Nice Gnome extension: https://github.com/gicmo/bolt-extension
 
 ## Tweaks
 
 ### Gdm
 
-https://forum.antergos.com/topic/5081/switching-from-lightdm-to-gdm-no-lock-screen
+```shell
+systemctl disable lightdm.service
+pacman -Rs lightdm-webkit2-greeter light-locker-settings light-locker lightdm
+pacman -S gdm
+pacman -S gtk-engines
+systemctl enable gdm.service
+pacman -Rs xscreensaver
+pacman -S gnome-screensaver
+```
+
+More: https://forum.antergos.com/topic/5081/switching-from-lightdm-to-gdm-no-lock-screen
 
 ### Theme
 
@@ -770,7 +803,13 @@ sudo systemctl enable tlp
 sudo systemctl enable tlp-sleep
 ```
 
-- https://wiki.archlinux.org/index.php/TLP#Bumblebee_with_NVIDIA_driver
+Bumblebee with NVIDIA driver
+/etc/default/tlp
+```shell
+# Bumblebee with NVIDIA driver
+# https://wiki.archlinux.org/index.php/TLP#Bumblebee_with_NVIDIA_driver
+RUNTIME_PM_BLACKLIST="07:00.0 07:00.1"
+```
 
 # Credits
 
