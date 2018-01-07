@@ -716,11 +716,8 @@ Disable touchpad while typing and some other tunings:
 
 ## More
 
-- [Touchscreen & Firefox](#touchscreen-firefox)
-    - [XINPUT2](#xinput2)
 - [Onscreen Keyboard](#onscreen-keyboard)
     - [Block caribou](#block-caribou)
-    - [Startup Applications](#startup-applications)
     - [Extension](#extension)
 - [Multiple Monitors](#multiple-monitors)
     - [Switch to 1920x1080](#switch-to-1920x1080)
