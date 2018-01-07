@@ -639,7 +639,7 @@ razercore extern fluxbox
 Modify and create your monitor settings, stored in /etc/bumblebee/xorg.conf.external:
 
 ```shell
-optirun /usr/bin/nvidia-settings  -c :8
+optirun /usr/bin/nvidia-settings -c :8
 ```
 
 ###### Manual Setup
@@ -680,7 +680,7 @@ Sames as Ubuntu:
 - [HDMI](#hdmi)
 - [Thunderbolt / USB-C](#thunderbolt-usb-c)
 
-Arch (4.14.11 kernel):
+Arch (4.14.12-1-ARCH kernel):
 - Caps-Lock fix is not needed
 - No touchpad issues
 
@@ -718,11 +718,13 @@ Disable touchpad while typing and some other tunings:
 
 - [Onscreen Keyboard](#onscreen-keyboard)
     - [Block caribou](#block-caribou)
-    - [Extension](#extension)
-- [Multiple Monitors](#multiple-monitors)
-    - [Switch to 1920x1080](#switch-to-1920x1080)
+        - [Extension](#extension)
+- [Touchscreen & Firefox](#touchscreen-firefox)
+    - [XINPUT2](#xinput2)    
 - [Unstable WIFI](#unstable-wifi)
     - [Update Firmware](#update-firmware)
+- [Multiple Monitors](#multiple-monitors)
+    - [Switch to 1920x1080](#switch-to-1920x1080)
 
 ## Razer Core
 
@@ -780,10 +782,25 @@ More: https://forum.antergos.com/topic/5081/switching-from-lightdm-to-gdm-no-loc
 
 ### Theme
 
-- appplications: arc-darker
-- cursor: capitaine-cursors
-- icons: flat-remix
-- shell: arc-Dark
+gnome-tweak-tool / Appearance
+
+- Appplications: Arc-Darker
+- Cursor: Capitaine-cursors
+- Icons: Flat-Remix
+- Shell: Arc-Dark
+
+gnome-tweak-tool / Fonts
+
+- Window Title: Ubuntu Bold 12
+- Interface: Ubuntu Regular 13
+- Document: Sans Regular 13
+- Monospace: Ubuntu Mono Regular 15
+- Hinting: Slight
+
+gnome-tweak-tool / Keyboard & Mouse / Touchpad
+
+- Click Method: Fingers
+- Disable While Typing: True
 
 ### Power Management
 
