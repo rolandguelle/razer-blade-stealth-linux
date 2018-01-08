@@ -76,6 +76,7 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gn
     - [Razer Core](#razer-core)
         - [Thunderbolt](#thunderbolt)
     - [Tweaks](#tweaks)
+        - [Top Icon Plus](#top-icon-plus)
         - [Gdm](#gdm)
         - [Theme](#theme)
         - [Power Management](#power-management)
@@ -671,7 +672,7 @@ Extreme Tuxracer should now run on your external screen.
 
 # Arch (Antergos)
 
-Tested with [Antergos](https://antergos.com/) Arch, but other Arch based distros should work too.
+Tested with [Antergos](https://antergos.com/) (Wayland & Gnome) Arch, but other Arch based distros should work too.
 
 ## Works
 
@@ -745,7 +746,7 @@ Disable touchpad while typing and some other tunings:
 
 ```shell
 $ nano .bashrc
-alias razercore='PRIMUS_SYNC=1 vblank_mode=0 primusrun'
+alias razerrun='PRIMUS_SYNC=1 vblank_mode=0 primusrun'
 ```
 
 check:
@@ -765,6 +766,12 @@ boltctl enroll
 Nice Gnome extension: https://github.com/gicmo/bolt-extension
 
 ## Tweaks
+
+- [Dock & Top Bar](#dock-top-bar)
+
+### Top Icon Plus
+
+https://github.com/phocean/TopIcons-plus
 
 ### Gdm
 
