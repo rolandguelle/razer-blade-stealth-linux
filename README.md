@@ -74,6 +74,9 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gn
         - [Synaptics (X11)](#synaptics-x11)
     - [More](#more)
     - [Razer Core](#razer-core)
+        - [Installation](#installation)
+        - [Setup](#setup)
+        - [Bash Alias razerrun & test](#bash-alias-razerrun-test)
         - [Thunderbolt](#thunderbolt)
     - [Tweaks](#tweaks)
         - [Top Icon Plus](#top-icon-plus)
@@ -729,41 +732,59 @@ Disable touchpad while typing and some other tunings:
 
 ## Razer Core
 
-- Install
-    - antergos-prime
-    - bumblebee
-    - primus
-    - nvidia
-    - nvidia-utils
-    - virtualgl
-- Install 32bit driver for steam
-    - lib32-virtualgl
-    - lib32-nvidia-utils
-- Setup
-    - Add to bumblebee group
-    - nano /etc/bumblebee/bumblebee.conf, change nvidia driver
-    - copy xorg.conf.external, bumblebee-external.conf to /etc/bumblebee/
+### Installation
 
+Install NVIDIA & bumblebee:
+```shell
+sudo pacman -S bumblebee primus nvidia nvidia-utils virtualgl
+```
+
+Install 32bit driver for steam:
+```shell
+sudo pacman -S lib32-virtualgl lib32-nvidia-utils
+```
+
+### Setup
+
+Add user to bumblebee group: 
+```shell
+sudo gpasswd -a $USER bumblebee
+```
+
+Set driver to nvidia: 
+```shell
+$ sudo nano /etc/bumblebee/bumblebee.conf
+Driver=nvidia
+```
+
+TODO / WIP:
+- xorg.conf.external, bumblebee-external.conf to /etc/bumblebee/ for external setup
+
+More: https://wiki.archlinux.org/index.php/bumblebee#Installation
+
+### Bash Alias razerrun & test
+
+Bash Alias:
 ```shell
 $ nano .bashrc
 alias razerrun='PRIMUS_SYNC=1 vblank_mode=0 primusrun'
 ```
 
-check:
+Test:
 ```shell
-optirun glxinfo
+razerrun glxinfo | grep OpenGL
 ```
-
-More: https://wiki.archlinux.org/index.php/bumblebee#Installation
 
 ### Thunderbolt
 
-Install "bolt"
+Install "bolt" for thunderbolt management:
 ```shell
+sudo pacman -S bolt
+# Authorize and store a device in the database
 boltctl enroll
 ```
 
-Nice Gnome extension: https://github.com/gicmo/bolt-extension
+Nice (but useless) Gnome extension: https://github.com/gicmo/bolt-extension
 
 ## Tweaks
 
