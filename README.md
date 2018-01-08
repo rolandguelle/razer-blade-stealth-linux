@@ -1,10 +1,10 @@
 # Razer Blade Stealth Linux
 
-**Razer Blade Stealth** (late 2016, UHD / HiDPI) Linux ([Ubuntu](#ubuntu-1710) & [Arch (Antergos)](#arch-antergos)) setup, including **[Razer Core](#razer-core)** with [discrete NVIDIA GPU](#discrete-nvidia-gpu) setup connected on [thunderbolt](#thunderbolt-1).
+**Razer Blade Stealth** (late 2016, UHD / HiDPI) Linux ([Ubuntu](#ubuntu-1710) & [Arch (Antergos)](#arch-antergos)) setup, including **[Razer Core](#razer-core)** with [discrete NVIDIA GPU](#discrete-nvidia-gpu) setup connected via [thunderbolt](#thunderbolt-1).
 
 Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions or open an issue.
 
-My current setup is Ubuntu 17.10 & Wayland, but you find some (maybe) outdated infos about X11 & Arch in this tutorial.
+My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gnome + Wayland), but you find some (maybe) outdated infos about X11 in this tutorial.
 
 <!-- TOC -->
 
@@ -15,7 +15,7 @@ My current setup is Ubuntu 17.10 & Wayland, but you find some (maybe) outdated i
     - [Works](#works)
         - [Graphic Card](#graphic-card)
         - [HDMI](#hdmi)
-        - [Thunderbolt / USB-C](#thunderbolt--usb-c)
+        - [Thunderbolt / USB-C](#thunderbolt-usb-c)
     - [Issues](#issues)
         - [Suspend Loop](#suspend-loop)
             - [Grub Kernel Parameter](#grub-kernel-parameter)
@@ -24,7 +24,7 @@ My current setup is Ubuntu 17.10 & Wayland, but you find some (maybe) outdated i
             - [X11: Disable Built-In Keyboard Driver](#x11-disable-built-in-keyboard-driver)
         - [Touchpad Suspend](#touchpad-suspend)
             - [Libinput-gestures](#libinput-gestures)
-        - [Touchscreen & Firefox](#touchscreen--firefox)
+        - [Touchscreen & Firefox](#touchscreen-firefox)
             - [XINPUT2](#xinput2)
         - [Unstable WIFI](#unstable-wifi)
             - [Update Firmware](#update-firmware)
@@ -46,7 +46,7 @@ My current setup is Ubuntu 17.10 & Wayland, but you find some (maybe) outdated i
         - [Theme](#theme)
             - ["Capitaine" Cursors](#capitaine-cursors)
             - [Applicatioins Theme](#applicatioins-theme)
-            - [Dock & Top Bar](#dock--top-bar)
+            - [Dock & Top Bar](#dock-top-bar)
             - [Fonts](#fonts)
     - [Razer Core](#razer-core)
         - [Thunderbolt](#thunderbolt)
@@ -67,15 +67,22 @@ My current setup is Ubuntu 17.10 & Wayland, but you find some (maybe) outdated i
                     - [Automatic Setup](#automatic-setup)
                     - [Manual Setup](#manual-setup)
 - [Arch (Antergos)](#arch-antergos)
-    - [Suspend Loop](#suspend-loop-1)
-    - [Power Management](#power-management-1)
-    - [Keyboard Colors](#keyboard-colors-1)
-    - [Gnome, Workspaces, Gestures](#gnome-workspaces-gestures)
-    - [Touchpad](#touchpad-1)
+    - [Works](#works)
+    - [Suspend Loop](#suspend-loop)
+    - [Touchpad](#touchpad)
+        - [Libinput-gestures](#libinput-gestures)
         - [Synaptics (X11)](#synaptics-x11)
-        - [libinput (X11)](#libinput-x11)
-        - [libinput (Wayland)](#libinput-wayland)
-    - [Multiple Monitors](#multiple-monitors-1)
+    - [More](#more)
+    - [Razer Core](#razer-core)
+        - [Installation](#installation)
+        - [Setup](#setup)
+        - [Bash Alias razerrun & test](#bash-alias-razerrun-test)
+        - [Thunderbolt](#thunderbolt)
+    - [Tweaks](#tweaks)
+        - [Top Icon Plus](#top-icon-plus)
+        - [Gdm](#gdm)
+        - [Theme](#theme)
+        - [Power Management](#power-management)
 - [Credits](#credits)
 
 <!-- /TOC -->
@@ -636,7 +643,7 @@ razercore extern fluxbox
 Modify and create your monitor settings, stored in /etc/bumblebee/xorg.conf.external:
 
 ```shell
-optirun /usr/bin/nvidia-settings  -c :8
+optirun /usr/bin/nvidia-settings -c :8
 ```
 
 ###### Manual Setup
@@ -668,8 +675,18 @@ Extreme Tuxracer should now run on your external screen.
 
 # Arch (Antergos)
 
-Tested with [Antergos](https://antergos.com/) Arch, but other Arch distros should work too.
-Maybe outdated.
+Tested with [Antergos](https://antergos.com/) (Wayland & Gnome) Arch, but other Arch based distros should work too.
+
+## Works
+
+Sames as Ubuntu:
+- [Graphic Card](#graphic-card)
+- [HDMI](#hdmi)
+- [Thunderbolt / USB-C](#thunderbolt-usb-c)
+
+Arch (4.14.12-1-ARCH kernel):
+- Caps-Lock fix is not needed
+- No touchpad issues
 
 ## Suspend Loop
 
@@ -677,7 +694,7 @@ Add kernel parameter:
 
 ```shell
 $ sudo nano /etc/default/grub
-GRUB_CMDLINE_LINUX_DEFAULT="quiet button.lid_init_state=open"
+GRUB_CMDLINE_LINUX_DEFAULT="button.lid_init_state=open"
 ```
 
 Update Grub:
@@ -686,7 +703,134 @@ Update Grub:
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-## Power Management
+## Touchpad
+
+Works, without suspend issues.
+
+### Libinput-gestures
+
+Install Libinput-gestures, my [config](config/libinput-gestures.conf).
+(If you prefer _natural scrolling_, change up/down)
+
+### Synaptics (X11)
+
+Disable touchpad while typing and some other tunings:
+
+- [50-synaptics-arch.conf](etc/X11/xorg.conf.d/50-synaptics-arch.conf)
+
+## More
+
+- [Onscreen Keyboard](#onscreen-keyboard)
+    - [Block caribou](#block-caribou)
+        - [Extension](#extension)
+- [Touchscreen & Firefox](#touchscreen-firefox)
+    - [XINPUT2](#xinput2)    
+- [Unstable WIFI](#unstable-wifi)
+    - [Update Firmware](#update-firmware)
+- [Multiple Monitors](#multiple-monitors)
+    - [Switch to 1920x1080](#switch-to-1920x1080)
+
+## Razer Core
+
+### Installation
+
+Install NVIDIA & bumblebee:
+```shell
+sudo pacman -S bumblebee primus nvidia nvidia-utils virtualgl
+```
+
+Install 32bit driver for steam:
+```shell
+sudo pacman -S lib32-virtualgl lib32-nvidia-utils
+```
+
+### Setup
+
+Add user to bumblebee group: 
+```shell
+sudo gpasswd -a $USER bumblebee
+```
+
+Set driver to nvidia: 
+```shell
+$ sudo nano /etc/bumblebee/bumblebee.conf
+Driver=nvidia
+```
+
+TODO / WIP:
+- xorg.conf.external, bumblebee-external.conf to /etc/bumblebee/ for external setup
+
+More: https://wiki.archlinux.org/index.php/bumblebee#Installation
+
+### Bash Alias razerrun & test
+
+Bash Alias:
+```shell
+$ nano .bashrc
+alias razerrun='PRIMUS_SYNC=1 vblank_mode=0 primusrun'
+```
+
+Test:
+```shell
+razerrun glxinfo | grep OpenGL
+```
+
+### Thunderbolt
+
+Install "bolt" for thunderbolt management:
+```shell
+sudo pacman -S bolt
+# Authorize and store a device in the database
+boltctl enroll
+```
+
+Nice (but useless) Gnome extension: https://github.com/gicmo/bolt-extension
+
+## Tweaks
+
+- [Dock & Top Bar](#dock-top-bar)
+
+### Top Icon Plus
+
+https://github.com/phocean/TopIcons-plus
+
+### Gdm
+
+```shell
+systemctl disable lightdm.service
+pacman -Rs lightdm-webkit2-greeter light-locker-settings light-locker lightdm
+pacman -S gdm
+pacman -S gtk-engines
+systemctl enable gdm.service
+pacman -Rs xscreensaver
+pacman -S gnome-screensaver
+```
+
+More: https://forum.antergos.com/topic/5081/switching-from-lightdm-to-gdm-no-lock-screen
+
+### Theme
+
+gnome-tweak-tool / Appearance
+
+- Appplications: Arc-Darker
+- Cursor: Capitaine-cursors
+- Icons: Flat-Remix
+- Shell: Arc-Dark
+
+gnome-tweak-tool / Fonts
+
+- Window Title: Ubuntu Bold 12
+- Interface: Ubuntu Regular 13
+- Document: Sans Regular 13
+- Monospace: Ubuntu Mono Regular 15
+- Hinting: Slight
+
+gnome-tweak-tool / Keyboard & Mouse / Touchpad
+
+- Click Method: Fingers
+- Disable While Typing: True
+
+### Power Management
 
 Install TLP tools:
 
@@ -701,46 +845,13 @@ sudo systemctl enable tlp
 sudo systemctl enable tlp-sleep
 ```
 
-## Keyboard Colors
-
-See Ubuntu Setup
-
-## Gnome, Workspaces, Gestures
-
-See Ubuntu Setup
-
-## Touchpad
-
-### Synaptics (X11)
-
-Disable touchpad while typing and some other tunings:
-
-- [50-synaptics-arch.conf](etc/X11/xorg.conf.d/50-synaptics-arch.conf)
-
-### libinput (X11)
-
-"libinput" configration for X11 [60-libinput.conf](etc/X11/xorg.conf.d/60-libinput.conf)
-
-### libinput (Wayland)
-
-Adjust "libinput" coordinate ranges for absolute axes:
-
-- [61-evdev-local.hwdb](etc/udev/hwdb.d/61-evdev-local.hwdb)
-
+Bumblebee with NVIDIA driver
+/etc/default/tlp
 ```shell
-sudo cp etc/udev/hwdb.d/61-evdev-local.hwdb /etc/udev/hwdb.d/61-evdev-local.hwdb
+# Bumblebee with NVIDIA driver
+# https://wiki.archlinux.org/index.php/TLP#Bumblebee_with_NVIDIA_driver
+RUNTIME_PM_BLACKLIST="07:00.0 07:00.1"
 ```
-
-Update settings:
-
-```shell
-sudo systemd-hwdb update
-sudo udevadm trigger /dev/input/event*
-```
-
-## Multiple Monitors
-
-See Ubuntu Setup
 
 # Credits
 
