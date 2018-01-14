@@ -685,7 +685,7 @@ Sames as Ubuntu:
 
 - [Graphic Card](#graphic-card)
 - [HDMI](#hdmi)
-- [Thunderbolt / USB-C](#thunderbolt-usb-c)
+- [Thunderbolt / USB-C](#thunderbolt--usb-c)
 
 Arch (4.14.12-1-ARCH kernel):
 
@@ -727,7 +727,7 @@ Disable touchpad while typing and some other tunings:
 - [Onscreen Keyboard](#onscreen-keyboard)
     - [Block caribou](#block-caribou)
         - [Extension](#extension)
-- [Touchscreen & Firefox](#touchscreen-firefox)
+- [Touchscreen & Firefox](#touchscreen--firefox)
     - [XINPUT2](#xinput2)
 - [Unstable WIFI](#unstable-wifi)
     - [Update Firmware](#update-firmware)
@@ -800,7 +800,7 @@ Nice (but useless) Gnome extension: https://github.com/gicmo/bolt-extension
 
 ## Tweaks
 
-- [Dock & Top Bar](#dock-top-bar)
+- [Dock & Top Bar](#dock--top-bar)
 
 ### Top Icon Plus
 
