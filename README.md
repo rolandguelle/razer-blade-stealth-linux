@@ -15,7 +15,7 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gn
     - [Works](#works)
         - [Graphic Card](#graphic-card)
         - [HDMI](#hdmi)
-        - [Thunderbolt / USB-C](#thunderbolt-usb-c)
+        - [Thunderbolt / USB-C](#thunderbolt--usb-c)
     - [Issues](#issues)
         - [Suspend Loop](#suspend-loop)
             - [Grub Kernel Parameter](#grub-kernel-parameter)
@@ -24,7 +24,7 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gn
             - [X11: Disable Built-In Keyboard Driver](#x11-disable-built-in-keyboard-driver)
         - [Touchpad Suspend](#touchpad-suspend)
             - [Libinput-gestures](#libinput-gestures)
-        - [Touchscreen & Firefox](#touchscreen-firefox)
+        - [Touchscreen & Firefox](#touchscreen--firefox)
             - [XINPUT2](#xinput2)
         - [Unstable WIFI](#unstable-wifi)
             - [Update Firmware](#update-firmware)
@@ -46,7 +46,7 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gn
         - [Theme](#theme)
             - ["Capitaine" Cursors](#capitaine-cursors)
             - [Applicatioins Theme](#applicatioins-theme)
-            - [Dock & Top Bar](#dock-top-bar)
+            - [Dock & Top Bar](#dock--top-bar)
             - [Fonts](#fonts)
     - [Razer Core](#razer-core)
         - [Thunderbolt](#thunderbolt)
@@ -67,22 +67,22 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gn
                     - [Automatic Setup](#automatic-setup)
                     - [Manual Setup](#manual-setup)
 - [Arch (Antergos)](#arch-antergos)
-    - [Works](#works)
-    - [Suspend Loop](#suspend-loop)
-    - [Touchpad](#touchpad)
-        - [Libinput-gestures](#libinput-gestures)
+    - [Works](#works-1)
+    - [Suspend Loop](#suspend-loop-1)
+    - [Touchpad](#touchpad-1)
+        - [Libinput-gestures](#libinput-gestures-1)
         - [Synaptics (X11)](#synaptics-x11)
     - [More](#more)
-    - [Razer Core](#razer-core)
+    - [Razer Core](#razer-core-1)
         - [Installation](#installation)
         - [Setup](#setup)
-        - [Bash Alias razerrun & test](#bash-alias-razerrun-test)
-        - [Thunderbolt](#thunderbolt)
-    - [Tweaks](#tweaks)
+        - [Bash Alias razerrun](#bash-alias-razerrun)
+        - [Thunderbolt](#thunderbolt-1)
+    - [Tweaks](#tweaks-1)
         - [Top Icon Plus](#top-icon-plus)
         - [Gdm](#gdm)
-        - [Theme](#theme)
-        - [Power Management](#power-management)
+        - [Theme](#theme-1)
+        - [Power Management](#power-management-1)
 - [Credits](#credits)
 
 <!-- /TOC -->
@@ -682,11 +682,13 @@ Tested with [Antergos](https://antergos.com/) (Wayland & Gnome) Arch, but other 
 ## Works
 
 Sames as Ubuntu:
+
 - [Graphic Card](#graphic-card)
 - [HDMI](#hdmi)
 - [Thunderbolt / USB-C](#thunderbolt-usb-c)
 
 Arch (4.14.12-1-ARCH kernel):
+
 - Caps-Lock fix is not needed
 - No touchpad issues
 
@@ -726,7 +728,7 @@ Disable touchpad while typing and some other tunings:
     - [Block caribou](#block-caribou)
         - [Extension](#extension)
 - [Touchscreen & Firefox](#touchscreen-firefox)
-    - [XINPUT2](#xinput2)    
+    - [XINPUT2](#xinput2)
 - [Unstable WIFI](#unstable-wifi)
     - [Update Firmware](#update-firmware)
 - [Multiple Monitors](#multiple-monitors)
@@ -737,42 +739,49 @@ Disable touchpad while typing and some other tunings:
 ### Installation
 
 Install NVIDIA & bumblebee:
+
 ```shell
 sudo pacman -S bumblebee primus nvidia nvidia-utils virtualgl
 ```
 
 Install 32bit driver for steam:
+
 ```shell
 sudo pacman -S lib32-virtualgl lib32-nvidia-utils
 ```
 
 ### Setup
 
-Add user to bumblebee group: 
+Add user to bumblebee group:
+
 ```shell
 sudo gpasswd -a $USER bumblebee
 ```
 
-Set driver to nvidia: 
+Set driver to nvidia:
+
 ```shell
 $ sudo nano /etc/bumblebee/bumblebee.conf
 Driver=nvidia
 ```
 
 TODO / WIP:
+
 - xorg.conf.external, bumblebee-external.conf to /etc/bumblebee/ for external setup
 
 More: https://wiki.archlinux.org/index.php/bumblebee#Installation
 
-### Bash Alias razerrun & test
+### Bash Alias razerrun
 
 Bash Alias:
+
 ```shell
 $ nano .bashrc
 alias razerrun='PRIMUS_SYNC=1 vblank_mode=0 primusrun'
 ```
 
 Test:
+
 ```shell
 razerrun glxinfo | grep OpenGL
 ```
@@ -780,6 +789,7 @@ razerrun glxinfo | grep OpenGL
 ### Thunderbolt
 
 Install "bolt" for thunderbolt management:
+
 ```shell
 sudo pacman -S bolt
 # Authorize and store a device in the database
@@ -848,8 +858,9 @@ sudo systemctl enable tlp-sleep
 ```
 
 Bumblebee with NVIDIA driver
-/etc/default/tlp
+
 ```shell
+sudo nano /etc/default/tlp
 # Bumblebee with NVIDIA driver
 # https://wiki.archlinux.org/index.php/TLP#Bumblebee_with_NVIDIA_driver
 RUNTIME_PM_BLACKLIST="07:00.0 07:00.1"
