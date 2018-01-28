@@ -167,6 +167,8 @@ XKBOPTIONS="ctrl:nocaps"
 
 #### X11: Disable Built-In Keyboard Driver
 
+Only needed if you run X11 instead of Wayland.
+
 Get your keyboard description and use it instead of "AT Raw Set 2 keyboard":
 
 ```shell
