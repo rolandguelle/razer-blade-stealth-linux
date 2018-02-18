@@ -15,7 +15,7 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gn
     - [Works](#works)
         - [Graphic Card](#graphic-card)
         - [HDMI](#hdmi)
-        - [Thunderbolt / USB-C](#thunderbolt--usb-c)
+        - [Thunderbolt / USB-C](#thunderbolt-usb-c)
     - [Issues](#issues)
         - [Suspend Loop](#suspend-loop)
             - [Grub Kernel Parameter](#grub-kernel-parameter)
@@ -24,7 +24,7 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gn
             - [X11: Disable Built-In Keyboard Driver](#x11-disable-built-in-keyboard-driver)
         - [Touchpad Suspend](#touchpad-suspend)
             - [Libinput-gestures](#libinput-gestures)
-        - [Touchscreen & Firefox](#touchscreen--firefox)
+        - [Touchscreen & Firefox](#touchscreen-firefox)
             - [XINPUT2](#xinput2)
         - [Unstable WIFI](#unstable-wifi)
             - [Update Firmware](#update-firmware)
@@ -46,7 +46,7 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gn
         - [Theme](#theme)
             - ["Capitaine" Cursors](#capitaine-cursors)
             - [Applicatioins Theme](#applicatioins-theme)
-            - [Dock & Top Bar](#dock--top-bar)
+            - [Dock & Top Bar](#dock-top-bar)
             - [Fonts](#fonts)
     - [Razer Core](#razer-core)
         - [Thunderbolt](#thunderbolt)
@@ -67,22 +67,25 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gn
                     - [Automatic Setup](#automatic-setup)
                     - [Manual Setup](#manual-setup)
 - [Arch (Antergos)](#arch-antergos)
-    - [Works](#works-1)
-    - [Suspend Loop](#suspend-loop-1)
-    - [Touchpad](#touchpad-1)
-        - [Libinput-gestures](#libinput-gestures-1)
+    - [Works](#works)
+    - [Suspend Loop](#suspend-loop)
+    - [Touchpad](#touchpad)
+        - [Libinput-gestures](#libinput-gestures)
         - [Synaptics (X11)](#synaptics-x11)
+        - [Libinput Coordinates](#libinput-coordinates)
     - [More](#more)
-    - [Razer Core](#razer-core-1)
+    - [Razer Core](#razer-core)
         - [Installation](#installation)
         - [Setup](#setup)
         - [Bash Alias razerrun](#bash-alias-razerrun)
-        - [Thunderbolt](#thunderbolt-1)
-    - [Tweaks](#tweaks-1)
+        - [Thunderbolt](#thunderbolt)
+    - [Tweaks](#tweaks)
         - [Top Icon Plus](#top-icon-plus)
         - [Gdm](#gdm)
-        - [Theme](#theme-1)
-        - [Power Management](#power-management-1)
+        - [Theme](#theme)
+        - [Power Management](#power-management)
+- [Razer Blade Stealth Late 2017](#razer-blade-stealth-late-2017)
+    - [Screen flickering](#screen-flickering)
 - [Credits](#credits)
 
 <!-- /TOC -->
@@ -689,7 +692,7 @@ Sames as Ubuntu:
 - [HDMI](#hdmi)
 - [Thunderbolt / USB-C](#thunderbolt--usb-c)
 
-Arch (4.14.12-1-ARCH kernel):
+Arch (4.15.2-2-ARCH kernel):
 
 - Caps-Lock fix is not needed
 - No touchpad issues
@@ -723,6 +726,21 @@ Install Libinput-gestures, my [config](config/libinput-gestures.conf).
 Disable touchpad while typing and some other tunings:
 
 - [50-synaptics-arch.conf](etc/X11/xorg.conf.d/50-synaptics-arch.conf)
+
+### Libinput Coordinates
+
+Adjust "libinput" coordinate ranges for absolute axes:
+* [61-evdev-local.hwdb](etc/udev/hwdb.d/61-evdev-local.hwdb)
+
+```shell
+$ sudo cp etc/udev/hwdb.d/61-evdev-local.hwdb /etc/udev/hwdb.d/61-evdev-local.hwdb
+```
+
+Update settings:
+```shell
+$ sudo systemd-hwdb update
+$ sudo udevadm trigger /dev/input/event*
+```
 
 ## More
 
@@ -867,6 +885,17 @@ sudo nano /etc/default/tlp
 # https://wiki.archlinux.org/index.php/TLP#Bumblebee_with_NVIDIA_driver
 RUNTIME_PM_BLACKLIST="07:00.0 07:00.1"
 ```
+
+# Razer Blade Stealth Late 2017
+
+## Screen flickering
+
+Add kernel param:
+```
+i915.edp_vswing=2
+```
+
+More: https://wiki.archlinux.org/index.php/Razer_Blade#Late-2017_version_Razer_Blade_Stealth
 
 # Credits
 
