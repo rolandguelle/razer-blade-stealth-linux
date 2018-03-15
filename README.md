@@ -35,7 +35,7 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gn
         - [Multiple Monitors](#multiple-monitors)
             - [Switch to 1920x1080](#switch-to-1920x1080)
     - [Unsolved Issues](#unsolved-issues)
-        - [Keyboard Colors](#keyboard-colors)
+        - [Keyboard Colors & Openrazer](#keyboard-colors--openrazer)
         - [Webcam](#webcam)
     - [Tweaks](#tweaks)
         - [Power Management](#power-management)
@@ -327,11 +327,15 @@ Gnome _remembers_ the monitor and switch back to 4k when unplugging the screen.
 
 ## Unsolved Issues
 
-### Keyboard Colors
+### Keyboard Colors & Openrazer
 
 Currently not used.
 
 [Issue](https://github.com/openrazer/openrazer/issues/342): Settings are lost after suspend (Gnome, Wayland).
+
+But maybe it works for you:
+
+* https://openrazer.github.io/
 
 ### Webcam
 
