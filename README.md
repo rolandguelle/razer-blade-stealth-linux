@@ -48,6 +48,7 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gn
             - [Applicatioins Theme](#applicatioins-theme)
             - [Dock & Top Bar](#dock--top-bar)
             - [Fonts](#fonts)
+            - [Workspace Grid](#workspace-grid)
     - [Razer Core](#razer-core)
         - [Thunderbolt](#thunderbolt)
             - [Cable](#cable)
@@ -427,6 +428,22 @@ My Ubuntu/Gnome tweaks :)
 - Interface: Ubuntu Regular 12
 - Document: Sans Regular 13
 - Monospace: Monospace Regular 13
+
+#### Workspace Grid
+
+Switch vertical though your workspaces.
+
+Install Workspace Grid:
+
+* https://github.com/zakkak/workspace-grid
+
+My setup is just vertical workspaces, swipe left/right for switching workspaces:
+
+```shell
+# .config/libinput.conf
+gesture swipe left      _internal ws_down
+gesture swipe right     _internal ws_up
+```
 
 ## Razer Core
 
