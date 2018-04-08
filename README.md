@@ -24,6 +24,7 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gn
             - [X11: Disable Built-In Keyboard Driver](#x11-disable-built-in-keyboard-driver)
         - [Touchpad Suspend](#touchpad-suspend)
             - [Libinput-gestures](#libinput-gestures)
+        - [Touchpad Temporary Freezes](#touchpad-temporary-freezes)
         - [Touchscreen & Firefox](#touchscreen--firefox)
             - [XINPUT2](#xinput2)
         - [Unstable WIFI](#unstable-wifi)
@@ -41,7 +42,6 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gn
         - [Power Management](#power-management)
         - [Touchpad](#touchpad)
             - [Click, Tap, Move](#click-tap-move)
-            - [X11: Synaptics Configuration](#x11-synaptics-configuration)
         - [Display Scaling](#display-scaling)
         - [Theme](#theme)
             - ["Capitaine" Cursors](#capitaine-cursors)
@@ -239,6 +239,21 @@ My [config](config/libinput-gestures.conf).
 
 Logout - Login
 
+### Touchpad Temporary Freezes
+
+The touchpad [temporary freezes](https://insider.razer.com/index.php?threads/ubuntu-17-10-blade-stealth-late-2017-issues.28967/) with libinput.
+Manual update libinput & kernel make it _less worse_, but it is still buggy.
+
+Switching from Wayland to X11 and libinput to Synaptics solves the problem.
+
+```shell
+sudo apt install xserver-xorg-input-synaptics
+```
+
+Edit Synaptics configuration: [50-synaptics-ubuntu.conf](etc/X11/xorg.conf.d/50-synaptics-ubuntu.conf)
+
+Restart and login with X11.
+
 ### Touchscreen & Firefox
 
 Firefox doesn't seem to care about the touchscreen at all.
@@ -375,12 +390,6 @@ sudo apt install gnome-tweak-tool
 - Keyboard & Mouse
 - Click Method: Fingers
 
-#### X11: Synaptics Configuration
-
-Disable touchpad while typing and some other tunings:
-
-- [50-synaptics-ubuntu.conf](etc/X11/xorg.conf.d/50-synaptics-ubuntu.conf)
-
 ### Display Scaling
 
 At native resolution, the internal HiDPI 4K display with 100% scale might be too tiny and frustrating for some, and with 200% scale is too large to be useful, luckily with Ubuntu 17.10 shipping with Gnome3, a native screen scaling solution is provided, however it's limited to 2 options: `100%` and `200%`.
@@ -413,14 +422,13 @@ My Ubuntu/Gnome tweaks :)
 - apt install numix-gtk-theme numix-icon-theme gnome-icon-theme gnome-icon-theme-extras
 - Select via tweaks tool, Appearance, Themes, Application (Numix), Icons (Numix-Light)
 
+Current Theme: [Adapta-Eta](https://github.com/adapta-project/adapta-gtk-theme)
+
 #### Dock & Top Bar
 
 - Dock (Settings)
     - Auto-hide the Dock
     - Position on the screen: bottom
-- Top Bar (Extension)
-    - ["Hide Top Bar"](https://github.com/mlutfy/hidetopbar)
-    - Tweaks, Extension: Show panel when mouse approaches edges of the screen
 
 #### Fonts
 
@@ -437,7 +445,7 @@ Install Workspace Grid:
 
 * https://github.com/zakkak/workspace-grid
 
-My setup is just vertical workspaces, swipe left/right for switching workspaces:
+My setup have just vertical workspaces, swipe left/right for switching workspaces:
 
 ```shell
 # .config/libinput.conf
