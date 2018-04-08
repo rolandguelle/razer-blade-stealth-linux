@@ -4,7 +4,7 @@
 
 Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions or open an issue.
 
-My current setup is Ubuntu 17.10 (Ubuntu Gnome + Wayland) or Arch (Antergos + Gnome + Wayland), but you find some (maybe) outdated infos about X11 in this tutorial.
+My current setup is Ubuntu 17.10 (Ubuntu Gnome + X11) or Arch (Antergos + Gnome + Wayland).
 
 <!-- TOC -->
 
@@ -172,7 +172,7 @@ XKBOPTIONS="ctrl:nocaps"
 
 #### X11: Disable Built-In Keyboard Driver
 
-Only needed if you run X11 instead of Wayland.
+Only needed if you run X11 instead of Wayland and enabled Capslock.
 
 Get your keyboard description and use it instead of "AT Raw Set 2 keyboard":
 
