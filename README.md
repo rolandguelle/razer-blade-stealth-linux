@@ -129,7 +129,8 @@ Udating my 17.10 installation works without issues. I run X11 with the Synaptics
 To check what fixes are needed at 18.04, I try a fresh install.
 Running the live session and starting the installation segfaults, starting direct (boot) into the setup works.
 
-* Minimal installation, include 3rd party
+- Minimal installation, include 3rd party
+- Install Intel Microcode
 
 ```shell
 sudo apt install intel-microcode
@@ -139,20 +140,23 @@ sudo apt install intel-microcode
 
 Check if the issues still exist and the fixes works:
 
-* Caps-Lock
-* Suspend-Loop
-* Touchpad Temporary Freezes
-* Touchscreen & Firefox
-* Libinput
-* Power Management
-* "Capitaine" Cursors
-* sudo apt install numix-gtk-theme numix-icon-theme gnome-icon-theme
-    * Selected Theme: "Numix"
+- Caps-Lock
+- Suspend-Loop
+- Touchpad Temporary Freezes
+- Touchscreen & Firefox
+- Libinput-gestures
+- Power Management
+- "Capitaine" Cursors
+- Theme: apt install numix-gtk-theme numix-icon-theme gnome-icon-theme
+    - Selected Theme: "Numix"
 
 ### TODO
 
-* Synaptics Configuration
-* Razer Core
+- Synaptics settings
+    - SingleTapTimeout=200
+    - PalmMinZ=800
+    - PalmMinWidth=50
+- Razer Core
 
 # Ubuntu 17.10
 
