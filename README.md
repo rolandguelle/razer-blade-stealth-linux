@@ -16,7 +16,7 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + X11) or Arch (Antergos + Gnome 
     - [Update](#update)
     - [Install](#install)
         - [Issues & Fixes](#issues--fixes)
-        - [TODO](#todo)
+        - [WIP](#wip)
 - [Ubuntu 17.10](#ubuntu-1710)
     - [Install](#install-1)
     - [Works](#works)
@@ -150,12 +150,9 @@ Check if the issues still exist and the fixes works:
 - Theme: apt install numix-gtk-theme numix-icon-theme gnome-icon-theme
     - Selected Theme: "Numix"
 
-### TODO
+### WIP
 
 - Synaptics settings
-    - SingleTapTimeout=200
-    - PalmMinZ=800
-    - PalmMinWidth=50
 - Razer Core
 
 # Ubuntu 17.10
