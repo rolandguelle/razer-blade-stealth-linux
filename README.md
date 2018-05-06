@@ -125,7 +125,23 @@ Udating my 17.10 installation works without issues. I run X11 with the Synaptics
 ## Install
 
 To check what fixes are needed at 18.04, I try a fresh install.
-Currently the installation segfaults at the last step :(
+Running the live session and starting the installation segfaults, starting direct (boot) into the setup works.
+
+* Minimal installation, include 3rd party
+
+```shell
+sudo apt install intel-microcode
+```
+
+### Issues & Fixes
+
+Check if the issues still exist and the fixes works:
+
+* Caps-Lock
+* Suspend-Loop
+* Touchpad Temporary Freezes
+
+
 
 # Ubuntu 17.10
 
