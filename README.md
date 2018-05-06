@@ -140,8 +140,12 @@ Check if the issues still exist and the fixes works:
 * Caps-Lock
 * Suspend-Loop
 * Touchpad Temporary Freezes
-
-
+* Touchscreen & Firefox
+* Libinput-gestures
+* Power Management
+* "Capitaine" Cursors
+* sudo apt install numix-gtk-theme numix-icon-theme gnome-icon-theme
+    * numix
 
 # Ubuntu 17.10
 
