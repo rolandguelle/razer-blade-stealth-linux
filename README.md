@@ -16,6 +16,7 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + X11) or Arch (Antergos + Gnome 
     - [Update](#update)
     - [Install](#install)
         - [Issues & Fixes](#issues--fixes)
+        - [TODO](#todo)
 - [Ubuntu 17.10](#ubuntu-1710)
     - [Install](#install-1)
     - [Works](#works)
@@ -142,11 +143,16 @@ Check if the issues still exist and the fixes works:
 * Suspend-Loop
 * Touchpad Temporary Freezes
 * Touchscreen & Firefox
-* Libinput-gestures
+* Libinput
 * Power Management
 * "Capitaine" Cursors
 * sudo apt install numix-gtk-theme numix-icon-theme gnome-icon-theme
-    * numix
+    * Selected Theme: "Numix"
+
+### TODO
+
+* Synaptics Configuration
+* Razer Core
 
 # Ubuntu 17.10
 
