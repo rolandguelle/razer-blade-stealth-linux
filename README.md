@@ -149,7 +149,8 @@ Check if the issues still exist and the fixes works:
 - "Capitaine" Cursors
 - Theme: apt install numix-gtk-theme numix-icon-theme gnome-icon-theme
     - Selected Theme: "Numix"
-
+- Steam: Settings, Interface, Enlarge text and icons based on monitor size
+ 
 ### WIP
 
 - Synaptics settings
