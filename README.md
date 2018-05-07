@@ -1,6 +1,6 @@
 # Razer Blade Stealth Linux
 
-**Razer Blade Stealth** (late 2016, UHD / HiDPI) Linux ([Ubuntu](#ubuntu-1710) & [Arch (Antergos)](#arch-antergos)) setup, including **[Razer Core](#razer-core)** with [discrete NVIDIA GPU](#discrete-nvidia-gpu) setup connected via [thunderbolt](#thunderbolt-1).
+**Razer Blade Stealth** (late 2016, Intel 7500U, UHD / HiDPI) Linux ([Ubuntu](#ubuntu-1710) & [Arch (Antergos)](#arch-antergos)) setup, including **[Razer Core](#razer-core)** with [discrete NVIDIA GPU](#discrete-nvidia-gpu) setup connected via [thunderbolt](#thunderbolt-1).
 
 Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions or open an issue.
 
@@ -10,23 +10,29 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + X11) or Arch (Antergos + Gnome 
 
 - [Razer Blade Stealth Linux](#razer-blade-stealth-linux)
 - [Preparation](#preparation)
-    - [Meltdown, Spectre & TPM Updates](#meltdown--spectre-tpm-updates)
-- [Ubuntu 17.10](#ubuntu-1710)
+    - [Meltdown, Spectre & TPM Updates](#meltdown-spectre--tpm-updates)
+    - [Disk Resize](#disk-resize)
+- [Ubuntu 18.04](#ubuntu-1804)
+    - [Update](#update)
     - [Install](#install)
+        - [Issues & Fixes](#issues--fixes)
+        - [WIP](#wip)
+- [Ubuntu 17.10](#ubuntu-1710)
+    - [Install](#install-1)
     - [Works](#works)
         - [Graphic Card](#graphic-card)
         - [HDMI](#hdmi)
-        - [Thunderbolt / USB-C](#thunderbolt---usb-c)
+        - [Thunderbolt / USB-C](#thunderbolt--usb-c)
     - [Issues](#issues)
         - [Suspend Loop](#suspend-loop)
             - [Grub Kernel Parameter](#grub-kernel-parameter)
         - [Caps-Lock Crash](#caps-lock-crash)
             - [Disable Capslocks](#disable-capslocks)
-            - [X11: Disable Built-In Keyboard Driver](#x11--disable-built-in-keyboard-driver)
+            - [X11: Disable Built-In Keyboard Driver](#x11-disable-built-in-keyboard-driver)
         - [Touchpad Suspend](#touchpad-suspend)
             - [Libinput-gestures](#libinput-gestures)
         - [Touchpad Temporary Freezes](#touchpad-temporary-freezes)
-        - [Touchscreen & Firefox](#touchscreen-firefox)
+        - [Touchscreen & Firefox](#touchscreen--firefox)
             - [XINPUT2](#xinput2)
         - [Unstable WIFI](#unstable-wifi)
             - [Update Firmware](#update-firmware)
@@ -37,17 +43,17 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + X11) or Arch (Antergos + Gnome 
         - [Multiple Monitors](#multiple-monitors)
             - [Switch to 1920x1080](#switch-to-1920x1080)
     - [Unsolved Issues](#unsolved-issues)
-        - [Keyboard Colors & Openrazer](#keyboard-colors-openrazer)
+        - [Keyboard Colors & Openrazer](#keyboard-colors--openrazer)
         - [Webcam](#webcam)
     - [Tweaks](#tweaks)
         - [Power Management](#power-management)
         - [Touchpad](#touchpad)
-            - [Click, Tap, Move](#click--tap--move)
+            - [Click, Tap, Move](#click-tap-move)
         - [Display Scaling](#display-scaling)
         - [Theme](#theme)
             - ["Capitaine" Cursors](#capitaine-cursors)
             - [Applicatioins Theme](#applicatioins-theme)
-            - [Dock & Top Bar](#dock-top-bar)
+            - [Dock & Top Bar](#dock--top-bar)
             - [Fonts](#fonts)
             - [Workspace Grid](#workspace-grid)
     - [Razer Core](#razer-core)
@@ -69,23 +75,23 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + X11) or Arch (Antergos + Gnome 
                     - [Automatic Setup](#automatic-setup)
                     - [Manual Setup](#manual-setup)
 - [Arch (Antergos)](#arch-antergos)
-    - [Works](#works)
-    - [Suspend Loop](#suspend-loop)
-    - [Touchpad](#touchpad)
-        - [Libinput-gestures](#libinput-gestures)
+    - [Works](#works-1)
+    - [Suspend Loop](#suspend-loop-1)
+    - [Touchpad](#touchpad-1)
+        - [Libinput-gestures](#libinput-gestures-1)
         - [Synaptics (X11)](#synaptics-x11)
         - [Libinput Coordinates](#libinput-coordinates)
     - [More](#more)
-    - [Razer Core](#razer-core)
+    - [Razer Core](#razer-core-1)
         - [Installation](#installation)
         - [Setup](#setup)
         - [Bash Alias razerrun](#bash-alias-razerrun)
-        - [Thunderbolt](#thunderbolt)
-    - [Tweaks](#tweaks)
+        - [Thunderbolt](#thunderbolt-1)
+    - [Tweaks](#tweaks-1)
         - [Top Icon Plus](#top-icon-plus)
         - [Gdm](#gdm)
-        - [Theme](#theme)
-        - [Power Management](#power-management)
+        - [Theme](#theme-1)
+        - [Power Management](#power-management-1)
 - [Other Models](#other-models)
     - [Razer Blade Stealth Late 2017](#razer-blade-stealth-late-2017)
         - [Screen flickering](#screen-flickering)
@@ -108,11 +114,51 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + X11) or Arch (Antergos + Gnome 
     * Meltdown and Spectre Vulnerabilities Updater - Razer BIOS customer updater (02 Apr 2018 06:44 PM)
     * Razer TPM Firmware Updater (13 Feb 2018 03:32 AM)
 
+## Disk Resize
+
+[Resize disk](https://www.howtogeek.com/101862/how-to-manage-partitions-on-windows-without-downloading-any-other-software/) via Windows 10
+
+# Ubuntu 18.04
+
+## Update
+
+Udating my 17.10 installation works without issues. I run X11 with the Synaptics driver.
+
+## Install
+
+To check what fixes are needed at 18.04, I try a fresh install.
+Running the live session and starting the installation segfaults, starting direct (boot) into the setup works.
+
+- Minimal installation, include 3rd party
+- Install Intel Microcode
+
+```shell
+sudo apt install intel-microcode
+```
+
+### Issues & Fixes
+
+Check if the issues still exist and the fixes works:
+
+- Caps-Lock
+- Suspend-Loop
+- Touchpad Temporary Freezes
+- Touchscreen & Firefox
+- Libinput-gestures
+- Power Management
+- "Capitaine" Cursors
+- Theme: apt install numix-gtk-theme numix-icon-theme gnome-icon-theme
+    - Selected Theme: "Numix"
+
+### WIP
+
+- Synaptics settings
+- Razer Core
+
 # Ubuntu 17.10
 
 ## Install
 
-- [Resize disk](https://www.howtogeek.com/101862/how-to-manage-partitions-on-windows-without-downloading-any-other-software/) via Windows 10
 - Fresh Ubuntu 17.10 installation, reboot
 - Software & Updates
     - Additional Drivers: Using Processor microcode firmware for Intel CPUs from intel-microcode (proprietary)
