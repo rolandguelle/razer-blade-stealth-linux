@@ -95,6 +95,7 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + X11) or Arch (Antergos + Gnome 
 - [Other Models](#other-models)
     - [Razer Blade Stealth Late 2017](#razer-blade-stealth-late-2017)
         - [Screen flickering](#screen-flickering)
+        - [External monitor randomly going blank](#external-monitor-randomly-going-blank)
 - [Credits](#credits)
 
 <!-- /TOC -->
