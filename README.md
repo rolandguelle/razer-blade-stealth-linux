@@ -984,6 +984,11 @@ i915.edp_vswing=2
 
 More: https://wiki.archlinux.org/index.php/Razer_Blade#Late-2017_version_Razer_Blade_Stealth
 
+### External monitor randomly going blank
+
+Workaround:
+- Change output channel to "HDMI / DisplayPort - Built in Audio" or connect headphones to the stereo jack.
+
 # Credits
 
 - References
@@ -1001,3 +1006,5 @@ More: https://wiki.archlinux.org/index.php/Razer_Blade#Late-2017_version_Razer_B
     - https://github.com/tomsquest
     - https://github.com/ahmadnassri
     - https://github.com/lucaszanella
+    - https://github.com/brendanrankin
+    - https://github.com/benjob
