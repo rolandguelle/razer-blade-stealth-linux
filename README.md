@@ -990,7 +990,7 @@ More: https://wiki.archlinux.org/index.php/Razer_Blade#Late-2017_version_Razer_B
 Workaround:
 Change output channel to "HDMI / DisplayPort - Built in Audio" or connect headphones to the stereo jack.
 
-Discussion: #18
+Discussion: https://github.com/rolandguelle/razer-blade-stealth-linux/issues/18
 
 # Credits
 
