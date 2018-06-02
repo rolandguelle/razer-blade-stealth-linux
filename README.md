@@ -17,6 +17,10 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + X11) or Arch (Antergos + Gnome 
     - [Install](#install)
         - [Issues & Fixes](#issues--fixes)
         - [WIP](#wip)
+            - [Synaptics settings](#synaptics-settings)
+            - [Razer Core](#razer-core)
+                - [Auth](#auth)
+                - [bumblebee](#bumblebee)
 - [Ubuntu 17.10](#ubuntu-1710)
     - [Install](#install-1)
     - [Works](#works)
@@ -56,7 +60,7 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + X11) or Arch (Antergos + Gnome 
             - [Dock & Top Bar](#dock--top-bar)
             - [Fonts](#fonts)
             - [Workspace Grid](#workspace-grid)
-    - [Razer Core](#razer-core)
+    - [Razer Core](#razer-core-1)
         - [Thunderbolt](#thunderbolt)
             - [Cable](#cable)
             - [User Authorization](#user-authorization)
@@ -82,7 +86,7 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + X11) or Arch (Antergos + Gnome 
         - [Synaptics (X11)](#synaptics-x11)
         - [Libinput Coordinates](#libinput-coordinates)
     - [More](#more)
-    - [Razer Core](#razer-core-1)
+    - [Razer Core](#razer-core-2)
         - [Installation](#installation)
         - [Setup](#setup)
         - [Bash Alias razerrun](#bash-alias-razerrun)
@@ -153,8 +157,40 @@ Check if the issues still exist and the fixes works:
  
 ### WIP
 
-- Synaptics settings
-- Razer Core
+#### Synaptics settings
+
+- suspend, some settings are gone
+- button3 disable
+
+#### Razer Core
+
+##### Auth
+
+bolt is installed
+
+$ boltctl list
+get <uuid>
+$ boltctl enroll <uuid> 
+
+activating "nouveau" crashes the system.
+
+installing nvidia-driver-396
+when insert thundderbolt, nouveau is loaded?
+sudo rmmod nouveau
+
+##### bumblebee
+
+$ sudo apt-get install bumblebee bumblebee-nvidia primus linux-headers-generic
+
+PKCS#7 signature not signed wth a trusted key
+
+sudo apt install mesa-utils
+
+sudo apt-get install nvidia-driver-396
+
+tlp suspend // see arch setup
+
+https://github.com/Bumblebee-Project/Bumblebee/issues/951
 
 # Ubuntu 17.10
 
