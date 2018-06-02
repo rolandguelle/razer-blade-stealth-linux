@@ -99,6 +99,7 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + X11) or Arch (Antergos + Gnome 
 - [Other Models](#other-models)
     - [Razer Blade Stealth Late 2017](#razer-blade-stealth-late-2017)
         - [Screen flickering](#screen-flickering)
+        - [External monitor randomly going blank](#external-monitor-randomly-going-blank)
 - [Credits](#credits)
 
 <!-- /TOC -->
@@ -1023,6 +1024,13 @@ i915.edp_vswing=2
 
 More: https://wiki.archlinux.org/index.php/Razer_Blade#Late-2017_version_Razer_Blade_Stealth
 
+### External monitor randomly going blank
+
+Workaround:
+Change output channel to "HDMI / DisplayPort - Built in Audio" or connect headphones to the stereo jack.
+
+Discussion: https://github.com/rolandguelle/razer-blade-stealth-linux/issues/18
+
 # Credits
 
 - References
@@ -1040,3 +1048,5 @@ More: https://wiki.archlinux.org/index.php/Razer_Blade#Late-2017_version_Razer_B
     - https://github.com/tomsquest
     - https://github.com/ahmadnassri
     - https://github.com/lucaszanella
+    - https://github.com/brendanrankin
+    - https://github.com/benjob
