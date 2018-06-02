@@ -159,8 +159,8 @@ Check if the issues still exist and the fixes works:
 
 #### Synaptics settings
 
-- suspend, some settings are gone
-- button3 disable
+- After suspend, some settings are gone
+- example: button3 disable
 
 #### Razer Core
 
@@ -172,11 +172,13 @@ $ boltctl list
 get <uuid>
 $ boltctl enroll <uuid> 
 
-activating "nouveau" crashes the system.
+activating with "nouveau" crashes the system.
 
-installing nvidia-driver-396
-when insert thundderbolt, nouveau is loaded?
-sudo rmmod nouveau
+Trial on error:
+
+- installing nvidia-driver-396
+- when insert thundderbolt, nouveau is loaded?
+- sudo rmmod nouveau
 
 ##### bumblebee
 
