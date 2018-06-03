@@ -1,0 +1,19 @@
+#!/bin/sh
+# location: /etc/pm/sleep.d/
+# synaptics settings are gone after resume
+
+case $1 in
+     resume|thaw)
+        # xinput list-props 15
+        synclient PalmDetect=1
+        synclient PalmMinWidth=18
+        synclient PalmMinZ=255
+        synclient FingerHigh=50 FingerLow=25 
+        #synclient SingleTapTimeout=300 MaxTapTime=300
+
+        synclient TapButton1=1 TapButton2=3 TapButton3=0
+        synclient HorizTwoFingerScroll=1 VertTwoFingerScroll=1
+        synclient ClickPad=1 ClickFinger1=1 ClickFinger2=3 ClickFinger3=0
+        synclient TopEdge=0 LeftEdge=0 BottomEdge=2405 RightEdge=4064
+        ;;
+esac

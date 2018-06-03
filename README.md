@@ -143,25 +143,39 @@ sudo apt install intel-microcode
 
 ### Issues & Fixes
 
-Check if the issues still exist and the fixes works:
+Issues still exist and the fixes needed:
 
-- Caps-Lock
-- Suspend-Loop
-- Touchpad Temporary Freezes
-- Touchscreen & Firefox
-- Libinput-gestures
-- Power Management
-- "Capitaine" Cursors
-- Theme: apt install numix-gtk-theme numix-icon-theme gnome-icon-theme
-    - Selected Theme: "Numix"
-- Steam: Settings, Interface, Enlarge text and icons based on monitor size
+- Caps-Lock (✓)
+- Suspend-Loop (✓)
+- Touchpad Temporary Freezes (✓)
+- Touchscreen & Firefox (✓)
+- Libinput-gestures (✓)
+- Power Management (✓)
+- "Capitaine" Cursors (✓)
+- Numix Theme: apt install numix-gtk-theme numix-icon-theme gnome-icon-theme
+    - Selected Theme: "Numix" (✓)
+- Steam: Settings, Interface, Enlarge text and icons based on monitor size (✓)
  
 ### WIP
 
 #### Synaptics settings
 
-- After suspend, some settings are gone
-- example: button3 disable
+With libinput, the pointer "jumps" while moving. The synaptics driver hasn't this issue.
+Maybe 4.17 kernel solves this problem (https://github.com/rolandguelle/razer-blade-stealth-linux/issues/19).
+
+- install the synaptics driver:
+```shell
+sudo apt install xserver-xorg-input-synaptics
+```
+- add /etc/X11/xorg.conf.d/50-synaptics.conf
+- reboot
+- check if synaptics driver is running
+```shell
+xinput list-props 'Synaptics TM2438-005'
+```
+
+After suspend, some settings are gone, workaround:
+/etc/pm/sleep.d/30_synaptics
 
 #### Razer Core
 
@@ -343,7 +357,7 @@ Switching from Wayland to X11 and libinput to Synaptics solves the problem.
 sudo apt install xserver-xorg-input-synaptics
 ```
 
-Edit Synaptics configuration: [50-synaptics-ubuntu.conf](etc/X11/xorg.conf.d/50-synaptics-ubuntu.conf)
+Edit Synaptics configuration: [50-synaptics.conf](etc/X11/xorg.conf.d/50-synaptics.conf)
 
 Restart and login with X11.
 
@@ -848,7 +862,7 @@ Install Libinput-gestures, my [config](config/libinput-gestures.conf).
 
 Disable touchpad while typing and some other tunings:
 
-- [50-synaptics-arch.conf](etc/X11/xorg.conf.d/50-synaptics-arch.conf)
+- [50-synaptics.conf](etc/X11/xorg.conf.d/50-synaptics.conf)
 
 ### Libinput Coordinates
 
