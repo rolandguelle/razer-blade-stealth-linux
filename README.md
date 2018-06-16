@@ -4,7 +4,7 @@
 
 Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions or open an issue.
 
-My current setup is Ubuntu 17.10 (Ubuntu Gnome + X11) or Arch (Antergos + Gnome + Wayland).
+My current setup is Ubuntu 18.04 (Ubuntu, Gnome, X11 & Synaptics touchpad driver) and Arch (Antergos, Gnome, Wayland & libinput touchpad driver).
 
 <!-- TOC -->
 
@@ -16,11 +16,14 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + X11) or Arch (Antergos + Gnome 
     - [Update](#update)
     - [Install](#install)
         - [Issues & Fixes](#issues--fixes)
+        - [Touchpad](#touchpad)
         - [WIP](#wip)
-            - [Synaptics settings](#synaptics-settings)
             - [Razer Core](#razer-core)
                 - [Auth](#auth)
                 - [bumblebee](#bumblebee)
+        - [Tweaks](#tweaks)
+            - [Theme](#theme)
+            - [Steam](#steam)
 - [Ubuntu 17.10](#ubuntu-1710)
     - [Install](#install-1)
     - [Works](#works)
@@ -49,12 +52,12 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + X11) or Arch (Antergos + Gnome 
     - [Unsolved Issues](#unsolved-issues)
         - [Keyboard Colors & Openrazer](#keyboard-colors--openrazer)
         - [Webcam](#webcam)
-    - [Tweaks](#tweaks)
+    - [Tweaks](#tweaks-1)
         - [Power Management](#power-management)
-        - [Touchpad](#touchpad)
+        - [Touchpad](#touchpad-1)
             - [Click, Tap, Move](#click-tap-move)
         - [Display Scaling](#display-scaling)
-        - [Theme](#theme)
+        - [Theme](#theme-1)
             - ["Capitaine" Cursors](#capitaine-cursors)
             - [Applicatioins Theme](#applicatioins-theme)
             - [Dock & Top Bar](#dock--top-bar)
@@ -81,7 +84,7 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + X11) or Arch (Antergos + Gnome 
 - [Arch (Antergos)](#arch-antergos)
     - [Works](#works-1)
     - [Suspend Loop](#suspend-loop-1)
-    - [Touchpad](#touchpad-1)
+    - [Touchpad](#touchpad-2)
         - [Libinput-gestures](#libinput-gestures-1)
         - [Synaptics (X11)](#synaptics-x11)
         - [Libinput Coordinates](#libinput-coordinates)
@@ -91,15 +94,16 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + X11) or Arch (Antergos + Gnome 
         - [Setup](#setup)
         - [Bash Alias razerrun](#bash-alias-razerrun)
         - [Thunderbolt](#thunderbolt-1)
-    - [Tweaks](#tweaks-1)
+    - [Tweaks](#tweaks-2)
         - [Top Icon Plus](#top-icon-plus)
         - [Gdm](#gdm)
-        - [Theme](#theme-1)
+        - [Theme](#theme-2)
         - [Power Management](#power-management-1)
 - [Other Models](#other-models)
     - [Razer Blade Stealth Late 2017](#razer-blade-stealth-late-2017)
         - [Screen flickering](#screen-flickering)
         - [External monitor randomly going blank](#external-monitor-randomly-going-blank)
+        - [Touchpad](#touchpad-3)
 - [Credits](#credits)
 
 <!-- /TOC -->
@@ -127,11 +131,11 @@ My current setup is Ubuntu 17.10 (Ubuntu Gnome + X11) or Arch (Antergos + Gnome 
 
 ## Update
 
-Udating my 17.10 installation works without issues. I run X11 with the Synaptics driver.
+Udating my 17.10 installation works without issues (X11 & Synaptics touchpad driver).
+(Currently) I'm running a fresh install based on this tutorial.
 
 ## Install
 
-To check what fixes are needed at 18.04, I try a fresh install.
 Running the live session and starting the installation segfaults, starting direct (boot) into the setup works.
 
 - Minimal installation, include 3rd party
@@ -143,43 +147,47 @@ sudo apt install intel-microcode
 
 ### Issues & Fixes
 
-Issues still exist and the fixes needed:
+These issues still exist and neeed fixes (including some tweaks):
 
-- Caps-Lock (✓)
-- Suspend-Loop (✓)
-- Touchpad Temporary Freezes (✓)
-- Touchscreen & Firefox (✓)
-- Libinput-gestures (✓)
-- Power Management (✓)
-- "Capitaine" Cursors (✓)
-- Numix Theme: apt install numix-gtk-theme numix-icon-theme gnome-icon-theme
-    - Selected Theme: "Numix" (✓)
-- Steam: Settings, Interface, Enlarge text and icons based on monitor size (✓)
- 
-### WIP
+- [Caps-Lock Crash](#caps-lock-crash)
+- [Suspend Loop](#suspend-loop)
+- [Touchpad Suspend](#touchpad-suspend)
+- [Touchpad Temporary Freezes](#touchpad-temporary-freezes)
+- [Touchscreen & Firefox](#touchscreen--firefox)
+- [Power Management](#power-management)
+- [Touchpad](#touchpad-1)
+- ["Capitaine" Cursors](#capitaine-cursors)
 
-#### Synaptics settings
+### Touchpad
 
 With libinput, the pointer "jumps" while moving. The synaptics driver hasn't this issue.
+Other users with RBS late 2017 reports dead zones, I'm not sure if they have tested the synaptics driver.
 Maybe 4.17-1 kernel solves this problem (https://github.com/rolandguelle/razer-blade-stealth-linux/issues/19).
 
-- install the synaptics driver:
+For me, synaptics works:
+
 ```shell
 sudo apt install xserver-xorg-input-synaptics
+sudo cp etc/X11/xorg.conf.d/50-synaptics.conf /etc/X11/xorg.conf.d/50-synaptics.conf
 ```
-- cp sudo etc/X11/xorg.conf.d/50-synaptics.conf /etc/X11/xorg.conf.d/50-synaptics.conf
-- reboot
-- check if synaptics driver is running
+
+Reboot
+
+Check if synaptics driver is running:
+
 ```shell
 xinput list-props 'Synaptics TM2438-005'
 ```
 
 At boot and after suspend, the settings "TapButton3=0 ClickFinger3=0" are gone.
 Workaround:
+
 ```shell
-/etc/pm/sleep.d/30_synaptics
-~/.config/autostart/synaptics.desktop
+sudo cp etc/pm/sleep.d/30_synaptics /etc/pm/sleep.d/30_synaptics
+cp config/autostart/synaptics.desktop ~/.config/autostart/synaptics.desktop
 ```
+
+### WIP
 
 #### Razer Core
 
@@ -212,6 +220,25 @@ sudo apt-get install nvidia-driver-396
 tlp suspend // see arch setup
 
 https://github.com/Bumblebee-Project/Bumblebee/issues/951
+
+### Tweaks
+
+#### Theme
+
+My current favorite :)
+
+```shell
+apt install numix-gtk-theme numix-icon-theme gnome-icon-theme
+```
+
+Selected Theme (Tweaks, Theme): "Numix" (✓)
+
+#### Steam
+
+Change Steam interface enlargement based on monitor size:
+
+- Settings, Interface, Enlarge text and icons based on monitor size (✓)
+
 
 # Ubuntu 17.10
 
@@ -1048,6 +1075,10 @@ Workaround:
 Change output channel to "HDMI / DisplayPort - Built in Audio" or connect headphones to the stereo jack.
 
 Discussion: https://github.com/rolandguelle/razer-blade-stealth-linux/issues/18
+
+### Touchpad
+
+See https://github.com/rolandguelle/razer-blade-stealth-linux/issues/19 and [Touchpad](#touchpad).
 
 # Credits
 
