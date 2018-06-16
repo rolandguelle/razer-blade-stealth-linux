@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
-Exec=synaptics TapButton3=0 ClickFinger3=0
+Exec=synclient TapButton3=0 ClickFinger3=0
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
-Name[en_US]=Synaptics
+Name[en_US]=Synaptics synclient
 Name=Synaptics
-Comment[en_US]=
-Comment=
+Comment[en_US]=synclient startup settings for button3 (Workaround)
+Comment=synclient settings for button3
