@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=synaptics TapButton3=0 ClickFinger3=0
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Synaptics
+Name=Synaptics
+Comment[en_US]=
+Comment=

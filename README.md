@@ -161,21 +161,25 @@ Issues still exist and the fixes needed:
 #### Synaptics settings
 
 With libinput, the pointer "jumps" while moving. The synaptics driver hasn't this issue.
-Maybe 4.17 kernel solves this problem (https://github.com/rolandguelle/razer-blade-stealth-linux/issues/19).
+Maybe 4.17-1 kernel solves this problem (https://github.com/rolandguelle/razer-blade-stealth-linux/issues/19).
 
 - install the synaptics driver:
 ```shell
 sudo apt install xserver-xorg-input-synaptics
 ```
-- add /etc/X11/xorg.conf.d/50-synaptics.conf
+- cp sudo etc/X11/xorg.conf.d/50-synaptics.conf /etc/X11/xorg.conf.d/50-synaptics.conf
 - reboot
 - check if synaptics driver is running
 ```shell
 xinput list-props 'Synaptics TM2438-005'
 ```
 
-After suspend, some settings are gone, workaround:
+At boot and after suspend, the settings "TapButton3=0 ClickFinger3=0" are gone.
+Workaround:
+```shell
 /etc/pm/sleep.d/30_synaptics
+~/.config/autostart/synaptics.desktop
+```
 
 #### Razer Core
 
