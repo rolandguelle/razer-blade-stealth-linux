@@ -136,10 +136,12 @@ Udating my 17.10 installation works without issues (X11 & Synaptics touchpad dri
 
 ## Install
 
-Running the live session and starting the installation segfaults, starting direct (boot) into the setup works.
+Running the live session and starting the installation ends with segfaults.
+Select "installation" while boot (Grub / USB Stick) works.
 
 - Minimal installation, include 3rd party
-- Install Intel Microcode
+
+After installation, update and install Intel Microcode
 
 ```shell
 sudo apt install intel-microcode
