@@ -103,7 +103,7 @@ My current setup is Ubuntu 18.04 (Ubuntu, Gnome, X11 & Synaptics touchpad driver
     - [Razer Blade Stealth Late 2017](#razer-blade-stealth-late-2017)
         - [Screen flickering](#screen-flickering)
         - [External monitor randomly going blank](#external-monitor-randomly-going-blank)
-        - [Touchpad](#touchpad-3)
+        - [Touchpad deadzones](#touchpad-deadzones)
     - [Razer Blade Stealth Early 2018](#razer-blade-stealth-early-2018)
         - [Screen flickering](#screen-flickering-1)
 - [Credits](#credits)
@@ -1089,7 +1089,9 @@ Change output channel to "HDMI / DisplayPort - Built in Audio" or connect headph
 
 Discussion: https://github.com/rolandguelle/razer-blade-stealth-linux/issues/18
 
-### Touchpad
+### Touchpad deadzones
+
+Kernel 4.17.1 solve the issue, see #19
 
 See https://github.com/rolandguelle/razer-blade-stealth-linux/issues/19 and [Touchpad](#touchpad).
 
@@ -1124,3 +1126,4 @@ More: https://github.com/rolandguelle/razer-blade-stealth-linux/issues/7
     - https://github.com/lucaszanella
     - https://github.com/brendanrankin
     - https://github.com/benjob
+    - https://github.com/emanuelet
