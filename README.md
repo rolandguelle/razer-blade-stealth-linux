@@ -1075,6 +1075,12 @@ More: https://wiki.archlinux.org/index.php/Razer_Blade#Late-2017_version_Razer_B
 
 Unconfirmed fix:
 
+```
+intel_idle.max_cstate=4
+```
+
+https://github.com/rolandguelle/razer-blade-stealth-linux/issues/7
+Please confirm :)
 
 ### External monitor randomly going blank
 
