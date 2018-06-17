@@ -104,6 +104,8 @@ My current setup is Ubuntu 18.04 (Ubuntu, Gnome, X11 & Synaptics touchpad driver
         - [Screen flickering](#screen-flickering)
         - [External monitor randomly going blank](#external-monitor-randomly-going-blank)
         - [Touchpad](#touchpad-3)
+    - [Razer Blade Stealth Early 2018](#razer-blade-stealth-early-2018)
+        - [Screen flickering](#screen-flickering-1)
 - [Credits](#credits)
 
 <!-- /TOC -->
@@ -1064,12 +1066,15 @@ Some fixes, tips & tweaks for other models.
 
 ### Screen flickering
 
-Add kernel param:
+Workaround, kernel parameter:
 ```
 i915.edp_vswing=2
 ```
 
 More: https://wiki.archlinux.org/index.php/Razer_Blade#Late-2017_version_Razer_Blade_Stealth
+
+Unconfirmed fix:
+
 
 ### External monitor randomly going blank
 
@@ -1081,6 +1086,18 @@ Discussion: https://github.com/rolandguelle/razer-blade-stealth-linux/issues/18
 ### Touchpad
 
 See https://github.com/rolandguelle/razer-blade-stealth-linux/issues/19 and [Touchpad](#touchpad).
+
+## Razer Blade Stealth Early 2018
+
+### Screen flickering
+
+Kernel parameter:
+
+```
+intel_idle.max_cstate=4
+```
+
+More: https://github.com/rolandguelle/razer-blade-stealth-linux/issues/7
 
 # Credits
 
