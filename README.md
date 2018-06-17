@@ -1084,14 +1084,14 @@ Please confirm :)
 
 ### External monitor randomly going blank
 
-Workaround:
-Change output channel to "HDMI / DisplayPort - Built in Audio" or connect headphones to the stereo jack.
+Workaround: Change output channel
+- "HDMI / DisplayPort - Built in Audio" (or connect headphones to the stereo jack)
 
-Discussion: https://github.com/rolandguelle/razer-blade-stealth-linux/issues/18
+See: https://github.com/rolandguelle/razer-blade-stealth-linux/issues/18
 
 ### Touchpad deadzones
 
-Kernel 4.17.1 solve the issue, see #19
+Kernel 4.17.1 solve the issue, see (#19)
 
 See https://github.com/rolandguelle/razer-blade-stealth-linux/issues/19 and [Touchpad](#touchpad).
 
