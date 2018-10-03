@@ -106,6 +106,8 @@ My current setup is Ubuntu 18.04 (Ubuntu, Gnome, X11 & Synaptics touchpad driver
         - [Touchpad deadzones](#touchpad-deadzones)
     - [Razer Blade Stealth Early 2018](#razer-blade-stealth-early-2018)
         - [Screen flickering](#screen-flickering-1)
+- [Oher Distros](#oher-distros)
+    - [Elementary OS](#elementary-os)
 - [Credits](#credits)
 
 <!-- /TOC -->
@@ -1067,45 +1069,55 @@ Some fixes, tips & tweaks for other models.
 ### Screen flickering
 
 Workaround, kernel parameter:
-```
-i915.edp_vswing=2
+
+```shell
+intel_idle.max_cstate=4
 ```
 
 More: https://wiki.archlinux.org/index.php/Razer_Blade#Late-2017_version_Razer_Blade_Stealth
 
-Unconfirmed fix:
-
-```
-intel_idle.max_cstate=4
-```
-
-https://github.com/rolandguelle/razer-blade-stealth-linux/issues/7
-Please confirm :)
-
 ### External monitor randomly going blank
 
-Workaround: Change output channel
+- Workaround: Change output channel
 - "HDMI / DisplayPort - Built in Audio" (or connect headphones to the stereo jack)
-
-See: https://github.com/rolandguelle/razer-blade-stealth-linux/issues/18
+- See: https://github.com/rolandguelle/razer-blade-stealth-linux/issues/18
 
 ### Touchpad deadzones
 
-Kernel 4.17.1 solve the issue, see (#19)
-
-See https://github.com/rolandguelle/razer-blade-stealth-linux/issues/19 and [Touchpad](#touchpad).
+- Kernel 4.17.1 solve the issue, see (#19)
+- See https://github.com/rolandguelle/razer-blade-stealth-linux/issues/19 and [Touchpad](#touchpad).
 
 ## Razer Blade Stealth Early 2018
 
 ### Screen flickering
 
-Kernel parameter:
+Workaround, kernel parameter:
 
-```
+```shell
 intel_idle.max_cstate=4
 ```
 
 More: https://github.com/rolandguelle/razer-blade-stealth-linux/issues/7
+
+# Oher Distros
+
+## Elementary OS
+
+- While booting from USB stick, choose direct the "Install Mode" (Option 2)
+- First boot after installing, add kernel parameter while booting (grub, press "e"):
+
+```shell
+intel_idle.max_cstate=4
+```
+
+Add this parameter permantly:
+
+```shell
+sudo nano /etc/default/grub
+GRUB_CMDLINE_LINUX_DEFAULT="button.lid_init_state=open intel_idle.max_cstate=4"
+```
+
+There are maybe other issues with this distros.
 
 # Credits
 
