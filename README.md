@@ -22,6 +22,8 @@ My current setup is Ubuntu 18.04 (Ubuntu, Gnome, X11 & Synaptics touchpad driver
                 - [Auth](#auth)
                 - [bumblebee](#bumblebee)
         - [Tweaks](#tweaks)
+            - [Grub](#grub)
+    - [Plymouth](#plymouth)
             - [Theme](#theme)
             - [Steam](#steam)
 - [Ubuntu 17.10](#ubuntu-1710)
@@ -228,6 +230,29 @@ tlp suspend // see arch setup
 https://github.com/Bumblebee-Project/Bumblebee/issues/951
 
 ### Tweaks
+
+
+#### Grub
+
+WIP // Theme
+
+```shell
+sudo cp -r themes/grub /boot/grub/themes/razer
+sudo cp etc/default/grub /etc/default/grub
+sudo update-grub
+```
+
+## Plymouth
+
+WIP // Theme
+
+```shell
+sudo cp -r themes/plymouth /usr/share/plymouth/themes/razer
+sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/razer/razer.plymouth 90
+sudo update-alternatives --config default.plymouth
+sudo update-initramfs -u
+```
+
 
 #### Theme
 

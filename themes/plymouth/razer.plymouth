@@ -1,6 +1,6 @@
 [Plymouth Theme]
 Name=Razer
-Description=A theme designed by jimmac that features a simple spinner, modified for the razer laptop
+Description=Based on simple spinner theme (by jimmac), modified for RBS
 ModuleName=two-step
 
 [two-step]
