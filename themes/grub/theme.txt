@@ -1,20 +1,19 @@
 # Razer GRUB theme
 # Based on the breeze theme
-# 2018, @rolandguelle
 #
 # Some rights reserved. This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License.
 #
 
 desktop-image: "background.png"
 
-# colors are taken from the breeze default theme
-title-text: "Select a boot option:"
+title-text: "Razer Blade Stealth"
 title-font: "Hack Regular 38"
 title-color: "#ffffff"
+
 message-font: "Hack Regular 38"
 message-color: "#ffffff"
-terminal-font: "Hack Regular 38"
-terminal-box: "terminal_*.png"
+
+terminal-font: "Unknown Regular 16"
 
 + boot_menu {
   left = 15%
@@ -27,27 +26,25 @@ terminal-box: "terminal_*.png"
   item_font = "Hack Regular 38"
   item_color = "#ffffff"
   item_height = 44
-  item_icon_space = 8
-  item_spacing = 2
+  item_icon_space = 12
+  item_spacing = 8
 
   selected_item_font = "Hack Regular 38"
   selected_item_color= "#44d62c"
-  selected_item_pixmap_style = "select_*.png"
 
-  icon_height = 48
-  icon_width = 48
+  icon_height = 54
+  icon_width = 54
 
   scrollbar = true
   scrollbar_width = 20
-  scrollbar_thumb = "slider_*.png"
 }
 
 + progress_bar {
   id = "__timeout__"
   left = 33%
-  width = 33%
+  width = 34%
   top = 73%
-  height = 6
+  height = 14
   show_text = false
   fg_color = #44d62c
   bg_color = #ffffff
