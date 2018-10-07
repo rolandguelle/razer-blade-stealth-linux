@@ -1,0 +1,9 @@
+284a285,287
+>                 if [ "${OS}" = "Antergos Linux" ] ; then
+>                         LINITRD="/boot/intel-ucode.img /boot/initramfs-linux.img"
+>                 fi
+304a308,310
+>                 if [ "${OS}" = "Antergos Linux" ] ; then
+>                         LINITRD="/boot/intel-ucode.img /boot/initramfs-linux.img"
+>                 fi
+
