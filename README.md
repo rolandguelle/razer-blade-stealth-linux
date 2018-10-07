@@ -24,8 +24,8 @@ My current setup is Ubuntu 18.04 (Ubuntu, Gnome, X11 & Synaptics touchpad driver
         - [Tweaks](#tweaks)
             - [Grub](#grub)
     - [Plymouth](#plymouth)
-            - [Theme](#theme)
-            - [Steam](#steam)
+            - [Gnome Theme](#gnome-theme)
+            - [Steam Interface](#steam-interface)
 - [Ubuntu 17.10](#ubuntu-1710)
     - [Install](#install-1)
     - [Works](#works)
@@ -59,7 +59,7 @@ My current setup is Ubuntu 18.04 (Ubuntu, Gnome, X11 & Synaptics touchpad driver
         - [Touchpad](#touchpad-1)
             - [Click, Tap, Move](#click-tap-move)
         - [Display Scaling](#display-scaling)
-        - [Theme](#theme-1)
+        - [Theme](#theme)
             - ["Capitaine" Cursors](#capitaine-cursors)
             - [Applicatioins Theme](#applicatioins-theme)
             - [Dock & Top Bar](#dock--top-bar)
@@ -99,7 +99,7 @@ My current setup is Ubuntu 18.04 (Ubuntu, Gnome, X11 & Synaptics touchpad driver
     - [Tweaks](#tweaks-2)
         - [Top Icon Plus](#top-icon-plus)
         - [Gdm](#gdm)
-        - [Theme](#theme-2)
+        - [Theme](#theme-1)
         - [Power Management](#power-management-1)
 - [Other Models](#other-models)
     - [Razer Blade Stealth Late 2017](#razer-blade-stealth-late-2017)
@@ -231,10 +231,9 @@ https://github.com/Bumblebee-Project/Bumblebee/issues/951
 
 ### Tweaks
 
-
 #### Grub
 
-WIP // Theme
+WIP // Razer Grub Theme
 
 ```shell
 sudo cp -r themes/grub /boot/grub/themes/razer
@@ -244,7 +243,7 @@ sudo update-grub
 
 ## Plymouth
 
-WIP // Theme
+WIP // Razer Plymouth Theme
 
 ```shell
 sudo cp -r themes/plymouth /usr/share/plymouth/themes/razer
@@ -253,8 +252,7 @@ sudo update-alternatives --config default.plymouth
 sudo update-initramfs -u
 ```
 
-
-#### Theme
+#### Gnome Theme
 
 My current favorite :)
 
@@ -264,7 +262,7 @@ apt install numix-gtk-theme numix-icon-theme gnome-icon-theme
 
 Selected Theme (Tweaks, Theme): "Numix" (✓)
 
-#### Steam
+#### Steam Interface
 
 Change Steam interface enlargement based on monitor size:
 
