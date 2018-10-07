@@ -22,8 +22,9 @@ My current setup is Ubuntu 18.04 (Ubuntu, Gnome, X11 & Synaptics touchpad driver
                 - [Auth](#auth)
                 - [bumblebee](#bumblebee)
         - [Tweaks](#tweaks)
+            - [Dual Boot Antergos](#dual-boot-antergos)
             - [Grub](#grub)
-    - [Plymouth](#plymouth)
+            - [Plymouth](#plymouth)
             - [Gnome Theme](#gnome-theme)
             - [Steam Interface](#steam-interface)
 - [Ubuntu 17.10](#ubuntu-1710)
@@ -172,6 +173,8 @@ With libinput, the pointer "jumps" while moving. The synaptics driver hasn't thi
 Other users with RBS late 2017 reports dead zones, I'm not sure if they have tested the synaptics driver.
 Maybe 4.17-1 kernel solves this problem (https://github.com/rolandguelle/razer-blade-stealth-linux/issues/19).
 
+**Note:** 18.10 (beta) works out-of-the-box with libinput.
+
 For me, synaptics works:
 
 ```shell
@@ -231,9 +234,18 @@ https://github.com/Bumblebee-Project/Bumblebee/issues/951
 
 ### Tweaks
 
+#### Dual Boot Antergos
+
+"update-grub" add only /boot/intel-ucode.img to initrd.
+(Maybe) a hack, but works well on my system.
+
+```shell
+patch /etc/grub.d/30_os-prober etc/grub.d/os-prober.patch
+```
+
 #### Grub
 
-WIP // Razer Grub Theme
+WIP // Razer Grub Theme for RBS 4k
 
 ```shell
 sudo cp -r themes/grub /boot/grub/themes/razer
@@ -241,7 +253,7 @@ sudo cp etc/default/grub /etc/default/grub
 sudo update-grub
 ```
 
-## Plymouth
+#### Plymouth
 
 WIP // Razer Plymouth Theme
 
@@ -260,7 +272,9 @@ My current favorite :)
 apt install numix-gtk-theme numix-icon-theme gnome-icon-theme
 ```
 
-Selected Theme (Tweaks, Theme): "Numix" (✓)
+- Theme Application (Tweaks, Theme): "Numix" (✓)
+- Theme Icons (Tweaks, Theme): "Yaru" (✓)
+- Theme Sound (Tweaks, Theme): "Yaru" (✓)
 
 #### Steam Interface
 
