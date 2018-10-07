@@ -6,7 +6,7 @@ GRUB_DEFAULT="0"
 GRUB_TIMEOUT_STYLE="hidden"
 GRUB_TIMEOUT="10"
 GRUB_DISTRIBUTOR="`lsb_release -i -s 2> /dev/null || echo Debian`"
-GRUB_CMDLINE_LINUX_DEFAULT="quiet splash button.lid_init_state=open"
+GRUB_CMDLINE_LINUX_DEFAULT="splash button.lid_init_state=open"
 GRUB_CMDLINE_LINUX=""
 
 # Uncomment to enable BadRAM filtering, modify to suit your needs
@@ -21,9 +21,10 @@ GRUB_CMDLINE_LINUX=""
 # note that you can use only modes which your graphic card supports via VBE
 # you can see them in real GRUB with the command `vbeinfo'
 
-#GRUB_GFXMODE="auto"
-GRUB_GFXMODE="3840x2160"
-GRUB_GFXPAYLOAD_LINUX="keep"
+# gfx mode for RBS 4k
+GRUB_GFXMODE="3840x2160-32"
+#GRUB_GFXPAYLOAD_LINUX="keep"
+GRUB_GFXPAYLOAD_LINUX="3840x2160-32"
 
 # Uncomment if you don't want GRUB to pass "root=UUID=xxx" parameter to Linux
 #GRUB_DISABLE_LINUX_UUID="true"
