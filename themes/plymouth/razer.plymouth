@@ -1,0 +1,13 @@
+[Plymouth Theme]
+Name=Razer
+Description=A theme designed by jimmac that features a simple spinner, modified for the razer laptop
+ModuleName=two-step
+
+[two-step]
+ImageDir=/usr/share/plymouth/themes/razer
+HorizontalAlignment=.5
+VerticalAlignment=.75
+Transition=none
+TransitionDuration=0.0
+BackgroundStartColor=0x202020
+BackgroundEndColor=0x202020

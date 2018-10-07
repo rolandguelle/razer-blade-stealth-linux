@@ -1,0 +1,56 @@
+# Razer GRUB theme
+# Based on the breeze theme
+# 2018, @rolandguelle
+#
+# Some rights reserved. This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License.
+#
+
+desktop-image: "background.png"
+
+# colors are taken from the breeze default theme
+title-text: "Hello! Select a boot option:"
+title-font: "Hack Regular 32"
+title-color: "#ffffff"
+message-font: "Hack Regular 32"
+message-color: "#ffffff"
+terminal-font: "Hack Regular 32"
+terminal-box: "terminal_*.png"
+
++ boot_menu {
+  left = 15%
+  width = 70%
+  top = 25%
+  height = 50%
+
+  menu_pixmap_style = "boot_menu_*.png"
+
+  item_font = "Hack Regular 32"
+  # item_color = "#999999"
+  item_color = "#ffffff"
+  item_height = 44
+  item_icon_space = 8
+  item_spacing = 2
+
+  selected_item_font = "Hack Regular 32"
+  selected_item_color= "#44d62c"
+  selected_item_pixmap_style = "select_*.png"
+
+  icon_height = 48
+  icon_width = 48
+
+  scrollbar = true
+  scrollbar_width = 20
+  scrollbar_thumb = "slider_*.png"
+}
+
++ progress_bar {
+  id = "__timeout__"
+  left = 33%
+  width = 33%
+  top = 73%
+  height = 6
+  show_text = false
+  fg_color = #44d62c
+  bg_color = #ffffff
+  border_color = #44d62c
+}
