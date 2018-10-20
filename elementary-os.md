@@ -31,4 +31,4 @@ sudo nano /etc/default/grub
 GRUB_CMDLINE_LINUX_DEFAULT="button.lid_init_state=open intel_idle.max_cstate=4"
 ```
 
-There are maybe other issues with this distros.
+There are maybe other issues with this distros, check [Ubuntu 18.04](ubuntu-18-04.md).

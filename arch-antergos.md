@@ -13,17 +13,22 @@ Tested with [Antergos](https://antergos.com/) (Wayland & Gnome) Arch, but other 
     - [3.2.1. Libinput-gestures](#321-libinput-gestures)
     - [3.2.2. Synaptics (X11)](#322-synaptics-x11)
     - [3.2.3. Libinput Coordinates](#323-libinput-coordinates)
-  - [3.3. More](#33-more)
-  - [3.4. Razer Core](#34-razer-core)
-    - [3.4.1. Installation](#341-installation)
-    - [3.4.2. Setup](#342-setup)
-    - [3.4.3. Bash Alias razerrun](#343-bash-alias-razerrun)
-    - [3.4.4. Thunderbolt](#344-thunderbolt)
-  - [3.5. Tweaks](#35-tweaks)
-    - [3.5.1. Top Icon Plus](#351-top-icon-plus)
-    - [3.5.2. Gdm](#352-gdm)
-    - [3.5.3. Theme](#353-theme)
-    - [3.5.4. Power Management](#354-power-management)
+  - [3.3. Onscreen Keyboard](#33-onscreen-keyboard)
+    - [3.3.1. Block caribou](#331-block-caribou)
+      - [3.3.1.1. Startup Applications](#3311-startup-applications)
+      - [3.3.1.2. Extension](#3312-extension)
+  - [3.4. Touchscreen & Firefox](#34-touchscreen--firefox)
+    - [3.4.1. XINPUT2](#341-xinput2)
+- [4. Razer Core](#4-razer-core)
+  - [4.1. Installation](#41-installation)
+  - [4.2. Setup](#42-setup)
+  - [4.3. Bash Alias razerrun](#43-bash-alias-razerrun)
+  - [4.4. Thunderbolt](#44-thunderbolt)
+- [5. Tweaks](#5-tweaks)
+  - [5.1. Top Icon Plus](#51-top-icon-plus)
+  - [5.2. Gdm](#52-gdm)
+  - [5.3. Theme](#53-theme)
+  - [5.4. Power Management](#54-power-management)
 
 <!-- /TOC -->
 
@@ -81,21 +86,69 @@ $ sudo systemd-hwdb update
 $ sudo udevadm trigger /dev/input/event*
 ```
 
-## 3.3. More
+## 3.3. Onscreen Keyboard
 
-- [Onscreen Keyboard](#onscreen-keyboard)
-    - [Block caribou](#block-caribou)
-        - [Extension](#extension)
-- [Touchscreen & Firefox](#touchscreen--firefox)
-    - [XINPUT2](#xinput2)
-- [Unstable WIFI](#unstable-wifi)
-    - [Update Firmware](#update-firmware)
-- [Multiple Monitors](#multiple-monitors)
-    - [Switch to 1920x1080](#switch-to-1920x1080)
+Everytime the touchscreen is used, an onscreen keyboard opens.
 
-## 3.4. Razer Core
+### 3.3.1. Block caribou
 
-### 3.4.1. Installation
+#### 3.3.1.1. Startup Applications
+
+Disable caribou (the on screen keyboard) in "Startup Applications".
+
+Display "hidden apps":
+
+```shell
+sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop
+```
+
+Open "Startup Applications", disable caribou (and maybe Desktop Sharing, Backup Monitor and some others).
+
+#### 3.3.1.2. Extension
+
+Remove caribou from "Startup Applications" is not enough :(
+
+Blocks caribou (the on screen keyboard) from popping up when you use a touchscreen with a Gnome extension.
+
+Manual installation:
+
+```shell
+mkdir -p ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
+cd ~/.local/share/gnome-shell/extensions/cariboublocker@git.keringar.xyz
+wget https://github.com/keringar/cariboublocker/raw/master/extension.js
+wget https://github.com/keringar/cariboublocker/raw/master/metadata.json
+cd
+gsettings get org.gnome.shell enabled-extensions
+```
+
+Add Gnome extension (add the new extension to your existing extensions):
+
+```shell
+gsettings set org.gnome.shell enabled-extensions "['cariboublocker@git.keringar.xyz']"
+```
+
+Logout - Login.
+
+
+## 3.4. Touchscreen & Firefox
+
+Firefox doesn't seem to care about the touchscreen at all.
+
+### 3.4.1. XINPUT2
+
+Tell Firefox to use xinput2
+
+```shell
+sudo nano /etc/environment
+MOZ_USE_XINPUT2=1
+```
+
+Logout - Login.
+
+
+# 4. Razer Core
+
+## 4.1. Installation
 
 Install NVIDIA & bumblebee:
 
@@ -109,7 +162,7 @@ Install 32bit driver for steam:
 sudo pacman -S lib32-virtualgl lib32-nvidia-utils
 ```
 
-### 3.4.2. Setup
+## 4.2. Setup
 
 Add user to bumblebee group:
 
@@ -130,7 +183,7 @@ TODO / WIP:
 
 More: https://wiki.archlinux.org/index.php/bumblebee#Installation
 
-### 3.4.3. Bash Alias razerrun
+## 4.3. Bash Alias razerrun
 
 Bash Alias:
 
@@ -145,7 +198,7 @@ Test:
 razerrun glxinfo | grep OpenGL
 ```
 
-### 3.4.4. Thunderbolt
+## 4.4. Thunderbolt
 
 Install "bolt" for thunderbolt management:
 
@@ -157,15 +210,15 @@ boltctl enroll
 
 Nice (but useless) Gnome extension: https://github.com/gicmo/bolt-extension
 
-## 3.5. Tweaks
+# 5. Tweaks
 
 - [Dock & Top Bar](#dock--top-bar)
 
-### 3.5.1. Top Icon Plus
+## 5.1. Top Icon Plus
 
 https://github.com/phocean/TopIcons-plus
 
-### 3.5.2. Gdm
+## 5.2. Gdm
 
 ```shell
 systemctl disable lightdm.service
@@ -179,7 +232,7 @@ pacman -S gnome-screensaver
 
 More: https://forum.antergos.com/topic/5081/switching-from-lightdm-to-gdm-no-lock-screen
 
-### 3.5.3. Theme
+## 5.3. Theme
 
 gnome-tweak-tool / Appearance
 
@@ -201,7 +254,7 @@ gnome-tweak-tool / Keyboard & Mouse / Touchpad
 - Click Method: Fingers
 - Disable While Typing: True
 
-### 3.5.4. Power Management
+## 5.4. Power Management
 
 Install TLP tools:
 
