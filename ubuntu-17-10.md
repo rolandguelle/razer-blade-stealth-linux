@@ -23,38 +23,38 @@
       - [1.7.1.2. Extension](#1712-extension)
   - [1.8. Multiple Monitors](#18-multiple-monitors)
     - [1.8.1. Switch to 1920x1080](#181-switch-to-1920x1080)
-- [2. Unsolved Issues](#2-unsolved-issues)
-  - [2.1. Keyboard Colors & Openrazer](#21-keyboard-colors--openrazer)
-  - [2.2. Webcam](#22-webcam)
-- [3. Tweaks](#3-tweaks)
-  - [3.1. Power Management](#31-power-management)
-  - [3.2. Touchpad](#32-touchpad)
-    - [3.2.1. Click, Tap, Move](#321-click-tap-move)
-  - [3.3. Display Scaling](#33-display-scaling)
-  - [3.4. Theme](#34-theme)
-    - [3.4.1. "Capitaine" Cursors](#341-capitaine-cursors)
-    - [3.4.2. Applicatioins Theme](#342-applicatioins-theme)
-    - [3.4.3. Dock & Top Bar](#343-dock--top-bar)
-    - [3.4.4. Fonts](#344-fonts)
-    - [3.4.5. Workspace Grid](#345-workspace-grid)
-- [4. Razer Core](#4-razer-core)
-  - [4.1. Thunderbolt](#41-thunderbolt)
-    - [4.1.1. Cable](#411-cable)
-    - [4.1.2. User Authorization](#412-user-authorization)
-  - [4.2. Discrete NVIDIA GPU](#42-discrete-nvidia-gpu)
-    - [4.2.1. NVIDIA Prime](#421-nvidia-prime)
-    - [4.2.2. NVIDIA GPU Driver](#422-nvidia-gpu-driver)
-    - [4.2.3. Bumblebee](#423-bumblebee)
-    - [4.2.4. Test GPU With optirun](#424-test-gpu-with-optirun)
-    - [4.2.5. Run Extremetuxracer With primusrun](#425-run-extremetuxracer-with-primusrun)
-  - [4.3. razercore](#43-razercore)
-  - [4.4. External Display](#44-external-display)
-    - [4.4.1. Connected At Laptop HDMI](#441-connected-at-laptop-hdmi)
-    - [4.4.2. Connected At External GPU](#442-connected-at-external-gpu)
-      - [4.4.2.1. Expand Display](#4421-expand-display)
-      - [4.4.2.2. Run Applications 'Only' On External Screen](#4422-run-applications-only-on-external-screen)
-        - [4.4.2.2.1. Automatic Setup](#44221-automatic-setup)
-        - [4.4.2.2.2. Manual Setup](#44222-manual-setup)
+- [2. Tweaks](#2-tweaks)
+  - [2.1. Power Management](#21-power-management)
+  - [2.2. Touchpad](#22-touchpad)
+    - [2.2.1. Click, Tap, Move](#221-click-tap-move)
+  - [2.3. Display Scaling](#23-display-scaling)
+  - [2.4. Theme](#24-theme)
+    - [2.4.1. "Capitaine" Cursors](#241-capitaine-cursors)
+    - [2.4.2. Applicatioins Theme](#242-applicatioins-theme)
+    - [2.4.3. Dock & Top Bar](#243-dock--top-bar)
+    - [2.4.4. Fonts](#244-fonts)
+    - [2.4.5. Workspace Grid](#245-workspace-grid)
+- [3. Razer Core](#3-razer-core)
+  - [3.1. Thunderbolt](#31-thunderbolt)
+    - [3.1.1. Cable](#311-cable)
+    - [3.1.2. User Authorization](#312-user-authorization)
+  - [3.2. Discrete NVIDIA GPU](#32-discrete-nvidia-gpu)
+    - [3.2.1. NVIDIA Prime](#321-nvidia-prime)
+    - [3.2.2. NVIDIA GPU Driver](#322-nvidia-gpu-driver)
+    - [3.2.3. Bumblebee](#323-bumblebee)
+    - [3.2.4. Test GPU With optirun](#324-test-gpu-with-optirun)
+    - [3.2.5. Run Extremetuxracer With primusrun](#325-run-extremetuxracer-with-primusrun)
+  - [3.3. razercore](#33-razercore)
+  - [3.4. External Display](#34-external-display)
+    - [3.4.1. Connected At Laptop HDMI](#341-connected-at-laptop-hdmi)
+    - [3.4.2. Connected At External GPU](#342-connected-at-external-gpu)
+      - [3.4.2.1. Expand Display](#3421-expand-display)
+      - [3.4.2.2. Run Applications 'Only' On External Screen](#3422-run-applications-only-on-external-screen)
+        - [3.4.2.2.1. Automatic Setup](#34221-automatic-setup)
+        - [3.4.2.2.2. Manual Setup](#34222-manual-setup)
+- [4. Unsolved Issues](#4-unsolved-issues)
+  - [4.1. Keyboard Colors & Openrazer](#41-keyboard-colors--openrazer)
+  - [4.2. Webcam](#42-webcam)
 
 <!-- /TOC -->
 
@@ -273,34 +273,9 @@ Using a HiDPI and "normal" monitor works on _some_ applications with Wayland, bu
 Switch the internal HiDPI screen to **1920x1080** when using your RBS together with a non HiDPI external monitor.
 Gnome _remembers_ the monitor and switch back to 4k when unplugging the screen.
 
-## 2. Unsolved Issues
+## 2. Tweaks
 
-### 2.1. Keyboard Colors & Openrazer
-
-Currently not used.
-
-[Issue](https://github.com/openrazer/openrazer/issues/342): Settings are lost after suspend (Gnome, Wayland).
-
-But maybe it works for you:
-
-* https://openrazer.github.io/
-
-### 2.2. Webcam
-
-Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
-
-[This](https://wiki.archlinux.org/index.php/Razer_Blade#Webcam) fix not really helped:
-
-```shell
-/etc/modprobe.d/uvcvideo.conf
-
-## fix issue with built-in webcam
-options uvcvideo quirks=512
-```
-
-## 3. Tweaks
-
-### 3.1. Power Management
+### 2.1. Power Management
 
 TLP is an advanced power management tool for Linux that tries to apply tweaks for you automatically, depending on your Linux distribution and hardware.
 
@@ -309,9 +284,9 @@ sudo apt-get install tlp tlp-rdw
 sudo systemctl enable tlp
 ```
 
-### 3.2. Touchpad
+### 2.2. Touchpad
 
-#### 3.2.1. Click, Tap, Move
+#### 2.2.1. Click, Tap, Move
 
 macOS touchpad feeling.
 
@@ -322,7 +297,7 @@ sudo apt install gnome-tweak-tool
 - Keyboard & Mouse
 - Click Method: Fingers
 
-### 3.3. Display Scaling
+### 2.3. Display Scaling
 
 At native resolution, the internal HiDPI 4K display with 100% scale might be too tiny and frustrating for some, and with 200% scale is too large to be useful, luckily with Ubuntu 17.10 shipping with Gnome3, a native screen scaling solution is provided, however it's limited to 2 options: `100%` and `200%`.
 
@@ -340,36 +315,36 @@ If the fonts are blurry (on my setup), reset this setting:
 gsettings reset-recursively org.gnome.mutter
 ```
 
-### 3.4. Theme
+### 2.4. Theme
 
 My Ubuntu/Gnome tweaks :)
 
-#### 3.4.1. "Capitaine" Cursors
+#### 2.4.1. "Capitaine" Cursors
 
 - Install ["Capitaine" Cursors](https://github.com/keeferrourke/capitaine-cursors)
 - Select via tweaks tool, Appearance, Themes, Cursor
 
-#### 3.4.2. Applicatioins Theme
+#### 2.4.2. Applicatioins Theme
 
 - apt install numix-gtk-theme numix-icon-theme gnome-icon-theme gnome-icon-theme-extras
 - Select via tweaks tool, Appearance, Themes, Application (Numix), Icons (Numix-Light)
 
 Current Theme: [Adapta-Eta](https://github.com/adapta-project/adapta-gtk-theme)
 
-#### 3.4.3. Dock & Top Bar
+#### 2.4.3. Dock & Top Bar
 
 - Dock (Settings)
     - Auto-hide the Dock
     - Position on the screen: bottom
 
-#### 3.4.4. Fonts
+#### 2.4.4. Fonts
 
 - Window-Title: Garuda Regular 11
 - Interface: Ubuntu Regular 12
 - Document: Sans Regular 13
 - Monospace: Monospace Regular 13
 
-#### 3.4.5. Workspace Grid
+#### 2.4.5. Workspace Grid
 
 Switch vertical though your workspaces.
 
@@ -385,19 +360,19 @@ gesture swipe left      _internal ws_down
 gesture swipe right     _internal ws_up
 ```
 
-## 4. Razer Core
+## 3. Razer Core
 
 Running a thunderbolt 3 device like the [Razer Core](https://www.razerzone.com/gaming-laptops/razer-core-v2) with Linux sounds like fun :)
 
-### 4.1. Thunderbolt
+### 3.1. Thunderbolt
 
 The Razer Core is connected via Thunderbold 3 with your RBS.
 
-#### 4.1.1. Cable
+#### 3.1.1. Cable
 
 This [**2m** cable](https://www.amazon.de/CalDigit-Thunderbolt-3-Kabel-Zertifiziert-Typ-C-kompatibel/dp/B01N4MFG7J/) works without problems. I measured no (performance) differences compared with the included _very_ short cable (tested on Windows & Linux).
 
-#### 4.1.2. User Authorization
+#### 3.1.2. User Authorization
 
 - BIOS Setting: Thunderbolt security: User
 - Authorize thunderbolt, install: [Thunderbolt user-space components](https://github.com/01org/thunderbolt-software-user-space)
@@ -428,7 +403,7 @@ sudo tbtadm approve 0-1
 
 Razer Core USB & Ethernet now works.
 
-### 4.2. Discrete NVIDIA GPU
+### 3.2. Discrete NVIDIA GPU
 
 Goal is a setup like:
 
@@ -437,7 +412,7 @@ Goal is a setup like:
 - Run selected applications with Razer Core on external NVIDIA GPU
 - Unplug the Razer Core - without freezing the system
 
-#### 4.2.1. NVIDIA Prime
+#### 3.2.1. NVIDIA Prime
 
 Install NVIDIA Prime and set it to "intel":
 
@@ -446,7 +421,7 @@ sudo apt install nvidia-prime
 sudo prime-select intel
 ```
 
-#### 4.2.2. NVIDIA GPU Driver
+#### 3.2.2. NVIDIA GPU Driver
 
 Update driver (I use the latest NVIDIA drivers & Ubuntu 'pre-released updates'):
 
@@ -463,7 +438,7 @@ ln -s /usr/lib/nvidia-387/bin/nvidia-persistenced /usr/bin/nvidia-persistenced
 ln -s /usr/lib/nvidia-387/libnvidia-cfg.so.1 /usr/lib/libnvidia-cfg.so.1
 ```
 
-#### 4.2.3. Bumblebee
+#### 3.2.3. Bumblebee
 
 Install Bumblebee:
 
@@ -487,7 +462,7 @@ LibraryPath=/usr/lib/nvidia-387:/usr/lib32/nvidia-387
 XorgModulePath=/usr/lib/nvidia-387/xorg,/usr/lib/xorg/modules
 ```
 
-#### 4.2.4. Test GPU With optirun
+#### 3.2.4. Test GPU With optirun
 
 Reboot with NVIDIA kernel drivers.
 
@@ -504,7 +479,7 @@ NVIDIA Settings
 optirun -b none /usr/bin/nvidia-settings  -c :8
 ```
 
-#### 4.2.5. Run Extremetuxracer With primusrun
+#### 3.2.5. Run Extremetuxracer With primusrun
 
 Replace "etr" (Extremetuxracer) with your favorite 3D application/game ;)
 
@@ -519,7 +494,7 @@ PRIMUS_SYNC=1 vblank_mode=0 primusrun etr
 
 Tested with "Extremetuxracer" and different games on "Steam" (Saints Row IV, Life is Strange and others) with 4k resolution on Wayland & X11.
 
-### 4.3. razercore
+### 3.3. razercore
 
 This (ugly) script helps with the typical tasks.
 Copy [razercore](bin/razercore) into ~/bin or somewhere else in your path and make it executable.
@@ -540,11 +515,11 @@ Usage:
     - razercore intern-on, razercore intern-off
         - enable / disable internal screen
 
-### 4.4. External Display
+### 3.4. External Display
 
 Use eGPU on external displays.
 
-#### 4.4.1. Connected At Laptop HDMI
+#### 3.4.1. Connected At Laptop HDMI
 
 Switch to "Single Display" for gaming:
 
@@ -552,13 +527,13 @@ Switch to "Single Display" for gaming:
 
 Tested with Samsung TV, XBox 360 controller (plugged in Razer Core) and Steam.
 
-#### 4.4.2. Connected At External GPU
+#### 3.4.2. Connected At External GPU
 
 Unsolved: Dynamic expand external display:
 
 - https://unix.stackexchange.com/questions/326362/bumblebee-dual-monitor-mirror-fedora-25
 
-##### 4.4.2.1. Expand Display
+##### 3.4.2.1. Expand Display
 
 Permanent expand display with external screen, connected at GPU / Razer Core:
 
@@ -567,7 +542,7 @@ Permanent expand display with external screen, connected at GPU / Razer Core:
 - Login with Xorg Session
 - Keep Thunderbold connected
 
-##### 4.4.2.2. Run Applications 'Only' On External Screen
+##### 3.4.2.2. Run Applications 'Only' On External Screen
 
 Check if your monitor is detected:
 
@@ -575,7 +550,7 @@ Check if your monitor is detected:
 nvidia-xconfig --query-gpu-info
 ```
 
-###### 4.4.2.2.1. Automatic Setup
+###### 3.4.2.2.1. Automatic Setup
 
 **NOTICE:**
 
@@ -615,7 +590,7 @@ Modify and create your monitor settings, stored in /etc/bumblebee/xorg.conf.exte
 optirun /usr/bin/nvidia-settings -c :8
 ```
 
-###### 4.4.2.2.2. Manual Setup
+###### 3.4.2.2.2. Manual Setup
 
 Modify [bumblebee.conf](etc/bumblebee/bublebee-external.conf) and store in etc/bumblebee/bublebee.conf:
 
@@ -642,3 +617,27 @@ etr # replace this with steam or whatever
 
 Extreme Tuxracer should now run on your external screen.
 
+## 4. Unsolved Issues
+
+### 4.1. Keyboard Colors & Openrazer
+
+Currently not used.
+
+[Issue](https://github.com/openrazer/openrazer/issues/342): Settings are lost after suspend (Gnome, Wayland).
+
+But maybe it works for you:
+
+* https://openrazer.github.io/
+
+### 4.2. Webcam
+
+Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
+
+[This](https://wiki.archlinux.org/index.php/Razer_Blade#Webcam) fix not really helped:
+
+```shell
+/etc/modprobe.d/uvcvideo.conf
+
+## fix issue with built-in webcam
+options uvcvideo quirks=512
+```

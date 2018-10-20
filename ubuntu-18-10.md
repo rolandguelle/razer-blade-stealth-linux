@@ -14,6 +14,10 @@
   - [2. Tweaks](#2-tweaks)
     - [2.1. "Capitaine" Cursors](#21-capitaine-cursors)
     - [2.2. Grub Theme](#22-grub-theme)
+  - [3. Unsolved Issues](#3-unsolved-issues)
+    - [3.1. Keyboard Colors & Openrazer](#31-keyboard-colors--openrazer)
+    - [3.2. Webcam](#32-webcam)
+    - [3.3. Wifi](#33-wifi)
 
 <!-- /TOC -->
 
@@ -124,3 +128,27 @@ Update Grub
 ```shell
 sudo update-grub
 ```
+
+## 3. Unsolved Issues
+
+### 3.1. Keyboard Colors & Openrazer
+
+* https://openrazer.github.io/
+
+[Issue](https://github.com/openrazer/openrazer/issues/342): Settings are lost after suspend (Gnome, Wayland).
+
+### 3.2. Webcam
+
+Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
+
+[This](https://wiki.archlinux.org/index.php/Razer_Blade#Webcam) fix not really helped:
+
+```shell
+/etc/modprobe.d/uvcvideo.conf
+
+options uvcvideo quirks=512
+```
+
+### 3.3. Wifi
+
+Connection lost, maybe firmware
