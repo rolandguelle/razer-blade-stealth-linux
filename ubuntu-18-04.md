@@ -17,7 +17,6 @@
   - [2.3. "Capitaine" Cursors](#23-capitaine-cursors)
   - [2.4. Dual Boot Antergos](#24-dual-boot-antergos)
   - [2.5. Grub Razer Theme](#25-grub-razer-theme)
-  - [2.6. Plymouth Razer Theme](#26-plymouth-razer-theme)
   - [2.7. Gnome Theme](#27-gnome-theme)
   - [2.8. Steam Interface](#28-steam-interface)
 
@@ -221,15 +220,6 @@ patch /etc/grub.d/30_os-prober etc/grub.d/os-prober.patch
 sudo cp -r themes/grub /boot/grub/themes/razer
 sudo cp etc/default/grub /etc/default/grub
 sudo update-grub
-```
-
-### 2.6. Plymouth Razer Theme
-
-```shell
-sudo cp -r themes/plymouth /usr/share/plymouth/themes/razer
-sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/razer/razer.plymouth 90
-sudo update-alternatives --config default.plymouth
-sudo update-initramfs -u
 ```
 
 ### 2.7. Gnome Theme

@@ -4,16 +4,16 @@
 
 <!-- TOC depthFrom:2 -->
 
-- [1. Issues](#1-issues)
-  - [1.1. Suspend Loop](#11-suspend-loop)
-  - [1.2. Caps-Lock Crash](#12-caps-lock-crash)
-  - [1.3. Touchscreen & Firefox](#13-touchscreen--firefox)
-  - [1.4. Gestures with Libinput](#14-gestures-with-libinput)
-  - [1.5. Dual Boot Antergos](#15-dual-boot-antergos)
-- [2. Tweaks](#2-tweaks)
-  - [2.1. "Capitaine" Cursors](#21-capitaine-cursors)
-  - [2.2. Grub Theme](#22-grub-theme)
-  - [2.3. Plymouth Theme](#23-plymouth-theme)
+- [Razer Blade Stealth Linux & Ubuntu 18.10](#razer-blade-stealth-linux--ubuntu-1810)
+  - [1. Issues](#1-issues)
+    - [1.1. Suspend Loop](#11-suspend-loop)
+    - [1.2. Caps-Lock Crash](#12-caps-lock-crash)
+    - [1.3. Touchscreen & Firefox](#13-touchscreen--firefox)
+    - [1.4. Gestures with Libinput](#14-gestures-with-libinput)
+    - [1.5. Dual Boot Antergos](#15-dual-boot-antergos)
+  - [2. Tweaks](#2-tweaks)
+    - [2.1. "Capitaine" Cursors](#21-capitaine-cursors)
+    - [2.2. Grub Theme](#22-grub-theme)
 
 <!-- /TOC -->
 
@@ -123,15 +123,4 @@ Update Grub
 
 ```shell
 sudo update-grub
-```
-
-### 2.3. Plymouth Theme
-
-Razer Plymouth Theme
-
-```shell
-sudo cp -r themes/plymouth /usr/share/plymouth/themes/razer
-sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/razer/razer.plymouth 90
-sudo update-alternatives --config default.plymouth # select razer theme
-sudo update-initramfs -u
 ```
