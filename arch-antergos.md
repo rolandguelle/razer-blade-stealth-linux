@@ -6,7 +6,7 @@ Tested with [Antergos](https://antergos.com/) (Wayland & Gnome) Arch, but other 
 <!-- TOC -->
 
 - [1. Razer Blade Stealth Linux & Arch (Antergos)](#1-razer-blade-stealth-linux--arch-antergos)
-- [2. Works](#2-works)
+- [2. Works without Problems](#2-works-without-problems)
 - [3. Issues](#3-issues)
   - [3.1. Suspend Loop](#31-suspend-loop)
   - [3.2. Touchpad](#32-touchpad)
@@ -32,7 +32,7 @@ Tested with [Antergos](https://antergos.com/) (Wayland & Gnome) Arch, but other 
 
 <!-- /TOC -->
 
-# 2. Works
+# 2. Works without Problems
 
 Arch (4.15.2-2-ARCH kernel):
 

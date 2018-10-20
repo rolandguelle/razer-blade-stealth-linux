@@ -5,36 +5,33 @@
 <!-- TOC -->
 
 - [1. Razer Blade Stealth Linux & Ubuntu 18.04](#1-razer-blade-stealth-linux--ubuntu-1804)
-- [2. Update](#2-update)
-- [3. Install](#3-install)
-- [4. Issues](#4-issues)
-  - [4.1. Suspend Loop](#41-suspend-loop)
-    - [4.1.1. Grub Kernel Parameter](#411-grub-kernel-parameter)
-  - [4.2. Caps-Lock Crash](#42-caps-lock-crash)
-    - [4.2.1. Disable Capslocks](#421-disable-capslocks)
-    - [4.2.2. X11: Disable Built-In Keyboard Driver](#422-x11-disable-built-in-keyboard-driver)
-  - [4.3. Touchpad Temporary Freezes](#43-touchpad-temporary-freezes)
-  - [4.4. Touchpad Suspend](#44-touchpad-suspend)
-    - [4.4.1. Libinput-gestures](#441-libinput-gestures)
-  - [4.5. Touchscreen & Firefox](#45-touchscreen--firefox)
-    - [4.5.1. XINPUT2](#451-xinput2)
-- [5. Tweaks](#5-tweaks)
-  - [5.1. Power Management](#51-power-management)
-  - [5.2. Touchpad tap & click](#52-touchpad-tap--click)
-  - [5.3. "Capitaine" Cursors](#53-capitaine-cursors)
-  - [5.4. Dual Boot Antergos](#54-dual-boot-antergos)
-  - [5.5. Grub Razer Theme](#55-grub-razer-theme)
-  - [5.6. Plymouth Razer Theme](#56-plymouth-razer-theme)
-  - [5.7. Gnome Theme](#57-gnome-theme)
-  - [5.8. Steam Interface](#58-steam-interface)
+- [2. Issues](#2-issues)
+  - [2.1. Installation](#21-installation)
+  - [2.2. Suspend Loop](#22-suspend-loop)
+    - [2.2.1. Grub Kernel Parameter](#221-grub-kernel-parameter)
+  - [2.3. Caps-Lock Crash](#23-caps-lock-crash)
+    - [2.3.1. Disable Capslocks](#231-disable-capslocks)
+    - [2.3.2. X11: Disable Built-In Keyboard Driver](#232-x11-disable-built-in-keyboard-driver)
+  - [2.4. Touchpad Temporary Freezes](#24-touchpad-temporary-freezes)
+  - [2.5. Touchpad Suspend](#25-touchpad-suspend)
+    - [2.5.1. Libinput-gestures](#251-libinput-gestures)
+  - [2.6. Touchscreen & Firefox](#26-touchscreen--firefox)
+    - [2.6.1. XINPUT2](#261-xinput2)
+- [3. Tweaks](#3-tweaks)
+  - [3.1. Power Management](#31-power-management)
+  - [3.2. Touchpad tap & click](#32-touchpad-tap--click)
+  - [3.3. "Capitaine" Cursors](#33-capitaine-cursors)
+  - [3.4. Dual Boot Antergos](#34-dual-boot-antergos)
+  - [3.5. Grub Razer Theme](#35-grub-razer-theme)
+  - [3.6. Plymouth Razer Theme](#36-plymouth-razer-theme)
+  - [3.7. Gnome Theme](#37-gnome-theme)
+  - [3.8. Steam Interface](#38-steam-interface)
 
 <!-- /TOC -->
 
-# 2. Update
+# 2. Issues
 
-Udating my 17.10 installation works without issues (X11 & Synaptics touchpad driver).
-
-# 3. Install
+## 2.1. Installation
 
 Running the live session and starting the installation ends with **segfaults**.
 
@@ -46,16 +43,12 @@ Running the live session and starting the installation ends with **segfaults**.
 sudo apt install intel-microcode
 ```
 
-# 4. Issues
-
-These issues still exist and neeed fixes.
-
-## 4.1. Suspend Loop
+## 2.2. Suspend Loop
 
 After resume, the system loops back in suspend.
 The system send an ACPI event where the [kernel defaults](https://patchwork.kernel.org/patch/9512307/) are different.
 
-### 4.1.1. Grub Kernel Parameter
+### 2.2.1. Grub Kernel Parameter
 
 Change kernel defaults:
 
@@ -70,11 +63,11 @@ Update grub
 sudo update-grub
 ```
 
-## 4.2. Caps-Lock Crash
+## 2.3. Caps-Lock Crash
 
 The RBS crashes ~~randomly~~ mostly if you hit "Caps Lock", causes by the build-in driver.
 
-### 4.2.1. Disable Capslocks
+### 2.3.1. Disable Capslocks
 
 Modify /etc/default/keyboard, replacing capslocks by a second ctrl:
 
@@ -83,7 +76,7 @@ sudo nano /etc/default/keyboard
 XKBOPTIONS="ctrl:nocaps"
 ```
 
-### 4.2.2. X11: Disable Built-In Keyboard Driver
+### 2.3.2. X11: Disable Built-In Keyboard Driver
 
 Only needed if you run X11 instead of Wayland and enabled Capslock.
 
@@ -118,7 +111,7 @@ case $1 in
 esac
 ```
 
-## 4.3. Touchpad Temporary Freezes
+## 2.4. Touchpad Temporary Freezes
 
 With libinput, the pointer "jumps" while moving. The synaptics driver hasn't this issue.
 Other users with RBS late 2017 reports dead zones, I'm not sure if they have tested the synaptics driver.
@@ -149,7 +142,7 @@ sudo cp etc/pm/sleep.d/30_synaptics /etc/pm/sleep.d/30_synaptics
 cp config/autostart/synaptics.desktop ~/.config/autostart/synaptics.desktop
 ```
 
-## 4.4. Touchpad Suspend
+## 2.5. Touchpad Suspend
 
 Touchpad fails resuming from suspend with:
 
@@ -165,7 +158,7 @@ Temporary fix:
 sudo rmmod i2c_hid && sudo modprobe i2c_hid
 ```
 
-### 4.4.1. Libinput-gestures
+### 2.5.1. Libinput-gestures
 
 [Libinput-gestures](https://github.com/bulletmark/libinput-gestures) solves the problem:
 
@@ -183,11 +176,11 @@ My [config](config/libinput-gestures.conf).
 
 Logout - Login
 
-## 4.5. Touchscreen & Firefox
+## 2.6. Touchscreen & Firefox
 
 Firefox doesn't seem to care about the touchscreen at all.
 
-### 4.5.1. XINPUT2
+### 2.6.1. XINPUT2
 
 Tell Firefox to use xinput2
 
@@ -198,9 +191,9 @@ MOZ_USE_XINPUT2=1
 
 Logout - Login.
 
-# 5. Tweaks
+# 3. Tweaks
 
-## 5.1. Power Management
+## 3.1. Power Management
 
 TLP is an advanced power management tool for Linux that tries to apply tweaks for you automatically, depending on your Linux distribution and hardware.
 
@@ -209,7 +202,7 @@ sudo apt-get install tlp tlp-rdw
 sudo systemctl enable tlp
 ```
 
-## 5.2. Touchpad tap & click
+## 3.2. Touchpad tap & click
 
 macOS touchpad feeling.
 
@@ -220,12 +213,12 @@ sudo apt install gnome-tweak-tool
 - Keyboard & Mouse
 - Click Method: Fingers
   
-## 5.3. "Capitaine" Cursors
+## 3.3. "Capitaine" Cursors
 
 - Install ["Capitaine" Cursors](https://github.com/keeferrourke/capitaine-cursors)
 - Select via tweaks tool, Appearance, Themes, Cursor
 
-## 5.4. Dual Boot Antergos
+## 3.4. Dual Boot Antergos
 
 "update-grub" add only /boot/intel-ucode.img to initrd.
 (Maybe) a hack, but works well on my system.
@@ -234,7 +227,7 @@ sudo apt install gnome-tweak-tool
 patch /etc/grub.d/30_os-prober etc/grub.d/os-prober.patch
 ```
 
-## 5.5. Grub Razer Theme
+## 3.5. Grub Razer Theme
 
 ```shell
 sudo cp -r themes/grub /boot/grub/themes/razer
@@ -242,7 +235,7 @@ sudo cp etc/default/grub /etc/default/grub
 sudo update-grub
 ```
 
-## 5.6. Plymouth Razer Theme
+## 3.6. Plymouth Razer Theme
 
 ```shell
 sudo cp -r themes/plymouth /usr/share/plymouth/themes/razer
@@ -251,7 +244,7 @@ sudo update-alternatives --config default.plymouth
 sudo update-initramfs -u
 ```
 
-## 5.7. Gnome Theme
+## 3.7. Gnome Theme
 
 My current favorite :)
 
@@ -263,7 +256,7 @@ apt install numix-gtk-theme numix-icon-theme gnome-icon-theme
 - Theme Icons (Tweaks, Theme): "Yaru" (✓)
 - Theme Sound (Tweaks, Theme): "Yaru" (✓)
 
-## 5.8. Steam Interface
+## 3.8. Steam Interface
 
 Change Steam interface enlargement based on monitor size:
 

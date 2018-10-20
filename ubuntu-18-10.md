@@ -5,36 +5,30 @@
 <!-- TOC -->
 
 - [1. Razer Blade Stealth Linux & Ubuntu 18.10](#1-razer-blade-stealth-linux--ubuntu-1810)
-- [2. Installation](#2-installation)
-- [3. Issues](#3-issues)
-  - [3.1. Suspend Loop](#31-suspend-loop)
-    - [3.1.1. Grub Kernel Parameter](#311-grub-kernel-parameter)
-  - [3.2. Caps-Lock Crash](#32-caps-lock-crash)
-    - [3.2.1. Disable Capslocks](#321-disable-capslocks)
-  - [3.3. Touchscreen & Firefox](#33-touchscreen--firefox)
-    - [3.3.1. XINPUT2](#331-xinput2)
-  - [3.4. Gestures with Libinput](#34-gestures-with-libinput)
-  - [3.5. Dual Boot Antergos](#35-dual-boot-antergos)
-- [4. Tweaks](#4-tweaks)
-  - [4.1. "Capitaine" Cursors](#41-capitaine-cursors)
-  - [4.2. Grub Theme](#42-grub-theme)
-  - [4.3. Plymouth Theme](#43-plymouth-theme)
+- [2. Issues](#2-issues)
+  - [2.1. Suspend Loop](#21-suspend-loop)
+    - [2.1.1. Grub Kernel Parameter](#211-grub-kernel-parameter)
+  - [2.2. Caps-Lock Crash](#22-caps-lock-crash)
+    - [2.2.1. Disable Capslocks](#221-disable-capslocks)
+  - [2.3. Touchscreen & Firefox](#23-touchscreen--firefox)
+    - [2.3.1. XINPUT2](#231-xinput2)
+  - [2.4. Gestures with Libinput](#24-gestures-with-libinput)
+  - [2.5. Dual Boot Antergos](#25-dual-boot-antergos)
+- [3. Tweaks](#3-tweaks)
+  - [3.1. "Capitaine" Cursors](#31-capitaine-cursors)
+  - [3.2. Grub Theme](#32-grub-theme)
+  - [3.3. Plymouth Theme](#33-plymouth-theme)
 
 <!-- /TOC -->
 
-# 2. Installation
+# 2. Issues
 
-- 18.04 -> 18.10 update works without issues (Wayland & libinput touchpad driver)
-- Fresh minimal installation, include 3rd party
-
-# 3. Issues
-
-## 3.1. Suspend Loop
+## 2.1. Suspend Loop
 
 After resume, the system loops back in suspend.
 The system send an ACPI event where the [kernel defaults](https://patchwork.kernel.org/patch/9512307/) are different.
 
-### 3.1.1. Grub Kernel Parameter
+### 2.1.1. Grub Kernel Parameter
 
 Change kernel defaults:
 
@@ -49,11 +43,11 @@ Update grub
 sudo update-grub
 ```
 
-## 3.2. Caps-Lock Crash
+## 2.2. Caps-Lock Crash
 
 The RBS crashes ~~randomly~~ mostly if you hit "Caps Lock", causes by the build-in driver.
 
-### 3.2.1. Disable Capslocks
+### 2.2.1. Disable Capslocks
 
 Modify /etc/default/keyboard, replacing capslocks by a second ctrl:
 
@@ -62,11 +56,11 @@ sudo nano /etc/default/keyboard
 XKBOPTIONS="ctrl:nocaps"
 ```
 
-## 3.3. Touchscreen & Firefox
+## 2.3. Touchscreen & Firefox
 
 Firefox doesn't seem to care about the touchscreen at all.
 
-### 3.3.1. XINPUT2
+### 2.3.1. XINPUT2
 
 Tell Firefox to use xinput2
 
@@ -77,7 +71,7 @@ MOZ_USE_XINPUT2=1
 
 Logout - Login.
 
-## 3.4. Gestures with Libinput
+## 2.4. Gestures with Libinput
 
 Setup [Libinput-gestures](https://github.com/bulletmark/libinput-gestures):
 
@@ -95,7 +89,7 @@ My [config](config/libinput-gestures.conf).
 
 Logout - Login
 
-## 3.5. Dual Boot Antergos
+## 2.5. Dual Boot Antergos
 
 "update-grub" add only /boot/intel-ucode.img to initrd.
 (Maybe) a hack, but works well on my system.
@@ -104,9 +98,9 @@ Logout - Login
 sudo patch /etc/grub.d/30_os-prober etc/grub.d/os-prober.patch
 ```
 
-# 4. Tweaks
+# 3. Tweaks
 
-## 4.1. "Capitaine" Cursors
+## 3.1. "Capitaine" Cursors
 
 - Install ["Capitaine" Cursors](https://github.com/keeferrourke/capitaine-cursors)
 
@@ -118,7 +112,7 @@ sudo apt install la-capitaine-cursor-theme
 
 - Select via tweaks tool, Appearance, Themes, Cursor
 
-## 4.2. Grub Theme
+## 3.2. Grub Theme
 
 Razer Grub Theme for RBS 4k.
 
@@ -142,7 +136,7 @@ Update Grub
 sudo update-grub
 ```
 
-## 4.3. Plymouth Theme
+## 3.3. Plymouth Theme
 
 Razer Plymouth Theme
 
