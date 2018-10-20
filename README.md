@@ -1,6 +1,6 @@
 # Razer Blade Stealth Linux
 
-**Razer Blade Stealth** (late 2016, Intel 7500U, UHD / HiDPI) Linux ([Ubuntu](#ubuntu-1710) & [Arch (Antergos)](#arch-antergos)) setup, including **[Razer Core](#razer-core)** with [discrete NVIDIA GPU](#discrete-nvidia-gpu) setup connected via [thunderbolt](#thunderbolt-1).
+**Razer Blade Stealth** (late 2016, Intel 7500U, UHD / HiDPI) Linux ([Ubuntu](#ubuntu-1810) & [Arch (Antergos)](#arch-antergos)) setup, including **[Razer Core](#razer-core)** with [discrete NVIDIA GPU](#discrete-nvidia-gpu) setup connected via [thunderbolt](#thunderbolt-1).
 
 Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions or open an issue.
 
@@ -12,12 +12,15 @@ My current setup is Ubuntu 18.04 (Ubuntu, Gnome, X11 & Synaptics touchpad driver
 - [Preparation](#preparation)
     - [Meltdown, Spectre & TPM Updates](#meltdown-spectre--tpm-updates)
     - [Disk Resize](#disk-resize)
+- [Ubuntu 18.10](#ubuntu-1810)
+    - [Install](#install)
+    - [WIP](#wip)
 - [Ubuntu 18.04](#ubuntu-1804)
     - [Update](#update)
-    - [Install](#install)
+    - [Install](#install-1)
         - [Issues & Fixes](#issues--fixes)
         - [Touchpad](#touchpad)
-        - [WIP](#wip)
+        - [WIP](#wip-1)
             - [Razer Core](#razer-core)
                 - [Auth](#auth)
                 - [bumblebee](#bumblebee)
@@ -28,7 +31,7 @@ My current setup is Ubuntu 18.04 (Ubuntu, Gnome, X11 & Synaptics touchpad driver
             - [Gnome Theme](#gnome-theme)
             - [Steam Interface](#steam-interface)
 - [Ubuntu 17.10](#ubuntu-1710)
-    - [Install](#install-1)
+    - [Install](#install-2)
     - [Works](#works)
         - [Graphic Card](#graphic-card)
         - [HDMI](#hdmi)
@@ -133,6 +136,19 @@ My current setup is Ubuntu 18.04 (Ubuntu, Gnome, X11 & Synaptics touchpad driver
 ## Disk Resize
 
 [Resize disk](https://www.howtogeek.com/101862/how-to-manage-partitions-on-windows-without-downloading-any-other-software/) via Windows 10
+
+# Ubuntu 18.10
+
+Udating my 18.04 installation works without issues (Wayland & libinput touchpad driver).
+
+## Install
+
+- Minimal installation, include 3rd party
+
+
+## WIP
+
+
 
 # Ubuntu 18.04
 
