@@ -1,41 +1,41 @@
-# Razer Blade Stealth Linux & Ubuntu 18.10
+# 1. Razer Blade Stealth Linux & Ubuntu 18.10
 
-**Razer Blade Stealth** (late 2016, Intel 7500U, UHD / HiDPI) Linux ([Ubuntu](#ubuntu-1810).
+**Razer Blade Stealth** (late 2016, Intel 7500U, UHD / HiDPI) Ubuntu Linux 18.10.
 Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions or open an issue.
 
 <!-- TOC -->
 
-- [Razer Blade Stealth Linux & Ubuntu 18.10](#razer-blade-stealth-linux--ubuntu-1810)
-    - [Installation](#installation)
-    - [Issues](#issues)
-        - [Suspend Loop](#suspend-loop)
-            - [Grub Kernel Parameter](#grub-kernel-parameter)
-        - [Caps-Lock Crash](#caps-lock-crash)
-            - [Disable Capslocks](#disable-capslocks)
-        - [Touchscreen & Firefox](#touchscreen--firefox)
-            - [XINPUT2](#xinput2)
-        - [Gestures with Libinput](#gestures-with-libinput)
-        - [Dual Boot Antergos](#dual-boot-antergos)
-    - [Tweaks](#tweaks)
-        - ["Capitaine" Cursors](#capitaine-cursors)
-        - [Grub Theme](#grub-theme)
-        - [Plymouth Theme](#plymouth-theme)
+- [1. Razer Blade Stealth Linux & Ubuntu 18.10](#1-razer-blade-stealth-linux--ubuntu-1810)
+- [2. Installation](#2-installation)
+- [3. Issues](#3-issues)
+  - [3.1. Suspend Loop](#31-suspend-loop)
+    - [3.1.1. Grub Kernel Parameter](#311-grub-kernel-parameter)
+  - [3.2. Caps-Lock Crash](#32-caps-lock-crash)
+    - [3.2.1. Disable Capslocks](#321-disable-capslocks)
+  - [3.3. Touchscreen & Firefox](#33-touchscreen--firefox)
+    - [3.3.1. XINPUT2](#331-xinput2)
+  - [3.4. Gestures with Libinput](#34-gestures-with-libinput)
+  - [3.5. Dual Boot Antergos](#35-dual-boot-antergos)
+- [4. Tweaks](#4-tweaks)
+  - [4.1. "Capitaine" Cursors](#41-capitaine-cursors)
+  - [4.2. Grub Theme](#42-grub-theme)
+  - [4.3. Plymouth Theme](#43-plymouth-theme)
 
 <!-- /TOC -->
 
-## Installation
+# 2. Installation
 
 - 18.04 -> 18.10 update works without issues (Wayland & libinput touchpad driver)
 - Fresh minimal installation, include 3rd party
 
-## Issues
+# 3. Issues
 
-### Suspend Loop
+## 3.1. Suspend Loop
 
 After resume, the system loops back in suspend.
 The system send an ACPI event where the [kernel defaults](https://patchwork.kernel.org/patch/9512307/) are different.
 
-#### Grub Kernel Parameter
+### 3.1.1. Grub Kernel Parameter
 
 Change kernel defaults:
 
@@ -50,11 +50,11 @@ Update grub
 sudo update-grub
 ```
 
-### Caps-Lock Crash
+## 3.2. Caps-Lock Crash
 
 The RBS crashes ~~randomly~~ mostly if you hit "Caps Lock", causes by the build-in driver.
 
-#### Disable Capslocks
+### 3.2.1. Disable Capslocks
 
 Modify /etc/default/keyboard, replacing capslocks by a second ctrl:
 
@@ -63,11 +63,11 @@ sudo nano /etc/default/keyboard
 XKBOPTIONS="ctrl:nocaps"
 ```
 
-### Touchscreen & Firefox
+## 3.3. Touchscreen & Firefox
 
 Firefox doesn't seem to care about the touchscreen at all.
 
-#### XINPUT2
+### 3.3.1. XINPUT2
 
 Tell Firefox to use xinput2
 
@@ -78,7 +78,7 @@ MOZ_USE_XINPUT2=1
 
 Logout - Login.
 
-### Gestures with Libinput
+## 3.4. Gestures with Libinput
 
 Setup [Libinput-gestures](https://github.com/bulletmark/libinput-gestures):
 
@@ -96,18 +96,18 @@ My [config](config/libinput-gestures.conf).
 
 Logout - Login
 
-### Dual Boot Antergos
+## 3.5. Dual Boot Antergos
 
 "update-grub" add only /boot/intel-ucode.img to initrd.
 (Maybe) a hack, but works well on my system.
 
 ```shell
-patch /etc/grub.d/30_os-prober etc/grub.d/os-prober.patch
+sudo patch /etc/grub.d/30_os-prober etc/grub.d/os-prober.patch
 ```
 
-## Tweaks
+# 4. Tweaks
 
-### "Capitaine" Cursors
+## 4.1. "Capitaine" Cursors
 
 - Install ["Capitaine" Cursors](https://github.com/keeferrourke/capitaine-cursors)
 
@@ -119,23 +119,38 @@ sudo apt install la-capitaine-cursor-theme
 
 - Select via tweaks tool, Appearance, Themes, Cursor
 
-### Grub Theme
+## 4.2. Grub Theme
 
-Razer Grub Theme for RBS 4k
+Razer Grub Theme for RBS 4k.
 
 ```shell
+sudo mkdir /boot/grub/themes
 sudo cp -r themes/grub /boot/grub/themes/razer
-sudo cp etc/default/grub /etc/default/grub
+```
+
+Add Theme:
+
+```shell
+sudo nano /etc/default/grub
+# gfx mode for RBS 4k
+GRUB_GFXMODE="3840x2160-32"
+GRUB_GFXPAYLOAD_LINUX="3840x2160-32"
+GRUB_THEME="/boot/grub/themes/razer/theme.txt"
+```
+
+Update Grub
+
+```shell
 sudo update-grub
 ```
 
-### Plymouth Theme
+## 4.3. Plymouth Theme
 
 Razer Plymouth Theme
 
 ```shell
 sudo cp -r themes/plymouth /usr/share/plymouth/themes/razer
 sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/razer/razer.plymouth 90
-sudo update-alternatives --config default.plymouth
+sudo update-alternatives --config default.plymouth # select razer theme
 sudo update-initramfs -u
 ```
