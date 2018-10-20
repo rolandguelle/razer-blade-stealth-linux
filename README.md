@@ -13,6 +13,12 @@ My current setup is Ubuntu 18.10 (Ubuntu, Gnome, Wayland & libinput touchpad dri
   - [2.1. Meltdown, Spectre & TPM Updates](#21-meltdown-spectre--tpm-updates)
   - [2.2. Disk Resize](#22-disk-resize)
 - [3. Guides](#3-guides)
+  - [3.1. Ubuntu 18.10](#31-ubuntu-1810)
+  - [3.2. Ubuntu 18.04](#32-ubuntu-1804)
+  - [3.3. Ubuntu 17.10](#33-ubuntu-1710)
+  - [3.4. Arch (Antergos)](#34-arch-antergos)
+  - [3.5. Elementary OS](#35-elementary-os)
+  - [3.6. Other Hardware Models](#36-other-hardware-models)
 - [4. Credits](#4-credits)
 
 <!-- /TOC -->
@@ -38,12 +44,29 @@ My current setup is Ubuntu 18.10 (Ubuntu, Gnome, Wayland & libinput touchpad dri
 
 # 3. Guides
 
-- [Ubuntu 18.10](ubuntu-18-10.md)
-- [Ubuntu 18.04](ubuntu-18-04.md)
-- [Ubuntu 17.10](ubuntu-17-10.md)
-- [Arch (Antergos)](arch-antergos.md)
-- [Elementary OS](elementary-os.md)
-- [Other Models](other-models.md)
+## 3.1. Ubuntu 18.10
+
+[Ubuntu 18.10](ubuntu-18-10.md)
+
+## 3.2. Ubuntu 18.04
+
+[Ubuntu 18.04](ubuntu-18-04.md)
+
+## 3.3. Ubuntu 17.10
+
+[Ubuntu 17.10](ubuntu-17-10.md)
+
+## 3.4. Arch (Antergos)
+
+[Arch (Antergos)](arch-antergos.md)
+
+## 3.5. Elementary OS
+
+[Elementary OS](elementary-os.md)
+
+## 3.6. Other Hardware Models
+
+[Other Hardware Models](other-hardware-models.md)
 
 # 4. Credits
 

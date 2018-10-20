@@ -5,66 +5,66 @@
 <!-- TOC -->
 
 - [1. Razer Blade Stealth Linux & Ubuntu 17.10](#1-razer-blade-stealth-linux--ubuntu-1710)
-  - [1.1. Install](#11-install)
-  - [1.2. Works](#12-works)
-    - [1.2.1. Graphic Card](#121-graphic-card)
-    - [1.2.2. HDMI](#122-hdmi)
-    - [1.2.3. Thunderbolt / USB-C](#123-thunderbolt--usb-c)
-  - [1.3. Issues](#13-issues)
-    - [1.3.1. Suspend Loop](#131-suspend-loop)
-      - [1.3.1.1. Grub Kernel Parameter](#1311-grub-kernel-parameter)
-    - [1.3.2. Caps-Lock Crash](#132-caps-lock-crash)
-      - [1.3.2.1. Disable Capslocks](#1321-disable-capslocks)
-      - [1.3.2.2. X11: Disable Built-In Keyboard Driver](#1322-x11-disable-built-in-keyboard-driver)
-    - [1.3.3. Touchpad Suspend](#133-touchpad-suspend)
-      - [1.3.3.1. Libinput-gestures](#1331-libinput-gestures)
-    - [1.3.4. Touchpad Temporary Freezes](#134-touchpad-temporary-freezes)
-    - [1.3.5. Touchscreen & Firefox](#135-touchscreen--firefox)
-      - [1.3.5.1. XINPUT2](#1351-xinput2)
-    - [1.3.6. Unstable WIFI](#136-unstable-wifi)
-      - [1.3.6.1. Update Firmware](#1361-update-firmware)
-    - [1.3.7. Onscreen Keyboard](#137-onscreen-keyboard)
-      - [1.3.7.1. Block caribou](#1371-block-caribou)
-        - [1.3.7.1.1. Startup Applications](#13711-startup-applications)
-        - [1.3.7.1.2. Extension](#13712-extension)
-    - [1.3.8. Multiple Monitors](#138-multiple-monitors)
-      - [1.3.8.1. Switch to 1920x1080](#1381-switch-to-1920x1080)
-  - [1.4. Unsolved Issues](#14-unsolved-issues)
-    - [1.4.1. Keyboard Colors & Openrazer](#141-keyboard-colors--openrazer)
-    - [1.4.2. Webcam](#142-webcam)
-  - [1.5. Tweaks](#15-tweaks)
-    - [1.5.1. Power Management](#151-power-management)
-    - [1.5.2. Touchpad](#152-touchpad)
-      - [1.5.2.1. Click, Tap, Move](#1521-click-tap-move)
-    - [1.5.3. Display Scaling](#153-display-scaling)
-    - [1.5.4. Theme](#154-theme)
-      - [1.5.4.1. "Capitaine" Cursors](#1541-capitaine-cursors)
-      - [1.5.4.2. Applicatioins Theme](#1542-applicatioins-theme)
-      - [1.5.4.3. Dock & Top Bar](#1543-dock--top-bar)
-      - [1.5.4.4. Fonts](#1544-fonts)
-      - [1.5.4.5. Workspace Grid](#1545-workspace-grid)
-  - [1.6. Razer Core](#16-razer-core)
-    - [1.6.1. Thunderbolt](#161-thunderbolt)
-      - [1.6.1.1. Cable](#1611-cable)
-      - [1.6.1.2. User Authorization](#1612-user-authorization)
-    - [1.6.2. Discrete NVIDIA GPU](#162-discrete-nvidia-gpu)
-      - [1.6.2.1. NVIDIA Prime](#1621-nvidia-prime)
-      - [1.6.2.2. NVIDIA GPU Driver](#1622-nvidia-gpu-driver)
-      - [1.6.2.3. Bumblebee](#1623-bumblebee)
-      - [1.6.2.4. Test GPU With optirun](#1624-test-gpu-with-optirun)
-      - [1.6.2.5. Run Extremetuxracer With primusrun](#1625-run-extremetuxracer-with-primusrun)
-    - [1.6.3. razercore](#163-razercore)
-    - [1.6.4. External Display](#164-external-display)
-      - [1.6.4.1. Connected At Laptop HDMI](#1641-connected-at-laptop-hdmi)
-      - [1.6.4.2. Connected At External GPU](#1642-connected-at-external-gpu)
-        - [1.6.4.2.1. Expand Display](#16421-expand-display)
-        - [1.6.4.2.2. Run Applications 'Only' On External Screen](#16422-run-applications-only-on-external-screen)
-          - [1.6.4.2.2.1. Automatic Setup](#164221-automatic-setup)
-          - [1.6.4.2.2.2. Manual Setup](#164222-manual-setup)
+- [2. Install](#2-install)
+- [3. Works](#3-works)
+  - [3.1. Graphic Card](#31-graphic-card)
+  - [3.2. HDMI](#32-hdmi)
+  - [3.3. Thunderbolt / USB-C](#33-thunderbolt--usb-c)
+- [4. Issues](#4-issues)
+  - [4.1. Suspend Loop](#41-suspend-loop)
+    - [4.1.1. Grub Kernel Parameter](#411-grub-kernel-parameter)
+  - [4.2. Caps-Lock Crash](#42-caps-lock-crash)
+    - [4.2.1. Disable Capslocks](#421-disable-capslocks)
+    - [4.2.2. X11: Disable Built-In Keyboard Driver](#422-x11-disable-built-in-keyboard-driver)
+  - [4.3. Touchpad Suspend](#43-touchpad-suspend)
+    - [4.3.1. Libinput-gestures](#431-libinput-gestures)
+  - [4.4. Touchpad Temporary Freezes](#44-touchpad-temporary-freezes)
+  - [4.5. Touchscreen & Firefox](#45-touchscreen--firefox)
+    - [4.5.1. XINPUT2](#451-xinput2)
+  - [4.6. Unstable WIFI](#46-unstable-wifi)
+    - [4.6.1. Update Firmware](#461-update-firmware)
+  - [4.7. Onscreen Keyboard](#47-onscreen-keyboard)
+    - [4.7.1. Block caribou](#471-block-caribou)
+      - [4.7.1.1. Startup Applications](#4711-startup-applications)
+      - [4.7.1.2. Extension](#4712-extension)
+  - [4.8. Multiple Monitors](#48-multiple-monitors)
+    - [4.8.1. Switch to 1920x1080](#481-switch-to-1920x1080)
+- [5. Unsolved Issues](#5-unsolved-issues)
+  - [5.1. Keyboard Colors & Openrazer](#51-keyboard-colors--openrazer)
+  - [5.2. Webcam](#52-webcam)
+- [6. Tweaks](#6-tweaks)
+  - [6.1. Power Management](#61-power-management)
+  - [6.2. Touchpad](#62-touchpad)
+    - [6.2.1. Click, Tap, Move](#621-click-tap-move)
+  - [6.3. Display Scaling](#63-display-scaling)
+  - [6.4. Theme](#64-theme)
+    - [6.4.1. "Capitaine" Cursors](#641-capitaine-cursors)
+    - [6.4.2. Applicatioins Theme](#642-applicatioins-theme)
+    - [6.4.3. Dock & Top Bar](#643-dock--top-bar)
+    - [6.4.4. Fonts](#644-fonts)
+    - [6.4.5. Workspace Grid](#645-workspace-grid)
+- [7. Razer Core](#7-razer-core)
+  - [7.1. Thunderbolt](#71-thunderbolt)
+    - [7.1.1. Cable](#711-cable)
+    - [7.1.2. User Authorization](#712-user-authorization)
+  - [7.2. Discrete NVIDIA GPU](#72-discrete-nvidia-gpu)
+    - [7.2.1. NVIDIA Prime](#721-nvidia-prime)
+    - [7.2.2. NVIDIA GPU Driver](#722-nvidia-gpu-driver)
+    - [7.2.3. Bumblebee](#723-bumblebee)
+    - [7.2.4. Test GPU With optirun](#724-test-gpu-with-optirun)
+    - [7.2.5. Run Extremetuxracer With primusrun](#725-run-extremetuxracer-with-primusrun)
+  - [7.3. razercore](#73-razercore)
+  - [7.4. External Display](#74-external-display)
+    - [7.4.1. Connected At Laptop HDMI](#741-connected-at-laptop-hdmi)
+    - [7.4.2. Connected At External GPU](#742-connected-at-external-gpu)
+      - [7.4.2.1. Expand Display](#7421-expand-display)
+      - [7.4.2.2. Run Applications 'Only' On External Screen](#7422-run-applications-only-on-external-screen)
+        - [7.4.2.2.1. Automatic Setup](#74221-automatic-setup)
+        - [7.4.2.2.2. Manual Setup](#74222-manual-setup)
 
 <!-- /TOC -->
 
-## 1.1. Install
+# 2. Install
 
 - Fresh Ubuntu 17.10 installation, reboot
 - Software & Updates
@@ -72,11 +72,11 @@
     - (Secure boot was disabled during installation, but is now activated)
   - Packages: main, universe, restricted, multiverse, artful-proposed
 
-## 1.2. Works
+# 3. Works
 
 Other tutorials reports issues for some topics/components, but on my machine these are running fine.
 
-### 1.2.1. Graphic Card
+## 3.1. Graphic Card
 
 Works out of the box **without** the Kernel parameter:
 
@@ -86,23 +86,23 @@ or X11 UXA mode:
 
 - "AccelMethod"  "uxa"
 
-### 1.2.2. HDMI
+## 3.2. HDMI
 
 Since 4.10.6 kernel, HDMI works out of the box.
 
-### 1.2.3. Thunderbolt / USB-C
+## 3.3. Thunderbolt / USB-C
 
 USB & video works on my 27'' Dell monitor with a (Apple) USB-C (HDMI, USB) adapter, without modifications (since 4.13.x kernel).
 Including USB to ethernet.
 
-## 1.3. Issues
+# 4. Issues
 
-### 1.3.1. Suspend Loop
+## 4.1. Suspend Loop
 
 After resume, the system loops back in suspend.
 The system send an ACPI event where the [kernel defaults](https://patchwork.kernel.org/patch/9512307/) are different.
 
-#### 1.3.1.1. Grub Kernel Parameter
+### 4.1.1. Grub Kernel Parameter
 
 Change kernel defaults:
 
@@ -117,11 +117,11 @@ Update grub
 sudo update-grub
 ```
 
-### 1.3.2. Caps-Lock Crash
+## 4.2. Caps-Lock Crash
 
 The RBS crashes ~~randomly~~ mostly if you hit "Caps Lock", causes by the build-in driver.
 
-#### 1.3.2.1. Disable Capslocks
+### 4.2.1. Disable Capslocks
 
 Modify /etc/default/keyboard, replacing capslocks by a second ctrl:
 
@@ -130,7 +130,7 @@ sudo nano /etc/default/keyboard
 XKBOPTIONS="ctrl:nocaps"
 ```
 
-#### 1.3.2.2. X11: Disable Built-In Keyboard Driver
+### 4.2.2. X11: Disable Built-In Keyboard Driver
 
 Only needed if you run X11 instead of Wayland and enabled Capslock.
 
@@ -165,7 +165,7 @@ case $1 in
 esac
 ```
 
-### 1.3.3. Touchpad Suspend
+## 4.3. Touchpad Suspend
 
 Touchpad fails resuming from suspend with:
 
@@ -181,7 +181,7 @@ Temporary fix:
 sudo rmmod i2c_hid && sudo modprobe i2c_hid
 ```
 
-#### 1.3.3.1. Libinput-gestures
+### 4.3.1. Libinput-gestures
 
 [Libinput-gestures](https://github.com/bulletmark/libinput-gestures) solves the problem:
 
@@ -199,7 +199,7 @@ My [config](config/libinput-gestures.conf).
 
 Logout - Login
 
-### 1.3.4. Touchpad Temporary Freezes
+## 4.4. Touchpad Temporary Freezes
 
 The touchpad [temporary freezes](https://insider.razer.com/index.php?threads/ubuntu-17-10-blade-stealth-late-2017-issues.28967/) with libinput.
 Manual update libinput & kernel make it _less worse_, but it is still buggy.
@@ -214,11 +214,11 @@ Edit Synaptics configuration: [50-synaptics.conf](etc/X11/xorg.conf.d/50-synapti
 
 Restart and login with X11.
 
-### 1.3.5. Touchscreen & Firefox
+## 4.5. Touchscreen & Firefox
 
 Firefox doesn't seem to care about the touchscreen at all.
 
-#### 1.3.5.1. XINPUT2
+### 4.5.1. XINPUT2
 
 Tell Firefox to use xinput2
 
@@ -229,11 +229,11 @@ MOZ_USE_XINPUT2=1
 
 Logout - Login.
 
-### 1.3.6. Unstable WIFI
+## 4.6. Unstable WIFI
 
 Wireless connection gets lost randomly.
 
-#### 1.3.6.1. Update Firmware
+### 4.6.1. Update Firmware
 
 Updating the firmeware:
 
@@ -249,13 +249,13 @@ wget https://github.com/kvalo/ath10k-firmware/raw/master/QCA6174/hw3.0/4.4.1/fir
 sudo mv firmware-6.bin_WLAN.RM.4.4.1-00079-QCARMSWPZ-1 /lib/firmware/ath10k/QCA6174/hw3.0/firmware-6.bin
 ```
 
-### 1.3.7. Onscreen Keyboard
+## 4.7. Onscreen Keyboard
 
 Everytime the touchscreen is used, an onscreen keyboard opens.
 
-#### 1.3.7.1. Block caribou
+### 4.7.1. Block caribou
 
-##### 1.3.7.1.1. Startup Applications
+#### 4.7.1.1. Startup Applications
 
 Disable caribou (the on screen keyboard) in "Startup Applications".
 
@@ -267,7 +267,7 @@ sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop
 
 Open "Startup Applications", disable caribou (and maybe Desktop Sharing, Backup Monitor and some others).
 
-##### 1.3.7.1.2. Extension
+#### 4.7.1.2. Extension
 
 Remove caribou from "Startup Applications" is not enough :(
 
@@ -292,18 +292,18 @@ gsettings set org.gnome.shell enabled-extensions "['cariboublocker@git.keringar.
 
 Logout - Login.
 
-### 1.3.8. Multiple Monitors
+## 4.8. Multiple Monitors
 
 Using a HiDPI and "normal" monitor works on _some_ applications with Wayland, but not in Firefox & Chrome.
 
-#### 1.3.8.1. Switch to 1920x1080
+### 4.8.1. Switch to 1920x1080
 
 Switch the internal HiDPI screen to **1920x1080** when using your RBS together with a non HiDPI external monitor.
 Gnome _remembers_ the monitor and switch back to 4k when unplugging the screen.
 
-## 1.4. Unsolved Issues
+# 5. Unsolved Issues
 
-### 1.4.1. Keyboard Colors & Openrazer
+## 5.1. Keyboard Colors & Openrazer
 
 Currently not used.
 
@@ -313,7 +313,7 @@ But maybe it works for you:
 
 * https://openrazer.github.io/
 
-### 1.4.2. Webcam
+## 5.2. Webcam
 
 Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
 
@@ -326,9 +326,9 @@ Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
 options uvcvideo quirks=512
 ```
 
-## 1.5. Tweaks
+# 6. Tweaks
 
-### 1.5.1. Power Management
+## 6.1. Power Management
 
 TLP is an advanced power management tool for Linux that tries to apply tweaks for you automatically, depending on your Linux distribution and hardware.
 
@@ -337,9 +337,9 @@ sudo apt-get install tlp tlp-rdw
 sudo systemctl enable tlp
 ```
 
-### 1.5.2. Touchpad
+## 6.2. Touchpad
 
-#### 1.5.2.1. Click, Tap, Move
+### 6.2.1. Click, Tap, Move
 
 macOS touchpad feeling.
 
@@ -350,7 +350,7 @@ sudo apt install gnome-tweak-tool
 - Keyboard & Mouse
 - Click Method: Fingers
 
-### 1.5.3. Display Scaling
+## 6.3. Display Scaling
 
 At native resolution, the internal HiDPI 4K display with 100% scale might be too tiny and frustrating for some, and with 200% scale is too large to be useful, luckily with Ubuntu 17.10 shipping with Gnome3, a native screen scaling solution is provided, however it's limited to 2 options: `100%` and `200%`.
 
@@ -368,36 +368,36 @@ If the fonts are blurry (on my setup), reset this setting:
 gsettings reset-recursively org.gnome.mutter
 ```
 
-### 1.5.4. Theme
+## 6.4. Theme
 
 My Ubuntu/Gnome tweaks :)
 
-#### 1.5.4.1. "Capitaine" Cursors
+### 6.4.1. "Capitaine" Cursors
 
 - Install ["Capitaine" Cursors](https://github.com/keeferrourke/capitaine-cursors)
 - Select via tweaks tool, Appearance, Themes, Cursor
 
-#### 1.5.4.2. Applicatioins Theme
+### 6.4.2. Applicatioins Theme
 
 - apt install numix-gtk-theme numix-icon-theme gnome-icon-theme gnome-icon-theme-extras
 - Select via tweaks tool, Appearance, Themes, Application (Numix), Icons (Numix-Light)
 
 Current Theme: [Adapta-Eta](https://github.com/adapta-project/adapta-gtk-theme)
 
-#### 1.5.4.3. Dock & Top Bar
+### 6.4.3. Dock & Top Bar
 
 - Dock (Settings)
     - Auto-hide the Dock
     - Position on the screen: bottom
 
-#### 1.5.4.4. Fonts
+### 6.4.4. Fonts
 
 - Window-Title: Garuda Regular 11
 - Interface: Ubuntu Regular 12
 - Document: Sans Regular 13
 - Monospace: Monospace Regular 13
 
-#### 1.5.4.5. Workspace Grid
+### 6.4.5. Workspace Grid
 
 Switch vertical though your workspaces.
 
@@ -413,19 +413,19 @@ gesture swipe left      _internal ws_down
 gesture swipe right     _internal ws_up
 ```
 
-## 1.6. Razer Core
+# 7. Razer Core
 
 Running a thunderbolt 3 device like the [Razer Core](https://www.razerzone.com/gaming-laptops/razer-core-v2) with Linux sounds like fun :)
 
-### 1.6.1. Thunderbolt
+## 7.1. Thunderbolt
 
 The Razer Core is connected via Thunderbold 3 with your RBS.
 
-#### 1.6.1.1. Cable
+### 7.1.1. Cable
 
 This [**2m** cable](https://www.amazon.de/CalDigit-Thunderbolt-3-Kabel-Zertifiziert-Typ-C-kompatibel/dp/B01N4MFG7J/) works without problems. I measured no (performance) differences compared with the included _very_ short cable (tested on Windows & Linux).
 
-#### 1.6.1.2. User Authorization
+### 7.1.2. User Authorization
 
 - BIOS Setting: Thunderbolt security: User
 - Authorize thunderbolt, install: [Thunderbolt user-space components](https://github.com/01org/thunderbolt-software-user-space)
@@ -456,7 +456,7 @@ sudo tbtadm approve 0-1
 
 Razer Core USB & Ethernet now works.
 
-### 1.6.2. Discrete NVIDIA GPU
+## 7.2. Discrete NVIDIA GPU
 
 Goal is a setup like:
 
@@ -465,7 +465,7 @@ Goal is a setup like:
 - Run selected applications with Razer Core on external NVIDIA GPU
 - Unplug the Razer Core - without freezing the system
 
-#### 1.6.2.1. NVIDIA Prime
+### 7.2.1. NVIDIA Prime
 
 Install NVIDIA Prime and set it to "intel":
 
@@ -474,7 +474,7 @@ sudo apt install nvidia-prime
 sudo prime-select intel
 ```
 
-#### 1.6.2.2. NVIDIA GPU Driver
+### 7.2.2. NVIDIA GPU Driver
 
 Update driver (I use the latest NVIDIA drivers & Ubuntu 'pre-released updates'):
 
@@ -491,7 +491,7 @@ ln -s /usr/lib/nvidia-387/bin/nvidia-persistenced /usr/bin/nvidia-persistenced
 ln -s /usr/lib/nvidia-387/libnvidia-cfg.so.1 /usr/lib/libnvidia-cfg.so.1
 ```
 
-#### 1.6.2.3. Bumblebee
+### 7.2.3. Bumblebee
 
 Install Bumblebee:
 
@@ -515,7 +515,7 @@ LibraryPath=/usr/lib/nvidia-387:/usr/lib32/nvidia-387
 XorgModulePath=/usr/lib/nvidia-387/xorg,/usr/lib/xorg/modules
 ```
 
-#### 1.6.2.4. Test GPU With optirun
+### 7.2.4. Test GPU With optirun
 
 Reboot with NVIDIA kernel drivers.
 
@@ -532,7 +532,7 @@ NVIDIA Settings
 optirun -b none /usr/bin/nvidia-settings  -c :8
 ```
 
-#### 1.6.2.5. Run Extremetuxracer With primusrun
+### 7.2.5. Run Extremetuxracer With primusrun
 
 Replace "etr" (Extremetuxracer) with your favorite 3D application/game ;)
 
@@ -547,7 +547,7 @@ PRIMUS_SYNC=1 vblank_mode=0 primusrun etr
 
 Tested with "Extremetuxracer" and different games on "Steam" (Saints Row IV, Life is Strange and others) with 4k resolution on Wayland & X11.
 
-### 1.6.3. razercore
+## 7.3. razercore
 
 This (ugly) script helps with the typical tasks.
 Copy [razercore](bin/razercore) into ~/bin or somewhere else in your path and make it executable.
@@ -568,11 +568,11 @@ Usage:
     - razercore intern-on, razercore intern-off
         - enable / disable internal screen
 
-### 1.6.4. External Display
+## 7.4. External Display
 
 Use eGPU on external displays.
 
-#### 1.6.4.1. Connected At Laptop HDMI
+### 7.4.1. Connected At Laptop HDMI
 
 Switch to "Single Display" for gaming:
 
@@ -580,13 +580,13 @@ Switch to "Single Display" for gaming:
 
 Tested with Samsung TV, XBox 360 controller (plugged in Razer Core) and Steam.
 
-#### 1.6.4.2. Connected At External GPU
+### 7.4.2. Connected At External GPU
 
 Unsolved: Dynamic expand external display:
 
 - https://unix.stackexchange.com/questions/326362/bumblebee-dual-monitor-mirror-fedora-25
 
-##### 1.6.4.2.1. Expand Display
+#### 7.4.2.1. Expand Display
 
 Permanent expand display with external screen, connected at GPU / Razer Core:
 
@@ -595,7 +595,7 @@ Permanent expand display with external screen, connected at GPU / Razer Core:
 - Login with Xorg Session
 - Keep Thunderbold connected
 
-##### 1.6.4.2.2. Run Applications 'Only' On External Screen
+#### 7.4.2.2. Run Applications 'Only' On External Screen
 
 Check if your monitor is detected:
 
@@ -603,7 +603,7 @@ Check if your monitor is detected:
 nvidia-xconfig --query-gpu-info
 ```
 
-###### 1.6.4.2.2.1. Automatic Setup
+##### 7.4.2.2.1. Automatic Setup
 
 **NOTICE:**
 
@@ -643,7 +643,7 @@ Modify and create your monitor settings, stored in /etc/bumblebee/xorg.conf.exte
 optirun /usr/bin/nvidia-settings -c :8
 ```
 
-###### 1.6.4.2.2.2. Manual Setup
+##### 7.4.2.2.2. Manual Setup
 
 Modify [bumblebee.conf](etc/bumblebee/bublebee-external.conf) and store in etc/bumblebee/bublebee.conf:
 

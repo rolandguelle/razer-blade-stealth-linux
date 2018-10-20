@@ -6,34 +6,37 @@ Tested with [Antergos](https://antergos.com/) (Wayland & Gnome) Arch, but other 
 <!-- TOC -->
 
 - [1. Razer Blade Stealth Linux & Arch (Antergos)](#1-razer-blade-stealth-linux--arch-antergos)
-  - [1.1. Works](#11-works)
-  - [1.2. Suspend Loop](#12-suspend-loop)
-  - [1.3. Touchpad](#13-touchpad)
-    - [1.3.1. Libinput-gestures](#131-libinput-gestures)
-    - [1.3.2. Synaptics (X11)](#132-synaptics-x11)
-    - [1.3.3. Libinput Coordinates](#133-libinput-coordinates)
-  - [1.4. More](#14-more)
-  - [1.5. Razer Core](#15-razer-core)
-    - [1.5.1. Installation](#151-installation)
-    - [1.5.2. Setup](#152-setup)
-    - [1.5.3. Bash Alias razerrun](#153-bash-alias-razerrun)
-    - [1.5.4. Thunderbolt](#154-thunderbolt)
-  - [1.6. Tweaks](#16-tweaks)
-    - [1.6.1. Top Icon Plus](#161-top-icon-plus)
-    - [1.6.2. Gdm](#162-gdm)
-    - [1.6.3. Theme](#163-theme)
-    - [1.6.4. Power Management](#164-power-management)
+- [2. Works](#2-works)
+- [3. Issues](#3-issues)
+  - [3.1. Suspend Loop](#31-suspend-loop)
+  - [3.2. Touchpad](#32-touchpad)
+    - [3.2.1. Libinput-gestures](#321-libinput-gestures)
+    - [3.2.2. Synaptics (X11)](#322-synaptics-x11)
+    - [3.2.3. Libinput Coordinates](#323-libinput-coordinates)
+  - [3.3. More](#33-more)
+  - [3.4. Razer Core](#34-razer-core)
+    - [3.4.1. Installation](#341-installation)
+    - [3.4.2. Setup](#342-setup)
+    - [3.4.3. Bash Alias razerrun](#343-bash-alias-razerrun)
+    - [3.4.4. Thunderbolt](#344-thunderbolt)
+  - [3.5. Tweaks](#35-tweaks)
+    - [3.5.1. Top Icon Plus](#351-top-icon-plus)
+    - [3.5.2. Gdm](#352-gdm)
+    - [3.5.3. Theme](#353-theme)
+    - [3.5.4. Power Management](#354-power-management)
 
 <!-- /TOC -->
 
-## 1.1. Works
+# 2. Works
 
 Arch (4.15.2-2-ARCH kernel):
 
 - Caps-Lock fix is not needed
 - No touchpad issues
 
-## 1.2. Suspend Loop
+# 3. Issues
+
+## 3.1. Suspend Loop
 
 Add kernel parameter:
 
@@ -48,22 +51,22 @@ Update Grub:
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-## 1.3. Touchpad
+## 3.2. Touchpad
 
 Works, without suspend issues.
 
-### 1.3.1. Libinput-gestures
+### 3.2.1. Libinput-gestures
 
 Install Libinput-gestures, my [config](config/libinput-gestures.conf).
 (If you prefer _natural scrolling_, change up/down)
 
-### 1.3.2. Synaptics (X11)
+### 3.2.2. Synaptics (X11)
 
 Disable touchpad while typing and some other tunings:
 
 - [50-synaptics.conf](etc/X11/xorg.conf.d/50-synaptics.conf)
 
-### 1.3.3. Libinput Coordinates
+### 3.2.3. Libinput Coordinates
 
 Adjust "libinput" coordinate ranges for absolute axes:
 * [61-evdev-local.hwdb](etc/udev/hwdb.d/61-evdev-local.hwdb)
@@ -78,7 +81,7 @@ $ sudo systemd-hwdb update
 $ sudo udevadm trigger /dev/input/event*
 ```
 
-## 1.4. More
+## 3.3. More
 
 - [Onscreen Keyboard](#onscreen-keyboard)
     - [Block caribou](#block-caribou)
@@ -90,9 +93,9 @@ $ sudo udevadm trigger /dev/input/event*
 - [Multiple Monitors](#multiple-monitors)
     - [Switch to 1920x1080](#switch-to-1920x1080)
 
-## 1.5. Razer Core
+## 3.4. Razer Core
 
-### 1.5.1. Installation
+### 3.4.1. Installation
 
 Install NVIDIA & bumblebee:
 
@@ -106,7 +109,7 @@ Install 32bit driver for steam:
 sudo pacman -S lib32-virtualgl lib32-nvidia-utils
 ```
 
-### 1.5.2. Setup
+### 3.4.2. Setup
 
 Add user to bumblebee group:
 
@@ -127,7 +130,7 @@ TODO / WIP:
 
 More: https://wiki.archlinux.org/index.php/bumblebee#Installation
 
-### 1.5.3. Bash Alias razerrun
+### 3.4.3. Bash Alias razerrun
 
 Bash Alias:
 
@@ -142,7 +145,7 @@ Test:
 razerrun glxinfo | grep OpenGL
 ```
 
-### 1.5.4. Thunderbolt
+### 3.4.4. Thunderbolt
 
 Install "bolt" for thunderbolt management:
 
@@ -154,15 +157,15 @@ boltctl enroll
 
 Nice (but useless) Gnome extension: https://github.com/gicmo/bolt-extension
 
-## 1.6. Tweaks
+## 3.5. Tweaks
 
 - [Dock & Top Bar](#dock--top-bar)
 
-### 1.6.1. Top Icon Plus
+### 3.5.1. Top Icon Plus
 
 https://github.com/phocean/TopIcons-plus
 
-### 1.6.2. Gdm
+### 3.5.2. Gdm
 
 ```shell
 systemctl disable lightdm.service
@@ -176,7 +179,7 @@ pacman -S gnome-screensaver
 
 More: https://forum.antergos.com/topic/5081/switching-from-lightdm-to-gdm-no-lock-screen
 
-### 1.6.3. Theme
+### 3.5.3. Theme
 
 gnome-tweak-tool / Appearance
 
@@ -198,7 +201,7 @@ gnome-tweak-tool / Keyboard & Mouse / Touchpad
 - Click Method: Fingers
 - Disable While Typing: True
 
-### 1.6.4. Power Management
+### 3.5.4. Power Management
 
 Install TLP tools:
 
