@@ -22,8 +22,11 @@ My current setup is Ubuntu 18.04 (Ubuntu, Gnome, X11 & Synaptics touchpad driver
                 - [Auth](#auth)
                 - [bumblebee](#bumblebee)
         - [Tweaks](#tweaks)
-            - [Theme](#theme)
-            - [Steam](#steam)
+            - [Dual Boot Antergos](#dual-boot-antergos)
+            - [Grub](#grub)
+            - [Plymouth](#plymouth)
+            - [Gnome Theme](#gnome-theme)
+            - [Steam Interface](#steam-interface)
 - [Ubuntu 17.10](#ubuntu-1710)
     - [Install](#install-1)
     - [Works](#works)
@@ -57,7 +60,7 @@ My current setup is Ubuntu 18.04 (Ubuntu, Gnome, X11 & Synaptics touchpad driver
         - [Touchpad](#touchpad-1)
             - [Click, Tap, Move](#click-tap-move)
         - [Display Scaling](#display-scaling)
-        - [Theme](#theme-1)
+        - [Theme](#theme)
             - ["Capitaine" Cursors](#capitaine-cursors)
             - [Applicatioins Theme](#applicatioins-theme)
             - [Dock & Top Bar](#dock--top-bar)
@@ -97,7 +100,7 @@ My current setup is Ubuntu 18.04 (Ubuntu, Gnome, X11 & Synaptics touchpad driver
     - [Tweaks](#tweaks-2)
         - [Top Icon Plus](#top-icon-plus)
         - [Gdm](#gdm)
-        - [Theme](#theme-2)
+        - [Theme](#theme-1)
         - [Power Management](#power-management-1)
 - [Other Models](#other-models)
     - [Razer Blade Stealth Late 2017](#razer-blade-stealth-late-2017)
@@ -170,6 +173,8 @@ With libinput, the pointer "jumps" while moving. The synaptics driver hasn't thi
 Other users with RBS late 2017 reports dead zones, I'm not sure if they have tested the synaptics driver.
 Maybe 4.17-1 kernel solves this problem (https://github.com/rolandguelle/razer-blade-stealth-linux/issues/19).
 
+**Note:** 18.10 (beta) works out-of-the-box with libinput.
+
 For me, synaptics works:
 
 ```shell
@@ -229,7 +234,37 @@ https://github.com/Bumblebee-Project/Bumblebee/issues/951
 
 ### Tweaks
 
-#### Theme
+#### Dual Boot Antergos
+
+"update-grub" add only /boot/intel-ucode.img to initrd.
+(Maybe) a hack, but works well on my system.
+
+```shell
+patch /etc/grub.d/30_os-prober etc/grub.d/os-prober.patch
+```
+
+#### Grub
+
+WIP // Razer Grub Theme for RBS 4k
+
+```shell
+sudo cp -r themes/grub /boot/grub/themes/razer
+sudo cp etc/default/grub /etc/default/grub
+sudo update-grub
+```
+
+#### Plymouth
+
+WIP // Razer Plymouth Theme
+
+```shell
+sudo cp -r themes/plymouth /usr/share/plymouth/themes/razer
+sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/razer/razer.plymouth 90
+sudo update-alternatives --config default.plymouth
+sudo update-initramfs -u
+```
+
+#### Gnome Theme
 
 My current favorite :)
 
@@ -237,9 +272,11 @@ My current favorite :)
 apt install numix-gtk-theme numix-icon-theme gnome-icon-theme
 ```
 
-Selected Theme (Tweaks, Theme): "Numix" (✓)
+- Theme Application (Tweaks, Theme): "Numix" (✓)
+- Theme Icons (Tweaks, Theme): "Yaru" (✓)
+- Theme Sound (Tweaks, Theme): "Yaru" (✓)
 
-#### Steam
+#### Steam Interface
 
 Change Steam interface enlargement based on monitor size:
 

@@ -1,0 +1,13 @@
+[Plymouth Theme]
+Name=Razer
+Description=Based on simple spinner theme (by jimmac), modified for RBS
+ModuleName=two-step
+
+[two-step]
+ImageDir=/usr/share/plymouth/themes/razer
+HorizontalAlignment=.5
+VerticalAlignment=.75
+Transition=none
+TransitionDuration=0.0
+BackgroundStartColor=0x202020
+BackgroundEndColor=0x202020
