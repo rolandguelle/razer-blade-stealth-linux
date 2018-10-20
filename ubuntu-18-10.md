@@ -1,7 +1,6 @@
 # 1. Razer Blade Stealth Linux & Ubuntu 18.10
 
 **Razer Blade Stealth** (late 2016, Intel 7500U, UHD / HiDPI) Ubuntu Linux 18.10.
-Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions or open an issue.
 
 <!-- TOC -->
 
@@ -132,7 +131,6 @@ Add Theme:
 
 ```shell
 sudo nano /etc/default/grub
-# gfx mode for RBS 4k
 GRUB_GFXMODE="3840x2160-32"
 GRUB_GFXPAYLOAD_LINUX="3840x2160-32"
 GRUB_THEME="/boot/grub/themes/razer/theme.txt"

@@ -1,4 +1,4 @@
-gfx mode for RBS 4k
+# gfx mode for RBS 4k
 GRUB_GFXMODE="3840x2160-32"
 GRUB_GFXPAYLOAD_LINUX="3840x2160-32"
 GRUB_THEME="/boot/grub/themes/razer/theme.txt"
