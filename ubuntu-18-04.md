@@ -7,15 +7,10 @@
 - [1. Issues](#1-issues)
   - [1.1. Installation](#11-installation)
   - [1.2. Suspend Loop](#12-suspend-loop)
-    - [1.2.1. Grub Kernel Parameter](#121-grub-kernel-parameter)
   - [1.3. Caps-Lock Crash](#13-caps-lock-crash)
-    - [1.3.1. Disable Capslocks](#131-disable-capslocks)
-    - [1.3.2. X11: Disable Built-In Keyboard Driver](#132-x11-disable-built-in-keyboard-driver)
   - [1.4. Touchpad Temporary Freezes](#14-touchpad-temporary-freezes)
   - [1.5. Touchpad Suspend](#15-touchpad-suspend)
-    - [1.5.1. Libinput-gestures](#151-libinput-gestures)
   - [1.6. Touchscreen & Firefox](#16-touchscreen--firefox)
-    - [1.6.1. XINPUT2](#161-xinput2)
 - [2. Tweaks](#2-tweaks)
   - [2.1. Power Management](#21-power-management)
   - [2.2. Touchpad tap & click](#22-touchpad-tap--click)
@@ -47,8 +42,6 @@ sudo apt install intel-microcode
 After resume, the system loops back in suspend.
 The system send an ACPI event where the [kernel defaults](https://patchwork.kernel.org/patch/9512307/) are different.
 
-#### 1.2.1. Grub Kernel Parameter
-
 Change kernel defaults:
 
 ```shell
@@ -66,8 +59,6 @@ sudo update-grub
 
 The RBS crashes ~~randomly~~ mostly if you hit "Caps Lock", causes by the build-in driver.
 
-#### 1.3.1. Disable Capslocks
-
 Modify /etc/default/keyboard, replacing capslocks by a second ctrl:
 
 ```shell
@@ -75,7 +66,7 @@ sudo nano /etc/default/keyboard
 XKBOPTIONS="ctrl:nocaps"
 ```
 
-#### 1.3.2. X11: Disable Built-In Keyboard Driver
+__Solution 2:__
 
 Only needed if you run X11 instead of Wayland and enabled Capslock.
 
@@ -151,13 +142,13 @@ dpm_run_callback(): i2c_hid_resume+0x0/0x120 [i2c_hid] returns -11
 PM: Device i2c-15320205:00 failed to resume async: error -11
 ```
 
-Temporary fix:
+__Temporary fix:__
 
 ```shell
 sudo rmmod i2c_hid && sudo modprobe i2c_hid
 ```
 
-#### 1.5.1. Libinput-gestures
+__Solution:__
 
 [Libinput-gestures](https://github.com/bulletmark/libinput-gestures) solves the problem:
 
@@ -179,9 +170,7 @@ Logout - Login
 
 Firefox doesn't seem to care about the touchscreen at all.
 
-#### 1.6.1. XINPUT2
-
-Tell Firefox to use xinput2
+Tell Firefox to use XINPUT2:
 
 ```shell
 sudo nano /etc/environment

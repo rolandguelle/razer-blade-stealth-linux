@@ -12,11 +12,7 @@ Tested with [Antergos](https://antergos.com/) (Wayland & Gnome) Arch, but other 
     - [1.2.2. Synaptics (X11)](#122-synaptics-x11)
     - [1.2.3. Libinput Coordinates](#123-libinput-coordinates)
   - [1.3. Onscreen Keyboard](#13-onscreen-keyboard)
-    - [1.3.1. Block caribou](#131-block-caribou)
-      - [1.3.1.1. Startup Applications](#1311-startup-applications)
-      - [1.3.1.2. Extension](#1312-extension)
   - [1.4. Touchscreen & Firefox](#14-touchscreen--firefox)
-    - [1.4.1. XINPUT2](#141-xinput2)
 - [2. Razer Core](#2-razer-core)
   - [2.1. Installation](#21-installation)
   - [2.2. Setup](#22-setup)
@@ -86,9 +82,7 @@ $ sudo udevadm trigger /dev/input/event*
 
 Everytime the touchscreen is used, an onscreen keyboard opens.
 
-#### 1.3.1. Block caribou
-
-##### 1.3.1.1. Startup Applications
+__Block caribou: Step 1__
 
 Disable caribou (the on screen keyboard) in "Startup Applications".
 
@@ -100,7 +94,7 @@ sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop
 
 Open "Startup Applications", disable caribou (and maybe Desktop Sharing, Backup Monitor and some others).
 
-##### 1.3.1.2. Extension
+__Block caribou: Step 2__
 
 Remove caribou from "Startup Applications" is not enough :(
 
@@ -129,9 +123,7 @@ Logout - Login.
 
 Firefox doesn't seem to care about the touchscreen at all.
 
-#### 1.4.1. XINPUT2
-
-Tell Firefox to use xinput2
+Tell Firefox to use XINPUT2:
 
 ```shell
 sudo nano /etc/environment
@@ -139,7 +131,6 @@ MOZ_USE_XINPUT2=1
 ```
 
 Logout - Login.
-
 
 ## 2. Razer Core
 

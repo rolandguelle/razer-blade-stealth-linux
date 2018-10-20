@@ -6,11 +6,8 @@
 
 - [1. Issues](#1-issues)
   - [1.1. Suspend Loop](#11-suspend-loop)
-    - [1.1.1. Grub Kernel Parameter](#111-grub-kernel-parameter)
   - [1.2. Caps-Lock Crash](#12-caps-lock-crash)
-    - [1.2.1. Disable Capslocks](#121-disable-capslocks)
   - [1.3. Touchscreen & Firefox](#13-touchscreen--firefox)
-    - [1.3.1. XINPUT2](#131-xinput2)
   - [1.4. Gestures with Libinput](#14-gestures-with-libinput)
   - [1.5. Dual Boot Antergos](#15-dual-boot-antergos)
 - [2. Tweaks](#2-tweaks)
@@ -26,8 +23,6 @@
 
 After resume, the system loops back in suspend.
 The system send an ACPI event where the [kernel defaults](https://patchwork.kernel.org/patch/9512307/) are different.
-
-#### 1.1.1. Grub Kernel Parameter
 
 Change kernel defaults:
 
@@ -46,8 +41,6 @@ sudo update-grub
 
 The RBS crashes ~~randomly~~ mostly if you hit "Caps Lock", causes by the build-in driver.
 
-#### 1.2.1. Disable Capslocks
-
 Modify /etc/default/keyboard, replacing capslocks by a second ctrl:
 
 ```shell
@@ -58,10 +51,7 @@ XKBOPTIONS="ctrl:nocaps"
 ### 1.3. Touchscreen & Firefox
 
 Firefox doesn't seem to care about the touchscreen at all.
-
-#### 1.3.1. XINPUT2
-
-Tell Firefox to use xinput2
+Tell Firefox to use XINPUT2:
 
 ```shell
 sudo nano /etc/environment
