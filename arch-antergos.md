@@ -1,47 +1,43 @@
-# 1. Razer Blade Stealth Linux & Arch (Antergos)
+# Razer Blade Stealth Linux & Arch (Antergos)
 
 **Razer Blade Stealth** (late 2016, Intel 7500U, UHD / HiDPI) Arch (Antergos).
 Tested with [Antergos](https://antergos.com/) (Wayland & Gnome) Arch, but other Arch based distros should work too.
 
-<!-- TOC -->
+<!-- TOC depthFrom:2 -->
 
-- [1. Razer Blade Stealth Linux & Arch (Antergos)](#1-razer-blade-stealth-linux--arch-antergos)
-- [2. Works without Problems](#2-works-without-problems)
-- [3. Issues](#3-issues)
-  - [3.1. Suspend Loop](#31-suspend-loop)
-  - [3.2. Touchpad](#32-touchpad)
-    - [3.2.1. Libinput-gestures](#321-libinput-gestures)
-    - [3.2.2. Synaptics (X11)](#322-synaptics-x11)
-    - [3.2.3. Libinput Coordinates](#323-libinput-coordinates)
-  - [3.3. Onscreen Keyboard](#33-onscreen-keyboard)
-    - [3.3.1. Block caribou](#331-block-caribou)
-      - [3.3.1.1. Startup Applications](#3311-startup-applications)
-      - [3.3.1.2. Extension](#3312-extension)
-  - [3.4. Touchscreen & Firefox](#34-touchscreen--firefox)
-    - [3.4.1. XINPUT2](#341-xinput2)
-- [4. Razer Core](#4-razer-core)
-  - [4.1. Installation](#41-installation)
-  - [4.2. Setup](#42-setup)
-  - [4.3. Bash Alias razerrun](#43-bash-alias-razerrun)
-  - [4.4. Thunderbolt](#44-thunderbolt)
-- [5. Tweaks](#5-tweaks)
-  - [5.1. Top Icon Plus](#51-top-icon-plus)
-  - [5.2. Gdm](#52-gdm)
-  - [5.3. Theme](#53-theme)
-  - [5.4. Power Management](#54-power-management)
+- [1. Issues](#1-issues)
+  - [1.1. Suspend Loop](#11-suspend-loop)
+  - [1.2. Touchpad](#12-touchpad)
+    - [1.2.1. Libinput-gestures](#121-libinput-gestures)
+    - [1.2.2. Synaptics (X11)](#122-synaptics-x11)
+    - [1.2.3. Libinput Coordinates](#123-libinput-coordinates)
+  - [1.3. Onscreen Keyboard](#13-onscreen-keyboard)
+    - [1.3.1. Block caribou](#131-block-caribou)
+      - [1.3.1.1. Startup Applications](#1311-startup-applications)
+      - [1.3.1.2. Extension](#1312-extension)
+  - [1.4. Touchscreen & Firefox](#14-touchscreen--firefox)
+    - [1.4.1. XINPUT2](#141-xinput2)
+- [2. Razer Core](#2-razer-core)
+  - [2.1. Installation](#21-installation)
+  - [2.2. Setup](#22-setup)
+  - [2.3. Bash Alias razerrun](#23-bash-alias-razerrun)
+  - [2.4. Thunderbolt](#24-thunderbolt)
+- [3. Tweaks](#3-tweaks)
+  - [3.1. Top Icon Plus](#31-top-icon-plus)
+  - [3.2. Gdm](#32-gdm)
+  - [3.3. Theme](#33-theme)
+  - [3.4. Power Management](#34-power-management)
 
 <!-- /TOC -->
 
-# 2. Works without Problems
+## 1. Issues
 
-Arch (4.15.2-2-ARCH kernel):
+Works **without** Problems:
 
 - Caps-Lock fix is not needed
 - No touchpad issues
 
-# 3. Issues
-
-## 3.1. Suspend Loop
+### 1.1. Suspend Loop
 
 Add kernel parameter:
 
@@ -56,22 +52,22 @@ Update Grub:
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-## 3.2. Touchpad
+### 1.2. Touchpad
 
 Works, without suspend issues.
 
-### 3.2.1. Libinput-gestures
+#### 1.2.1. Libinput-gestures
 
 Install Libinput-gestures, my [config](config/libinput-gestures.conf).
 (If you prefer _natural scrolling_, change up/down)
 
-### 3.2.2. Synaptics (X11)
+#### 1.2.2. Synaptics (X11)
 
 Disable touchpad while typing and some other tunings:
 
 - [50-synaptics.conf](etc/X11/xorg.conf.d/50-synaptics.conf)
 
-### 3.2.3. Libinput Coordinates
+#### 1.2.3. Libinput Coordinates
 
 Adjust "libinput" coordinate ranges for absolute axes:
 * [61-evdev-local.hwdb](etc/udev/hwdb.d/61-evdev-local.hwdb)
@@ -86,13 +82,13 @@ $ sudo systemd-hwdb update
 $ sudo udevadm trigger /dev/input/event*
 ```
 
-## 3.3. Onscreen Keyboard
+### 1.3. Onscreen Keyboard
 
 Everytime the touchscreen is used, an onscreen keyboard opens.
 
-### 3.3.1. Block caribou
+#### 1.3.1. Block caribou
 
-#### 3.3.1.1. Startup Applications
+##### 1.3.1.1. Startup Applications
 
 Disable caribou (the on screen keyboard) in "Startup Applications".
 
@@ -104,7 +100,7 @@ sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop
 
 Open "Startup Applications", disable caribou (and maybe Desktop Sharing, Backup Monitor and some others).
 
-#### 3.3.1.2. Extension
+##### 1.3.1.2. Extension
 
 Remove caribou from "Startup Applications" is not enough :(
 
@@ -129,12 +125,11 @@ gsettings set org.gnome.shell enabled-extensions "['cariboublocker@git.keringar.
 
 Logout - Login.
 
-
-## 3.4. Touchscreen & Firefox
+### 1.4. Touchscreen & Firefox
 
 Firefox doesn't seem to care about the touchscreen at all.
 
-### 3.4.1. XINPUT2
+#### 1.4.1. XINPUT2
 
 Tell Firefox to use xinput2
 
@@ -146,9 +141,9 @@ MOZ_USE_XINPUT2=1
 Logout - Login.
 
 
-# 4. Razer Core
+## 2. Razer Core
 
-## 4.1. Installation
+### 2.1. Installation
 
 Install NVIDIA & bumblebee:
 
@@ -162,7 +157,7 @@ Install 32bit driver for steam:
 sudo pacman -S lib32-virtualgl lib32-nvidia-utils
 ```
 
-## 4.2. Setup
+### 2.2. Setup
 
 Add user to bumblebee group:
 
@@ -183,7 +178,7 @@ TODO / WIP:
 
 More: https://wiki.archlinux.org/index.php/bumblebee#Installation
 
-## 4.3. Bash Alias razerrun
+### 2.3. Bash Alias razerrun
 
 Bash Alias:
 
@@ -198,7 +193,7 @@ Test:
 razerrun glxinfo | grep OpenGL
 ```
 
-## 4.4. Thunderbolt
+### 2.4. Thunderbolt
 
 Install "bolt" for thunderbolt management:
 
@@ -210,15 +205,15 @@ boltctl enroll
 
 Nice (but useless) Gnome extension: https://github.com/gicmo/bolt-extension
 
-# 5. Tweaks
+## 3. Tweaks
 
 - [Dock & Top Bar](#dock--top-bar)
 
-## 5.1. Top Icon Plus
+### 3.1. Top Icon Plus
 
 https://github.com/phocean/TopIcons-plus
 
-## 5.2. Gdm
+### 3.2. Gdm
 
 ```shell
 systemctl disable lightdm.service
@@ -232,7 +227,7 @@ pacman -S gnome-screensaver
 
 More: https://forum.antergos.com/topic/5081/switching-from-lightdm-to-gdm-no-lock-screen
 
-## 5.3. Theme
+### 3.3. Theme
 
 gnome-tweak-tool / Appearance
 
@@ -254,7 +249,7 @@ gnome-tweak-tool / Keyboard & Mouse / Touchpad
 - Click Method: Fingers
 - Disable While Typing: True
 
-## 5.4. Power Management
+### 3.4. Power Management
 
 Install TLP tools:
 

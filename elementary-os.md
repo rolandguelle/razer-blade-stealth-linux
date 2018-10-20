@@ -1,19 +1,18 @@
-# 1. Razer Blade Stealth Linux & Elementary OS
+# Razer Blade Stealth Linux & Elementary OS
 
 **Razer Blade Stealth** (late 2016, Intel 7500U, UHD / HiDPI) with other Elementary OS.
 
-<!-- TOC -->
+<!-- TOC depthFrom:2 -->
 
-- [1. Razer Blade Stealth Linux & Elementary OS](#1-razer-blade-stealth-linux--elementary-os)
-- [2. Issues](#2-issues)
-  - [2.1. Live USB Boot](#21-live-usb-boot)
-  - [2.2. Screen flickering](#22-screen-flickering)
+- [1. Issues](#1-issues)
+  - [1.1. Live USB Boot](#11-live-usb-boot)
+  - [1.2. Screen flickering](#12-screen-flickering)
 
 <!-- /TOC -->
 
-# 2. Issues
+## 1. Issues
 
-## 2.1. Live USB Boot
+### 1.1. Live USB Boot
 
 - While booting from USB stick, choose direct the "Install Mode" (Option 2)
 - First boot after installing, add kernel parameter while booting (grub, press "e"):
@@ -22,7 +21,7 @@
 intel_idle.max_cstate=4
 ```
 
-## 2.2. Screen flickering
+### 1.2. Screen flickering
 
 Add this parameter permantly:
 
