@@ -14,6 +14,7 @@
   - [2. Tweaks](#2-tweaks)
     - [2.1. "Capitaine" Cursors](#21-capitaine-cursors)
     - [2.2. Grub Theme](#22-grub-theme)
+    - [2.3. Steam Interface](#23-steam-interface)
   - [3. Unsolved Issues](#3-unsolved-issues)
     - [3.1. Keyboard Colors & Openrazer](#31-keyboard-colors--openrazer)
     - [3.2. Webcam](#32-webcam)
@@ -129,6 +130,12 @@ Update Grub
 ```shell
 sudo update-grub
 ```
+
+### 2.3. Steam Interface
+
+Change Steam interface enlargement based on monitor size:
+
+- Settings, Interface, Enlarge text and icons based on monitor size
 
 ## 3. Unsolved Issues
 
