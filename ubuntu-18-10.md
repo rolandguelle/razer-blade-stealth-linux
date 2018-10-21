@@ -17,7 +17,6 @@
   - [3. Unsolved Issues](#3-unsolved-issues)
     - [3.1. Keyboard Colors & Openrazer](#31-keyboard-colors--openrazer)
     - [3.2. Webcam](#32-webcam)
-  - [fix issue with built-in webcam](#fix-issue-with-built-in-webcam)
     - [3.3. Wifi](#33-wifi)
     - [3.4. Razer Core (WIP)](#34-razer-core-wip)
 
@@ -147,8 +146,6 @@ Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
 
 ```shell
 /etc/modprobe.d/uvcvideo.conf
-
-## fix issue with built-in webcam
 options uvcvideo quirks=512
 ```
 
