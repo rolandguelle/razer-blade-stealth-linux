@@ -4,20 +4,20 @@
 
 <!-- TOC depthFrom:2 -->
 
-- [Razer Blade Stealth Linux & Ubuntu 18.10](#razer-blade-stealth-linux--ubuntu-1810)
-  - [1. Issues](#1-issues)
-    - [1.1. Suspend Loop](#11-suspend-loop)
-    - [1.2. Caps-Lock Crash](#12-caps-lock-crash)
-    - [1.3. Touchscreen & Firefox](#13-touchscreen--firefox)
-    - [1.4. Gestures with Libinput](#14-gestures-with-libinput)
-    - [1.5. Dual Boot Antergos](#15-dual-boot-antergos)
-  - [2. Tweaks](#2-tweaks)
-    - [2.1. "Capitaine" Cursors](#21-capitaine-cursors)
-    - [2.2. Grub Theme](#22-grub-theme)
-  - [3. Unsolved Issues](#3-unsolved-issues)
-    - [3.1. Keyboard Colors & Openrazer](#31-keyboard-colors--openrazer)
-    - [3.2. Webcam](#32-webcam)
-    - [3.3. Wifi](#33-wifi)
+- [1. Issues](#1-issues)
+  - [1.1. Suspend Loop](#11-suspend-loop)
+  - [1.2. Caps-Lock Crash](#12-caps-lock-crash)
+  - [1.3. Touchscreen & Firefox](#13-touchscreen--firefox)
+  - [1.4. Gestures with Libinput](#14-gestures-with-libinput)
+  - [1.5. Dual Boot Antergos](#15-dual-boot-antergos)
+- [2. Tweaks](#2-tweaks)
+  - [2.1. "Capitaine" Cursors](#21-capitaine-cursors)
+  - [2.2. Grub Theme](#22-grub-theme)
+- [3. Unsolved Issues](#3-unsolved-issues)
+  - [3.1. Keyboard Colors & Openrazer](#31-keyboard-colors--openrazer)
+  - [3.2. Webcam](#32-webcam)
+  - [3.3. Wifi](#33-wifi)
+  - [3.4. Razer Core (WIP)](#34-razer-core-wip)
 
 <!-- /TOC -->
 
@@ -146,9 +146,16 @@ Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
 ```shell
 /etc/modprobe.d/uvcvideo.conf
 
+## fix issue with built-in webcam
 options uvcvideo quirks=512
 ```
 
 ### 3.3. Wifi
 
 Connection lost, maybe firmware
+
+### 3.4. Razer Core (WIP)
+
+- Auth over Settings -> Devices -> Thunderbolt
+- Razer Core: Authorized
+- Install nvidia-driver-390
