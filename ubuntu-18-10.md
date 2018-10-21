@@ -171,3 +171,7 @@ Connection lost, maybe firmware
 - Auth over Settings -> Devices -> Thunderbolt
 - Razer Core: Authorized
 - Install nvidia-driver-390
+
+https://wiki.ubuntu.com/Bumblebee#Installation
+
+sudo apt-get install bumblebee bumblebee-nvidia primus linux-headers-generic
