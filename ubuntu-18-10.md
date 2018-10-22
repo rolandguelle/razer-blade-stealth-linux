@@ -18,8 +18,8 @@
   - [3.1. Thunderbolt](#31-thunderbolt)
   - [3.2. Nvidia Driver](#32-nvidia-driver)
   - [3.3. Bumblebee](#33-bumblebee)
-  - [Steam](#steam)
-  - [3.4. WIP](#34-wip)
+  - [3.4. Steam](#34-steam)
+  - [3.5. WIP](#35-wip)
 - [4. Unsolved Issues](#4-unsolved-issues)
   - [4.1. Keyboard Colors & Openrazer](#41-keyboard-colors--openrazer)
   - [4.2. Webcam](#42-webcam)
@@ -143,7 +143,7 @@ Change Steam interface enlargement based on monitor size:
 
 ## 3. Razer Core
 
-Running a thunderbolt 3 device like the [Razer Core](https://www.razerzone.com/gaming-laptops/razer-core-v2) with Linux sounds like fun :)
+Running a thunderbolt 3 device like the [Razer Core](https://www.razerzone.com/gaming-laptops/razer-core-v2) and an external GPU with Linux sounds like fun :)
 
 ### 3.1. Thunderbolt
 
@@ -204,7 +204,7 @@ Run game on external GPU:
 primusrun 0ad
 ```
 
-### Steam
+### 3.4. Steam
 
 Run steam games on your external GPU over Bumblebee/primusrun:
 
@@ -214,7 +214,7 @@ Run steam games on your external GPU over Bumblebee/primusrun:
 - "Set Launch Options"
 - Insert "primusrun %command%"
 
-### 3.4. WIP
+### 3.5. WIP
 
 - External screen
 
