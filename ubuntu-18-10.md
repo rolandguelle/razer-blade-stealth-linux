@@ -14,11 +14,15 @@
   - [2.1. "Capitaine" Cursors](#21-capitaine-cursors)
   - [2.2. Grub Theme](#22-grub-theme)
   - [2.3. Steam Interface](#23-steam-interface)
-- [3. Unsolved Issues](#3-unsolved-issues)
-  - [3.1. Keyboard Colors & Openrazer](#31-keyboard-colors--openrazer)
-  - [3.2. Webcam](#32-webcam)
-  - [3.3. Wifi](#33-wifi)
-  - [3.4. Razer Core (WIP)](#34-razer-core-wip)
+- [3. Razer Core](#3-razer-core)
+  - [3.1. Thunderbolt](#31-thunderbolt)
+  - [3.2. Nvidia Driver](#32-nvidia-driver)
+  - [3.3. Bumblebee](#33-bumblebee)
+  - [3.4. WIP](#34-wip)
+- [4. Unsolved Issues](#4-unsolved-issues)
+  - [4.1. Keyboard Colors & Openrazer](#41-keyboard-colors--openrazer)
+  - [4.2. Webcam](#42-webcam)
+  - [4.3. Wifi](#43-wifi)
 
 <!-- /TOC -->
 
@@ -136,42 +140,23 @@ Change Steam interface enlargement based on monitor size:
 
 - Settings, Interface, Enlarge text and icons based on monitor size
 
-## 3. Unsolved Issues
+## 3. Razer Core
 
-### 3.1. Keyboard Colors & Openrazer
+### 3.1. Thunderbolt
 
-[Openrazer](https://openrazer.github.io/) lost settings after suspend.
-
-[Issue](https://github.com/openrazer/openrazer/issues/342): Settings are lost after suspend (Gnome, Wayland).
-
-### 3.2. Webcam
-
-Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
-
-[This](https://wiki.archlinux.org/index.php/Razer_Blade#Webcam) fix not really helped:
-
-```shell
-/etc/modprobe.d/uvcvideo.conf
-options uvcvideo quirks=512
-```
-
-**Web Browser:**
-
-"works almost perfectly (at least it's not all green or black and have decent fps) using Slack or Hangout"
-
-- [Issue 21](https://github.com/rolandguelle/razer-blade-stealth-linux/issues/21)
-- [Browser Test](https://www.cam-recorder.com/)
-
-### 3.3. Wifi
-
-Connection lost, maybe firmware
-
-### 3.4. Razer Core (WIP)
-
-- Auth over Settings -> Devices -> Thunderbolt
+- Authorization: Settings -> Devices -> Thunderbolt
 - This [**2m** cable](https://www.amazon.de/CalDigit-Thunderbolt-3-Kabel-Zertifiziert-Typ-C-kompatibel/dp/B01N4MFG7J/) works without problems. I measured no (performance) differences compared with the included _very_ short cable (tested on Windows & Linux).
 - Razer Core: Authorized
-- Install nvidia-driver-390
+
+### 3.2. Nvidia Driver
+
+Install nvidia-driver-390, over Software-Settings or manually:
+
+```shell
+sudo apt install nvidia-driver-390
+```
+
+### 3.3. Bumblebee
 
 Install [Bumblebee / Primus](https://wiki.ubuntu.com/Bumblebee#Installation):
 
@@ -209,3 +194,45 @@ Patch [primusrun](https://github.com/Bumblebee-Project/Bumblebee/issues/951#issu
 sudo mv /usr/bin/primusrun /usr/bin/primusrun.bak
 sudo cp usr/bin/primusrun /usr/bin/
 ```
+
+Run game on external GPU:
+
+```shell
+PRIMUS_SYNC=1 vblank_mode=0 primusrun 0ad
+```
+
+### 3.4. WIP
+
+- Steam
+- external screen
+
+## 4. Unsolved Issues
+
+### 4.1. Keyboard Colors & Openrazer
+
+[Openrazer](https://openrazer.github.io/) lost settings after suspend.
+
+[Issue](https://github.com/openrazer/openrazer/issues/342): Settings are lost after suspend (Gnome, Wayland).
+
+### 4.2. Webcam
+
+Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
+
+[This](https://wiki.archlinux.org/index.php/Razer_Blade#Webcam) fix not really helped:
+
+```shell
+/etc/modprobe.d/uvcvideo.conf
+options uvcvideo quirks=512
+```
+
+**Web Browser:**
+
+"works almost perfectly (at least it's not all green or black and have decent fps) using Slack or Hangout"
+
+- [Issue 21](https://github.com/rolandguelle/razer-blade-stealth-linux/issues/21)
+- [Browser Test](https://www.cam-recorder.com/)
+
+### 4.3. Wifi
+
+Connection lost, maybe firmware
+
