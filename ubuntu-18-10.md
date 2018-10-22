@@ -141,7 +141,7 @@ Change Steam interface enlargement based on monitor size:
 
 ### 3.1. Keyboard Colors & Openrazer
 
-* https://openrazer.github.io/
+[Openrazer](https://openrazer.github.io/) lost settings after suspend.
 
 [Issue](https://github.com/openrazer/openrazer/issues/342): Settings are lost after suspend (Gnome, Wayland).
 
@@ -156,11 +156,12 @@ Working only with 176x in cheese, or 640x480 in guvcview with 15/1 frames.
 options uvcvideo quirks=512
 ```
 
-**Web Browser**
+**Web Browser:**
 
 "works almost perfectly (at least it's not all green or black and have decent fps) using Slack or Hangout"
-- https://github.com/rolandguelle/razer-blade-stealth-linux/issues/21
-- https://www.cam-recorder.com/
+
+- [Issue 21](https://github.com/rolandguelle/razer-blade-stealth-linux/issues/21)
+- [Browser Test](https://www.cam-recorder.com/)
 
 ### 3.3. Wifi
 
@@ -172,6 +173,39 @@ Connection lost, maybe firmware
 - Razer Core: Authorized
 - Install nvidia-driver-390
 
-https://wiki.ubuntu.com/Bumblebee#Installation
+Install [Bumblebee / Primus](https://wiki.ubuntu.com/Bumblebee#Installation):
 
+```shell
 sudo apt-get install bumblebee bumblebee-nvidia primus linux-headers-generic
+```
+
+Change [bumblebee.conf](https://askubuntu.com/questions/1029169/bumblebee-doesnt-work-on-ubuntu-18-04/1042950#1042950)
+
+```shell
+sudo nano /etc/bumblebee/bumblebbee.comf
+LibraryPath=/usr/lib/x86_64-linux-gnu:/usr/lib/i386-linux-gnu
+XorgModulePath=/usr/lib/x86_64-linux-gnu/nvidia/xorg,/usr/lib/xorg/modules,/usr/lib/xorg/modules/input
+```
+
+Change [/etc/environment](https://askubuntu.com/questions/1029169/bumblebee-doesnt-work-on-ubuntu-18-04/1042950#1042950)
+
+```shell
+sudo nano /etc/environment
+__GLVND_DISALLOW_PATCHING=1
+```
+
+Create [Nvidia Blacklist](https://askubuntu.com/questions/1029169/bumblebee-doesnt-work-on-ubuntu-18-04/1042950#1042950):
+
+```shell
+sudo nano /etc/modprobe.d/blacklist-nvidia.conf
+blacklist nvidia
+blacklist nvidia-drm
+blacklist nvidia-modeset
+```
+
+Patch [primusrun](https://github.com/Bumblebee-Project/Bumblebee/issues/951#issuecomment-379512353)
+
+```shell
+sudo mv /usr/bin/primusrun /usr/bin/primusrun.bak
+sudo cp usr/bin/primusrun /usr/bin/
+```
