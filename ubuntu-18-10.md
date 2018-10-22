@@ -18,6 +18,7 @@
   - [3.1. Thunderbolt](#31-thunderbolt)
   - [3.2. Nvidia Driver](#32-nvidia-driver)
   - [3.3. Bumblebee](#33-bumblebee)
+  - [Steam](#steam)
   - [3.4. WIP](#34-wip)
 - [4. Unsolved Issues](#4-unsolved-issues)
   - [4.1. Keyboard Colors & Openrazer](#41-keyboard-colors--openrazer)
@@ -142,6 +143,8 @@ Change Steam interface enlargement based on monitor size:
 
 ## 3. Razer Core
 
+Running a thunderbolt 3 device like the [Razer Core](https://www.razerzone.com/gaming-laptops/razer-core-v2) with Linux sounds like fun :)
+
 ### 3.1. Thunderbolt
 
 - Authorization: Settings -> Devices -> Thunderbolt
@@ -198,13 +201,22 @@ sudo cp usr/bin/primusrun /usr/bin/
 Run game on external GPU:
 
 ```shell
-PRIMUS_SYNC=1 vblank_mode=0 primusrun 0ad
+primusrun 0ad
 ```
+
+### Steam
+
+Run steam games on your external GPU over Bumblebee/primusrun:
+
+- Start steam
+- Select your game
+- Select "Properties"
+- "Set Launch Options"
+- Insert "primusrun %command%"
 
 ### 3.4. WIP
 
-- Steam
-- external screen
+- External screen
 
 ## 4. Unsolved Issues
 
@@ -235,4 +247,3 @@ options uvcvideo quirks=512
 ### 4.3. Wifi
 
 Connection lost, maybe firmware
-

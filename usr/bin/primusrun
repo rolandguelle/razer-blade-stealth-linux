@@ -4,6 +4,14 @@
 # 0: no sync, 1: D lags behind one frame, 2: fully synced
 # export PRIMUS_SYNC=${PRIMUS_SYNC:-0}
 
+# PRIMUS_SYNC sync between NVIDIA and Intel
+  # 0: no sync, 1: D lags behind one frame, 2: fully synced
+# ignore the refresh rate of your monitor and just try to reach the maximux fps
+  # vblank_mode=0
+
+export PRIMUS_SYNC=1
+export vblank_mode=0 
+
 # Verbosity level
 # 0: only errors, 1: warnings (default), 2: profiling
 # export PRIMUS_VERBOSE=${PRIMUS_VERBOSE:-1}
