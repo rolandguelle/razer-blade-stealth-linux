@@ -69,25 +69,22 @@ Disable touchpad while typing and some other tunings:
 
 #### 1.2.3. Libinput Coordinates
 
-Adjust "libinput" coordinate ranges for absolute axes:
-* [61-evdev-local.hwdb](etc/udev/hwdb.d/61-evdev-local.hwdb)
+Adjust "libinput" coordinate ranges for absolute axes: [61-evdev-local.hwdb](etc/udev/hwdb.d/61-evdev-local.hwdb):
 
 ```shell
-$ sudo cp etc/udev/hwdb.d/61-evdev-local.hwdb /etc/udev/hwdb.d/61-evdev-local.hwdb
+sudo cp etc/udev/hwdb.d/61-evdev-local.hwdb /etc/udev/hwdb.d/61-evdev-local.hwdb
 ```
 
 Update settings:
+
 ```shell
-$ sudo systemd-hwdb update
-$ sudo udevadm trigger /dev/input/event*
+sudo systemd-hwdb update
+sudo udevadm trigger /dev/input/event*
 ```
 
 ### 1.3. Onscreen Keyboard
 
 Everytime the touchscreen is used, an onscreen keyboard opens.
-
-__Block caribou: Step 1__
-
 Disable caribou (the on screen keyboard) in "Startup Applications".
 
 Display "hidden apps":
@@ -97,11 +94,7 @@ sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop
 ```
 
 Open "Startup Applications", disable caribou (and maybe Desktop Sharing, Backup Monitor and some others).
-
-__Block caribou: Step 2__
-
 Remove caribou from "Startup Applications" is not enough :(
-
 Blocks caribou (the on screen keyboard) from popping up when you use a touchscreen with a Gnome extension.
 
 Manual installation:
@@ -136,16 +129,17 @@ MOZ_USE_XINPUT2=1
 
 Logout - Login.
 
-
 ## 2. Tweaks
 
 - [Dock & Top Bar](#dock--top-bar)
 
 ### 2.1. Top Icon Plus
 
-https://github.com/phocean/TopIcons-plus
+Install [Top Icon Plus](https://github.com/phocean/TopIcons-plus).
 
 ### 2.2. Gdm
+
+Replace [lightdm with gdm](https://forum.antergos.com/topic/5081/switching-from-lightdm-to-gdm-no-lock-screen):
 
 ```shell
 systemctl disable lightdm.service
@@ -156,8 +150,6 @@ systemctl enable gdm.service
 pacman -Rs xscreensaver
 pacman -S gnome-screensaver
 ```
-
-More: https://forum.antergos.com/topic/5081/switching-from-lightdm-to-gdm-no-lock-screen
 
 ### 2.3. Theme
 
@@ -240,8 +232,6 @@ TODO / WIP:
 
 - xorg.conf.external, bumblebee-external.conf to /etc/bumblebee/ for external setup
 
-More: https://wiki.archlinux.org/index.php/bumblebee#Installation
-
 ### 3.3. Bash Alias razerrun
 
 Bash Alias:
@@ -267,13 +257,11 @@ sudo pacman -S bolt
 boltctl enroll
 ```
 
-Nice (but useless) Gnome extension: https://github.com/gicmo/bolt-extension
-
 ## 4. Unsolved Issues
 
 ### 4.1. Keyboard Colors & Openrazer
 
-* https://openrazer.github.io/
+Currently [Openrazer](https://openrazer.github.io/) not used.
 
 [Issue](https://github.com/openrazer/openrazer/issues/342): Settings are lost after suspend (Gnome, Wayland).
 

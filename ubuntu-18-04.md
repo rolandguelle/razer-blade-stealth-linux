@@ -108,7 +108,7 @@ esac
 
 With libinput, the pointer "jumps" while moving. The synaptics driver hasn't this issue.
 Other users with RBS late 2017 reports dead zones, I'm not sure if they have tested the synaptics driver.
-Maybe 4.17-1 kernel solves this problem (https://github.com/rolandguelle/razer-blade-stealth-linux/issues/19).
+Maybe 4.17-1 kernel solves this problem [Issue 19](https://github.com/rolandguelle/razer-blade-stealth-linux/issues/19).
 
 **Note:** A new kernel workd better with libinput.
 
@@ -248,7 +248,7 @@ Change Steam interface enlargement based on monitor size:
 
 ### 3.1. Keyboard Colors & Openrazer
 
-* https://openrazer.github.io/
+Currently [Openrazer](https://openrazer.github.io/) not used.
 
 [Issue](https://github.com/openrazer/openrazer/issues/342): Settings are lost after suspend (Gnome, Wayland).
 
