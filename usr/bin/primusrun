@@ -9,8 +9,8 @@
 # ignore the refresh rate of your monitor and just try to reach the maximux fps
   # vblank_mode=0
 
-export PRIMUS_SYNC=1
-export vblank_mode=0 
+#export PRIMUS_SYNC=2
+#export vblank_mode=0 
 
 # Verbosity level
 # 0: only errors, 1: warnings (default), 2: profiling

@@ -14,6 +14,7 @@
   - [2.1. "Capitaine" Cursors](#21-capitaine-cursors)
   - [2.2. Grub Theme](#22-grub-theme)
   - [2.3. Steam Interface](#23-steam-interface)
+  - [2.4. Touchpad](#24-touchpad)
 - [3. Razer Core](#3-razer-core)
   - [3.1. Thunderbolt](#31-thunderbolt)
   - [3.2. Nvidia Driver](#32-nvidia-driver)
@@ -140,6 +141,12 @@ sudo update-grub
 Change Steam interface enlargement based on monitor size:
 
 - Settings, Interface, Enlarge text and icons based on monitor size
+
+### 2.4. Touchpad
+
+- Tweaks
+- Touchpad
+- Disable while typing: Off
 
 ## 3. Razer Core
 
