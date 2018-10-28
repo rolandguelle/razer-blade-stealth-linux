@@ -15,6 +15,7 @@
   - [2.2. Grub Theme](#22-grub-theme)
   - [2.3. Steam Interface](#23-steam-interface)
   - [2.4. Touchpad](#24-touchpad)
+  - [2.5. Disable Center New Window](#25-disable-center-new-window)
 - [3. Razer Core](#3-razer-core)
   - [3.1. Thunderbolt](#31-thunderbolt)
   - [3.2. Nvidia Driver](#32-nvidia-driver)
@@ -147,6 +148,12 @@ Change Steam interface enlargement based on monitor size:
 - Tweaks
 - Touchpad
 - Disable while typing: Off
+
+### 2.5. Disable Center New Window
+
+- Tweaks
+- Windows
+- Center New Window: Off
 
 ## 3. Razer Core
 
