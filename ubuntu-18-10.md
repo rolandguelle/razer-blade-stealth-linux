@@ -227,6 +227,12 @@ Run steam games on your external GPU over Bumblebee/primusrun:
 - Select "Properties"
 - "Set Launch Options"
 - Insert "primusrun %command%"
+- Install [Corefonts](https://www.holarse-linuxgaming.de/wiki/gta_v) for Steam Play:
+
+```shell
+sudo apt install ttf-mscorefonts-installer
+```
+
 
 ### 3.5. WIP
 
