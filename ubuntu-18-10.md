@@ -16,7 +16,7 @@
   - [2.3. Steam Interface](#23-steam-interface)
   - [2.4. Touchpad](#24-touchpad)
   - [2.5. Disable Center New Window](#25-disable-center-new-window)
-  - [Gnome Theme](#gnome-theme)
+  - [2.6. Gnome Theme](#26-gnome-theme)
 - [3. Razer Core](#3-razer-core)
   - [3.1. Thunderbolt](#31-thunderbolt)
   - [3.2. Nvidia Driver](#32-nvidia-driver)
@@ -156,7 +156,7 @@ Change Steam interface enlargement based on monitor size:
 - Windows
 - Center New Window: Off
 
-### Gnome Theme
+### 2.6. Gnome Theme
 
 ```shell
 sudo apt install gnome-shell-extensions
@@ -164,14 +164,12 @@ cp themes/RBS ~/.themes
 ```
 
 Select RBS Theme:
+
 - Tweaks
 - Extensions
 - User Themes: Yes
 - Appearance
 - Shell: RBS
-
-
-
 
 ## 3. Razer Core
 
