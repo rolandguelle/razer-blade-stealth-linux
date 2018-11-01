@@ -5,27 +5,28 @@
 <!-- TOC depthFrom:2 -->
 
 - [1. Issues](#1-issues)
-    - [1.1. Suspend Loop](#11-suspend-loop)
-    - [1.2. Caps-Lock Crash](#12-caps-lock-crash)
-    - [1.3. Touchscreen & Firefox](#13-touchscreen--firefox)
-    - [1.4. Gestures with Libinput](#14-gestures-with-libinput)
-    - [1.5. Dual Boot Antergos](#15-dual-boot-antergos)
+  - [1.1. Suspend Loop](#11-suspend-loop)
+  - [1.2. Caps-Lock Crash](#12-caps-lock-crash)
+  - [1.3. Touchscreen & Firefox](#13-touchscreen--firefox)
+  - [1.4. Gestures with Libinput](#14-gestures-with-libinput)
+  - [1.5. Dual Boot Antergos](#15-dual-boot-antergos)
 - [2. Tweaks](#2-tweaks)
-    - [2.1. "Capitaine" Cursors](#21-capitaine-cursors)
-    - [2.2. Grub Theme](#22-grub-theme)
-    - [2.3. Steam Interface](#23-steam-interface)
-    - [2.4. Touchpad](#24-touchpad)
-    - [2.5. Disable Center New Window](#25-disable-center-new-window)
+  - [2.1. "Capitaine" Cursors](#21-capitaine-cursors)
+  - [2.2. Grub Theme](#22-grub-theme)
+  - [2.3. Steam Interface](#23-steam-interface)
+  - [2.4. Touchpad](#24-touchpad)
+  - [2.5. Disable Center New Window](#25-disable-center-new-window)
+  - [Gnome Theme](#gnome-theme)
 - [3. Razer Core](#3-razer-core)
-    - [3.1. Thunderbolt](#31-thunderbolt)
-    - [3.2. Nvidia Driver](#32-nvidia-driver)
-    - [3.3. Bumblebee](#33-bumblebee)
-    - [3.4. Steam](#34-steam)
-    - [3.5. WIP](#35-wip)
+  - [3.1. Thunderbolt](#31-thunderbolt)
+  - [3.2. Nvidia Driver](#32-nvidia-driver)
+  - [3.3. Bumblebee](#33-bumblebee)
+  - [3.4. Steam](#34-steam)
+  - [3.5. WIP](#35-wip)
 - [4. Unsolved Issues](#4-unsolved-issues)
-    - [4.1. Keyboard Colors & Openrazer](#41-keyboard-colors--openrazer)
-    - [4.2. Webcam](#42-webcam)
-    - [4.3. Wifi](#43-wifi)
+  - [4.1. Keyboard Colors & Openrazer](#41-keyboard-colors--openrazer)
+  - [4.2. Webcam](#42-webcam)
+  - [4.3. Wifi](#43-wifi)
 
 <!-- /TOC -->
 
@@ -154,6 +155,23 @@ Change Steam interface enlargement based on monitor size:
 - Tweaks
 - Windows
 - Center New Window: Off
+
+### Gnome Theme
+
+```shell
+sudo apt install gnome-shell-extensions
+cp themes/RBS ~/.themes
+```
+
+Select RBS Theme:
+- Tweaks
+- Extensions
+- User Themes: Yes
+- Appearance
+- Shell: RBS
+
+
+
 
 ## 3. Razer Core
 
