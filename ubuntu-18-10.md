@@ -163,11 +163,11 @@ sudo apt install gnome-shell-extensions
 cp themes/RBS ~/.themes
 ```
 
-Select RBS Theme:
-
+- Logout - Login
 - Tweaks
 - Extensions
 - User Themes: Yes
+- Logout - Login
 - Appearance
 - Shell: RBS
 
