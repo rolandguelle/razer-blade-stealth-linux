@@ -11,12 +11,13 @@
   - [1.4. Gestures with Libinput](#14-gestures-with-libinput)
   - [1.5. Dual Boot Antergos](#15-dual-boot-antergos)
 - [2. Tweaks](#2-tweaks)
-  - [2.1. "Capitaine" Cursors](#21-capitaine-cursors)
-  - [2.2. Grub Theme](#22-grub-theme)
-  - [2.3. Steam Interface](#23-steam-interface)
-  - [2.4. Touchpad](#24-touchpad)
-  - [2.5. Disable Center New Window](#25-disable-center-new-window)
-  - [2.6. Gnome Theme](#26-gnome-theme)
+  - [2.1. Power Management](#21-power-management)
+  - [2.2. "Capitaine" Cursors](#22-capitaine-cursors)
+  - [2.3. Grub Theme](#23-grub-theme)
+  - [2.4. Gnome Theme](#24-gnome-theme)
+  - [2.5. Steam Interface](#25-steam-interface)
+  - [2.6. Touchpad](#26-touchpad)
+  - [2.7. Disable Center New Window](#27-disable-center-new-window)
 - [3. Razer Core](#3-razer-core)
   - [3.1. Thunderbolt](#31-thunderbolt)
   - [3.2. Nvidia Driver](#32-nvidia-driver)
@@ -102,7 +103,16 @@ sudo patch /etc/grub.d/30_os-prober etc/grub.d/os-prober.patch
 
 ## 2. Tweaks
 
-### 2.1. "Capitaine" Cursors
+### 2.1. Power Management
+
+TLP is an advanced power management tool for Linux that tries to apply tweaks for you automatically, depending on your Linux distribution and hardware.
+
+```shell
+sudo apt-get install tlp tlp-rdw
+sudo systemctl enable tlp
+```
+
+### 2.2. "Capitaine" Cursors
 
 - Install ["Capitaine" Cursors](https://github.com/keeferrourke/capitaine-cursors)
 
@@ -114,7 +124,7 @@ sudo apt install la-capitaine-cursor-theme
 
 - Select via tweaks tool, Appearance, Themes, Cursor
 
-### 2.2. Grub Theme
+### 2.3. Grub Theme
 
 Razer Grub Theme for RBS 4k.
 
@@ -138,25 +148,7 @@ Update Grub
 sudo update-grub
 ```
 
-### 2.3. Steam Interface
-
-Change Steam interface enlargement based on monitor size:
-
-- Settings, Interface, Enlarge text and icons based on monitor size
-
-### 2.4. Touchpad
-
-- Tweaks
-- Touchpad
-- Disable while typing: Off
-
-### 2.5. Disable Center New Window
-
-- Tweaks
-- Windows
-- Center New Window: Off
-
-### 2.6. Gnome Theme
+### 2.4. Gnome Theme
 
 ```shell
 sudo apt install gnome-shell-extensions
@@ -164,12 +156,38 @@ cp themes/RBS ~/.themes
 ```
 
 - Logout - Login
+
 - Tweaks
 - Extensions
 - User Themes: Yes
+
 - Logout - Login
 - Appearance
 - Shell: RBS
+
+- Interface: Garuda Regular 11
+- Document: Gurada Regular 11
+- Monospace: Ubuntu Mono Regular 11
+
+### 2.5. Steam Interface
+
+Change Steam interface enlargement based on monitor size:
+
+- Settings
+- Interface
+- Enlarge text and icons based on monitor size
+
+### 2.6. Touchpad
+
+- Tweaks
+- Touchpad
+- Disable while typing: Off
+
+### 2.7. Disable Center New Window
+
+- Tweaks
+- Windows
+- Center New Window: Off
 
 ## 3. Razer Core
 
