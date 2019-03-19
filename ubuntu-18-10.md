@@ -2,8 +2,6 @@
 
 **Razer Blade Stealth** (late 2016, Intel 7500U, UHD / HiDPI) Ubuntu Linux 18.10.
 
-<!-- TOC depthFrom:2 -->autoauto- [1. Issues](#1-issues)auto  - [1.1. Suspend Loop](#11-suspend-loop)auto  - [1.2. Caps-Lock Crash](#12-caps-lock-crash)auto  - [1.3. Touchscreen & Firefox](#13-touchscreen--firefox)auto  - [1.4. Gestures with Libinput](#14-gestures-with-libinput)auto  - [1.5. Dual Boot Antergos](#15-dual-boot-antergos)auto- [2. Tweaks](#2-tweaks)auto  - [2.1. Power Management](#21-power-management)auto  - [2.2. "Capitaine" Cursors](#22-capitaine-cursors)auto  - [2.3. Grub Theme](#23-grub-theme)auto  - [2.4. Gnome Theme](#24-gnome-theme)auto  - [2.5. Steam Interface](#25-steam-interface)auto  - [2.6. Touchpad](#26-touchpad)auto  - [2.7. Disable Center New Window](#27-disable-center-new-window)auto- [3. Razer Core](#3-razer-core)auto  - [3.1. Thunderbolt](#31-thunderbolt)auto  - [3.2. Nvidia Driver](#32-nvidia-driver)auto  - [3.3. Bumblebee](#33-bumblebee)auto  - [3.4. Steam](#34-steam)auto  - [3.5. WIP](#35-wip)auto- [4. Unsolved Issues](#4-unsolved-issues)auto  - [4.1. Keyboard Colors & Openrazer](#41-keyboard-colors--openrazer)auto  - [4.2. Webcam](#42-webcam)auto  - [4.3. Wifi](#43-wifi)autoauto<!-- /TOC -->
-
 ## 1. Issues
 
 ### 1.1. Suspend Loop
