@@ -123,7 +123,7 @@ sudo update-grub
 
 ```shell
 sudo apt install gnome-shell-extensions
-cp themes/RBS ~/.themes
+cp -r themes/RBS ~/.themes
 ```
 
 - Logout - Login
