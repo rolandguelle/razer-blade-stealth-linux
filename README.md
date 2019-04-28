@@ -6,7 +6,7 @@
 
 Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions or open an issue.
 
-My current setup is Ubuntu 18.10 (Ubuntu, Gnome, Wayland & libinput touchpad driver) and Arch (Antergos, Gnome, Wayland & libinput touchpad driver).
+My current setup is Ubuntu 19.04 (Ubuntu, Gnome, Wayland & libinput touchpad driver) and Arch (Antergos, Gnome, Wayland & libinput touchpad driver).
 
 <!-- TOC depthFrom:2 -->
 
