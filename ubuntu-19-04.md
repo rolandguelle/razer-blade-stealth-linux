@@ -199,6 +199,28 @@ Run steam games on your external GPU over Bumblebee/primusrun:
 - "Set Launch Options"
 - Insert "primusrun %command%"
 
+### 3.5 Laptop HDMI
+
+The internal HDMI output works out-of-the box with `primusrun`. Tested on a 4k screen.
+
+### 3.6 Razer Core / GPU HDMI Out
+
+Check if your monitor is detected:
+
+```shell
+nvidia-xconfig --query-gpu-info
+```
+
+```shell
+export DISPLAY=:8 LD_LIBRARY_PATH=/usr/lib/nvidia:$LD_LIBRARY_PATH
+optirun steam
+```
+
+TODO:
+
+- changed bumblebee.conf
+- xorg.conf's
+
 ## 4. Unsolved Issues
 
 ### 4.1. Keyboard Colors & Openrazer
