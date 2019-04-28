@@ -205,21 +205,27 @@ The internal HDMI output works out-of-the box with `primusrun`. Tested on a 4k s
 
 ### 3.6 Razer Core / GPU HDMI Out
 
+Not recommend setup...
 Check if your monitor is detected:
 
 ```shell
 nvidia-xconfig --query-gpu-info
 ```
 
+- [Config Files](etc/bumblebee-ubuntu-19-04/).
+
+Modify and create your monitor settings, stored in /etc/bumblebee/xorg.conf.external:
+
+```shell
+optirun /usr/bin/nvidia-settings -c :8
+```
+
+Change `Driver=nvidia` into `Driver=external` and restart bumblebee.
+
 ```shell
 export DISPLAY=:8 LD_LIBRARY_PATH=/usr/lib/nvidia:$LD_LIBRARY_PATH
 optirun steam
 ```
-
-TODO:
-
-- changed bumblebee.conf
-- xorg.conf's
 
 ## 4. Unsolved Issues
 
