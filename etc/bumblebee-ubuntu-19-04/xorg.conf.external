@@ -1,0 +1,70 @@
+Section "ServerLayout"
+    Identifier  "Layout0"
+    Option      "AutoAddDevices" "true"
+    Option      "AutoAddGPU" "false"
+EndSection
+
+Section "Device"
+    Identifier  "DiscreteNvidia"
+    Driver      "nvidia"
+    VendorName  "NVIDIA Corporation"
+    BusID       "PCI:07:00:0"
+    Option      "UseEDID" "true"
+    Option      "NoLogo" "true"
+    Option      "AllowEmptyInitialConfiguration" "true"
+    Option      "ProbeAllGpus" "false"
+EndSection
+
+Section "Screen"
+    Identifier     "Screen0"
+    DefaultDepth    24
+    Option         "Stereo" "0"
+    Option         "metamodes" "3840x2160_60 +0+0"
+    Option         "SLI" "Off"
+    Option         "MultiGPU" "Off"
+    Option         "BaseMosaic" "off"
+    SubSection     "Display"
+        Depth       24
+    EndSubSection
+EndSection
+
+Section "Monitor"
+    # HorizSync source: edid, VertRefresh source: edid
+    Identifier     "Monitor0"
+    VendorName     "Unknown"
+    ModelName      "SAMSUNG"
+    HorizSync       15.0 - 81.0
+    VertRefresh     24.0 - 75.0
+    Option         "DPMS"
+EndSection
+
+Section "InputClass"
+        Identifier "touchpad"
+        Driver "synaptics"
+        MatchIsTouchpad "yes"
+        Option  "PalmDetect" "1"
+        Option  "PalmMinWidth" "15"
+        Option  "PalmMinZ" "250"
+        Option  "FingerHigh" "50"
+        Option  "FingerLow" "15"
+
+        Option  "TapButton1" "1"
+        Option  "TapButton2" "3"
+
+        Option  "HorizTwoFingerScroll" "1"
+        Option  "VertTwoFingerScroll" "1"
+
+        Option  "TapButton3" "0"
+        Option  "ClickPad" "1"
+        Option  "ClickFinger1" "1"
+        Option  "ClickFinger2" "3"
+        Option  "ClickFinger3" "2"
+        Option  "RightButtonAreaLeft" "0"
+        Option  "RightButtonAreaRight" "0"
+        Option  "RightButtonAreaTop" "0"
+        Option  "RightButtonAreaBottom" "0"
+        Option  "SoftButtonAreas" "0   0   0   0   0   0   0   0  "
+        Option  "HasSecondarySoftButtons" "false"
+        Option  "SecondarySoftButtonAreas" "0 0 0 0 0 0 0 0"
+        Option  "CoastingSpeed" "0"
+EndSection
