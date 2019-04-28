@@ -44,3 +44,31 @@ MOZ_USE_XINPUT2=1
 ```
 
 Logout - Login.
+
+## 2. Tweaks
+
+Install Gnome Tweak Tool:
+
+```shell
+sudo apt install gnome-tweak-tool
+```
+
+### 2.1. Power Management
+
+TLP is an advanced power management tool for Linux that tries to apply tweaks for you automatically, depending on your Linux distribution and hardware.
+
+```shell
+sudo apt-get install tlp tlp-rdw
+sudo systemctl enable tlp
+```
+
+### 2.2. "Capitaine" Cursors
+
+- Install ["Capitaine" Cursors](https://github.com/keeferrourke/capitaine-cursors)
+
+```shell
+git clone https://github.com/keeferrourke/capitaine-cursors.git
+cp -pr capitaine-cursors/dist/ ~/.icons/capitaine-cursors
+```
+
+- Select via `gnome-tweaks-tool`: Appearance, Themes, Cursor
