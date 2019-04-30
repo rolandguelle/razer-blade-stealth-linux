@@ -2,6 +2,29 @@
 
 **Razer Blade Stealth** (late 2016, Intel 7500U, UHD / HiDPI) Ubuntu Linux 19.04, running Wayland / Gnome.
 
+- [Razer Blade Stealth Linux & Ubuntu 19.04](#razer-blade-stealth-linux--ubuntu-1904)
+  - [1. Issues](#1-issues)
+    - [1.1. Suspend Loop](#11-suspend-loop)
+    - [1.2. Caps-Lock Crash](#12-caps-lock-crash)
+    - [1.3. Touchscreen & Firefox](#13-touchscreen--firefox)
+    - [1.4. Dual Boot Antergos](#14-dual-boot-antergos)
+  - [2. Tweaks](#2-tweaks)
+    - [2.1. Power Management](#21-power-management)
+    - [2.2. "Capitaine" Cursors](#22-%22capitaine%22-cursors)
+    - [2.3. Grub Theme](#23-grub-theme)
+    - [2.4. Gnome Theme](#24-gnome-theme)
+    - [2.5. Steam Interface](#25-steam-interface)
+  - [3. Razer Core](#3-razer-core)
+    - [3.1. Thunderbolt](#31-thunderbolt)
+    - [3.2. Nvidia Driver](#32-nvidia-driver)
+    - [3.3. Bumblebee](#33-bumblebee)
+    - [3.4. Steam](#34-steam)
+    - [3.5 Laptop HDMI](#35-laptop-hdmi)
+    - [3.6 Razer Core / GPU HDMI Out](#36-razer-core--gpu-hdmi-out)
+  - [4. Unsolved Issues](#4-unsolved-issues)
+    - [4.1. Keyboard Colors & Openrazer](#41-keyboard-colors--openrazer)
+    - [4.2. Webcam](#42-webcam)
+
 ## 1. Issues
 
 ### 1.1. Suspend Loop
@@ -44,6 +67,15 @@ MOZ_USE_XINPUT2=1
 ```
 
 Logout - Login.
+
+### 1.4. Dual Boot Antergos
+
+"update-grub" add only /boot/intel-ucode.img to initrd.
+(Maybe) a hack, but works well on my system.
+
+```shell
+sudo patch /etc/grub.d/30_os-prober etc/grub.d/os-prober.patch
+```
 
 ## 2. Tweaks
 

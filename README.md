@@ -8,8 +8,6 @@ Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for ques
 
 My current setup is Ubuntu 19.04 (Ubuntu, Gnome, Wayland & libinput) and Arch (Antergos, Gnome, Wayland & libinput).
 
-<!-- TOC depthFrom:2 -->
-
 - [Razer Blade Stealth Linux](#razer-blade-stealth-linux)
   - [1. Preparation](#1-preparation)
     - [1.1. Meltdown, Spectre & TPM Updates](#11-meltdown-spectre--tpm-updates)
@@ -23,8 +21,6 @@ My current setup is Ubuntu 19.04 (Ubuntu, Gnome, Wayland & libinput) and Arch (A
     - [2.6. Elementary OS](#26-elementary-os)
     - [2.7. Other Hardware Models](#27-other-hardware-models)
   - [3. Credits](#3-credits)
-
-<!-- /TOC -->
 
 ## 1. Preparation
 

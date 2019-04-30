@@ -2,8 +2,6 @@
 
 **Razer Blade Stealth** (late 2016, Intel 7500U, UHD / HiDPI) Ubuntu Linux 17.10.
 
-<!-- TOC depthFrom:2 -->
-
 - [Razer Blade Stealth Linux & Ubuntu 17.10](#razer-blade-stealth-linux--ubuntu-1710)
   - [1. Issues](#1-issues)
     - [1.1. Suspend Loop](#11-suspend-loop)
@@ -44,8 +42,6 @@
   - [4. Unsolved Issues](#4-unsolved-issues)
     - [4.1. Keyboard Colors & Openrazer](#41-keyboard-colors--openrazer)
     - [4.2. Webcam](#42-webcam)
-
-<!-- /TOC -->
 
 ## 1. Issues
 

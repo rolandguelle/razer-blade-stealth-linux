@@ -2,27 +2,26 @@
 
 **Razer Blade Stealth** (late 2016, Intel 7500U, UHD / HiDPI) Ubuntu Linux 18.04.
 
-<!-- TOC depthFrom:2 -->
-
-- [1. Issues](#1-issues)
-  - [1.1. Installation](#11-installation)
-  - [1.2. Suspend Loop](#12-suspend-loop)
-  - [1.3. Caps-Lock Crash](#13-caps-lock-crash)
-  - [1.4. Touchpad Temporary Freezes](#14-touchpad-temporary-freezes)
-  - [1.5. Touchpad Suspend](#15-touchpad-suspend)
-  - [1.6. Touchscreen & Firefox](#16-touchscreen--firefox)
-- [2. Tweaks](#2-tweaks)
-  - [2.1. Power Management](#21-power-management)
-  - [2.2. Touchpad tap & click](#22-touchpad-tap--click)
-  - [2.3. "Capitaine" Cursors](#23-capitaine-cursors)
-  - [2.4. Dual Boot Antergos](#24-dual-boot-antergos)
-  - [2.5. Grub Razer Theme](#25-grub-razer-theme)
-  - [2.7. Gnome Theme](#27-gnome-theme)
-  - [2.8. Steam Interface](#28-steam-interface)
-- [3. Unsolved Issues](#3-unsolved-issues)
-  - [3.1. Keyboard Colors & Openrazer](#31-keyboard-colors--openrazer)
-  - [3.2. Webcam](#32-webcam)
-  - [3.3. Razer Core](#33-razer-core)
+- [Razer Blade Stealth Linux & Ubuntu 18.04](#razer-blade-stealth-linux--ubuntu-1804)
+  - [1. Issues](#1-issues)
+    - [1.1. Installation](#11-installation)
+    - [1.2. Suspend Loop](#12-suspend-loop)
+    - [1.3. Caps-Lock Crash](#13-caps-lock-crash)
+    - [1.4. Touchpad Temporary Freezes](#14-touchpad-temporary-freezes)
+    - [1.5. Touchpad Suspend](#15-touchpad-suspend)
+    - [1.6. Touchscreen & Firefox](#16-touchscreen--firefox)
+  - [2. Tweaks](#2-tweaks)
+    - [2.1. Power Management](#21-power-management)
+    - [2.2. Touchpad tap & click](#22-touchpad-tap--click)
+    - [2.3. "Capitaine" Cursors](#23-%22capitaine%22-cursors)
+    - [2.4. Dual Boot Antergos](#24-dual-boot-antergos)
+    - [2.5. Grub Razer Theme](#25-grub-razer-theme)
+    - [2.7. Gnome Theme](#27-gnome-theme)
+    - [2.8. Steam Interface](#28-steam-interface)
+  - [3. Unsolved Issues](#3-unsolved-issues)
+    - [3.1. Keyboard Colors & Openrazer](#31-keyboard-colors--openrazer)
+    - [3.2. Webcam](#32-webcam)
+    - [3.3. Razer Core](#33-razer-core)
 
 <!-- /TOC -->
 
