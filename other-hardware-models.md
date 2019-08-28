@@ -58,3 +58,7 @@ intel_idle.max_cstate=4
 ```
 
 More: [Issue 7](https://github.com/rolandguelle/razer-blade-stealth-linux/issues/7)
+
+## 1.3. Razer Blade Stealt 2019
+
+Ubuntu 18.04 LTS installed just fine without any additional work (Thanks @durzo).
