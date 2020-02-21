@@ -10,7 +10,7 @@
     - [1.4. Dual Boot Antergos](#14-dual-boot-antergos)
   - [2. Tweaks](#2-tweaks)
     - [2.1. Power Management](#21-power-management)
-    - [2.2. "Capitaine" Cursors](#22-%22capitaine%22-cursors)
+    - [2.2. "Capitaine" Cursors](#22-capitaine-cursors)
     - [2.3. Grub Theme](#23-grub-theme)
     - [2.4. Gnome Theme](#24-gnome-theme)
     - [2.5. Steam Interface](#25-steam-interface)
@@ -64,6 +64,7 @@ Tell Firefox to use XINPUT2:
 ```shell
 sudo nano /etc/environment
 MOZ_USE_XINPUT2=1
+MOZ_ENABLE_WAYLAND=1
 ```
 
 Logout - Login.
