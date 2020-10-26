@@ -1,6 +1,6 @@
 # Razer Blade Stealth Linux & Ubuntu 20.10
 
-**Razer Blade Stealth** (Early 2016, Intel 6500U, UHD / HiDPI) Ubuntu Linux 19.10, running Wayland / Gnome.
+**Razer Blade Stealth** (Early 2016, Intel 6500U, UHD / HiDPI) Ubuntu Linux 20.10, running Wayland / Gnome.
 
 - [Razer Blade Stealth Linux & Ubuntu 20.10](#razer-blade-stealth-linux--ubuntu-2010)
   - [Issues](#issues)
@@ -106,7 +106,6 @@ Add Theme:
 ```shell
 sudo nano /etc/default/grub
 GRUB_GFXMODE="3840x2160-32"
-GRUB_GFXPAYLOAD_LINUX="3840x2160-32"
 GRUB_THEME="/boot/grub/themes/razer/theme.txt"
 ```
 
