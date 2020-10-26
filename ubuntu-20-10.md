@@ -165,21 +165,19 @@ blacklist nvidia-drm
 blacklist nvidia-modeset
 ```
 
-Patch [primusrun](https://github.com/Bumblebee-Project/Bumblebee/issues/951#issuecomment-379512353)
-
-```shell
-sudo mv /usr/bin/primusrun /usr/bin/primusrun.bak
-sudo cp usr/bin/primusrun /usr/bin/
-```
-
-
-
 # --- WIP ---
 
 Test:
 
 primusrun glxinfo | grep OpenGL
 
+
+Patch [primusrun](https://github.com/Bumblebee-Project/Bumblebee/issues/951#issuecomment-379512353)
+
+```shell
+sudo mv /usr/bin/primusrun /usr/bin/primusrun.bak
+sudo cp usr/bin/primusrun /usr/bin/
+```
 
 ### Steam
 
