@@ -6,7 +6,7 @@
 
 Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions or open an issue.
 
-My current setup is Ubuntu 19.04 (Ubuntu, Gnome, Wayland & libinput) and Arch (Antergos, Gnome, Wayland & libinput).
+My current setup is Ubuntu 20.10 (Ubuntu, Gnome, Wayland).
 
 - [Razer Blade Stealth Linux](#razer-blade-stealth-linux)
   - [Preparation](#preparation)
