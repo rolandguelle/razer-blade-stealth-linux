@@ -8,7 +8,6 @@
     - [Caps-Lock Crash](#caps-lock-crash)
     - [Touchscreen & Firefox](#touchscreen--firefox)
   - [Tweaks](#tweaks)
-    - [Power Management](#power-management)
     - ["Capitaine" Cursors](#capitaine-cursors)
     - [Grub Theme](#grub-theme)
   - [Razer Core](#razer-core)
@@ -67,15 +66,6 @@ Install Gnome Tweak Tool:
 
 ```shell
 sudo apt install gnome-tweak-tool
-```
-
-### Power Management
-
-TLP is an advanced power management tool for Linux that tries to apply tweaks for you automatically, depending on your Linux distribution and hardware.
-
-```shell
-sudo apt-get install tlp tlp-rdw
-sudo systemctl enable tlp
 ```
 
 ### "Capitaine" Cursors
