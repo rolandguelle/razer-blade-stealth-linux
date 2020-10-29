@@ -15,7 +15,6 @@
     - [Thunderbolt](#thunderbolt)
     - [Nvidia Driver](#nvidia-driver)
     - [Bumblebee](#bumblebee)
-- [--- WIP ---](#----wip----)
     - [Steam](#steam)
 
 ## Issues
@@ -165,18 +164,19 @@ blacklist nvidia-drm
 blacklist nvidia-modeset
 ```
 
-# --- WIP ---
-
-Test:
-
-primusrun glxinfo | grep OpenGL
-
-
 Patch [primusrun](https://github.com/Bumblebee-Project/Bumblebee/issues/951#issuecomment-379512353)
 
 ```shell
 sudo mv /usr/bin/primusrun /usr/bin/primusrun.bak
 sudo cp usr/bin/primusrun /usr/bin/
+```
+
+Test:
+
+```shell
+$ primusrun glxinfo | grep OpenGL
+OpenGL vendor string: NVIDIA Corporation
+...
 ```
 
 ### Steam
@@ -192,6 +192,7 @@ Run steam games on your external GPU over Bumblebee/primusrun:
 - Start steam
 - Select your game
 - Select "Properties"
+- "General"
 - "Set Launch Options"
 - Insert "primusrun %command%"
 
