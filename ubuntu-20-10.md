@@ -1,6 +1,6 @@
 # Razer Blade Stealth Linux & Ubuntu 20.10
 
-**Razer Blade Stealth** (Early 2016, Intel 6500U, UHD / HiDPI) Ubuntu Linux 20.10, running Wayland / Gnome.
+**Razer Blade Stealth** (Early 2016, Intel 6500U, UHD / HiDPI) Ubuntu Linux 20.10, running Wayland & Gnome.
 
 - [Razer Blade Stealth Linux & Ubuntu 20.10](#razer-blade-stealth-linux--ubuntu-2010)
   - [Issues](#issues)
@@ -15,7 +15,6 @@
     - [Thunderbolt](#thunderbolt)
     - [Nvidia Driver](#nvidia-driver)
     - [Bumblebee](#bumblebee)
-- [--- WIP ---](#----wip----)
     - [Steam](#steam)
 
 ## Issues
@@ -165,18 +164,17 @@ blacklist nvidia-drm
 blacklist nvidia-modeset
 ```
 
-# --- WIP ---
-
-Test:
-
-primusrun glxinfo | grep OpenGL
-
-
 Patch [primusrun](https://github.com/Bumblebee-Project/Bumblebee/issues/951#issuecomment-379512353)
 
 ```shell
 sudo mv /usr/bin/primusrun /usr/bin/primusrun.bak
 sudo cp usr/bin/primusrun /usr/bin/
+```
+
+Test:
+
+```shell
+primusrun glxinfo | grep OpenGL
 ```
 
 ### Steam
