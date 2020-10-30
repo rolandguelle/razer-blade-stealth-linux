@@ -8,7 +8,6 @@
     - [Caps-Lock Crash](#caps-lock-crash)
     - [Touchscreen & Firefox](#touchscreen--firefox)
   - [Tweaks](#tweaks)
-    - ["Capitaine" Cursors](#capitaine-cursors)
     - [Grub Theme](#grub-theme)
   - [Razer Core](#razer-core)
     - [Thunderbolt](#thunderbolt)
@@ -67,19 +66,6 @@ Install Gnome Tweak Tool:
 ```shell
 sudo apt install gnome-tweak-tool
 ```
-
-### "Capitaine" Cursors
-
-- Install ["Capitaine" Cursors](https://github.com/keeferrourke/capitaine-cursors)
-
-```shell
-git clone https://github.com/keeferrourke/capitaine-cursors.git
-cd capitaine-cursors
-./build.sh -d xhd
-cp -pr dist/dark ~/.icons/capitaine-cursors
-```
-
-- Select via `gnome-tweaks-tool`: Appearance, Themes, Cursor
 
 ### Grub Theme
 
