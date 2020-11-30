@@ -10,7 +10,6 @@ My current setup is Ubuntu 20.10 (Ubuntu, Gnome, Wayland).
 
 - [Razer Blade Stealth Linux](#razer-blade-stealth-linux)
   - [Preparation](#preparation)
-    - [Meltdown, Spectre & TPM Updates](#meltdown-spectre--tpm-updates)
     - [Disk Resize](#disk-resize)
   - [Guides](#guides)
     - [Ubuntu 20.10](#ubuntu-2010)
@@ -27,9 +26,6 @@ My current setup is Ubuntu 20.10 (Ubuntu, Gnome, Wayland).
 ## Preparation
 
 - [BIOS updates](http://drivers.razersupport.com//index.php?_m=downloads&_a=view&parentcategoryid=350&pcid=0&nav=0) via Windows 10
-
-### Meltdown, Spectre & TPM Updates
-
 - [Razer Blade Stealth (2016) - Intel 7500U](https://dl.razerzone.com/master-guides/Blade/Razer%20Blade%20IME%20Firmware%20Updater.pdf)
 
 ### Disk Resize
