@@ -10,7 +10,6 @@ My current setup is Ubuntu 20.10 (Ubuntu, Gnome, Wayland).
 
 - [Razer Blade Stealth Linux](#razer-blade-stealth-linux)
   - [Preparation](#preparation)
-    - [Meltdown, Spectre & TPM Updates](#meltdown-spectre--tpm-updates)
     - [Disk Resize](#disk-resize)
   - [Guides](#guides)
     - [Ubuntu 20.10](#ubuntu-2010)
@@ -26,18 +25,8 @@ My current setup is Ubuntu 20.10 (Ubuntu, Gnome, Wayland).
 
 ## Preparation
 
-- [BIOS updates](http://www.razersupport.com/gaming-systems/razer-blade-stealth/) via Windows 10
-- Direct Links:
-- [BladeStealthUpdater_v1.0.5.3_BIOS6.05.exe.7z](http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.3_BIOS6.05.exe.7z)
-  - [BladeStealthUpdater_v1.0.5.0.zip](http://dl.razerzone.com/support/BladeStealthH2/BladeStealthUpdater_v1.0.5.0.zip)
-- [Fix for INTEL-SA-00086 Intel Management Engine Critical Firmware Update](https://insider.razerzone.com/index.php?threads/fix-for-intel-sa-00086-intel-management-engine-critical-firmware-update.29116/)
-  - [RazerUpdater_v1.0.6.2_ME-11.8.50.3425.exe.7z](http://razerdrivers.s3.amazonaws.com/drivers/RazerUpdater_v1.0.6.2_ME-11.8.50.3425.exe.7z)
-
-### Meltdown, Spectre & TPM Updates
-
-- [Razer Blade Stealth (2016) - Intel 7500U](http://drivers.razersupport.com//index.php?_m=downloads&_a=view&parentcategoryid=605&pcid=604&nav=0,350,604)
-  - Meltdown and Spectre Vulnerabilities Updater - Razer BIOS customer updater (02 Apr 2018 06:44 PM)
-  - Razer TPM Firmware Updater (13 Feb 2018 03:32 AM)
+- [BIOS updates](http://drivers.razersupport.com//index.php?_m=downloads&_a=view&parentcategoryid=350&pcid=0&nav=0) via Windows 10
+- [Razer Blade Stealth (2016) - Intel 7500U](https://dl.razerzone.com/master-guides/Blade/Razer%20Blade%20IME%20Firmware%20Updater.pdf)
 
 ### Disk Resize
 
