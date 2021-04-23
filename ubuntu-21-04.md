@@ -52,7 +52,7 @@ Update Grub
 sudo update-grub
 ```
 
-## Razer Core
+## Razer Core (WIP)
 
 ### Thunderbolt
 
