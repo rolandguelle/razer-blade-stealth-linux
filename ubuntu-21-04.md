@@ -149,4 +149,3 @@ Run steam games on your external GPU over Bumblebee/primusrun:
 - Select "Properties"
 - "Set Launch Options"
 - Insert "primusrun %command%"
-
