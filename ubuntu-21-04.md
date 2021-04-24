@@ -2,6 +2,18 @@
 
 **Razer Blade Stealth** (Early 2016, Intel 6500U, UHD / HiDPI) Ubuntu Linux 20.10, running Wayland & Gnome.
 
+- [Razer Blade Stealth Linux & Ubuntu 21.04](#razer-blade-stealth-linux--ubuntu-2104)
+  - [Issues](#issues)
+    - [Caps-Lock Crash](#caps-lock-crash)
+  - [Tweaks](#tweaks)
+    - ["Capitaine" Cursors](#capitaine-cursors)
+    - [Grub Theme](#grub-theme)
+  - [Razer Core](#razer-core)
+    - [Thunderbolt](#thunderbolt)
+    - [Nvidia Driver](#nvidia-driver)
+    - [Bumblebee](#bumblebee)
+    - [Steam](#steam)
+
 ## Issues
 
 ### Caps-Lock Crash
@@ -52,7 +64,7 @@ Update Grub
 sudo update-grub
 ```
 
-## Razer Core (WIP)
+## Razer Core
 
 ### Thunderbolt
 
@@ -122,6 +134,13 @@ Install [Corefonts](https://www.holarse-linuxgaming.de/wiki/gta_v) for Steam Pla
 ```shell
 sudo apt install ttf-mscorefonts-installer
 ```
+
+Enable Proton for Windows Games:
+
+- Settings
+- Steam Play
+- Advanced
+- Enable Steam Play for all other titles
 
 Run steam games on your external GPU over Bumblebee/primusrun:
 
