@@ -127,6 +127,20 @@ Test:
 primusrun glxinfo | grep OpenGL
 ```
 
+**Vulkan drivers**
+
+Install vkrun from the package primus_vk is as drop-in replacement for primusrun that enables to run Vulkan-based applications. 
+
+```shell
+sudo apt-get install vulkan-tools primus-vk primus-vk-nvidia
+```
+
+Test:
+
+```shell
+pvkrun vulkaninfo --summary
+```
+
 ### Steam
 
 Install [Corefonts](https://www.holarse-linuxgaming.de/wiki/gta_v) for Steam Play:
@@ -148,4 +162,4 @@ Run steam games on your external GPU over Bumblebee/primusrun:
 - Select your game
 - Select "Properties"
 - "Set Launch Options"
-- Insert "primusrun %command%"
+- Insert "primusrun %command%" or "pvkrun %command%"
