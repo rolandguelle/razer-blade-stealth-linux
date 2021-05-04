@@ -87,7 +87,7 @@ sudo apt install nvidia-driver-390
 Install [Bumblebee / Primus](https://wiki.ubuntu.com/Bumblebee#Installation):
 
 ```shell
-sudo apt-get install bumblebee bumblebee-nvidia primus linux-headers-generic
+sudo apt-get install bumblebee bumblebee-nvidia primus linux-headers-generic socat mesa-utils
 ```
 
 Change [bumblebee.conf](https://askubuntu.com/questions/1029169/bumblebee-doesnt-work-on-ubuntu-18-04/1042950#1042950)
