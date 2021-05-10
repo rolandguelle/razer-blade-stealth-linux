@@ -39,7 +39,17 @@ sudo apt install gnome-tweak-tool
 
 - Install ["Capitaine" Cursors](https://github.com/keeferrourke/capitaine-cursors)
 - https://www.pling.com/p/1148692
+- unzip
+- move to cursors
+```shell
+mv capitaine-cursors-light ~/.icons/
+```
 - Select via `gnome-tweaks-tool`: Appearance, Themes, Cursor
+- change cursor size
+```shell
+gsettings set org.gnome.desktop.interface cursor-size 32
+```
+
 
 ### Grub Theme
 
