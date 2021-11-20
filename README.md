@@ -6,12 +6,13 @@
 
 Contact me at twitter [@rolandguelle](https://twitter.com/rolandguelle) for questions or open an issue.
 
-My current setup is Ubuntu 21.04 (Ubuntu, Gnome, Wayland).
+My current setup is Ubuntu 21.10 (Ubuntu, Gnome, Wayland).
 
 - [Razer Blade Stealth Linux](#razer-blade-stealth-linux)
   - [Preparation](#preparation)
     - [Disk Resize](#disk-resize)
   - [Guides](#guides)
+    - [Ubuntu 21.10](#ubuntu-2110)
     - [Ubuntu 21.04](#ubuntu-2104)
     - [Ubuntu 20.10](#ubuntu-2010)
     - [Ubuntu 19.10](#ubuntu-1910)
@@ -34,6 +35,10 @@ My current setup is Ubuntu 21.04 (Ubuntu, Gnome, Wayland).
 [Resize disk](https://www.howtogeek.com/101862/how-to-manage-partitions-on-windows-without-downloading-any-other-software/) via Windows 10
 
 ## Guides
+
+### Ubuntu 21.10
+
+[Ubuntu 21.10](ubuntu-21-10.md)
 
 ### Ubuntu 21.04
 

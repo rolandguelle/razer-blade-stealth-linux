@@ -1,8 +1,9 @@
-# Razer Blade Stealth Linux & Ubuntu 21.04
+# Razer Blade Stealth Linux & Ubuntu 21.10
 
-**Razer Blade Stealth** (Early 2016, Intel 6500U, UHD / HiDPI) Ubuntu Linux 21.04, running Wayland & Gnome.
+**Razer Blade Stealth** (Early 2016, Intel 6500U, UHD / HiDPI) Ubuntu Linux 21.10, running Wayland & Gnome.
 
-- [Razer Blade Stealth Linux & Ubuntu 21.04](#razer-blade-stealth-linux--ubuntu-2104)
+- [Razer Blade Stealth Linux & Ubuntu 21.10](#razer-blade-stealth-linux--ubuntu-2110)
+- [To-Test](#to-test)
   - [Issues](#issues)
     - [Caps-Lock Crash](#caps-lock-crash)
   - [Tweaks](#tweaks)
@@ -13,6 +14,9 @@
     - [Nvidia Driver](#nvidia-driver)
     - [Bumblebee](#bumblebee)
     - [Steam](#steam)
+
+
+# To-Test
 
 ## Issues
 
