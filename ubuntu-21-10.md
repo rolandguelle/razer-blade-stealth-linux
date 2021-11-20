@@ -3,11 +3,10 @@
 **Razer Blade Stealth** (Early 2016, Intel 6500U, UHD / HiDPI) Ubuntu Linux 21.10, running Wayland & Gnome.
 
 - [Razer Blade Stealth Linux & Ubuntu 21.10](#razer-blade-stealth-linux--ubuntu-2110)
-- [To-Test](#to-test)
   - [Issues](#issues)
     - [Caps-Lock Crash](#caps-lock-crash)
   - [Tweaks](#tweaks)
-    - ["Capitaine" Cursors](#capitaine-cursors)
+    - ["Breeze" Cursors](#breeze-cursors)
     - [Grub Theme](#grub-theme)
   - [Razer Core](#razer-core)
     - [Thunderbolt](#thunderbolt)
@@ -15,8 +14,6 @@
     - [Bumblebee](#bumblebee)
     - [Steam](#steam)
 
-
-# To-Test
 
 ## Issues
 
@@ -36,23 +33,16 @@ XKBOPTIONS="ctrl:nocaps"
 Install Gnome Tweak Tool:
 
 ```shell
-sudo apt install gnome-tweak-tool
+sudo apt install gnome-tweaks
 ```
 
-### "Capitaine" Cursors
+### "Breeze" Cursors
 
-- Install ["Capitaine" Cursors](https://github.com/keeferrourke/capitaine-cursors)
-- https://www.pling.com/p/1148692
-- unzip
-- move to cursors
 ```shell
-mv capitaine-cursors-light ~/.icons/
+sudo apt install breeze-cursor-theme
 ```
-- Select via `gnome-tweaks-tool`: Appearance, Themes, Cursor
-- change cursor size
-```shell
-gsettings set org.gnome.desktop.interface cursor-size 32
-```
+
+- Select via `gnome-tweaks`: Appearance, Themes, Cursor
 
 
 ### Grub Theme
